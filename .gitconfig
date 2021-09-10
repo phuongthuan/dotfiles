@@ -1,0 +1,10 @@
+[user]
+	name = phuongthuan
+	email = 20045189+phuongthuan@users.noreply.github.com
+[http]
+	postBuffer = 524288000
+	sslVerify = false
+[credential]
+	helper = osxkeychain
+[core]
+	compression = 0
