@@ -8,3 +8,4 @@
 	helper = osxkeychain
 [core]
 	compression = 0
+	editor = neovim
