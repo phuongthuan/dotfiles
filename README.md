@@ -1,5 +1,16 @@
 # .dotfiles
 
+
+```
+                                    _       _    __ _ _
+                                   | |     | |  / _(_) |
+                                 __| | ___ | |_| |_ _| | ___  ___
+                                / _` |/ _ \| __|  _| | |/ _ \/ __|
+                               | (_| | (_) | |_| | | | |  __/\__ \
+                                \__,_|\___/ \__|_| |_|_|\___||___/
+
+```
+
 Hello everyone,
 
 I'm a software engineer and this is my configuration. I'm using Macbook Pro 13' 2020 intel CPU.
