@@ -19,8 +19,12 @@ map('x', 'L', '$')
 
 map('n', 'Y', 'y$')
 
+-- keep cursor center when search
+map('n', 'n', 'nzzzv')
+map('n', 'N', 'Nzzzv')
+map('n', 'J', 'mzJ`z')
+
 -- undo break points
-map('i', ',', ',<c-g>u')
 map('i', '.', '.<c-g>u')
 map('i', '[', '[<c-g>u')
 map('i', '!', '!<c-g>u')
@@ -68,7 +72,7 @@ map('n', '<leader><leader>1', ':source %<CR>')
 -- fast saving with <leader> and s
 map('n', '<leader>s', ':w<CR>')
 
--- move around splits using Ctrl + {h,j,k,l}
+-- quicker window movement
 map('n', '<C-h>', '<C-w>h')
 map('n', '<C-j>', '<C-w>j')
 map('n', '<C-k>', '<C-w>k')
@@ -89,6 +93,7 @@ map('n', '<leader>q', ':q!<CR>')
 -----------------------------------------------------------
 map('n', '<tab>', ':bp<CR>')
 map('n', '<S-tab>', ':bn<CR>')
+map('n', '<BS>', '<C-^>') -- switch between last two files
 map('n', '<leader>bk', ':bd<CR>')
 
 -----------------------------------------------------------
