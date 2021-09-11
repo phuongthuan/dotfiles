@@ -68,10 +68,13 @@ opt.synmaxcol = 240 -- max column for syntax highlight
 -----------------------------------------------------------
 -- Colorscheme
 -----------------------------------------------------------
+g.gruvbox_contrast_dark = 'hard'
 opt.termguicolors = true -- enable 24-bit RGB colors
 opt.background = 'dark'
 cmd [[colorscheme gruvbox]] -- set colorscheme
 cmd [[highlight Normal ctermbg=None]]
+-- Highlight error
+cmd[[ autocmd ColorScheme * :lua require('vim.lsp.diagnostic')._define_default_signs_and_highlights() ]]
 
 -----------------------------------------------------------
 -- Tabs, indent
@@ -104,11 +107,6 @@ cmd [[autocmd FileType markdown let g:indentLine_enabled=0]]
 -----------------------------------------------------------
 opt.completeopt = 'menuone,noselect,noinsert' -- completion options
 opt.shortmess = 'c' -- don't show completion messages
-
--- auto format Lua
--- cmd[[
---   autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)
--- ]]
 
 -- auto format
 cmd [[

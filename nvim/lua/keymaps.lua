@@ -42,15 +42,6 @@ map('n', '<leader>j', ":m .+1<CR>==")
 map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true })
 map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true })
 
--- basic autopair
-map('i', '"', '""<left>')
-map('i', '`', '``<left>')
-map('i', '(', '()<left>')
-map('i', '[', '[]<left>')
-map('i', '{', '{}<left>')
-map('i', '{<CR>', '{<CR}<ESC>0')
-map('i', '{;<CR>', '{<CR};<ESC>0')
-
 -- clear search highlighting
 map('n', '<Esc>', ':nohl<CR>')
 
@@ -101,21 +92,10 @@ map('n', '<leader>bk', ':bd<CR>')
 -----------------------------------------------------------
 -- nvim-tree
 map('n', '<C-b>', ':NvimTreeToggle<CR>') -- open/close
--- map('n', '<C-r>', ':NvimTreeRefresh<CR>')  -- refresh
 map('n', '<C-f>', ':NvimTreeFindFile<CR>') -- search file
 
 -- vista
 map('', '<C-m>', ':Vista<CR>')  -- open/close vista window-
-
--- FZF
-map('n', '<C-p>', ':Files<CR>')
-map('n', '<leader>bb', ':Buffers<CR>') -- list all buffers
-map('n', '<leader>sb', ':Lines<CR>') -- search in all buffers
-map('n', '<leader>h', ':History<CR>') -- show recent open file
-map('n', '<leader>sf', ':BLines<CR>') -- search in current buffer
-map('n', '<leader>sa', ':Rg<CR>') -- search ripgrep
-map('n', '<leader>C', ':Commands<CR>')
-map('n', '<leader>gg', ':GFiles?<CR>') -- git status
 
 -- vsnip
 map('n', '<leader>V', ':VsnipOpenVsplit<CR>') -- open vsnip
@@ -123,14 +103,3 @@ map('n', '<leader>V', ':VsnipOpenVsplit<CR>') -- open vsnip
 -- vim-sneak
 map('n', 's', '<Plug>Sneak_s', {noremap = false})
 map('n', 'S', '<Plug>Sneak_S', {noremap = false})
-
--- map('n', 'f', '<Plug>Sneak_f', {noremap = false})
--- map('n', 'F', '<Plug>Sneak_F', {noremap = false})
--- map('n', 't', '<Plug>Sneak_t', {noremap = false})
--- map('n', 'T', '<Plug>Sneak_T', {noremap = false})
-
--- vimwiki
--- map('n', '<leader>td', '<Plug>vimwikimakediarynote', {noremap = false})
--- map('n', '<leader>yt', '<Plug>vimwikimakeyesterdaydiarynote', {noremap = false})
--- map('n', '<leader>tm', '<Plug>vimwikimaketomorrowdiarynote', {noremap = false})
-
