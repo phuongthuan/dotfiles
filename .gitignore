@@ -1,0 +1,4 @@
+node_modules/
+.git/
+
+zsh/eh.zsh
