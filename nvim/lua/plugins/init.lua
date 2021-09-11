@@ -53,8 +53,10 @@ require 'paq' {
   'nvim-treesitter/nvim-treesitter';
   {'styled-components/vim-styled-components', branch="main"};
 
-  -- Searching tools
-  {'junegunn/fzf', run = vim.fn['fzf#install']};
-  'junegunn/fzf.vim';
+  -- Telescope requirement
+  'nvim-lua/popup.nvim';
+  'nvim-lua/plenary.nvim';
+  'nvim-telescope/telescope.nvim';
+  'nvim-telescope/telescope-fzy-native.nvim';
 }
 
