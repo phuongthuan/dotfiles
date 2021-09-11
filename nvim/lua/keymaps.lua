@@ -68,8 +68,8 @@ map('n', '<leader><leader>1', ':source %<CR>')
 -- fast saving with <leader> and s
 map('n', '<leader>s', ':w<CR>')
 
--- install vundle
-map('n', '<leader>P', ':so %<CR>:PaqInstall<CR>:q<CR>')
+-- source file and install plugins
+map('n', '<leader>P', ':so %<CR>:PaqInstall<CR>')
 
 -- quicker window movement
 map('n', '<C-h>', '<C-w>h')
@@ -105,15 +105,6 @@ endfunction
 map <Leader>rnf :call RenameFile()<cr>
 ]]
 
--- open current file on google chrome
--- vim.cmd[[
--- function! OpenCurrentFile()
---   let current_file = @%
---   execute 'Silent open -a "Google Chrome"' current_file
--- endfunction
--- nnoremap <Leader><Leader>of :call OpenCurrentFile()<cr>
--- ]]
-
 -----------------------------------------------------------
 -- Buffers shortcuts:
 -----------------------------------------------------------
@@ -138,3 +129,7 @@ map('n', '<leader>V', ':VsnipOpenVsplit<CR>') -- open vsnip
 -- vim-sneak
 map('n', 's', '<Plug>Sneak_s', {noremap = false})
 map('n', 'S', '<Plug>Sneak_S', {noremap = false})
+
+-- Gitsigns
+map('n', '<leader>pv', ':Gitsigns preview_hunk<CR>')
+map('n', '<leader>R', ':Gitsigns reset_hunk<CR>')
