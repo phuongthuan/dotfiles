@@ -17,7 +17,14 @@ map('o', 'L', '$')
 map('n', 'L', '$')
 map('x', 'L', '$')
 
+-- Y to copy to end of line
 map('n', 'Y', 'y$')
+
+-- select all file
+map('n', '<leader>a', 'ggVG')
+
+-- create folder
+vim.cmd[[map <Leader>cf :!mkdir -p<Space>]]
 
 -- keep cursor center when search
 map('n', 'n', 'nzzzv')
@@ -31,12 +38,10 @@ map('i', '!', '!<c-g>u')
 map('i', '?', '?<c-g>u')
 
 -- moving line
-map('v', 'J', ":m '>+1<CR>gv=gv")
-map('v', 'K', ":m '<-2<CR>gv=gv")
-map('i', '<C-j>', "<Esc>:m .+1<CR>==")
-map('i', '<C-k>', "<Esc>:m .-2<CR>==")
-map('n', '<leader>k', ":m .-2<CR>==")
-map('n', '<leader>j', ":m .+1<CR>==")
+map('v', '<leader>j', ":m'>+<cr>`<my`>mzgv`yo`z")
+map('v', '<leader>k', ":m'<-2<cr>`>my`<mzgv`yo`z")
+map('n', '<leader>k', "mz:m-2<cr>`z")
+map('n', '<leader>j', "mz:m+<cr>`z")
 
 -- remap for dealing with word wrap
 map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true })
@@ -63,6 +68,9 @@ map('n', '<leader><leader>1', ':source %<CR>')
 -- fast saving with <leader> and s
 map('n', '<leader>s', ':w<CR>')
 
+-- install vundle
+map('n', '<leader>P', ':so %<CR>:PaqInstall<CR>:q<CR>')
+
 -- quicker window movement
 map('n', '<C-h>', '<C-w>h')
 map('n', '<C-j>', '<C-w>j')
@@ -78,6 +86,33 @@ map('n', '<leader>wc', ':wq<CR>')
 
 -- close window without save
 map('n', '<leader>q', ':q!<CR>')
+
+-----------------------------------------------------------
+-- Custom function and shortcuts
+-----------------------------------------------------------
+
+-- rename current file
+vim.cmd [[
+function! RenameFile()
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'), 'file')
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
+endfunction
+map <Leader>rnf :call RenameFile()<cr>
+]]
+
+-- open current file on google chrome
+-- vim.cmd[[
+-- function! OpenCurrentFile()
+--   let current_file = @%
+--   execute 'Silent open -a "Google Chrome"' current_file
+-- endfunction
+-- nnoremap <Leader><Leader>of :call OpenCurrentFile()<cr>
+-- ]]
 
 -----------------------------------------------------------
 -- Buffers shortcuts:
