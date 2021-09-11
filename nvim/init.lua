@@ -25,11 +25,12 @@ require('lsp')                      -- LSP settings
 require('plugins/nvim-tree')	      -- file manager
 require('plugins/lualine')          -- statusline
 require('plugins/nvim-cmp')         -- autocomplete
-require('plugins/fzf-vim')          -- FZF
 require('plugins/gitsigns')         --
 require('plugins/vim-starify')      -- Beautify start screen
 require('plugins/nvim-treesitter')  -- tree-sitter interface
 require('plugins/vim-sneak')
 require('plugins/emmet-vim')        -- Emmet HTML
 require('plugins/vista')            -- tag viewer
+require('plugins/telescope')
+require('plugins/nvim-autopairs')
 
