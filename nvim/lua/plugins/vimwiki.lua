@@ -10,6 +10,4 @@ local cmd = vim.cmd
 
 -- g.vimwiki_list = {path = '~/vimwiki/', syntax = 'markdown', ext = '.md'}
 
-cmd [[
-let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
-]]
+cmd [[ let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}] ]]
