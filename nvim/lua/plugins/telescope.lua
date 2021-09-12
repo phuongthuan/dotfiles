@@ -6,6 +6,7 @@
 --- https://github.com/nvim-telescope/telescope.nvim
 
 local actions = require('telescope.actions')
+local cmd = vim.cmd
 
 require('telescope').setup{
   defaults = {
@@ -24,9 +25,7 @@ require('telescope').setup{
       vertical = {
         mirror = false,
       },
-      prompt_position = 'top',
     },
-    borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
     vimgrep_arguments = {
       'rg',
       '--color=never',
@@ -49,8 +48,7 @@ require('telescope').setup{
   -- overriding default settings
   pickers = {
     find_files = {
-      theme = 'dropdown',
-      hidden = true
+      theme = 'dropdown'
     },
   },
   extensions = {
@@ -64,11 +62,9 @@ require('telescope').setup{
 require('telescope').load_extension('fzy_native')
 
 -- Mappings
-vim.cmd [[
+cmd [[
   nnoremap <C-p> :lua require('telescope.builtin').find_files()<CR>
-  nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
-  nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
-
+  nnoremap <leader>ps :lua require('telescope.builtin').live_grep()<CR>
   nnoremap <leader>gg :lua require('telescope.builtin').git_status()<CR>
   nnoremap <leader>ht :lua require('telescope.builtin').help_tags()<CR>
   nnoremap <leader>C :lua require('telescope.builtin').commands()<CR>
