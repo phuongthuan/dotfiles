@@ -3,8 +3,7 @@
 --- and plugins.
 -----------------------------------------------------------
 
-local utils = require('utils')
-local map = utils.map
+local map = require('utils').map
 local cmd = vim.cmd
 
 -----------------------------------------------------------

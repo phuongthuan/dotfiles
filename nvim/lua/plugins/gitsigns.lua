@@ -5,6 +5,7 @@
 -- Plugin: gitsigns.nvim
 --- https://github.com/lewis6991/gitsigns.nvim
 
+local map = require('utils').map
 local gitsigns = require('gitsigns')
 
 gitsigns.setup {
@@ -26,3 +27,6 @@ gitsigns.setup {
     delay = 1000,
   },
 }
+
+map('n', '<leader>pv', ':Gitsigns preview_hunk<CR>')
+map('n', '<leader>R', ':Gitsigns reset_hunk<CR>')

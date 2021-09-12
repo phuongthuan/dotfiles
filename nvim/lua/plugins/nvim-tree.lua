@@ -6,6 +6,7 @@
 --- https://github.com/kyazdani42/nvim-tree.lua
 
 local g = vim.g
+local map = require('utils').map
 
 g.nvim_tree_width = 27
 g.nvim_tree_ignore = {'.git', 'node_modules', '.cache'}
@@ -33,3 +34,6 @@ g.nvim_tree_icons = {
     ignored = "◌"
   },
 }
+
+map('n', '<C-b>', ':NvimTreeToggle<CR>') -- open/close
+map('n', '<C-f>', ':NvimTreeFindFile<CR>') -- search file

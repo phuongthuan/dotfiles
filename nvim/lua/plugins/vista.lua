@@ -6,7 +6,7 @@
 --- https://github.com/liuchengxu/vista.vim
 
 local g = vim.g
-local cmd = vim.cmd
+local map = require('utils').map
 
 -- How each level is indented and what to prepend.
 --- This could make the display more compact or more spacious.
@@ -20,5 +20,6 @@ g.vista_default_executive = 'ctags'
 
 -- Ensure you have installed some decent font to sho these pretty symbols,
 --- then you can enable icon for the kind.
-cmd[[let g:vista#renderer#enable_icon = 1]]
+g["vista#renderer#enable_icon"] = 1
 
+map('', '<C-m>', ':Vista<CR>')  -- open/close vista window-

@@ -1,23 +1,16 @@
 -----------------------------------------------------------
 -- lspsaga.nvim
 -----------------------------------------------------------
-
 -- A light-weight lsp plugin based on neovim built-in lsp with highly a performant UI.
 --- https://github.com/glepnir/lspsaga.nvim
-
 local saga = require 'lspsaga'
 local map = require('utils').map
+local cmd = vim.cmd
 
 saga.init_lsp_saga {
-  code_action_icon = '💡',
-  code_action_prompt = {
-    enable        = true,
-    sign          = true,
-    sign_priority = 20,
-    virtual_text  = false,
-  },
-  code_action_keys = { quit = {'q', '<ESC>'}, exec = '<CR>' },
-  border_style     = "round",
+    code_action_prompt = {enable = true, sign = true, sign_priority = 20, virtual_text = false},
+    code_action_keys = {quit = {'q', '<ESC>'}, exec = '<CR>'},
+    border_style = 'round'
 }
 
 map('n', 'K', ':Lspsaga hover_doc<CR>')
@@ -34,4 +27,4 @@ map('n', '<C-j>', ':Lspsaga diagnostic_jump_next<CR>')
 
 -- open/close terminal
 map('n', '<leader>T', ':Lspsaga open_floaterm<CR>')
-vim.cmd[[tnoremap <silent> <leader>T <C-\><C-n>:Lspsaga close_floaterm<CR>]]
+cmd [[tnoremap <silent> <leader>T <C-\><C-n>:Lspsaga close_floaterm<CR>]]

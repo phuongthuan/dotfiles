@@ -2,13 +2,13 @@
 -- Neovim settings
 -- General Neovim settings
 -----------------------------------------------------------
+
 -----------------------------------------------------------
 -- API aliases
 -----------------------------------------------------------
--- local map = vim.api.nvim_set_keymap  -- set global keymap
+
 local cmd = vim.cmd -- execute Vim commands
 local exec = vim.api.nvim_exec -- execute Vimscript
--- local fn = vim.fn -- call Vim functions
 local g = vim.g -- global variables
 local opt = vim.opt -- global/buffer/windows-scoped options
 
@@ -22,6 +22,7 @@ opt.clipboard = 'unnamedplus' -- copy/paste to system clipboard
 opt.swapfile = false -- don't use swapfile
 opt.encoding = 'utf-8' -- the encoding displayed
 opt.fileencoding = 'utf-8' -- the encoding written to file
+opt.scrolloff = 8
 
 cmd [[
   set nocompatible
@@ -94,9 +95,7 @@ cmd [[autocmd BufWritePre * :%s/\s\+$//e]]
 cmd [[autocmd FileType text,markdown,xml,html,xhtml,javascript setlocal cc=0]]
 
 -- 2 spaces for selected filetypes
-cmd [[
-  autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml setlocal shiftwidth=2 tabstop=2
-]]
+cmd [[ autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml setlocal shiftwidth=2 tabstop=2 ]]
 
 -- IndentLine
 -- g.indentLine_setColors = 0  -- set indentLine color
@@ -110,11 +109,3 @@ cmd [[autocmd FileType markdown let g:indentLine_enabled=0]]
 -----------------------------------------------------------
 opt.completeopt = 'menuone,noselect,noinsert' -- completion options
 opt.shortmess = 'c' -- don't show completion messages
-
--- auto format
-cmd [[
-  autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 1000)
-  autocmd BufWritePre *.ts lua vim.lsp.buf.formatting_sync(nil, 1000)
-  autocmd BufWritePre *.jsx lua vim.lsp.buf.formatting_sync(nil, 1000)
-]]
-

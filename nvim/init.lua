@@ -20,6 +20,7 @@ require('settings')                 -- settings
 require('keymaps')                  -- keymaps
 require('plugins')                  -- plugin manager
 require('lsp')                      -- LSP settings
+require('lsp/html')
 
 -- Plugins
 require('plugins/nvim-tree')	      -- file manager
@@ -33,4 +34,5 @@ require('plugins/emmet-vim')        -- Emmet HTML
 require('plugins/vista')            -- tag viewer
 require('plugins/telescope')
 require('plugins/nvim-autopairs')
+require('plugins/saga')
 

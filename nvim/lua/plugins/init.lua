@@ -12,9 +12,12 @@ local paq = require('paq-nvim').paq   -- import module with `paq` function
 require 'paq' {
   'savq/paq-nvim';  -- let paq manage itself
 
+  -- LSP
   'hrsh7th/nvim-cmp'; -- autocompletion
   'hrsh7th/cmp-nvim-lsp';
   'neovim/nvim-lspconfig';
+  'glepnir/lspsaga.nvim';
+  'onsails/lspkind-nvim';
 
   -- UI
   'morhetz/gruvbox';  -- theme
