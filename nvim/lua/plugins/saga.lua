@@ -17,13 +17,11 @@ map('n', 'K', ':Lspsaga hover_doc<CR>')
 map('n', '<C-k>', ':Lspsaga signature_help<CR>')
 map('n', 'gr', ':Lspsaga lsp_finder<CR>')
 map('n', '<leader>ca', ':Lspsaga code_action<CR>')
-map('n', '<leader>cd', ':Lspsaga show_line_diagnostics<CR>')
+map('n', '<leader>e', ':Lspsaga show_line_diagnostics<CR>')
 map('n', '<leader>rn', ':Lspsaga rename<CR>')
 
 map('n', ']]', ':Lspsaga diagnostic_jump_next<CR>')
 map('n', '[[', ':Lspsaga diagnostic_jump_next<CR>')
-
-map('n', '<C-j>', ':Lspsaga diagnostic_jump_next<CR>')
 
 -- open/close terminal
 map('n', '<leader>T', ':Lspsaga open_floaterm<CR>')
