@@ -6,6 +6,7 @@
   ██║██║╚██╗██║██║   ██║   ██║     ██║   ██║██╔══██║
   ██║██║ ╚████║██║   ██║██╗███████╗╚██████╔╝██║  ██║
   ╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝
+
                   Neovim init file
                 Author: Thuan Nguyen
             https://github.com/phuongthuan
@@ -23,16 +24,18 @@ require('lsp')                      -- LSP settings
 require('lsp/html')
 
 -- Plugins
-require('plugins/nvim-tree')	      -- file manager
+require('plugins/nvim-tree')	      -- file explorer
 require('plugins/lualine')          -- statusline
 require('plugins/nvim-cmp')         -- autocomplete
-require('plugins/gitsigns')         --
-require('plugins/vim-starify')      -- Beautify start screen
-require('plugins/nvim-treesitter')  -- tree-sitter interface
-require('plugins/vim-sneak')
+require('plugins/gitsigns')         -- git checking tool
+require('plugins/vim-starify')      -- start screen
+require('plugins/nvim-treesitter')  -- improve code highlighting
+require('plugins/vim-sneak')        -- better jump word
 require('plugins/emmet-vim')        -- Emmet HTML
 require('plugins/vista')            -- tag viewer
-require('plugins/telescope')
-require('plugins/nvim-autopairs')
-require('plugins/saga')
-
+require('plugins/vsnip')            -- snippets
+require('plugins/telescope')        -- search tool
+require('plugins/nvim-autopairs')   -- auto autopairs
+require('plugins/saga')             -- LSP UI improve
+require('plugins/lspkind')          -- icon types
+require('plugins/vimwiki')          -- personal note
