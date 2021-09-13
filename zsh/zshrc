@@ -1,0 +1,26 @@
+# ~/.zshrc
+
+export ZSH="$HOME/.oh-my-zsh"
+
+# rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
+# Load seperated config files
+for conf in "$HOME/.config/zsh/"*.zsh; do
+  source "${conf}"
+done
+unset conf
+
+# Load nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+ZSH_THEME="lambda-gitster"
+
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting colored-man-pages colorize brew osx docker)
+
+source $ZSH/oh-my-zsh.sh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

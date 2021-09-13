@@ -4,5 +4,5 @@ export FZF_DEFAULT_COMMAND='rg --files --follow --no-ignore-vcs --hidden -g "!{n
 # Open file with Vim
 v() {
   local file
-  file=$(fzf --query="$1") && vim "$file"
+  file=$(fzf --query="$1") && nvim "$file"
 }

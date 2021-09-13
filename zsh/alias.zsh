@@ -7,11 +7,15 @@ alias p="cd ~/Programming"
 alias d="cd ~/Desktop"
 alias dl="cd ~/Downloads"
 
+# Tmux
+alias t="tmux"
+alias ta="tmux attach -t"
+
 # Git ;)
 alias gs='git status'
 alias ga='git add'
 alias gb='git branch'
-alias gc='git commit -m'
+alias gc='git commit -m '
 alias gca='git add . && git commit --amend --no-edit'
 alias gd='git diff'
 alias sw='git checkout'
@@ -30,4 +34,3 @@ alias pushf='git push origin HEAD -f'
 alias gcl='git clone '
 alias pick='git cherry-pick '
 alias grn='git branch -m '
-
