@@ -6,6 +6,7 @@
 --- https://github.com/hrsh7th/nvim-cmp
 
 local cmp = require('cmp')
+local lspkind = require('lspkind')
 
 cmp.setup {
   completion = {
@@ -37,6 +38,12 @@ cmp.setup {
         fallback()
       end
     end,
+  },
+  formatting = {
+    format = function(_, vim_item)
+      vim_item.kind = lspkind.presets.default[vim_item.kind]
+      return vim_item
+    end
   },
   sources = {
     { name = 'nvim_lsp' },
