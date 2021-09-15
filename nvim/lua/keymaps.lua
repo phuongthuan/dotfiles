@@ -27,6 +27,9 @@ map('x', 'L', '$')
 -- Y to copy to end of line
 map('n', 'Y', 'y$')
 
+-- Z{symbol} to copy inside
+map('n', 'Z', 'yi')
+
 -- select all file
 map('n', '<leader>a', 'ggVG')
 
@@ -71,7 +74,7 @@ map('', '<left>', '<nop>', {noremap = true})
 map('', '<right>', '<nop>', {noremap = true})
 
 -- source Vim configuration file and install plugins
-map('n', '<leader><leader>1', ':source %<CR>')
+map('n', '<leader><leader>1', ':source ~/.config/nvim/init.lua<CR>:echo "Reloaded ~/.config/nvim/init.lua"<CR>')
 
 -- fast saving with <leader> and s
 map('n', '<leader>s', ':w<CR>')
