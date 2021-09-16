@@ -40,7 +40,6 @@ require 'paq' {
   'plasticboy/vim-markdown';
 
   -- Git
-  'nvim-lua/plenary.nvim';
   'lewis6991/gitsigns.nvim';
 
   -- Snippets
