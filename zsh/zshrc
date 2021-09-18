@@ -17,10 +17,19 @@ unset conf
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
+# Theme
 ZSH_THEME="lambda-gitster"
 
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting colored-man-pages colorize brew osx docker)
+# Plugins
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting colorize)
 
 source $ZSH/oh-my-zsh.sh
 
+# FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Enable vim mode
+bindkey -v
+
+# Make switch vim mode quicker
+export KEYTIMEOUT=1

@@ -1,5 +1,5 @@
 alias vi='nvim'
-alias reload='source ~/.zshrc'
+alias reload="source ~/.zshrc; echo 'Source zshrc complete!';"
 
 # I'm lazy, sorry :(
 alias brewup='brew update; brew upgrade; brew cleanup; brew doctor'
@@ -11,11 +11,14 @@ alias dl='cd ~/Downloads'
 alias t='tmux'
 alias ta='tmux attach -t'
 
+# How do I ....
+alias how="howdoi"
+
 # Git ;)
 alias gs='git status'
 alias ga='git add'
 alias gb='git branch'
-alias gc='git commit -m'
+alias gc='git commit'
 alias gca='git add . && git commit --amend --no-edit'
 alias gd='git diff'
 alias sw='git checkout'
