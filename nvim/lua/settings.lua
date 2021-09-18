@@ -23,7 +23,6 @@ opt.swapfile = false -- don't use swapfile
 opt.encoding = 'utf-8' -- the encoding displayed
 opt.fileencoding = 'utf-8' -- the encoding written to file
 opt.scrolloff = 8
-opt.relativenumber = true
 
 cmd [[
   set nocompatible
@@ -46,7 +45,6 @@ opt.smartcase = true -- ignore lowercase for the whole pattern
 opt.ruler = true -- show the cursor position all the time
 opt.cursorline = true -- Enable cursorline all time
 opt.hlsearch = true -- highlight search result
--- opt.noshowmode = true         -- we don't need to see thing like -- INSERT --
 
 -- remove whitespace on save
 cmd [[au BufWritePre * :%s/\s\+$//e]]

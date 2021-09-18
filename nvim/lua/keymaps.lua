@@ -34,7 +34,7 @@ map('n', 'Z', 'yi')
 map('n', '<leader>a', 'ggVG')
 
 -- create folder
-cmd[[map <Leader>cf :!mkdir -p<Space>]]
+map('n', '<leader><leader>cf', ':!mkdir -p<Space>')
 
 -- keep cursor center when search
 map('n', 'n', 'nzzzv')
@@ -113,4 +113,9 @@ function! RenameFile()
   endif
 endfunction
 map <Leader>rnf :call RenameFile()<cr>
+]]
+
+-- Open file in same directory
+cmd [[
+  nnoremap ,e :e <C-R>=expand('%:p:h') . '/'<CR>
 ]]
