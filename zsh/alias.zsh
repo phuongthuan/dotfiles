@@ -12,7 +12,7 @@ alias t='tmux'
 alias ta='tmux attach -t'
 
 # How do I ....
-alias how="howdoi"
+alias how='howdoi'
 
 # Git ;)
 alias gs='git status'
