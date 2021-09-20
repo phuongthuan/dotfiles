@@ -39,4 +39,4 @@ windows:
   - hero-design:
       - cd ~/Programming/EmploymentHero/hero-design
       - nvim
-  - console: cd ~
+  - console:

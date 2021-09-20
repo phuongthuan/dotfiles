@@ -37,8 +37,10 @@ windows:
       #   - nvim
   - auth:
       - cd ~/Programming/EmploymentHero/auth
-      - rau
+      - rau # alias to run auth -> Check alias.zsh for more information.
   - market:
       - cd ~/Programming/EmploymentHero/marketplace-service
       - bundle exec puma
-  - console: cd ~
+  - console:
+      - bundle install
+      - rma # alias to run main-app -> Check alias.zsh for more information.
