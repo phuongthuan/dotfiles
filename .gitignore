@@ -1,4 +1,5 @@
 node_modules/
 .git/
 
+.DS_Store
 zsh/eh.zsh
