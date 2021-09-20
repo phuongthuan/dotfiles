@@ -44,19 +44,26 @@ require('telescope').setup {
         results_title = false,
       },
     },
-    extensions = {fzy_native = {override_generic_sorter = false, override_file_sorter = true}}
+    extensions = {
+      fzy_native = {
+        override_generic_sorter = false,
+        override_file_sorter = true
+      }
+    }
 }
 
 require('telescope').load_extension('fzy_native')
 
 -- Mappings
-
 -- Telescope builtin function
 map('n', '<leader>tb', ':Telescope builtin<CR>')
 
 map('n', '<C-p>', ':lua require("telescope.builtin").find_files()<CR>')
 map('n', '<leader>ps', ':lua require("telescope.builtin").live_grep()<CR>')
 map('n', '<leader>pw', ':lua require("telescope.builtin").grep_string()<CR>')
+
+-- Search string in loaded buffers
+map('n', '<leader>l', ':lua require("telescope.builtin").live_grep({prompt_title="< Buffers String >",grep_open_files=true})<CR>')
 
 map('n', '<leader>C', ':lua require("telescope.builtin").commands()<CR>')
 map('n', '<leader>?', ':lua require("telescope.builtin").oldfiles()<CR>')
@@ -73,4 +80,3 @@ map('n', '<leader>sdf', ':lua require("thuan.telescope").search_dotfiles()<CR>')
 map('n', '<leader>sn', ':lua require("thuan.telescope").search_notes()<CR>')
 map('n', '<leader>snf', ':lua require("thuan.telescope").search_note_files()<CR>')
 map('n', '<leader>sr', ':lua require("thuan.telescope").search_references()<CR>')
-
