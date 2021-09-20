@@ -1,4 +1,7 @@
 alias vi='nvim'
+
+# Open dotfiles
+alias od='cd ~/.dotfiles && nvim'
 alias reload="source ~/.zshrc; echo 'Source zshrc complete!';"
 
 # I'm lazy, sorry :(
