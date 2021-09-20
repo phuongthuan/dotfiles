@@ -79,6 +79,9 @@ map('n', '<leader><leader>1', ':source ~/.config/nvim/init.lua<CR>:echo "Reloade
 -- fast saving with <leader> and s
 map('n', '<leader>s', ':w<CR>')
 
+-- Saving all working buffers
+map('n', '<leader>S', ':wa<CR>')
+
 -- source file and install plugins
 map('n', '<leader>P', ':so %<CR>:PaqInstall<CR>')
 
