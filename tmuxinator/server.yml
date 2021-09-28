@@ -44,3 +44,6 @@ windows:
   - console:
       - bundle install
       - rma # alias to run main-app -> Check alias.zsh for more information.
+  - flag-api:
+      - cd ~/Programming/EmploymentHero/feature-flag-api
+      - bundle exec puma -p 9293
