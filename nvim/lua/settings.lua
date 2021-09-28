@@ -23,6 +23,7 @@ opt.swapfile = false -- don't use swapfile
 opt.encoding = 'utf-8' -- the encoding displayed
 opt.fileencoding = 'utf-8' -- the encoding written to file
 opt.scrolloff = 8
+opt.cmdheight = 2
 
 cmd [[
   set nocompatible
