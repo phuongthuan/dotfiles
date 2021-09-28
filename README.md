@@ -15,7 +15,7 @@ Hello everyone,
 
 I'm a software engineer and this is my configuration. I'm using Macbook Pro 13' 2020 intel CPU.
 
-Oh, before we go the configuration, let's me show you guys my story:
+Oh, before we go the configuration, let's me tell you guys my story:
 
 I'm a lazy programmer but not a lazy person. I'd like to set up configuration and environment for working in my new machine :D. That's great right.
 
