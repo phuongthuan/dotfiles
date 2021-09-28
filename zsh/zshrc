@@ -12,10 +12,10 @@ bindkey -v
 ZSH_THEME="lambda-gitster"
 
 # Plugins
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting colorize)
+plugins=(git vi-mode zsh-autosuggestions zsh-syntax-highlighting colorize)
 
 # rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
+# export PATH="$HOME/.rbenv/bin:$PATH"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 

@@ -18,7 +18,7 @@ alias ta='tmux attach -t'
 alias how='howdoi'
 
 # Git ;)
-alias gs='git status'
+alias gs='git status -sb'
 alias ga='git add'
 alias gb='git branch'
 alias gc='git commit'
