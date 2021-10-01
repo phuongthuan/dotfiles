@@ -35,8 +35,8 @@ windows:
       # panes:
       #   - nvim
       #   - nvim
-  - localhost: yarn start
+  - test-runner:
   - hero-design:
       - cd ~/Programming/EmploymentHero/hero-design
       - nvim
-  - console:
+  - localhost: yarn start
