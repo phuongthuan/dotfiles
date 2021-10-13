@@ -59,11 +59,12 @@ require('telescope').load_extension('fzy_native')
 map('n', '<leader>tb', ':Telescope builtin<CR>')
 
 map('n', '<C-p>', ':lua require("telescope.builtin").find_files()<CR>')
-map('n', '<leader>ps', ':lua require("telescope.builtin").live_grep()<CR>')
-map('n', '<leader>pw', ':lua require("telescope.builtin").grep_string()<CR>')
+
+map('n', '<leader>ps', ':lua require("telescope.builtin").grep_string({ search = vim.fn.input("Grep For > ")})<CR>')
+map('n', '<leader>pw', ':lua require("telescope.builtin").grep_string{ search = vim.fn.expand("<cword>") }<CR>')
 
 -- Search string in loaded buffers
-map('n', '<leader>l', ':lua require("telescope.builtin").live_grep({prompt_title="< Buffers String >",grep_open_files=true})<CR>')
+map('n', '<leader>l', ':lua require("telescope.builtin").live_grep({ prompt_title="< Buffers String >", grep_open_files=true })<CR>')
 
 map('n', '<leader>C', ':lua require("telescope.builtin").commands()<CR>')
 map('n', '<leader>?', ':lua require("telescope.builtin").oldfiles()<CR>')
