@@ -17,6 +17,9 @@ alias ta='tmux attach -t'
 # How do I ....
 alias how='howdoi'
 
+# Ruby
+alias rc='bundle exec rails c'
+
 # Git ;)
 alias gs='git status -sb'
 alias ga='git add'
@@ -25,6 +28,8 @@ alias gc='git commit'
 alias gca='git add . && git commit --amend --no-edit'
 alias gd='git diff'
 alias sw='git checkout'
+alias swm='git checkout master && git pull origin master'
+alias new='git checkout -b'
 alias log='git log'
 alias glo='git log --oneline -10'
 alias reflog='git reflog --relative-date'
