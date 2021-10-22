@@ -35,6 +35,7 @@ windows:
       # panes:
       #   - nvim
       #   - nvim
+  - rails-c: nvim
   - console:
       - bundle install
       - rma # alias to run main-app -> Check alias.zsh for more information.
