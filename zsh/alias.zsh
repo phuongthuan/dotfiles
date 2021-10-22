@@ -19,6 +19,7 @@ alias how='howdoi'
 
 # Ruby
 alias rc='bundle exec rails c'
+alias be='bundle exec'
 
 # Git ;)
 alias gs='git status -sb'
