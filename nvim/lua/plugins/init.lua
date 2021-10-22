@@ -29,8 +29,8 @@ require 'paq' {
   'wakatime/vim-wakatime';
   'hoob3rt/lualine.nvim';
   'mhinz/vim-startify';
-  'kyazdani42/nvim-tree.lua';
   'kyazdani42/nvim-web-devicons';
+  'kyazdani42/nvim-tree.lua';
   'Yggdroot/indentLine';
   'norcalli/nvim-colorizer.lua';
 
@@ -52,8 +52,9 @@ require 'paq' {
   'liuchengxu/vista.vim';
   'justinmk/vim-sneak';
   'tpope/vim-surround';
+  'tpope/vim-commentary';
   'mattn/emmet-vim';
-  'b3nj5m1n/kommentary';
+  'JoosepAlviste/nvim-ts-context-commentstring';
 
   -- Code Highlight
   'nvim-treesitter/nvim-treesitter';

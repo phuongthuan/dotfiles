@@ -8,7 +8,7 @@ local map = require('utils').map
 -- Plugin: nvim-tree
 --- https://github.com/kyazdani42/nvim-tree.lua
 
-g.nvim_tree_width = 35
+g.nvim_tree_width = 40
 g.nvim_tree_ignore = {'.git', 'node_modules', '.cache', '.DS_Store'}
 g.nvim_tree_gitignore = 1
 g.nvim_tree_hide_dotfiles = 1
@@ -29,6 +29,8 @@ g.nvim_tree_icons = {
     symlink = '',
   },
 }
+
+require'nvim-tree'.setup {}
 
 -- Keymaps
 map('n', '<C-b>', ':NvimTreeToggle<CR>')
