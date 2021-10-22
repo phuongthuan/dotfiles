@@ -11,5 +11,5 @@ local map = require('utils').map
 g["sneak#label"] = true
 g["sneak#use_ic_scs"] = true
 
-map('n', 'f', '<Plug>Sneak_s', {noremap = false})
-map('n', 'F', '<Plug>Sneak_S', {noremap = false})
+map('n', '<leader>f', '<Plug>Sneak_s', {noremap = false})
+map('n', '<leader>F', '<Plug>Sneak_S', {noremap = false})
