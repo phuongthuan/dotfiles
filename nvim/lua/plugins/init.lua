@@ -55,6 +55,7 @@ require 'paq' {
   'tpope/vim-commentary';
   'mattn/emmet-vim';
   'JoosepAlviste/nvim-ts-context-commentstring';
+  'ThePrimeagen/harpoon';
 
   -- Code Highlight
   'nvim-treesitter/nvim-treesitter';

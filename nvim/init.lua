@@ -43,5 +43,6 @@ require('plugins/saga')             -- LSP UI improve
 require('plugins/lspkind')          -- icon types
 require('plugins/vimwiki')          -- personal note
 require('plugins/colorizer')        -- colorizer
+require('plugins/harpoon')          -- harpoon
 
 print('Loaded in ' .. fn.printf('%.3f', fn.reltimefloat(fn.reltime(start_time))) .. ' seconds.')
