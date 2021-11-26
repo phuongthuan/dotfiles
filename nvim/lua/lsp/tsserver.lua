@@ -9,7 +9,8 @@ M.setup = function(on_attach, capabilities)
             client.resolved_capabilities.document_range_formatting = false
             on_attach(client)
         end,
-        capabilities = capabilities
+        capabilities = capabilities,
+        flags = {debounce_text_changes = 150}
     }
 end
 
