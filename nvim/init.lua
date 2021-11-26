@@ -35,7 +35,6 @@ require('plugins/vim-starify')      -- start screen
 require('plugins/nvim-treesitter')  -- improve code highlighting
 require('plugins/vim-sneak')        -- better jump word
 require('plugins/emmet-vim')        -- Emmet HTML
-require('plugins/vista')            -- tag viewer
 require('plugins/vsnip')            -- snippets
 require('plugins/telescope')        -- search tool
 require('plugins/nvim-autopairs')   -- auto autopairs
