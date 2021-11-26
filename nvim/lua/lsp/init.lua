@@ -5,6 +5,7 @@
 local sumneko = require('lsp/sumneko')
 local tsserver = require('lsp/tsserver')
 local efm = require('lsp/efm')
+local solargraph = require('lsp/solargraph')
 
 -- plugin: nvim-lspconfig
 --- For language server setup see: https://github.com/neovim/nvim-lspconfig
@@ -59,6 +60,9 @@ sumneko.setup(on_attach, capabilities)
 
 -- npm install -g typescript typescript-language-server
 tsserver.setup(on_attach, capabilities)
+
+-- gem install solargraph
+solargraph.setup(on_attach, capabilities)
 
 -- brew install efm-langserver
 -- npm install -g eslint_d
