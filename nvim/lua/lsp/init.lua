@@ -40,7 +40,9 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
     buf_set_keymap('n', '<leader>cf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
-    if client.name == 'tsserver' then client.resolved_capabilities.document_formatting = false end
+    if client.name == 'solargraph' or client.name == 'tsserver' then
+      client.resolved_capabilities.document_formatting = false
+    end
 
     -- Format onsave
     -- if client.resolved_capabilities.document_formatting then
