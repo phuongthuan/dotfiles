@@ -21,4 +21,4 @@ map('n', '<leader>e', ':Lspsaga show_line_diagnostics<CR>')
 map('n', '<leader>rn', ':Lspsaga rename<CR>')
 
 map('n', ']e', ':Lspsaga diagnostic_jump_next<CR>')
-map('n', '[e', ':Lspsaga diagnostic_jump_next<CR>')
+map('n', '[e', ':Lspsaga diagnostic_jump_prev<CR>')
