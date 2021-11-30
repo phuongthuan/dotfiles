@@ -24,7 +24,7 @@ require 'paq' {
   'onsails/lspkind-nvim';
 
   -- UI
-  'morhetz/gruvbox';  -- theme
+  'morhetz/gruvbox';  -- best colortheme of all time :)
 
   'wakatime/vim-wakatime';
   'hoob3rt/lualine.nvim';
@@ -41,6 +41,7 @@ require 'paq' {
 
   -- Git
   'lewis6991/gitsigns.nvim';
+  'tpope/vim-fugitive';
 
   -- Snippets
   'hrsh7th/vim-vsnip';
