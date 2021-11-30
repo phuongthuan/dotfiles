@@ -43,5 +43,6 @@ require('plugins/lspkind')          -- icon types
 require('plugins/vimwiki')          -- personal note
 require('plugins/colorizer')        -- colorizer
 require('plugins/harpoon')          -- harpoon
+require('plugins/vim-fugitive')     -- best Git client for vim
 
 print('Loaded in ' .. fn.printf('%.3f', fn.reltimefloat(fn.reltime(start_time))) .. ' seconds.')
