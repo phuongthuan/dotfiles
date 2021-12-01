@@ -57,6 +57,7 @@ require 'paq' {
   'mattn/emmet-vim';
   'JoosepAlviste/nvim-ts-context-commentstring';
   'ThePrimeagen/harpoon';
+  {'mg979/vim-visual-multi', branch="master"};
 
   -- Code Highlight
   'nvim-treesitter/nvim-treesitter';
