@@ -72,12 +72,14 @@ map('n', '<leader>sb', ':lua require("telescope.builtin").buffers()<CR>')
 map('n', '<leader>sfb', ':lua require("telescope.builtin").file_browser()<CR>')
 
 -- Git
-map('n', '<leader>gg', ':lua require("telescope.builtin").git_status()<CR>')
-map('n', '<leader>gc', ':lua require("telescope.builtin").git_commits()<CR>')
-map('n', '<leader>gb', ':lua require("telescope.builtin").git_branches()<CR>')
+-- map('n', '<leader>gg', ':lua require("telescope.builtin").git_status()<CR>')
+-- map('n', '<leader>gc', ':lua require("telescope.builtin").git_commits()<CR>')
+-- map('n', '<leader>gb', ':lua require("telescope.builtin").git_branches()<CR>')
 
 -- Custom function should require from thuan.telescope instead
 map('n', '<leader>sdf', ':lua require("thuan.telescope").search_dotfiles()<CR>')
-map('n', '<leader>sn', ':lua require("thuan.telescope").search_notes()<CR>')
-map('n', '<leader>snf', ':lua require("thuan.telescope").search_note_files()<CR>')
-map('n', '<leader>sr', ':lua require("thuan.telescope").search_references()<CR>')
+map('n', '<leader>si', ':lua require("thuan.telescope").search_files_in_path()<CR>')
+map('n', '<leader>li', ':lua require("thuan.telescope").live_grep_in_path()<CR>')
+
+-- map('n', '<leader>sn', ':lua require("thuan.telescope").search_notes()<CR>')
+-- map('n', '<leader>snf', ':lua require("thuan.telescope").search_note_files()<CR>')
