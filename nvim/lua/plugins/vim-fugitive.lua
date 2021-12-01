@@ -9,3 +9,5 @@ local map = require('utils').map
 
 map('n', '<leader>gg', ':G<CR>')
 map('n', '<leader>gl', ':G log<CR>')
+
+map('n', '<leader>gc', ':G checkout ')
