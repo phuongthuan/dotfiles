@@ -95,7 +95,7 @@ map('n', '<C-l>', '<C-w>l')
 map('n', '<leader>wv', ':vs<CR>')
 map('n', '<leader>ws', ':split<CR>')
 
--- close windown
+-- close window
 map('n', '<leader>wc', ':wq<CR>')
 
 -- close window without save
