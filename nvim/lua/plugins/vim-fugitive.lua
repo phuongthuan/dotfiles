@@ -7,7 +7,9 @@ local map = require('utils').map
 -- Plugin: vim-fugitive
 --- https://github.com/tpope/vim-fugitive
 
-map('n', '<leader>gg', ':G<CR>')
+map('n', '<leader>gs', ':G<CR>')
 map('n', '<leader>gl', ':G log<CR>')
 
-map('n', '<leader>gc', ':G checkout ')
+map('n', '<leader>go', ':G checkout<Space>')
+map('n', '<leader>gb', ':G branch<Space>')
+map('n', '<leader>gd', ':G diff<CR>')
