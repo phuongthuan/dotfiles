@@ -11,5 +11,8 @@ map('n', '<leader>gs', ':G<CR>')
 map('n', '<leader>gl', ':G log<CR>')
 
 map('n', '<leader>go', ':G checkout<Space>')
+map('n', '<leader>gom', ':G checkout master<CR>')
 map('n', '<leader>gb', ':G branch<Space>')
 map('n', '<leader>gd', ':G diff<CR>')
+
+map('n', '<leader>gp', ':G push origin HEAD<CR>')
