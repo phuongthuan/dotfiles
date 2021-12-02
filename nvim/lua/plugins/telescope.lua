@@ -62,7 +62,6 @@ map('n', '<leader>wd', ':Telescope lsp_workspace_diagnostics<CR>')
 map('n', '<C-p>', ':lua require("telescope.builtin").find_files()<CR>')
 
 map('n', '<leader>ps', ':lua require("telescope.builtin").grep_string({ search = vim.fn.input("Grep For > ")})<CR>')
-map('n', '<leader>pw', ':lua require("telescope.builtin").grep_string{ search = vim.fn.expand("<cword>") }<CR>')
 
 -- Search string in loaded buffers
 map('n', '<leader>l', ':lua require("telescope.builtin").live_grep({ prompt_title="< Buffers String >", grep_open_files=true })<CR>')
@@ -72,15 +71,7 @@ map('n', '<leader>?', ':lua require("telescope.builtin").oldfiles()<CR>')
 map('n', '<leader>sb', ':lua require("telescope.builtin").buffers()<CR>')
 map('n', '<leader>sfb', ':lua require("telescope.builtin").file_browser()<CR>')
 
--- Git
--- map('n', '<leader>gg', ':lua require("telescope.builtin").git_status()<CR>')
--- map('n', '<leader>gc', ':lua require("telescope.builtin").git_commits()<CR>')
--- map('n', '<leader>gb', ':lua require("telescope.builtin").git_branches()<CR>')
-
 -- Custom function should require from thuan.telescope instead
 map('n', '<leader>sdf', ':lua require("thuan.telescope").search_dotfiles()<CR>')
 map('n', '<leader>si', ':lua require("thuan.telescope").search_files_in_path()<CR>')
 map('n', '<leader>li', ':lua require("thuan.telescope").live_grep_in_path()<CR>')
-
--- map('n', '<leader>sn', ':lua require("thuan.telescope").search_notes()<CR>')
--- map('n', '<leader>snf', ':lua require("thuan.telescope").search_note_files()<CR>')
