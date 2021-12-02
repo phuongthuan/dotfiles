@@ -57,6 +57,7 @@ require('telescope').load_extension('fzy_native')
 -- Mappings
 -- Telescope builtin function
 map('n', '<leader>tb', ':Telescope builtin<CR>')
+map('n', '<leader>wd', ':Telescope lsp_workspace_diagnostics<CR>')
 
 map('n', '<C-p>', ':lua require("telescope.builtin").find_files()<CR>')
 
