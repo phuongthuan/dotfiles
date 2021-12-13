@@ -75,9 +75,9 @@ opt.background = 'dark'
 cmd [[colorscheme gruvbox]] -- set colorscheme
 cmd [[highlight Normal ctermbg=None]]
 -- Highlight error
-cmd[[ autocmd ColorScheme * :lua require('vim.lsp.diagnostic')._define_default_signs_and_highlights() ]]
+cmd [[ autocmd ColorScheme * :lua require('vim.lsp.diagnostic')._define_default_signs_and_highlights() ]]
 g.gruvbox_transparent_bg = 1
-cmd[[ autocmd VimEnter * hi Normal ctermbg=NONE guibg=NONE ]]
+cmd [[ autocmd VimEnter * hi Normal ctermbg=NONE guibg=NONE ]]
 
 -----------------------------------------------------------
 -- Tabs, indent
