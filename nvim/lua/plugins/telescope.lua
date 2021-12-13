@@ -69,9 +69,11 @@ map('n', '<leader>l', ':lua require("telescope.builtin").live_grep({ prompt_titl
 map('n', '<leader>C', ':lua require("telescope.builtin").commands()<CR>')
 map('n', '<leader>?', ':lua require("telescope.builtin").oldfiles()<CR>')
 map('n', '<leader>sb', ':lua require("telescope.builtin").buffers()<CR>')
-map('n', '<leader>sfb', ':lua require("telescope.builtin").file_browser()<CR>')
 
 -- Custom function should require from thuan.telescope instead
 map('n', '<leader>sdf', ':lua require("thuan.telescope").search_dotfiles()<CR>')
 map('n', '<leader>si', ':lua require("thuan.telescope").search_files_in_path()<CR>')
 map('n', '<leader>li', ':lua require("thuan.telescope").live_grep_in_path()<CR>')
+
+map('n', '<leader>sn', ':lua require("thuan.telescope").search_notes()<CR>')
+map('n', '<leader>snf', ':lua require("thuan.telescope").search_note_files()<CR>')
