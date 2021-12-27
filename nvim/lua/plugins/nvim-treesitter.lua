@@ -2,7 +2,7 @@
 -- Treesitter
 -----------------------------------------------------------
 
-local opt = vim.opt
+-- local opt = vim.opt
 
 -- Plugin: nvim-treesitter
 --- https://github.com/nvim-treesitter/nvim-treesitter
@@ -50,8 +50,8 @@ require('nvim-treesitter.configs').setup({
     }
 })
 
-opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- opt.foldmethod = "expr"
+-- opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 parser_config.tsx.used_by = { "javascript", "typescript.tsx" }

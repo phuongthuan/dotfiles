@@ -19,9 +19,7 @@ map('n', '<leader>gd', ':G diff<CR>')
 
 -- Push/Pull
 map('n', '<leader>gp', ':G push origin HEAD<CR>')
-map('n', '<leader>gP', ':G push origin master<CR>')
-
-map('n', '<leader>gpl', ':G pull origin HEAD<CR>')
+map('n', '<leader>gpm', ':G push origin master<CR>')
 
 -- Merge/Rebase
 map('n', '<leader>gm', ':G merge<Space>')

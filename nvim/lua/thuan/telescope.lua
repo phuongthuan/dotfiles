@@ -10,6 +10,14 @@ M.search_dotfiles = function()
     })
 end
 
+M.search_references = function()
+    builtin.find_files({
+      prompt_title = '< References >',
+      cwd = '~/Programming/references/',
+      hidden = true,
+    })
+end
+
 M.search_notes = function()
     builtin.live_grep({
       prompt_title = '< Notes >',

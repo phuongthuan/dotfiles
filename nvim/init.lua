@@ -38,7 +38,6 @@ require('plugins/emmet-vim')        -- Emmet HTML
 require('plugins/vsnip')            -- snippets
 require('plugins/telescope')        -- search tool
 require('plugins/nvim-autopairs')   -- auto autopairs
-require('plugins/saga')             -- LSP UI improve
 require('plugins/lspkind')          -- icon types
 require('plugins/vimwiki')          -- personal note
 require('plugins/colorizer')        -- colorizer

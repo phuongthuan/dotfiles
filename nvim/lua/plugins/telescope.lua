@@ -77,3 +77,4 @@ map('n', '<leader>li', ':lua require("thuan.telescope").live_grep_in_path()<CR>'
 
 map('n', '<leader>sn', ':lua require("thuan.telescope").search_notes()<CR>')
 map('n', '<leader>snf', ':lua require("thuan.telescope").search_note_files()<CR>')
+map('n', '<leader>sr', ':lua require("thuan.telescope").search_references()<CR>')

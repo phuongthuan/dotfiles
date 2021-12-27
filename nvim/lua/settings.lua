@@ -47,9 +47,6 @@ opt.ruler = true -- show the cursor position all the time
 opt.cursorline = true -- Enable cursorline all time
 opt.hlsearch = true -- highlight search result
 
--- remove whitespace on save
-cmd [[au BufWritePre * :%s/\s\+$//e]]
-
 -- highlight on yank
 exec([[
   augroup YankHighlight
@@ -61,7 +58,6 @@ exec([[
 -----------------------------------------------------------
 -- Memory, CPU
 -----------------------------------------------------------
-opt.hidden = true -- enable background buffers
 opt.history = 100 -- remember n lines in history
 opt.lazyredraw = true -- faster scrolling
 opt.synmaxcol = 240 -- max column for syntax highlight
@@ -74,6 +70,7 @@ opt.termguicolors = true -- enable 24-bit RGB colors
 opt.background = 'dark'
 cmd [[colorscheme gruvbox]] -- set colorscheme
 cmd [[highlight Normal ctermbg=None]]
+
 -- Highlight error
 cmd [[ autocmd ColorScheme * :lua require('vim.lsp.diagnostic')._define_default_signs_and_highlights() ]]
 g.gruvbox_transparent_bg = 1

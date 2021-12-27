@@ -24,9 +24,6 @@ map('o', 'L', '$')
 map('n', 'L', '$')
 map('x', 'L', '$')
 
--- Y to copy to end of line
-map('n', 'Y', 'y$')
-
 -- Z{symbol} to copy inside
 map('n', 'Z', 'yi')
 
