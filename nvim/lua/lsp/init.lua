@@ -11,6 +11,15 @@ local solargraph = require('lsp/solargraph')
 --- For language server setup see: https://github.com/neovim/nvim-lspconfig
 
 -- custom diagnosticls look and feel
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+ vim.lsp.diagnostic.on_publish_diagnostics, {
+   -- Enable underline, use default values
+   underline = true,
+   virtual_text = false,
+   update_in_insert = false,
+ }
+)
+
 -- vim.lsp.handlers['textDocument/publishDiagnostics'] = function(...)
 --   vim.lsp.with(
 --     vim.lsp.diagnostic.on_publish_diagnostics,
