@@ -57,7 +57,7 @@ require('telescope').load_extension('fzy_native')
 -- Mappings
 -- Telescope builtin function
 map('n', '<leader>tb', ':Telescope builtin<CR>')
-map('n', '<leader>wd', ':Telescope lsp_workspace_diagnostics<CR>')
+map('n', '<leader>wd', ':Telescope diagnostics<CR>')
 
 map('n', '<C-p>', ':lua require("telescope.builtin").find_files()<CR>')
 
@@ -69,6 +69,7 @@ map('n', '<leader>l', ':lua require("telescope.builtin").live_grep({ prompt_titl
 map('n', '<leader>C', ':lua require("telescope.builtin").commands()<CR>')
 map('n', '<leader>?', ':lua require("telescope.builtin").oldfiles()<CR>')
 map('n', '<leader>sb', ':lua require("telescope.builtin").buffers()<CR>')
+map('n', '<leader>gb', ':lua require("telescope.builtin").git_branches()<CR>')
 
 -- Custom function should require from thuan.telescope instead
 map('n', '<leader>sdf', ':lua require("thuan.telescope").search_dotfiles()<CR>')
