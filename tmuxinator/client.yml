@@ -35,7 +35,7 @@ windows:
       # panes:
       #   - nvim
       #   - nvim
-  - test-runner:
+  - git:
   # - hero-design:
   #     - cd ~/Programming/EmploymentHero/hero-design
   #     - nvim
