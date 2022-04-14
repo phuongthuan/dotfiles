@@ -19,6 +19,9 @@ local start_time = fn.reltime()
 -- Import Lua modules
 ----------------------------------------------------------
 
+-- Speed up Lua modules
+require('impatient')
+
 -- Core
 require('settings')                 -- settings
 require('keymaps')                  -- keymaps

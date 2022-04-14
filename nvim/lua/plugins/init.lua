@@ -20,6 +20,7 @@ require 'paq' {
   'hrsh7th/cmp-path';
   'hrsh7th/cmp-nvim-lsp';
   'hrsh7th/cmp-nvim-lua';
+  'hrsh7th/cmp-copilot';
   'onsails/lspkind-nvim';
 
   -- UI
@@ -57,6 +58,8 @@ require 'paq' {
   'JoosepAlviste/nvim-ts-context-commentstring';
   'ThePrimeagen/harpoon';
   {'mg979/vim-visual-multi', branch="master"};
+  'github/copilot.vim';
+  'lewis6991/impatient.nvim'; -- speed up loading Lua modules
 
   -- Code Highlight
   'nvim-treesitter/nvim-treesitter';
