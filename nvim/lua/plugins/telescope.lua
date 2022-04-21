@@ -20,7 +20,15 @@ require('telescope').setup {
 
         file_ignore_patterns = {'node_modules', '.git'},
 
-        layout_config = {horizontal = {mirror = false}, vertical = {mirror = false}},
+        layout_config = {
+          horizontal = {
+            mirror = false
+          },
+          vertical = {
+            mirror = false
+          }
+        },
+
         vimgrep_arguments = {'rg', '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case'},
         mappings = {
             i = {
@@ -40,17 +48,23 @@ require('telescope').setup {
         previewer = false,
       },
       live_grep = {
-        prompt_title = 'Search Strings',
+        prompt_title = 'Grep Strings',
         results_title = false,
       },
     },
     extensions = {
       fzy_native = {
+        fuzzy = true, -- false will only do exact matching
         override_generic_sorter = false,
-        override_file_sorter = true
+        override_file_sorter = true,
+        case_mode = "smart_case", -- this is default
       }
     }
 }
+
+-- 🔭 Extensions --
+-- https://github.com/nvim-telescope/telescope-file-browser.nvim
+require('telescope').load_extension('file_browser')
 
 require('telescope').load_extension('fzy_native')
 
@@ -58,6 +72,7 @@ require('telescope').load_extension('fzy_native')
 -- Telescope builtin function
 map('n', '<leader>tb', ':Telescope builtin<CR>')
 map('n', '<leader>wd', ':Telescope diagnostics<CR>')
+map('n', '<leader>ts', ':Telescope treesitter<CR>')
 
 map('n', '<C-p>', ':lua require("telescope.builtin").find_files()<CR>')
 
@@ -79,3 +94,5 @@ map('n', '<leader>li', ':lua require("thuan.telescope").live_grep_in_path()<CR>'
 map('n', '<leader>sn', ':lua require("thuan.telescope").search_notes()<CR>')
 map('n', '<leader>snf', ':lua require("thuan.telescope").search_note_files()<CR>')
 map('n', '<leader>sr', ':lua require("thuan.telescope").search_references()<CR>')
+
+map('n', '<leader>fb', ':lua require("thuan.telescope").file_explorer()<CR>')
