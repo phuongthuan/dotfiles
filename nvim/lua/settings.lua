@@ -16,6 +16,7 @@ local opt = vim.opt -- global/buffer/windows-scoped options
 -- General
 -----------------------------------------------------------
 g.mapleader = ' ' -- change leader to a comma
+g.loaded_perl_provider = 0 -- disabled Perl warning when run :CheckHeath
 opt.mouse = 'a' -- enable mouse support
 opt.mouse = 'v' -- enable mouse middle click paste
 opt.clipboard = 'unnamedplus' -- copy/paste to system clipboard
