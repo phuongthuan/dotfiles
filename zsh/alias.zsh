@@ -1,3 +1,4 @@
+alias nvim='~/nvim-osx64/bin/nvim'
 alias vi='nvim'
 
 # Open dotfiles
