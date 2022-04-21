@@ -9,3 +9,5 @@
 [core]
 	compression = 0
 	editor = nvim
+[pull]
+	rebase = false
