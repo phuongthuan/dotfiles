@@ -1,7 +1,3 @@
------------------------------------------------------------
--- Treesitter
------------------------------------------------------------
-
 -- local opt = vim.opt
 
 -- Plugin: nvim-treesitter
@@ -22,6 +18,7 @@ require('nvim-treesitter.configs').setup({
       "scss",
       "ruby"
     },
+
     -- plugins
     autopairs = { enable = true },
     textsubjects = {

@@ -1,22 +1,13 @@
------------------------------------------------------------
--- Keymaps configuration file: keymaps of neovim
---- and plugins.
------------------------------------------------------------
-
 local map = require('utils').map
 local cmd = vim.cmd
 
------------------------------------------------------------
--- Neovim shortcuts
------------------------------------------------------------
-
--- buffers stuff
+-- Buffers stuff
 map('n', '<tab>', ':bp<CR>')
 map('n', '<S-tab>', ':bn<CR>')
 map('n', '<BS>', '<C-^>') -- switch between last two files
 map('n', '<leader>bk', ':bd<CR>')
 
--- make life more easier
+-- Make life more easier
 map('n', 'H', '^')
 map('o', 'H', '^')
 map('x', 'H', '^')
@@ -27,81 +18,78 @@ map('x', 'L', '$')
 -- Z{symbol} to copy inside
 map('n', 'Z', 'yi')
 
--- select all file
+-- Select all file
 map('n', '<leader>a', 'ggVG')
 
--- create folder
+-- Create folder
 map('n', '<leader><leader>cf', ':!mkdir -p<Space>')
 
--- keep cursor center when search
+-- Keep cursor center when search
 map('n', 'n', 'nzzzv')
 map('n', 'N', 'Nzzzv')
 map('n', 'J', 'mzJ`z')
 
--- undo break points
+-- Undo break points
 map('i', '.', '.<c-g>u')
 map('i', '[', '[<c-g>u')
 map('i', '!', '!<c-g>u')
 map('i', '?', '?<c-g>u')
 
--- moving line
+-- Moving line
 map('v', '<leader>j', ":m'>+<cr>`<my`>mzgv`yo`z")
 map('v', '<leader>k', ":m'<-2<cr>`>my`<mzgv`yo`z")
 map('n', '<leader>k', "mz:m-2<cr>`z")
 map('n', '<leader>j', "mz:m+<cr>`z")
 
--- keep visual mode indenting
+-- Keep visual mode indenting
 map('v', '<', '<gv')
 map('v', '>', '>gv')
 
--- remap for dealing with word wrap
+-- Remap for dealing with word wrap
 map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true })
 map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true })
 
--- clear search highlighting
+-- Clear search highlighting
 map('n', '<Esc>', ':nohl<CR>')
 
--- map Esc to jk
+-- Map Esc to jk
 map('i', 'jk', '<Esc>', {noremap = true})
 
--- prevent to used arrow keys ;)
+-- Prevent to used arrow keys ;)
 map('', '<up>', '<nop>', {noremap = true})
 map('', '<down>', '<nop>', {noremap = true})
 map('', '<left>', '<nop>', {noremap = true})
 map('', '<right>', '<nop>', {noremap = true})
 
--- source Vim configuration file and install plugins
+-- Source Vim configuration file and install plugins
 map('n', '<leader><leader>1', ':source ~/.config/nvim/init.lua<CR>:echo "Reloaded ~/.config/nvim/init.lua"<CR>')
 
--- fast saving with <leader> and s
+-- Fast saving with <leader> and s
 map('n', '<leader>s', ':w<CR>')
 
 -- Saving all working buffers
 map('n', '<leader>S', ':wa<CR>')
 
--- source file and install plugins
+-- Source file and install plugins
 map('n', '<leader>P', ':so %<CR>:PaqInstall<CR>')
 
--- quicker window movement
+-- Quicker window movement
 map('n', '<C-h>', '<C-w>h')
 map('n', '<C-j>', '<C-w>j')
 map('n', '<C-k>', '<C-w>k')
 map('n', '<C-l>', '<C-w>l')
 
--- vertically split screen
+-- Vertically split screen
 map('n', '<leader>wv', ':vs<CR>')
 map('n', '<leader>ws', ':split<CR>')
 
--- close window
+-- Close window
 map('n', '<leader>wc', ':wq<CR>')
 
--- close window without save
+-- Close window without save
 map('n', '<leader>q', ':q!<CR>')
 
------------------------------------------------------------
--- Custom function and shortcuts
------------------------------------------------------------
--- rename current file
+-- Rename current file
 cmd [[
 function! RenameFile()
   let old_name = expand('%')

@@ -1,7 +1,3 @@
------------------------------------------------------------
--- File manager configuration file
------------------------------------------------------------
-
 local g = vim.g
 local map = require('utils').map
 
@@ -19,7 +15,7 @@ g.nvim_tree_show_icons = {
 }
 
 g.nvim_tree_icons = {
-  default = '',
+  -- default = '',
   symlink = '',
   folder = {
     symlink = '',
@@ -61,16 +57,22 @@ require'nvim-tree'.setup {
     width = 40,
     height = 30,
     side = 'left',
-    auto_resize = false,
+    auto_resize = true,
     mappings = {
       custom_only = false,
       list = {}
     }
   },
+  git = {
+    enable = true,
+    ignore = true,
+    timeout = 400,
+  },
   filters = {
     dotfiles = false,
-    custom = {}
-  }
+    custom = { '^.git$', 'node_modules/', '.DS_Store' },
+    exclude = { '.env', 'application.yml' },
+  },
 }
 
 

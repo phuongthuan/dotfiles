@@ -3,20 +3,18 @@
 -- General Neovim settings
 -----------------------------------------------------------
 
------------------------------------------------------------
 -- API aliases
------------------------------------------------------------
-
 local cmd = vim.cmd -- execute Vim commands
 local exec = vim.api.nvim_exec -- execute Vimscript
 local g = vim.g -- global variables
 local opt = vim.opt -- global/buffer/windows-scoped options
 
------------------------------------------------------------
--- General
------------------------------------------------------------
-g.mapleader = ' ' -- change leader to a comma
+-- Skip providers
+g.loaded_python_provider = 0
+g.loaded_python3_provider = 0
 g.loaded_perl_provider = 0 -- disabled Perl warning when run :CheckHeath
+
+-- General
 opt.mouse = 'a' -- enable mouse support
 opt.mouse = 'v' -- enable mouse middle click paste
 opt.clipboard = 'unnamedplus' -- copy/paste to system clipboard
@@ -32,9 +30,7 @@ cmd [[
   filetype indent on
 ]]
 
------------------------------------------------------------
 -- UI
------------------------------------------------------------
 opt.syntax = 'enable' -- enable syntax highlighting
 opt.number = true -- show line number
 opt.showmatch = true -- highlight matching parenthesis
@@ -56,16 +52,12 @@ exec([[
   augroup end
 ]], false)
 
------------------------------------------------------------
 -- Memory, CPU
------------------------------------------------------------
 opt.history = 100 -- remember n lines in history
 opt.lazyredraw = true -- faster scrolling
 opt.synmaxcol = 240 -- max column for syntax highlight
 
------------------------------------------------------------
 -- Colorscheme
------------------------------------------------------------
 g.gruvbox_contrast_dark = 'hard'
 opt.termguicolors = true -- enable 24-bit RGB colors
 opt.background = 'dark'
@@ -77,9 +69,7 @@ cmd [[ autocmd ColorScheme * :lua require('vim.lsp.diagnostic')._define_default_
 g.gruvbox_transparent_bg = 1
 cmd [[ autocmd VimEnter * hi Normal ctermbg=NONE guibg=NONE ]]
 
------------------------------------------------------------
 -- Tabs, indent
------------------------------------------------------------
 opt.expandtab = true -- use spaces instead of tabs
 opt.shiftwidth = 2 -- shift 2 spaces when tab
 opt.tabstop = 2 -- 1 tab == 2 spaces
@@ -105,8 +95,6 @@ g.indentLine_enabled = 0
 -- disable IndentLine for markdown files (avoid concealing)
 cmd [[autocmd FileType markdown let g:indentLine_enabled=0]]
 
------------------------------------------------------------
 -- Autocompletion
------------------------------------------------------------
 opt.completeopt = 'menuone,noselect,noinsert' -- completion options
 opt.shortmess = 'c' -- don't show completion messages

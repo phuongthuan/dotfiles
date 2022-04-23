@@ -6,7 +6,6 @@
   ██║██║╚██╗██║██║   ██║   ██║     ██║   ██║██╔══██║
   ██║██║ ╚████║██║   ██║██╗███████╗╚██████╔╝██║  ██║
   ╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝
-
                   Neovim init file
                 Author: Thuan Nguyen
             https://github.com/phuongthuan
@@ -15,12 +14,11 @@
 local fn = vim.fn
 local start_time = fn.reltime()
 
-----------------------------------------------------------
--- Import Lua modules
-----------------------------------------------------------
-
 -- Speed up Lua modules
 require('impatient')
+
+-- Always map leader first
+vim.g.mapleader = ' '
 
 -- Core
 require('settings')                 -- settings

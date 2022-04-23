@@ -1,7 +1,3 @@
------------------------------------------------------------
--- Telescope
------------------------------------------------------------
-
 local actions = require('telescope.actions')
 local map = require('utils').map
 
@@ -14,6 +10,8 @@ require('telescope').setup {
         prompt_prefix = ' 🔍  ',
         color_devicons = true,
 
+        winblend = 0,
+
         file_previewer = require('telescope.previewers').vim_buffer_cat.new,
         grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
         qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
@@ -21,12 +19,30 @@ require('telescope').setup {
         file_ignore_patterns = {'node_modules', '.git'},
 
         layout_config = {
+          width = 0.95,
+          height = 0.85,
+
           horizontal = {
-            mirror = false
+            preview_width = function(_, cols, _)
+              if cols > 200 then
+                return math.floor(cols * 0.4)
+              else
+                return math.floor(cols * 0.6)
+              end
+            end,
           },
+
           vertical = {
-            mirror = false
-          }
+            width = 0.9,
+            height = 0.95,
+            preview_height = 0.5,
+          },
+
+          flex = {
+            horizontal = {
+              preview_width = 0.9,
+            },
+          },
         },
 
         vimgrep_arguments = {'rg', '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case'},
@@ -55,9 +71,9 @@ require('telescope').setup {
     extensions = {
       fzy_native = {
         fuzzy = true, -- false will only do exact matching
-        override_generic_sorter = false,
+        override_generic_sorter = true,
         override_file_sorter = true,
-        case_mode = "smart_case", -- this is default
+        case_mode = "smart_case",
       }
     }
 }

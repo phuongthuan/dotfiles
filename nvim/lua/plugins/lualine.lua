@@ -1,7 +1,3 @@
------------------------------------------------------------
--- Statusline configuration file
------------------------------------------------------------
-
 -- Plugin: lualine
 --- https://github.com/hoob3rt/lualine.nvim
 

@@ -1,13 +1,8 @@
------------------------------------------------------------
--- Vimwiki
------------------------------------------------------------
+local cmd = vim.cmd
+local map = require('utils').map
 
 -- Plugin: vimwiki
 --- https://github.com/vimwiki/vimwiki
-
--- local g = vim.g
-local cmd = vim.cmd
-local map = require('utils').map
 
 -- g.vimwiki_list = {path = '~/vimwiki/', syntax = 'markdown', ext = '.md'}
 

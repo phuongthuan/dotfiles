@@ -1,7 +1,3 @@
------------------------------------------------------------
--- Neovim LSP configuration file
------------------------------------------------------------
-
 local sumneko = require('lsp/sumneko')
 local tsserver = require('lsp/tsserver')
 local efm = require('lsp/efm')
@@ -19,18 +15,6 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
    update_in_insert = false,
  }
 )
-
--- vim.lsp.handlers['textDocument/publishDiagnostics'] = function(...)
---   vim.lsp.with(
---     vim.lsp.diagnostic.on_publish_diagnostics,
---     {
---       virtual_text = false,
---       underline = true,
---       update_in_insert = false,
---     }
---   )(...)
---   pcall(vim.lsp.diagnostic.set_loclist, {open_loclist = false})
--- end
 
 local on_attach = function(client, bufnr)
     local function buf_set_keymap(...)
@@ -63,14 +47,6 @@ local on_attach = function(client, bufnr)
     if client.name == 'solargraph' or client.name == 'tsserver' then
       client.resolved_capabilities.document_formatting = false
     end
-
-    -- Format onsave
-    -- if client.resolved_capabilities.document_formatting then
-    --     vim.api.nvim_command [[augroup Format]]
-    --     vim.api.nvim_command [[autocmd! * <buffer>]]
-    --     vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync(nil, 1000)]]
-    --     vim.api.nvim_command [[augroup END]]
-    -- end
 end
 
 -- nvim-cmp supports additional completion capabilities

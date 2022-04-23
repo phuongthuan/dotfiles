@@ -1,7 +1,3 @@
------------------------------------------------------------
--- Autocomplete configuration file
------------------------------------------------------------
-
 local cmp = require('cmp')
 local lspkind = require('lspkind')
 
@@ -53,7 +49,7 @@ cmp.setup {
       {name = 'nvim_lsp'},
       {name = 'nvim_lua'},
       {name = 'path'},
-      {name = 'copilot'},
+      -- {name = 'copilot'},
       {name = 'vsnip'},
       {name = 'path'},
       {name = 'buffer',

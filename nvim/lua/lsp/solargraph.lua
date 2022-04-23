@@ -1,3 +1,5 @@
+-- Solargraph is Ruby language server
+
 local lspconfig = require('lspconfig')
 
 local M = {}
