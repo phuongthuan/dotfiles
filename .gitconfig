@@ -8,6 +8,6 @@
 	helper = osxkeychain
 [core]
 	compression = 0
-	editor = nvim
+	editor = /Users/thuan/nvim-osx64/bin/nvim
 [pull]
 	rebase = false
