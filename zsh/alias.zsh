@@ -5,8 +5,12 @@ alias vi='nvim'
 alias od='cd ~/.dotfiles && nvim'
 alias reload="source ~/.zshrc; echo 'Source zshrc complete!';"
 
-# I'm lazy, sorry :(
+# Homebrew
 alias brewup='brew update; brew upgrade; brew cleanup; brew doctor'
+alias bl='brew services list'
+alias bs='brew services'
+
+# I'm lazy, sorry :(
 alias p='cd ~/Programming'
 alias d='cd ~/Desktop'
 alias dl='cd ~/Downloads'
@@ -22,12 +26,14 @@ alias how='howdoi'
 alias rc='bundle exec rails c'
 alias be='bundle exec'
 
+# Gitmoji
+alias gj='gitmoji'
+
 # Git ;)
 alias gs='git status -sb'
 alias ga='git add'
 alias gb='git branch'
 alias gc='git commit -am'
-alias gca='git add . && git commit --amend --no-edit'
 alias gd='git diff'
 alias sw='git checkout'
 alias swm='git checkout master && git pull origin master'
