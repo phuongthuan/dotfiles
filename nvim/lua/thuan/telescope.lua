@@ -6,7 +6,7 @@ M.search_dotfiles = function()
     builtin.find_files({
       prompt_title = " Dotfiles",
       cwd = "~/.dotfiles",
-      hidden = true,
+      -- hidden = true,
     })
 end
 

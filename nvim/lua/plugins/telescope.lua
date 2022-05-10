@@ -97,10 +97,10 @@ map('n', '<leader>ps', ':lua require("telescope.builtin").grep_string({ search =
 -- Search string in loaded buffers
 map('n', '<leader>l', ':lua require("telescope.builtin").live_grep({ prompt_title="< Buffers String >", grep_open_files=true })<CR>')
 
-map('n', '<leader>C', ':lua require("telescope.builtin").commands()<CR>')
 map('n', '<leader>?', ':lua require("telescope.builtin").oldfiles()<CR>')
 map('n', '<leader>sb', ':lua require("telescope.builtin").buffers()<CR>')
 map('n', '<leader>gb', ':lua require("telescope.builtin").git_branches()<CR>')
+map('n', '<leader>rs', ':lua require("telescope.builtin").resume()<CR>')
 
 -- Custom function should require from thuan.telescope instead
 map('n', '<leader>sdf', ':lua require("thuan.telescope").search_dotfiles()<CR>')
