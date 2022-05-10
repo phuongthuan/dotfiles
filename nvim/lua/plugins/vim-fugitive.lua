@@ -22,3 +22,7 @@ map('n', '<leader>gr', ':G rebase<Space>')
 
 -- Resolve conflict
 map('n', '<leader>rc', ':Gvdiffsplit!<CR>')
+
+-- on the Gvdiffsplit mode
+-- d2o : get the left column
+-- d3o : get the right column
