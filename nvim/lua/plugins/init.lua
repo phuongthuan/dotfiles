@@ -13,6 +13,7 @@ require 'paq' {
   'savq/paq-nvim';  -- let paq manage itself
 
   -- LSP
+  'williamboman/nvim-lsp-installer';
   'neovim/nvim-lspconfig';
   'hrsh7th/nvim-cmp'; -- autocompletion
   'hrsh7th/cmp-buffer';
@@ -21,6 +22,8 @@ require 'paq' {
   'hrsh7th/cmp-nvim-lsp';
   'hrsh7th/cmp-nvim-lua';
   'onsails/lspkind-nvim';
+  'jose-elias-alvarez/null-ls.nvim';
+  'jose-elias-alvarez/nvim-lsp-ts-utils';
 
   -- UI
   'morhetz/gruvbox';  -- best colortheme of all time :)
@@ -49,7 +52,6 @@ require 'paq' {
   -- Utilies
   'windwp/nvim-autopairs';
   'vimwiki/vimwiki';
-  'liuchengxu/vista.vim';
   'justinmk/vim-sneak';
   'tpope/vim-surround';
   'tpope/vim-commentary';

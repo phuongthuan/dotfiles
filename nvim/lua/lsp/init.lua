@@ -1,3 +1,5 @@
+require 'lsp.nvim-lsp-installer'
+
 local sumneko = require('lsp/sumneko')
 local tsserver = require('lsp/tsserver')
 local efm = require('lsp/efm')
@@ -53,7 +55,11 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
--- Lua language server
+-- language-server configuration
+-- Check for specific server configuration
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+
+-- lua language server
 sumneko.setup(on_attach, capabilities)
 
 -- npm install -g typescript typescript-language-server
@@ -65,3 +71,8 @@ solargraph.setup(on_attach, capabilities)
 -- brew install efm-langserver
 -- npm install -g eslint_d
 efm.setup(on_attach, capabilities)
+
+-- npm install -g @tailwindcss/language-server
+-- require 'lsp.tailwindcss'
+
+-- require 'lsp.null-ls'

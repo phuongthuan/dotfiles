@@ -1,6 +1,6 @@
 -- Sumneko is lua-language-server
-
 -- https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
+
 USER = vim.fn.expand('$USER')
 
 local lspconfig = require('lspconfig')
