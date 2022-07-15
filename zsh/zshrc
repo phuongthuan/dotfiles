@@ -11,16 +11,25 @@ bindkey -v
 # Theme
 ZSH_THEME="lambda-gitster"
 
-# Plugins
-plugins=(git vi-mode zsh-autosuggestions zsh-syntax-highlighting colorize)
+plugins=(
+  git
+  vi-mode
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  colorize
+)
 
-# rbenv
+
+# Lazyload rbenv
 # export PATH="$HOME/.rbenv/bin:$PATH"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+# jump
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 export EDITOR="nvim"
 export TERM="xterm-256color"
+export PATH="/usr/local/sbin:$PATH"
 
 # Load seperated config files
 for conf in "$HOME/.config/zsh/"*.zsh; do
@@ -28,7 +37,7 @@ for conf in "$HOME/.config/zsh/"*.zsh; do
 done
 unset conf
 
-# Load nvm
+# Lazyload nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                    # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
