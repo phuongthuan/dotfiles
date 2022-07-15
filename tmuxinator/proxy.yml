@@ -1,0 +1,22 @@
+# /Users/thuan/.config/tmuxinator/client.yml
+
+name: client
+root: ~/Programming/EmploymentHero/frontend-core
+
+windows:
+  - fe-core:
+    # - nvm use 16.14.2 => change to this node version incase using null-ls
+    - nvim
+      # layout: b7a8,239x61,0,0[239x47,0,0,0,239x13,0,48,4]
+      # panes:
+      #   - nvim
+      #   - nvim
+  - git:
+  - free:
+    # - cd ~
+  # - hero-design:
+  #     - cd ~/Programming/EmploymentHero/hero-design
+  #     - nvim
+  # - localhost: yarn start
+  - localhost: DOTENV=.env.sbx-omop PORT=8010 DISABLED_CHUNK_HASH=true npx eh-react-scripts start
+  - proxy: npx start-web-dev-proxy
