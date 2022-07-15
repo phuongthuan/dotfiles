@@ -9,6 +9,7 @@ alias reload="source ~/.zshrc; echo 'Source zshrc complete!';"
 alias brewup='brew update; brew upgrade; brew cleanup; brew doctor'
 alias bl='brew services list'
 alias bs='brew services'
+alias bd='brew doctor'
 
 # I'm lazy, sorry :(
 alias p='cd ~/Programming'
@@ -56,3 +57,7 @@ alias st='git stash'
 alias stl='git stash list'
 alias pop='git stash pop'
 alias grs='git checkout origin/master'
+
+# Ruby
+alias bi='bundle install'
+alias be='bundle exec'
