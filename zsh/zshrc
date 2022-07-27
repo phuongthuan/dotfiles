@@ -28,7 +28,6 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 export EDITOR="nvim"
-export TERM="xterm-256color"
 export PATH="/usr/local/sbin:$PATH"
 
 # Load seperated config files
