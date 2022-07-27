@@ -1,4 +1,4 @@
-alias nvim='~/nvim-osx64/bin/nvim'
+# alias nvim='~/nvim-osx64/bin/nvim'
 alias vi='nvim'
 
 # Open dotfiles
@@ -38,6 +38,8 @@ alias gc='git commit -m'
 alias gd='git diff'
 alias sw='git checkout'
 alias swm='git checkout master && git pull origin master'
+alias swi='git checkout sbx-instapay && git pull origin sbx-instapay'
+alias swo='git checkout sbx-omop && git pull origin sbx-omop'
 alias new='git checkout -b'
 alias log='git log'
 alias glo='git log --oneline -10'
