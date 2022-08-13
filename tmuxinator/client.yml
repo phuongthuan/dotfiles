@@ -11,11 +11,8 @@ windows:
       #   - nvim
       #   - nvim
   - git:
+    - nvm use 12
   - free:
-    # - cd ~
-  # - hero-design:
-  #     - cd ~/Programming/EmploymentHero/hero-design
-  #     - nvim
   - localhost:
     - nvm use 12
     - yarn start

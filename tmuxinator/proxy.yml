@@ -1,15 +1,22 @@
-# /Users/thuan/.config/tmuxinator/client.yml
+# /Users/thuan/.config/tmuxinator/proxy.yml
 
 name: proxy
 root: ~/Programming/EmploymentHero/frontend-core
 
 windows:
   - fe-core:
+    - nvm use 16
     - nvim
   - git:
+    - nvm use 12
   - free:
   - localhost:
+    - nvm use 12
     - git stash apply stash{0}
     - DOTENV=.env.sbx-instapay PORT=8010 DISABLED_CHUNK_HASH=true npx eh-react-scripts start
   - proxy:
     - npx start-web-dev-proxy
+  - marketplace:
+    - cd ~/Programming/EmploymentHero/marketplace-service
+    # - rms
+
