@@ -5,7 +5,7 @@ local map = require('utils').map
 
 -- Status/Log
 map('n', '<leader>g', ':G<CR>')
-map('n', '<leader>gl', ':G log<CR>')
+map('n', '<leader>gl', ':G log --oneline -10<CR>')
 
 -- Branch
 map('n', '<leader>go', ':G checkout<Space>')
