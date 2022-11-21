@@ -1,4 +1,4 @@
-# alias nvim='~/nvim-osx64/bin/nvim'
+alias nvim='~/nvim-macos/bin/nvim'
 alias vi='nvim'
 
 # Open dotfiles
@@ -24,7 +24,7 @@ alias ta='tmux attach -t'
 alias how='howdoi'
 
 # Ruby
-alias rc='bundle exec rails c'
+alias bi='bundle install'
 alias be='bundle exec'
 
 # Gitmoji
@@ -38,8 +38,6 @@ alias gc='git commit -m'
 alias gd='git diff'
 alias sw='git checkout'
 alias swm='git checkout master && git pull origin master'
-alias swi='git checkout sbx-instapay && git pull origin sbx-instapay'
-alias swo='git checkout sbx-omop && git pull origin sbx-omop'
 alias new='git checkout -b'
 alias log='git log'
 alias glo='git log --oneline -10'
@@ -55,11 +53,6 @@ alias pushm='git push origin master'
 alias pushf='git push origin HEAD -f'
 alias gcl='git clone'
 alias pick='git cherry-pick'
-alias st='git stash'
 alias stl='git stash list'
 alias pop='git stash pop'
 alias grs='git checkout origin/master'
-
-# Ruby
-alias bi='bundle install'
-alias be='bundle exec'
