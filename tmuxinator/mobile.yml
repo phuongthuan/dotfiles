@@ -1,0 +1,17 @@
+# /Users/thuan/.config/tmuxinator/mobile.yml
+
+name: proxy
+root: ~/Programming/EmploymentHero/eh-mobile-pro
+
+windows:
+  - ide:
+    # - nvm use 16.10
+    - nvim
+  - git:
+  - free:
+  - ios:
+    - yarn install
+    - cd ios
+    - pod install
+  - local:
+    - nvm use 16.10

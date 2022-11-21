@@ -5,18 +5,20 @@ root: ~/Programming/EmploymentHero/frontend-core
 
 windows:
   - fe-core:
-    - nvm use 16
+    # - nvm use 16
     - nvim
   - git:
-    - nvm use 12
   - free:
-  - localhost:
-    - nvm use 12
-    - git stash apply stash{0}
-    - DOTENV=.env.sbx-instapay PORT=8010 DISABLED_CHUNK_HASH=true npx eh-react-scripts start
-  - proxy:
-    - npx start-web-dev-proxy
   - marketplace:
     - cd ~/Programming/EmploymentHero/marketplace-service
-    # - rms
+  - local|proxy:
+      layout: b7a8,239x61,0,0[239x47,0,0,0,239x13,0,48,4]
+      panes:
+        - DOTENV=.env.sbx-instapay PORT=8010 DISABLED_CHUNK_HASH=true npx eh-react-scripts start
+        - npx start-web-dev-proxy
+  # - mp database:
+  #   - cd ~/Programming/EmploymentHero/marketplace-service
+  #   - heroclistag app run-tty marketplace
 
+  # proxy for KP local
+  # DOTENV=.env.sbx-omop PORT=8010 DISABLED_CHUNK_HASH=true KEYPAY=true npx eh-react-scripts start
