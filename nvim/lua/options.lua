@@ -3,7 +3,6 @@
 -- General Neovim settings
 -----------------------------------------------------------
 
--- API aliases
 local cmd = vim.cmd -- execute Vim commands
 local exec = vim.api.nvim_exec -- execute Vimscript
 local g = vim.g -- global variables
@@ -12,6 +11,10 @@ local opt = vim.opt -- global/buffer/windows-scoped options
 -- Skip providers
 g.loaded_python_provider = 0
 g.loaded_python3_provider = 0
+g.loaded_java_provider = 0
+g.loaded_javac_provider = 0
+g.loaded_julia_provider = 0
+g.loaded_php_provider = 0
 g.loaded_perl_provider = 0 -- disabled Perl warning when run :CheckHeath
 
 -- General
@@ -23,6 +26,8 @@ opt.encoding = 'utf-8' -- the encoding displayed
 opt.fileencoding = 'utf-8' -- the encoding written to file
 opt.scrolloff = 8
 opt.cmdheight = 2
+opt.conceallevel = 0 -- so that `` is visible in markdown files
+opt.showmode = false -- we don't need to see things like -- INSERT -- anymore
 
 cmd [[
   set nocompatible

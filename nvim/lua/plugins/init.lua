@@ -1,75 +1,99 @@
------------------------------------------------------------
--- Plugin manager configuration file
------------------------------------------------------------
+local fn = vim.fn
 
-vim.cmd 'packadd paq-nvim'            -- load paq
-local paq = require('paq-nvim').paq   -- import module with `paq` function
+-- Automatically install packer
+local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+if fn.empty(fn.glob(install_path)) > 0 then
+    PACKER_BOOTSTRAP = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    print('Installing packer close and re-open Neovim...')
+    vim.cmd([[packadd packer.nvim]])
+end
 
--- Plugin manager: paq-nvim
---- https://github.com/savq/paq-nvim
+-- Autocommand that reloads neovim whenever saving the plugins.lua file
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerSync
+  augroup end
+]])
 
--- Add packages
-require 'paq' {
-  'savq/paq-nvim';  -- let paq manage itself
+-- Use a protected call so we don't error out on first use
+local status_ok, packer = pcall(require, 'packer')
+if not status_ok then return end
 
-  -- LSP
-  'williamboman/nvim-lsp-installer';
-  'neovim/nvim-lspconfig';
-  'hrsh7th/nvim-cmp'; -- autocompletion
-  'hrsh7th/cmp-buffer';
-  'hrsh7th/cmp-vsnip';
-  'hrsh7th/cmp-path';
-  'hrsh7th/cmp-nvim-lsp';
-  'hrsh7th/cmp-nvim-lua';
-  'onsails/lspkind-nvim';
-  'jose-elias-alvarez/null-ls.nvim';
-  'jose-elias-alvarez/nvim-lsp-ts-utils';
+-- Have packer use a popup window
+packer.init({
+    display = {
+        open_fn = function()
+            return require('packer.util').float({border = 'rounded'})
+        end
+    }
+})
 
-  -- UI
-  'morhetz/gruvbox';  -- best colortheme of all time :)
+return packer.startup(function(use)
+    -- Packer can manage itself
+    use 'wbthomason/packer.nvim'
 
-  'wakatime/vim-wakatime';
-  'hoob3rt/lualine.nvim';
-  'mhinz/vim-startify';
-  'kyazdani42/nvim-web-devicons';
-  'kyazdani42/nvim-tree.lua';
-  'Yggdroot/indentLine';
-  'norcalli/nvim-colorizer.lua';
+    -- Required
+    use 'nvim-lua/plenary.nvim'
+    use 'nvim-lua/popup.nvim'
 
-  -- Markdown
-  'jxnblk/vim-mdx-js';
-  'godlygeek/tabular';
-  'plasticboy/vim-markdown';
+    -- Color schemes
+    use 'morhetz/gruvbox'
 
-  -- Git
-  'lewis6991/gitsigns.nvim';
-  'tpope/vim-fugitive';
+    -- LSP
+    use 'williamboman/nvim-lsp-installer'
+    use 'neovim/nvim-lspconfig'
 
-  -- Snippets
-  'hrsh7th/vim-vsnip';
-  'hrsh7th/vim-vsnip-integ';
+    -- Autocompletion
+    use 'hrsh7th/nvim-cmp'
+    use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-path'
+    use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/cmp-nvim-lua'
+    use 'hrsh7th/cmp-cmdline'
+    use 'saadparwaiz1/cmp_luasnip'
 
-  -- Utilies
-  'windwp/nvim-autopairs';
-  'vimwiki/vimwiki';
-  'justinmk/vim-sneak';
-  'tpope/vim-surround';
-  'tpope/vim-commentary';
-  'mattn/emmet-vim';
-  'JoosepAlviste/nvim-ts-context-commentstring';
-  'ThePrimeagen/harpoon';
-  {'mg979/vim-visual-multi', branch='master'};
-  'lewis6991/impatient.nvim'; -- speed up loading Lua modules
+    -- Snippets
+    use 'L3MON4D3/LuaSnip'
 
-  -- Code Highlight
-  'nvim-treesitter/nvim-treesitter';
-  {'styled-components/vim-styled-components', branch='main'};
+    -- Markdown
+    use 'jxnblk/vim-mdx-js'
+    use 'plasticboy/vim-markdown'
 
-  -- Telescope requirement
-  'nvim-lua/popup.nvim';
-  'nvim-lua/plenary.nvim';
-  'nvim-telescope/telescope.nvim';
-  'nvim-telescope/telescope-fzy-native.nvim';
-  'nvim-telescope/telescope-file-browser.nvim';
-}
+    -- Git
+    use 'lewis6991/gitsigns.nvim'
+    use 'tpope/vim-fugitive';
 
+    -- Code highlighting, colors, look and feel
+    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    use 'nvim-treesitter/nvim-treesitter-refactor'
+    use 'nvim-treesitter/nvim-treesitter-textobjects'
+    use 'onsails/lspkind-nvim'
+    use {'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}}
+    use 'mhinz/vim-startify'
+    use 'norcalli/nvim-colorizer.lua'
+    use 'kyazdani42/nvim-tree.lua'
+    use 'Yggdroot/indentLine'
+
+    -- Utilies
+    use 'windwp/nvim-autopairs'
+    use 'vimwiki/vimwiki'
+    use 'wakatime/vim-wakatime'
+    use 'justinmk/vim-sneak'
+    use 'tpope/vim-surround'
+    use 'tpope/vim-commentary'
+    use 'mattn/emmet-vim'
+    use 'JoosepAlviste/nvim-ts-context-commentstring'
+    use 'ThePrimeagen/harpoon'
+    use {'mg979/vim-visual-multi', branch = 'master'}
+    use 'lewis6991/impatient.nvim' -- speed up loading Lua modules
+
+    -- Telescope
+    use 'nvim-telescope/telescope.nvim'
+    use 'nvim-telescope/telescope-fzy-native.nvim'
+    use 'nvim-telescope/telescope-file-browser.nvim'
+
+    -- Automatically set up your configuration after cloning packer.nvim
+    -- Put this at the end after all plugins
+    if PACKER_BOOTSTRAP then require('packer').sync() end
+end)
