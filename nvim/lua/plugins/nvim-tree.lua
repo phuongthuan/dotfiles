@@ -1,37 +1,15 @@
-local g = vim.g
 local map = require('utils').map
 
 -- Plugin: nvim-tree
 --- https://github.com/kyazdani42/nvim-tree.lua
 
-g.nvim_tree_git_hl = 1
-g.nvim_tree_width_allow_resize  = 1
-g.nvim_tree_special_files = {'README.md', 'Makefile', 'MAKEFILE'}
-
-g.nvim_tree_show_icons = {
-  git = 0,
-  folders = 0,
-  files = 1
-}
-
-g.nvim_tree_icons = {
-  -- default = '',
-  symlink = '',
-  folder = {
-    symlink = '',
-  },
-}
+--- Migrate guide: https://github.com/nvim-tree/nvim-tree.lua/issues/674
 
 require'nvim-tree'.setup {
   disable_netrw       = true,
   hijack_netrw        = true,
   open_on_setup       = false,
   ignore_ft_on_setup  = {},
-  update_to_buf_dir   = {
-    enable = true,
-    auto_open = true,
-  },
-  auto_close          = false,
   open_on_tab         = false,
   hijack_cursor       = false,
   update_cwd          = false,
@@ -55,9 +33,7 @@ require'nvim-tree'.setup {
   },
   view = {
     width = 40,
-    height = 30,
     side = 'right',
-    auto_resize = true,
     mappings = {
       custom_only = false,
       list = {}
@@ -73,8 +49,26 @@ require'nvim-tree'.setup {
     custom = { '^.git$', 'node_modules/', '.DS_Store' },
     exclude = { '.env', 'application.yml' },
   },
+  renderer = {
+    highlight_git = true,
+    special_files = {'README.md', 'Makefile', 'MAKEFILE'},
+    icons = {
+      glyphs = {
+        -- default = '',
+        symlink = '',
+        folder = {
+          symlink = '',
+        },
+      },
+      show = {
+        git = false,
+        folder = false,
+        folder_arrow = false,
+        file = true,
+      }
+    }
+  }
 }
-
 
 -- Keymaps
 map('n', '<C-b>', ':NvimTreeToggle<CR>')

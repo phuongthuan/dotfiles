@@ -58,12 +58,12 @@ require 'paq' {
   'mattn/emmet-vim';
   'JoosepAlviste/nvim-ts-context-commentstring';
   'ThePrimeagen/harpoon';
-  {'mg979/vim-visual-multi', branch="master"};
+  {'mg979/vim-visual-multi', branch='master'};
   'lewis6991/impatient.nvim'; -- speed up loading Lua modules
 
   -- Code Highlight
   'nvim-treesitter/nvim-treesitter';
-  {'styled-components/vim-styled-components', branch="main"};
+  {'styled-components/vim-styled-components', branch='main'};
 
   -- Telescope requirement
   'nvim-lua/popup.nvim';
