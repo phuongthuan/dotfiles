@@ -1,4 +1,5 @@
-alias nvim='~/nvim-macos/bin/nvim'
+alias oldnvim='~/nvim-macos/bin/nvim' # older version of neovim
+alias nvim='~/nvim08/bin/nvim'
 alias vi='nvim'
 
 # Open dotfiles
