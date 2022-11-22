@@ -14,5 +14,4 @@ windows:
     - nvm use 12
   - free:
   - localhost:
-    - nvm use 12
     - yarn start
