@@ -23,12 +23,11 @@
         "path": "./javascript.json"
       },
       {
-        "language": "typescript",
+        "language": [
+          "typescript",
+          "typescriptreact"
+        ],
         "path": "./typescript.json"
-      },
-      {
-        "language": "typescriptreact",
-        "path": "./typescriptreact.json"
       },
       {
         "language": "json",
