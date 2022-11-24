@@ -80,14 +80,21 @@ return packer.startup(function(use)
     use 'vimwiki/vimwiki'
     use 'wakatime/vim-wakatime'
     use 'justinmk/vim-sneak'
-    use 'tpope/vim-surround'
     use 'tpope/vim-commentary'
     use 'mattn/emmet-vim'
     use 'JoosepAlviste/nvim-ts-context-commentstring'
     use 'ThePrimeagen/harpoon'
     use {'mg979/vim-visual-multi', branch = 'master'}
     use 'lewis6991/impatient.nvim' -- speed up loading Lua modules
-
+    use({
+        'kylechui/nvim-surround',
+        tag = '*', -- Use for stability; omit to use `main` branch for the latest features
+        config = function()
+            require('nvim-surround').setup({
+                -- Configuration here, or leave empty to use defaults
+            })
+        end
+    })
     -- Telescope
     use 'nvim-telescope/telescope.nvim'
     use 'nvim-telescope/telescope-fzy-native.nvim'
