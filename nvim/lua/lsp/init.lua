@@ -1,12 +1,10 @@
-require 'lsp.nvim-lsp-installer'
-
 local sumneko = require('lsp/sumneko')
 local tsserver = require('lsp/tsserver')
 local efm = require('lsp/efm')
 local solargraph = require('lsp/solargraph')
 
--- plugin: nvim-lspconfig
 --- For language server setup see: https://github.com/neovim/nvim-lspconfig
+-- plugin: nvim-lspconfig
 
 -- custom diagnosticls look and feel
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
@@ -70,6 +68,8 @@ solargraph.setup(on_attach, capabilities)
 -- brew install efm-langserver
 -- npm install -g eslint_d
 efm.setup(on_attach, capabilities)
+
+require('lsp/html')
 
 -- npm install -g @tailwindcss/language-server
 -- require 'lsp.tailwindcss'

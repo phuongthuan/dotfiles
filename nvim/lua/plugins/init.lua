@@ -8,17 +8,9 @@ if fn.empty(fn.glob(install_path)) > 0 then
     vim.cmd([[packadd packer.nvim]])
 end
 
--- Autocommand that reloads neovim whenever saving the plugins.lua file
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]])
-
 -- Use a protected call so we don't error out on first use
-local status_ok, packer = pcall(require, 'packer')
-if not status_ok then return end
+local status, packer = pcall(require, 'packer')
+if (not status) then return end
 
 -- Have packer use a popup window
 packer.init({
@@ -41,7 +33,8 @@ return packer.startup(function(use)
     use 'morhetz/gruvbox'
 
     -- LSP
-    use 'williamboman/nvim-lsp-installer'
+    use 'williamboman/mason.nvim'
+    use 'williamboman/mason-lspconfig.nvim'
     use 'neovim/nvim-lspconfig'
 
     -- Autocompletion
@@ -65,18 +58,36 @@ return packer.startup(function(use)
     use 'tpope/vim-fugitive';
 
     -- Code highlighting, colors, look and feel
-    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
-    use 'nvim-treesitter/nvim-treesitter-refactor'
-    use 'nvim-treesitter/nvim-treesitter-textobjects'
+    -- use {
+    --     'nvim-treesitter/nvim-treesitter',
+    --     run = ':TSUpdate',
+    --     config = function()
+    --         require('plugins.treesitter')
+    --     end
+    -- }
+    -- use 'nvim-treesitter/nvim-treesitter-refactor'
+    -- use 'nvim-treesitter/nvim-treesitter-textobjects'
+
     use 'onsails/lspkind-nvim'
     use {'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}}
-    use 'mhinz/vim-startify'
     use 'norcalli/nvim-colorizer.lua'
-    use 'kyazdani42/nvim-tree.lua'
+    -- use 'kyazdani42/nvim-tree.lua'
+    use 'prichrd/netrw.nvim'
     use 'Yggdroot/indentLine'
 
     -- Utilies
-    use 'windwp/nvim-autopairs'
+    use {
+        'windwp/nvim-autopairs',
+        config = function()
+            require('nvim-autopairs').setup({disable_filetype = {'TelescopePrompt', 'vim'}})
+        end
+    }
+    use {
+        'windwp/nvim-ts-autotag',
+        config = function()
+            require('nvim-ts-autotag').setup {}
+        end
+    }
     use 'vimwiki/vimwiki'
     use 'wakatime/vim-wakatime'
     use 'justinmk/vim-sneak'
@@ -88,13 +99,12 @@ return packer.startup(function(use)
     use 'lewis6991/impatient.nvim' -- speed up loading Lua modules
     use({
         'kylechui/nvim-surround',
-        tag = '*', -- Use for stability; omit to use `main` branch for the latest features
+        tag = '*',
         config = function()
-            require('nvim-surround').setup({
-                -- Configuration here, or leave empty to use defaults
-            })
+            require('nvim-surround').setup {}
         end
     })
+
     -- Telescope
     use 'nvim-telescope/telescope.nvim'
     use 'nvim-telescope/telescope-fzy-native.nvim'
