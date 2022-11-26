@@ -94,7 +94,8 @@ cmd [[ autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml setlocal shi
 
 -- IndentLine
 -- g.indentLine_setColors = 0  -- set indentLine color
--- g.indentLine_char = '┊' -- set indentLine character
+-- g.indentLine_char_list = { '|', '¦', '┆', '┊' }
+-- g.indentLine_char = '¦' -- set indentLine character
 g.indentLine_enabled = 0
 
 -- disable IndentLine for markdown files (avoid concealing)

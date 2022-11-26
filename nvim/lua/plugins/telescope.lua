@@ -1,10 +1,13 @@
 local actions = require('telescope.actions')
 local map = require('utils').map
 
+local status, telescope = pcall(require, 'telescope')
+if (not status) then return end
+
 -- Plugin: telescope.nvim
 --- https://github.com/nvim-telescope/telescope.nvim
 
-require('telescope').setup {
+telescope.setup {
     defaults = {
         file_sorter = require('telescope.sorters').get_fzy_sorter,
         prompt_prefix = ' 🔍  ',
@@ -58,7 +61,7 @@ require('telescope').setup {
     },
     -- overriding default settings
     pickers = {
-      find_files = {theme = 'dropdown', previewer = false},
+      find_files = {theme = 'dropdown', previewer = false, no_ignore = false, hidden = true},
       buffers = {
         theme = 'ivy',
         previewer = false,
