@@ -5,7 +5,6 @@ root: ~/Programming/EmploymentHero/frontend-core
 
 windows:
   - fe-core:
-    # - nvm use 16
     - nvim
   - git:
   - free:
@@ -19,6 +18,3 @@ windows:
   # - mp database:
   #   - cd ~/Programming/EmploymentHero/marketplace-service
   #   - heroclistag app run-tty marketplace
-
-  # proxy for KP local
-  # DOTENV=.env.sbx-omop PORT=8010 DISABLED_CHUNK_HASH=true KEYPAY=true npx eh-react-scripts start

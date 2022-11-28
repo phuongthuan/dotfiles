@@ -19,7 +19,8 @@ windows:
   - auth|grpc:
       layout: b7a8,239x61,0,0[239x47,0,0,0,239x13,0,48,4]
       panes:
-        - rau
+        # - rau
+        - open -a Docker && docker-compose up --build
         - bundle exec eh_protobuf start -c './config/environment.rb'
   # - ff:
   #     - cd ~/Programming/EmploymentHero/feature-flag-api

@@ -5,7 +5,6 @@ root: ~/Programming/EmploymentHero/eh-mobile-pro
 
 windows:
   - ide:
-    # - nvm use 16.10
     - nvim
   - git:
   - free:
