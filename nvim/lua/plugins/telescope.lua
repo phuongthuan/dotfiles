@@ -84,7 +84,6 @@ telescope.setup {
 -- 🔭 Extensions --
 -- https://github.com/nvim-telescope/telescope-file-browser.nvim
 require('telescope').load_extension('file_browser')
-
 require('telescope').load_extension('fzy_native')
 
 -- Mappings

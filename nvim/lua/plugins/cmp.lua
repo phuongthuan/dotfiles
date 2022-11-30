@@ -1,8 +1,11 @@
--- Plugin: nvim-cmp
---- https://github.com/hrsh7th/nvim-cmp
-local cmp = require('cmp')
+local status, cmp = pcall(require, 'cmp')
+if (not status) then return end
+
 local luasnip = require('luasnip')
 local lspkind = require('lspkind')
+
+-- Plugin: nvim-cmp
+--- https://github.com/hrsh7th/nvim-cmp
 
 require('luasnip.loaders.from_vscode').lazy_load({paths = vim.fn.stdpath 'config' .. '/snippets'})
 
@@ -50,9 +53,7 @@ cmp.setup {
     formatting = {
         format = function(entry, vim_item)
             vim_item.kind = lspkind.presets.default[vim_item.kind] .. ' ' .. vim_item.kind
-            vim_item.menu =
-                ({buffer = ' [Buffer]', path = ' [Path]', nvim_lsp = ' [LSP]', luasnip = ' [Snippet]', calc = ' [Calc]'})[entry.source
-                    .name]
+            vim_item.menu = ({buffer = ' [Buffer]', path = ' [Path]', nvim_lsp = ' [LSP]', luasnip = ' [Snippet]'})[entry.source.name]
             return vim_item
         end
     },
