@@ -224,13 +224,13 @@
     "body": [
       "import React from 'react';",
       "",
-      "export interface ${1:${MyApp}}Props {}",
+      "export interface ${1}Props {}",
       "",
-      "const ${1:${MyApp}} = ({}: ${1:${MyApp}}Props) => {",
+      "const ${1} = ({}: ${1}Props) => {",
       "\treturn <div>${2:}</div>;",
       "};",
       "",
-      "export default ${1:${MyApp}};",
+      "export default ${1};",
       ""
     ],
     "description": "Create a Typescript React Function Component"
