@@ -13,6 +13,9 @@ ts.setup {
     enable = true,
     disable = {},
   },
+  endwise = {
+    enable = true,
+  },
   ensure_installed = {
       'javascript',
       'typescript',
@@ -28,7 +31,9 @@ ts.setup {
   autotag = {
     enable = true,
   },
-  autopairs = { enable = true },
+  autopairs = {
+    enable = true
+  },
 
   -- enable module 'nvim-ts-context-commentstring' in treesitter
   context_commentstring = {

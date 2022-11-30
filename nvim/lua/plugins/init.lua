@@ -43,7 +43,6 @@ return packer.startup(function(use)
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-nvim-lua'
-    use 'hrsh7th/cmp-cmdline'
     use 'saadparwaiz1/cmp_luasnip'
 
     -- Snippets
@@ -67,6 +66,7 @@ return packer.startup(function(use)
     -- }
     -- use 'nvim-treesitter/nvim-treesitter-refactor'
     -- use 'nvim-treesitter/nvim-treesitter-textobjects'
+    use 'RRethy/nvim-treesitter-endwise'
 
     use 'onsails/lspkind-nvim'
     use {'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}}
