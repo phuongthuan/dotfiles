@@ -69,6 +69,12 @@ opt.background = 'dark'
 cmd [[colorscheme gruvbox]] -- set colorscheme
 cmd [[highlight Normal ctermbg=None]]
 
+-- Cursor
+cmd [[
+  hi Cursor2 guifg=#fe8019 guibg=#fe8019
+  set guicursor=i-r-v-ci:block-Cursor2
+]]
+
 -- Highlight error
 cmd [[ autocmd ColorScheme * :lua require('vim.lsp.diagnostic')._define_default_signs_and_highlights() ]]
 g.gruvbox_transparent_bg = 1
