@@ -1,5 +1,5 @@
-local map = require('utils').map
 local cmd = vim.cmd
+local map = vim.keymap.set
 
 -- Buffers stuff
 map('n', '<tab>', ':bp<CR>')
@@ -19,7 +19,7 @@ map('x', 'L', '$')
 map('n', 'Z', 'yi')
 
 -- Select all file
-map('n', '<leader>a', 'ggVG')
+map('n', '<leader>a', ':keepjumps normal! ggVG<CR>')
 
 -- Create folder
 map('n', '<leader><leader>cf', ':!mkdir -p<Space>')
@@ -46,8 +46,8 @@ map('v', '<', '<gv')
 map('v', '>', '>gv')
 
 -- Remap for dealing with word wrap
-map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true })
-map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true })
+map('n', 'k', "v:count == 0 ? 'gk' : 'k'", {expr = true})
+map('n', 'j', "v:count == 0 ? 'gj' : 'j'", {expr = true})
 
 -- Clear search highlighting
 map('n', '<Esc>', ':nohl<CR>')
@@ -71,7 +71,14 @@ map('n', '<leader>s', ':w<CR>')
 map('n', '<leader>S', ':wa<CR>')
 
 -- Source file and install plugins
-map('n', '<leader>P', ':so %<CR>:PaqInstall<CR>')
+map('n', '<leader>P', ':PackerSync<CR>')
+
+-- Delete without changing the registers
+map({'n', 'x'}, 'x', '"_x')
+map({'n', 'x'}, 'd', '"_d')
+map({'n', 'x'}, 'D', '"_D')
+map({'n', 'x'}, 'c', '"_c')
+map({'n', 'x'}, 'C', '"_C')
 
 -- Quicker window movement
 map('n', '<C-h>', '<C-w>h')
@@ -91,19 +98,17 @@ map('n', '<leader>q', ':q!<CR>')
 
 -- Rename current file
 cmd [[
-function! RenameFile()
-  let old_name = expand('%')
-  let new_name = input('New file name: ', expand('%'), 'file')
-  if new_name != '' && new_name != old_name
-    exec ':saveas ' . new_name
-    exec ':silent !rm ' . old_name
-    redraw!
-  endif
-endfunction
-map <Leader>rnf :call RenameFile()<cr>
+  function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'), 'file')
+    if new_name != '' && new_name != old_name
+      exec ':saveas ' . new_name
+      exec ':silent !rm ' . old_name
+      redraw!
+    endif
+  endfunction
+  map <Leader>rnf :call RenameFile()<cr>
 ]]
 
 -- Open file in same directory
-cmd [[
-  nnoremap ,e :e <C-R>=expand('%:p:h') . '/'<CR>
-]]
+cmd [[ nnoremap ,e :e <C-R>=expand('%:p:h') . '/'<CR> ]]

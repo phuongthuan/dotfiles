@@ -15,7 +15,7 @@ local fn = vim.fn
 local start_time = fn.reltime()
 
 -- Speed up Lua modules
-require('impatient')
+require('impatient').enable_profile()
 
 -- Always map leader first
 vim.g.mapleader = ' '
@@ -27,7 +27,7 @@ require('plugins')                  -- plugin manager
 require('lsp')                      -- LSP settings
 
 -- Plugins
--- require('plugins/nvim-tree')	      -- file explorer
+require('plugins/nvim-tree')	      -- file explorer
 require('plugins/lualine')          -- statusline
 require('plugins/cmp')              -- autocomplete
 require('plugins/gitsigns')         -- git checking tool

@@ -1,8 +1,8 @@
--- Plugin: lualine
---- https://github.com/hoob3rt/lualine.nvim
-
 local status, lualine = pcall(require, 'lualine')
 if (not status) then return end
+
+-- Plugin: lualine
+--- https://github.com/hoob3rt/lualine.nvim
 
 lualine.setup {
   options = {

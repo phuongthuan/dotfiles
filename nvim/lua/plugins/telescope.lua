@@ -1,5 +1,5 @@
+local map = vim.keymap.set
 local actions = require('telescope.actions')
-local map = require('utils').map
 
 local status, telescope = pcall(require, 'telescope')
 if (not status) then return end

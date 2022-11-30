@@ -1,5 +1,5 @@
 local g = vim.g
-local map = require('utils').map
+local map = vim.keymap.set
 
 -- Plugin: justinmk/vim-sneak
 --- https://github.com/justinmk/vim-sneak

@@ -1,5 +1,5 @@
 local cmd = vim.cmd
-local map = require('utils').map
+local map = vim.keymap.set
 
 -- Plugin: vimwiki
 --- https://github.com/vimwiki/vimwiki

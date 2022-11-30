@@ -71,7 +71,7 @@ return packer.startup(function(use)
     use 'onsails/lspkind-nvim'
     use {'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}}
     use 'norcalli/nvim-colorizer.lua'
-    -- use 'kyazdani42/nvim-tree.lua'
+    use 'kyazdani42/nvim-tree.lua'
     use 'prichrd/netrw.nvim'
     use 'Yggdroot/indentLine'
 

@@ -1,4 +1,4 @@
-local map = require('utils').map
+local map = vim.keymap.set
 
 local status, mason = pcall(require, 'mason')
 if (not status) then return end

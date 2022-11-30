@@ -1,4 +1,4 @@
-local map = require('utils').map
+local map = vim.keymap.set
 
 local status, harpoon = pcall(require, 'harpoon')
 if (not status) then return end
