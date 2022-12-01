@@ -54,8 +54,9 @@ return packer.startup(function(use)
 
     -- Git
     use 'lewis6991/gitsigns.nvim'
-    use 'tpope/vim-fugitive';
+    use 'tpope/vim-fugitive'
     use 'tpope/vim-rhubarb'
+    use 'ThePrimeagen/git-worktree.nvim'
 
     -- Code highlighting, colors, look and feel
     -- use {

@@ -44,5 +44,6 @@ require('plugins/harpoon')          -- harpoon
 require('plugins/fugitive')         -- best Git client for vim
 require('plugins/netrw')
 require('plugins/mason')
+require('plugins/worktree')         -- git worktree
 
 print('Loaded in ' .. fn.printf('%.3f', fn.reltimefloat(fn.reltime(start_time))) .. ' seconds.')
