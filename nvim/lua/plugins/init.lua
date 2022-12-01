@@ -74,7 +74,6 @@ return packer.startup(function(use)
     use 'norcalli/nvim-colorizer.lua'
     use 'kyazdani42/nvim-tree.lua'
     use 'prichrd/netrw.nvim'
-    use 'Yggdroot/indentLine'
 
     -- Utilies
     use {
