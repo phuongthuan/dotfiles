@@ -1,4 +1,4 @@
-local map = require('utils').map
+local map = vim.keymap.set
 
 -- Plugin: nvim-tree
 --- https://github.com/kyazdani42/nvim-tree.lua
@@ -6,7 +6,7 @@ local map = require('utils').map
 --- Migrate guide: https://github.com/nvim-tree/nvim-tree.lua/issues/674
 
 require'nvim-tree'.setup {
-  disable_netrw       = true,
+  disable_netrw       = false,
   hijack_netrw        = true,
   open_on_setup       = false,
   ignore_ft_on_setup  = {},

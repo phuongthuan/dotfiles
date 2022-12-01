@@ -23,10 +23,12 @@ vim.g.mapleader = ' '
 -- Core
 require('options')                  -- options
 require('keymaps')                  -- keymaps
-require('plugins')                  -- plugin manager
 require('lsp')                      -- LSP settings
 
+require('colorschemes/gruvbox')
+
 -- Plugins
+require('plugins')                  -- plugin manager
 require('plugins/nvim-tree')	      -- file explorer
 require('plugins/lualine')          -- statusline
 require('plugins/cmp')              -- autocomplete

@@ -30,7 +30,7 @@ return packer.startup(function(use)
     use 'nvim-lua/popup.nvim'
 
     -- Color schemes
-    use 'morhetz/gruvbox'
+    use 'ellisonleao/gruvbox.nvim'
 
     -- LSP
     use 'williamboman/mason.nvim'

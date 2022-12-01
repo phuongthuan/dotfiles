@@ -48,6 +48,7 @@ opt.smartcase = true -- ignore lowercase for the whole pattern
 opt.ruler = true -- show the cursor position all the time
 opt.cursorline = true -- Enable cursorline all time
 opt.hlsearch = true -- highlight search result
+opt.termguicolors = true -- enable 24-bit RGB colors
 
 -- highlight on yank
 exec([[
@@ -63,11 +64,9 @@ opt.lazyredraw = true -- faster scrolling
 opt.synmaxcol = 240 -- max column for syntax highlight
 
 -- Colorscheme
-g.gruvbox_contrast_dark = 'hard'
-opt.termguicolors = true -- enable 24-bit RGB colors
 opt.background = 'dark'
-cmd [[colorscheme gruvbox]] -- set colorscheme
-cmd [[highlight Normal ctermbg=None]]
+cmd [[ colorscheme gruvbox ]]
+cmd [[ highlight Normal ctermbg=None ]]
 
 -- Cursor
 cmd [[
@@ -92,17 +91,17 @@ cmd [[au BufEnter * set fo-=c fo-=r fo-=o]]
 -- remove all trailing space when saving file
 cmd [[autocmd BufWritePre * :%s/\s\+$//e]]
 
--- remove line lenght marker for selected filetypes
+-- remove line length marker for selected filetypes
 cmd [[autocmd FileType text,markdown,xml,html,xhtml,javascript setlocal cc=0]]
 
 -- 2 spaces for selected filetypes
 cmd [[ autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml setlocal shiftwidth=2 tabstop=2 ]]
 
 -- IndentLine
+-- g.indentLine_enabled = 0
 -- g.indentLine_setColors = 0  -- set indentLine color
--- g.indentLine_char_list = { '|', '¦', '┆', '┊' }
--- g.indentLine_char = '¦' -- set indentLine character
-g.indentLine_enabled = 0
+-- g.indentLine_char_list = { '|', '¦', '┆', '┊', '·' }
+g.indentLine_char = '·' -- set indentLine character
 
 -- disable IndentLine for markdown files (avoid concealing)
 cmd [[autocmd FileType markdown let g:indentLine_enabled=0]]
