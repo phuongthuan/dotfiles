@@ -11,6 +11,7 @@ windows:
       #   - nvim
   - market:
       - cd ~/Programming/EmploymentHero/marketplace-service
+      - nvim
   - market-log:
       - rms
   - eh-log:
