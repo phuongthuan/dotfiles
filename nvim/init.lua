@@ -21,21 +21,17 @@ require('impatient').enable_profile()
 vim.g.mapleader = ' '
 
 -- Core
-require('options')                  -- options
-require('keymaps')                  -- keymaps
-require('lsp')                      -- LSP settings
-
-require('colorschemes/gruvbox')
+require('options')
+require('keymaps')
 
 -- Plugins
-require('plugins')                  -- plugin manager
+require('plugins')
 require('plugins/nvim-tree')	      -- file explorer
 require('plugins/lualine')          -- statusline
 require('plugins/cmp')              -- autocomplete
 require('plugins/gitsigns')         -- git checking tool
 require('plugins/treesitter')       -- code highlighting
 require('plugins/vim-sneak')        -- better jump word
-require('plugins/emmet-vim')        -- emmet HTML
 require('plugins/telescope')        -- search tool
 require('plugins/lspkind')          -- icon types
 require('plugins/vimwiki')          -- personal note
@@ -45,5 +41,10 @@ require('plugins/fugitive')         -- best Git client for vim
 require('plugins/netrw')
 require('plugins/mason')
 require('plugins/worktree')         -- git worktree
+require('plugins/fidget')           -- progress for lsp
+
+require('colorschemes/gruvbox')
+
+require('lsp')
 
 print('Loaded in ' .. fn.printf('%.3f', fn.reltimefloat(fn.reltime(start_time))) .. ' seconds.')

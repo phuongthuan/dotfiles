@@ -56,6 +56,7 @@ return packer.startup(function(use)
     use 'lewis6991/gitsigns.nvim'
     use 'tpope/vim-fugitive'
     use 'tpope/vim-rhubarb'
+    use 'junegunn/gv.vim'
     use 'ThePrimeagen/git-worktree.nvim'
 
     -- Code highlighting, colors, look and feel
@@ -70,11 +71,13 @@ return packer.startup(function(use)
     -- use 'nvim-treesitter/nvim-treesitter-textobjects'
     use 'RRethy/nvim-treesitter-endwise'
 
+    -- UI
     use 'onsails/lspkind-nvim'
     use {'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}}
     use 'norcalli/nvim-colorizer.lua'
     use 'kyazdani42/nvim-tree.lua'
     use 'prichrd/netrw.nvim'
+    use 'j-hui/fidget.nvim'
 
     -- Utilies
     use {
