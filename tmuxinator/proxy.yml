@@ -16,8 +16,9 @@ windows:
   - local|proxy:
       layout: b7a8,239x61,0,0[239x47,0,0,0,239x13,0,48,4]
       panes:
-        - DOTENV=.env.sbx-instapay PORT=8010 DISABLED_CHUNK_HASH=true npx eh-react-scripts start
-        - npx start-web-dev-proxy
+          - yarn start
+        # - DOTENV=.env.sbx-instapay PORT=8010 DISABLED_CHUNK_HASH=true npx eh-react-scripts start
+        # - npx start-web-dev-proxy
   # - mp database:
   #   - cd ~/Programming/EmploymentHero/marketplace-service
   #   - heroclistag app run-tty marketplace

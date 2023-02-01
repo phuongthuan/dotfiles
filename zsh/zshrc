@@ -29,6 +29,10 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 export EDITOR="nvim"
 export PATH="/usr/local/sbin:$PATH"
 
+export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
+export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+
 # Load seperated config files
 for conf in "$HOME/.config/zsh/"*.zsh; do
   source "${conf}"
