@@ -72,7 +72,6 @@ opt.shiftwidth = 2                                     -- shift 2 spaces when ta
 opt.tabstop = 2                                        -- 1 tab == 2 spaces
 opt.smartindent = true                                 -- autoindent new lines
 
-
 cmd [[au BufEnter * set fo-=c fo-=r fo-=o]]            -- don't auto commenting new lines
 
 cmd [[autocmd BufWritePre * :%s/\s\+$//e]]             -- remove all trailing space when saving file
@@ -89,6 +88,10 @@ cmd [[ autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml setlocal shi
 -- g.indentLine_char_list = { '|', '¦', '┆', '┊', '·' }
 g.indentLine_char = '·'
 
--- disable IndentLine for markdown files (avoid concealing)
+-- Disable netrw
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
+
+-- Disable IndentLine for markdown files (avoid concealing)
 cmd [[autocmd FileType markdown let g:indentLine_enabled=0]]
 

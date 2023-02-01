@@ -57,26 +57,27 @@ return packer.startup(function(use)
     use 'tpope/vim-fugitive'
     use 'tpope/vim-rhubarb'
     use 'junegunn/gv.vim'
-    use 'ThePrimeagen/git-worktree.nvim'
+    -- use 'ThePrimeagen/git-worktree.nvim'
 
     -- Code highlighting, colors, look and feel
-    -- use {
-    --     'nvim-treesitter/nvim-treesitter',
-    --     run = ':TSUpdate',
-    --     config = function()
-    --         require('plugins.treesitter')
-    --     end
-    -- }
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate',
+        config = function()
+            require('plugins.treesitter')
+        end
+    }
     -- use 'nvim-treesitter/nvim-treesitter-refactor'
     -- use 'nvim-treesitter/nvim-treesitter-textobjects'
     use 'RRethy/nvim-treesitter-endwise'
 
     -- UI
     use 'onsails/lspkind-nvim'
-    use {'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}}
+    use 'nvim-tree/nvim-web-devicons'
+    use 'nvim-lualine/lualine.nvim'
     use 'norcalli/nvim-colorizer.lua'
-    use 'kyazdani42/nvim-tree.lua'
-    use 'prichrd/netrw.nvim'
+    use 'lukas-reineke/indent-blankline.nvim'
+    use {'nvim-tree/nvim-tree.lua', tag = 'nightly'}
     use 'j-hui/fidget.nvim'
 
     -- Utilies

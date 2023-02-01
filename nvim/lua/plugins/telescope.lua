@@ -87,7 +87,6 @@ require('telescope').load_extension('file_browser')
 require('telescope').load_extension('fzy_native')
 
 -- Mappings
--- Telescope builtin function
 map('n', '<leader>tb', ':Telescope builtin<CR>')
 map('n', '<leader>wd', ':Telescope diagnostics<CR>')
 map('n', '<leader>ts', ':Telescope treesitter<CR>')

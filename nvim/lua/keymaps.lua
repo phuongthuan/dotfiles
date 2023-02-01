@@ -75,10 +75,8 @@ map('n', '<leader>P', ':PackerSync<CR>')
 
 -- Delete without changing the registers
 map({'n', 'x'}, 'x', '"_x')
-map({'n', 'x'}, 'd', '"_d')
-map({'n', 'x'}, 'D', '"_D')
-map({'n', 'x'}, 'c', '"_c')
-map({'n', 'x'}, 'C', '"_C')
+
+map('x', '<leader>p', "\"_dP")
 
 -- Quicker window movement
 map('n', '<C-h>', '<C-w>h')

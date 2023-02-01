@@ -38,9 +38,8 @@ require('plugins/vimwiki')          -- personal note
 require('plugins/colorizer')        -- colorizer
 require('plugins/harpoon')          -- harpoon
 require('plugins/fugitive')         -- best Git client for vim
-require('plugins/netrw')
 require('plugins/mason')
-require('plugins/worktree')         -- git worktree
+require('plugins/nvim-web-devicons')
 require('plugins/fidget')           -- progress for lsp
 
 require('colorschemes/gruvbox')

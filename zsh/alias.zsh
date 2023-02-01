@@ -1,10 +1,12 @@
-alias oldnvim='~/nvim-macos/bin/nvim' # older version of neovim
-alias nvim='~/nvim08/bin/nvim'
+alias nvim='~/nvim-macos/bin/nvim'
 alias vi='nvim'
 
 # Open dotfiles
 alias od='cd ~/.dotfiles && nvim'
 alias reload="source ~/.zshrc; echo 'Source zshrc complete!';"
+
+# Open EH config
+alias ehconf='nvim ~/.config/zsh/eh.zsh'
 
 # Homebrew
 alias brewup='brew update; brew upgrade; brew cleanup; brew doctor'
@@ -40,7 +42,6 @@ alias gd='git diff'
 alias sw='git checkout'
 alias swm='git checkout master && git pull origin master'
 alias new='git checkout -b'
-alias log='git log'
 alias glo='git log --oneline -10'
 alias reflog='git reflog --relative-date'
 alias del='git branch -D'
