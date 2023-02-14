@@ -10,11 +10,10 @@ null_ls.setup({
 	sources = {
 		formatting.rubocop,
 		formatting.prettier,
-		-- formatting.eslint,
 		formatting.stylua,
 		diagnostics.rubocop,
-		diagnostics.eslint,
+    diagnostics.luacheck
 	},
 
-	diagnostics_format = "#{s}: #{m} (#{c})",
+	diagnostics_format = "[#{c}] #{m} (#{s})",
 })

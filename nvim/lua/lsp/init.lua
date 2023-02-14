@@ -1,7 +1,7 @@
-local sumneko = require('lsp/sumneko')
 local tsserver = require('lsp/tsserver')
-local efm = require('lsp/efm')
 local solargraph = require('lsp/solargraph')
+
+local map = vim.keymap.set
 
 --- For language server setup see: https://github.com/neovim/nvim-lspconfig
 -- plugin: nvim-lspconfig
@@ -17,32 +17,29 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 )
 
 local on_attach = function(client, bufnr)
-    local function buf_set_keymap(...)
-        vim.api.nvim_buf_set_keymap(bufnr, ...)
-    end
-    local function buf_set_option(...)
-        vim.api.nvim_buf_set_option(bufnr, ...)
-    end
 
     -- Enable completion triggered by <c-x><c-o>
-    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    local opts = {noremap = true, silent = true}
 
-    buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-    buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    buf_set_keymap('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-    buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+    -- Mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local bufopts = { noremap=true, silent=true, buffer=bufnr }
 
-    buf_set_keymap('n', ']e', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-    buf_set_keymap('n', '[e', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-    buf_set_keymap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+    map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', bufopts)
+    map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', bufopts)
+    map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', bufopts)
+    map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', bufopts)
+    map('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', bufopts)
+    map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', bufopts)
 
-    buf_set_keymap('n', '<leader>cf', '<cmd>lua vim.lsp.buf.format { async = true }<CR>', opts)
-    buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-    buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    map('n', ']e', '<cmd>lua vim.diagnostic.goto_next()<CR>', bufopts)
+    map('n', '[e', '<cmd>lua vim.diagnostic.goto_prev()<CR>', bufopts)
+    map('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', bufopts)
+
+    map('n', '<leader>cf', '<cmd>lua vim.lsp.buf.format { async = true }<CR>', bufopts)
+    map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', bufopts)
+    map('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', bufopts)
 
     if client.name == 'solargraph' or client.name == 'tsserver' then
       client.server_capabilities.documentFormattingProvider = false
@@ -56,9 +53,6 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- Check for specific server configuration
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 
--- lua language server
-sumneko.setup(on_attach, capabilities)
-
 -- npm install -g typescript typescript-language-server
 tsserver.setup(on_attach, capabilities)
 
@@ -67,11 +61,11 @@ solargraph.setup(on_attach, capabilities)
 
 -- brew install efm-langserver
 -- npm install -g eslint_d
-efm.setup(on_attach, capabilities)
+-- efm.setup(on_attach, capabilities)
 
-require('lsp/html')
+require('lsp.html')
 
 -- npm install -g @tailwindcss/language-server
 -- require 'lsp.tailwindcss'
 
--- require 'lsp.null-ls'
+require 'lsp.null-ls'
