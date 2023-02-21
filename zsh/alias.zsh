@@ -57,4 +57,12 @@ alias gcl='git clone'
 alias pick='git cherry-pick'
 alias stl='git stash list'
 alias pop='git stash pop'
-alias grs='git checkout origin/master'
+
+# Docker
+alias dps='docker ps -a'
+alias ds='docker stop'
+alias drm='docker rm'
+alias drmi='docker rmi'
+alias dl='docker logs'
+alias di='docker inspect'
+alias drM='docker container prune -f'
