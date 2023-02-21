@@ -238,10 +238,12 @@
   "describe block test": {
     "prefix": "desc",
     "body": [
-      "import { renderWithRedux as render } from 'eh-test-helper';\n",
+      "import { renderWithRedux as render, mockFrontendEnv } from 'eh-test-helper';\n",
+      "import fetchMock from 'fetch-mock-jest';\n",
       "import React from 'react';",
       "import { getMarketplaceHost } from 'eh-utils/getFrontendEnv';",
-      "import { screen } from '@testing-library/react';\n",
+      "import { screen, fireEvent } from '@testing-library/react';\n",
+      "mockFrontendEnv('REACT_APP_MARKETPLACE_HOST', 'marketplaceHost');\n",
       "describe('$1', () => {",
       "\tit('$2', () => {",
       "\t\t$3",
@@ -257,15 +259,19 @@
   },
   "expect getByText": {
     "prefix": "egbt",
-    "body": ["expect(getByText('$1')).toBeInTheDocument();$0"]
+    "body": ["expect(screen.getByText('$1')).toBeInTheDocument();$0"]
   },
   "expect await findByText": {
     "prefix": "efbt",
-    "body": ["expect(await findByText('$1')).toBeInTheDocument();$0"]
+    "body": ["expect(await screen.findByText('$1')).toBeInTheDocument();$0"]
   },
   "expect queryByText": {
     "prefix": "eqbt",
-    "body": ["expect(queryByText('$1')).not.toBeInTheDocument();$0"]
+    "body": ["expect(screen.queryByText('$1')).not.toBeInTheDocument();$0"]
+  },
+  "expect getByRole": {
+    "prefix": "egbr",
+    "body": ["expect(screen.getByRole('${1:img}')).toHaveAttribute('src', '${2:url_link}');$0"]
   },
   "Intl formatMessage": {
     "prefix": "intlf",
