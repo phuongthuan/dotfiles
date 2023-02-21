@@ -1,1 +1,3 @@
-require'lspconfig'.tailwindcss.setup{}
+-- npm install -g @tailwindcss/language-server
+
+require("lspconfig").tailwindcss.setup({})

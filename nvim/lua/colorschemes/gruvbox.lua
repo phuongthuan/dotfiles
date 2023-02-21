@@ -1,6 +1,6 @@
-require('gruvbox').setup({
-  bold = false,
-  italic = false,
-  invert_selection = false,
-  contrast = 'hard',
+require("gruvbox").setup({
+	bold = false,
+	italic = false,
+	invert_selection = false,
+	contrast = "hard",
 })

@@ -3,8 +3,8 @@
 
 local g = vim.g
 
-g.user_emmet_leader_key = ','
+g.user_emmet_leader_key = ","
 g.user_emmet_settings = {
-  typescript = {extends = 'jsx'},
-  javascript = {extends = 'jsx'},
+	typescript = { extends = "jsx" },
+	javascript = { extends = "jsx" },
 }

@@ -6,8 +6,8 @@ local map = vim.keymap.set
 
 -- g.vimwiki_list = {path = '~/vimwiki/', syntax = 'markdown', ext = '.md'}
 
-cmd [[ let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}] ]]
+cmd([[ let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}] ]])
 
-map('n', '<leader>td', ':VimwikiMakeDiaryNote<CR>', {noremap = false})
-map('n', '<leader>yt', ':VimwikiMakeYesterdayDiaryNote<CR>', {noremap = false})
-map('n', '<leader>tm', ':VimwikiMakeTomorrowDiaryNote<CR>', {noremap = false})
+map("n", "<leader>td", ":VimwikiMakeDiaryNote<CR>", { noremap = false })
+map("n", "<leader>yt", ":VimwikiMakeYesterdayDiaryNote<CR>", { noremap = false })
+map("n", "<leader>tm", ":VimwikiMakeTomorrowDiaryNote<CR>", { noremap = false })

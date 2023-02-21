@@ -1,1 +1,1 @@
-require('thuan/telescope')
+require("thuan/telescope")
