@@ -32,8 +32,8 @@ require("nvim-tree").setup({
 		args = {},
 	},
 	view = {
-		width = 40,
-		side = "right",
+		width = 50,
+		side = "left",
 		mappings = {
 			custom_only = false,
 			list = {},
@@ -62,8 +62,8 @@ require("nvim-tree").setup({
 			},
 			show = {
 				git = false,
-				folder = false,
-				folder_arrow = false,
+				folder = true,
+				folder_arrow = true,
 				file = true,
 			},
 		},
