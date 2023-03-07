@@ -1,12 +1,14 @@
 alias nvim='~/nvim-macos/bin/nvim'
 alias vi='nvim'
 
-# Open dotfiles
-alias od='cd ~/.dotfiles && nvim'
+# Source zshrc
 alias reload="source ~/.zshrc; echo 'Source zshrc complete!';"
 
 # Open EH config
 alias ehconf='nvim ~/.config/zsh/eh.zsh'
+
+# Open dotfiles
+alias dot='nvim ~/.dotfiles'
 
 # Homebrew
 alias brewup='brew update; brew upgrade; brew cleanup; brew doctor'
@@ -36,6 +38,7 @@ alias gj='gitmoji'
 # Git ;)
 alias gs='git status -sb'
 alias ga='git add'
+alias gw='git worktree'
 alias gb='git branch'
 alias gc='git commit -m'
 alias gd='git diff'
