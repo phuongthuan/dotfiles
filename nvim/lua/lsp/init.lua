@@ -54,4 +54,6 @@ solargraph.setup(on_attach, capabilities)
 
 require("lsp.html")
 
+require("lsp.graphql")
+
 require("lsp.null-ls")
