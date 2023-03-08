@@ -1,5 +1,4 @@
 alias nvim='~/nvim-macos/bin/nvim'
-alias vi='nvim'
 
 # Source zshrc
 alias reload="source ~/.zshrc; echo 'Source zshrc complete!';"
