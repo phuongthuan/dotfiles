@@ -2,6 +2,7 @@
 
 local tsserver = require("lsp/tsserver")
 local solargraph = require("lsp/solargraph")
+local gopls = require("lsp/gopls")
 
 local map = vim.keymap.set
 
@@ -52,8 +53,9 @@ tsserver.setup(on_attach, capabilities)
 
 solargraph.setup(on_attach, capabilities)
 
-require("lsp.html")
+gopls.setup(on_attach, capabilities)
 
-require("lsp.graphql")
+-- require("lsp.html")
+-- require("lsp.graphql")
 
 require("lsp.null-ls")
