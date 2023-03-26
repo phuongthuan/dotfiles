@@ -72,7 +72,7 @@ return packer.startup(function(use)
 		end,
 	})
 	-- use 'nvim-treesitter/nvim-treesitter-refactor'
-	-- use 'nvim-treesitter/nvim-treesitter-textobjects'
+	use 'nvim-treesitter/nvim-treesitter-textobjects'
 	use("RRethy/nvim-treesitter-endwise")
 
 	-- UI
