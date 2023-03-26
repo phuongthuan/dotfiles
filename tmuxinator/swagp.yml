@@ -5,7 +5,7 @@ root: ~/Programming/EmploymentHero/ebf-swag-personal
 
 windows:
   - editor:
-    - vi
+    - nvim
   - git:
   - superapp:
     - cd ~/Programming/EmploymentHero/eh-mobile-pro

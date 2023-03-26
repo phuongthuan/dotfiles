@@ -68,3 +68,5 @@ alias drmi='docker rmi'
 alias dl='docker logs'
 alias di='docker inspect'
 alias drM='docker container prune -f'
+
+alias dc='docker-compose'

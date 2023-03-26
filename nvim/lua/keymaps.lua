@@ -110,3 +110,6 @@ cmd([[
 
 -- Open file in same directory
 cmd([[ nnoremap ,e :e <C-R>=expand('%:p:h') . '/'<CR> ]])
+
+-- Open EH configuration
+map("n", "<leader>eh", ":e ~/.dotfiles/zsh/eh.zsh<CR>")
