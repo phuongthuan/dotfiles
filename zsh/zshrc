@@ -2,13 +2,13 @@
 
 export ZSH="$HOME/.oh-my-zsh"
 
-# DOTFILE folder
+# DOTFILES folder
 export DOTFILES=~/Programming/dotfiles
 
 # Enable vim mode
 bindkey -v
 
-# Theme
+# https://github.com/ergenekonyigit/lambda-gitster
 ZSH_THEME="lambda-gitster"
 
 plugins=(
@@ -23,7 +23,7 @@ plugins=(
 # export PATH="$HOME/.rbenv/bin:$PATH"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-# jump
+# https://github.com/wting/autojump
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 export EDITOR="nvim"

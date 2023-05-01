@@ -36,7 +36,7 @@ opt.ruler = true -- show the cursor position all the time
 opt.cursorline = true -- Enable cursorline all time
 opt.hlsearch = true -- highlight search result
 opt.termguicolors = true -- enable 24-bit RGB colors
-opt.relativenumber = true
+opt.relativenumber = false
 
 -- highlight on yank
 exec(
