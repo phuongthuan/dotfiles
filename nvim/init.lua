@@ -22,7 +22,7 @@ vim.g.mapleader = " "
 
 -- Core
 require("options")
-require("keymaps")
+require("remaps")
 
 -- Plugins
 require("plugins")
@@ -38,7 +38,7 @@ require("plugins/vimwiki") -- personal note
 require("plugins/colorizer") -- colorizer
 require("plugins/harpoon") -- harpoon
 require("plugins/fugitive") -- best Git client for vim
-require("plugins/mason")
+require("plugins/mason") -- LSP manager
 require("plugins/nvim-web-devicons")
 require("plugins/fidget") -- progress for lsp
 
