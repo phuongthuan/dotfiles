@@ -72,7 +72,7 @@ return packer.startup(function(use)
 		end,
 	})
 	-- use 'nvim-treesitter/nvim-treesitter-refactor'
-	use 'nvim-treesitter/nvim-treesitter-textobjects'
+	use("nvim-treesitter/nvim-treesitter-textobjects")
 	use("RRethy/nvim-treesitter-endwise")
 
 	-- UI
@@ -82,7 +82,7 @@ return packer.startup(function(use)
 	use("norcalli/nvim-colorizer.lua")
 	use("lukas-reineke/indent-blankline.nvim")
 	use({ "nvim-tree/nvim-tree.lua", tag = "nightly" })
-	use("j-hui/fidget.nvim")
+	use({ "j-hui/fidget.nvim", tag = "legacy" })
 
 	-- Utilies
 	use({

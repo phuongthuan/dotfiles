@@ -1,4 +1,5 @@
-alias nvim='~/nvim-macos/bin/nvim'
+alias onvim='~/nvim-macos/bin/nvim'
+alias nvim='~/nvim9/bin/nvim'
 
 # Source zshrc
 alias reload="source ~/.zshrc; echo 'Source zshrc complete!';"
@@ -50,7 +51,7 @@ alias del='git branch -D'
 alias rsh='git reset --hard'
 alias rss='git reset --soft'
 alias grm='git checkout --'
-alias pull='git pull origin HEAD'
+alias pull='git pull origin $(git rev-parse --abbrev-ref HEAD)'
 alias pullm='git pull origin master'
 alias push='git push origin HEAD'
 alias pushm='git push origin master'

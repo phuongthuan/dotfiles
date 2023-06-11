@@ -6,7 +6,7 @@ local map = vim.keymap.set
 -- Status/Log
 map("n", "<leader>g", ":G<CR>")
 map("n", "<leader>gl", ":GV<CR>")
-map("n", "<leader>gL", ":GV!<CR>")
+map("n", "<leader>gL", ":GV <C-R>=expand('%:p')<CR><CR>")
 
 -- Branch
 map("n", "<leader>go", ":G checkout<Space>")

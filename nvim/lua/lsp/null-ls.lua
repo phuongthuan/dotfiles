@@ -13,15 +13,14 @@ local diagnostics = null_ls.builtins.diagnostics
 
 null_ls.setup({
 	sources = {
-		formatting.rubocop,
 		formatting.prettier,
 		formatting.stylua,
-		formatting.shfmt, -- shell script formatting
+		formatting.rubocop,
+		-- formatting.shfmt, -- shell script formatting
 
-		diagnostics.rubocop,
 		diagnostics.luacheck,
-		diagnostics.shellcheck, -- shell script diagnostics
 		diagnostics.eslint_d,
+		-- diagnostics.shellcheck, -- shell script diagnostics
 	},
 
 	diagnostics_format = "#{m} [#{c}]",

@@ -17,6 +17,7 @@ plugins=(
   zsh-autosuggestions
   zsh-syntax-highlighting
   colorize
+  dotenv
 )
 
 # Lazyload rbenv

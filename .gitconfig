@@ -11,3 +11,5 @@
 	editor = /Users/thuan/nvim-macos/bin/nvim
 [pull]
 	rebase = false
+[url "git@github.com:Thinkei"]
+	insteadOf = https://github.com/Thinkei
