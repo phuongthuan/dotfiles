@@ -13,9 +13,9 @@
 
 Hi everyone,
 
-I'm a software engineer and this is my configuration. I'm using Macbook Pro 13' 2020 intel CPU.
+I'm a software engineer and this is my configuration development. I'm using Macbook Pro 13' 2020 intel CPU.
 
-Before we go the configuration, let's me tell you guys a story:
+Before we go to the configuration, let's me tell you guys a story:
 
 I'm a lazy programmer but not a lazy person. I'd like to set up configuration and environment for working in my new machine :D. That's great right.
 
@@ -27,8 +27,8 @@ Then I realized that why don't keep all of my configurations, all of the stuff t
 
 So that's why I created this repo to save all my configuration then one day I got another new laptop. I don't worried about the configuration stuff anymore :)
 
-I still learning new things and this repo help me so much. If I find something new and useful. I'll put into this repo.
+I'm still learning new things and this repo helps me so much. If I find something new and useful. I'll put into this repo.
 
 > Never put any line of code that you don't understand in your own configuration. Because it might hurt you and mess things up without you even knowing it ;)
 
-Thanks for reading !
+Thanks for reading and happy coding !!
