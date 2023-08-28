@@ -29,6 +29,7 @@ ts.setup({
 		"scss",
 		"ruby",
 		"html",
+    "graphql",
 	},
 	autotag = {
 		enable = true,

@@ -70,6 +70,7 @@ cmp.setup({
 		{ name = "luasnip" },
 		{ name = "buffer", keyword_length = 4 },
 		{ name = "path" },
+    { name = 'graphql'}
 	},
 	window = {
 		documentation = cmp.config.window.bordered(),
