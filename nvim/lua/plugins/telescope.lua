@@ -21,7 +21,7 @@ telescope.setup({
 		grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
 		qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
 
-		file_ignore_patterns = { "node_modules", ".git" },
+		file_ignore_patterns = { "node_modules", ".github/", ".git/" },
 
 		layout_config = {
 			width = 0.95,
@@ -72,8 +72,8 @@ telescope.setup({
 	-- overriding default settings
 	pickers = {
 		find_files = {
-			theme = "dropdown",
-			previewer = false,
+			-- theme = "dropdown",
+			-- previewer = false,
 			no_ignore = false,
 			hidden = true,
 		},
