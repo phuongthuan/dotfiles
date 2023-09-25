@@ -21,7 +21,7 @@ telescope.setup({
 		grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
 		qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
 
-		file_ignore_patterns = { "node_modules", ".github/", ".git/" },
+		file_ignore_patterns = { "node_modules", ".git/" },
 
 		layout_config = {
 			width = 0.95,
