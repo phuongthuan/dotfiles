@@ -20,6 +20,7 @@ null_ls.setup({
 
 		diagnostics.luacheck,
 		diagnostics.eslint_d,
+		diagnostics.rubocop,
 		-- diagnostics.shellcheck, -- shell script diagnostics
 	},
 
