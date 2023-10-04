@@ -60,6 +60,7 @@ alias gcl='git clone'
 alias pick='git cherry-pick'
 alias stl='git stash list'
 alias pop='git stash pop'
+alias gfo='git fetch origin'
 
 # Docker
 alias dps='docker ps -a'
