@@ -50,12 +50,9 @@ end
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 tsserver.setup(on_attach, capabilities)
-
 solargraph.setup(on_attach, capabilities)
-
 gopls.setup(on_attach, capabilities)
 
 -- require("lsp.html")
 -- require("lsp.graphql")
-
 require("lsp.null-ls")

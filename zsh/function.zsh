@@ -4,7 +4,7 @@ function bgkill() {
 }
 
 # Open Github PR: mypr <project_name>
-function mypr() {
+function opr() {
   if [ -z "$1" ]; then
     open 'https://github.com/thinkei/frontend-core/pulls/phuongthuan'
   else
@@ -14,7 +14,7 @@ function mypr() {
 }
 
 # Open Circle CI: myci <project_name>
-function myci() {
+function oci() {
   if [ -z "$1" ]; then
     open 'https://app.circleci.com/pipelines/github/Thinkei?filter=mine'
   else
@@ -24,7 +24,7 @@ function myci() {
 }
 
 # Simple Git commit: mygcm "commit message"
-function mygcm() {
+function cgc() {
   # Check if a commit message is provided as an argument
   if [ -z "$1" ]; then
     echo "Please provide a commit message."

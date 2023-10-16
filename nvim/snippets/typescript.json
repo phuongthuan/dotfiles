@@ -260,7 +260,7 @@
   },
   "expect getByText": {
     "prefix": "egbt",
-    "body": ["expect(getByText(\"$1\")).toBeInTheDocument();$0"]
+    "body": ["expect(screen.getByText(\"$1\")).toBeInTheDocument();$0"]
   },
   "expect await findByText": {
     "prefix": "efbt",
