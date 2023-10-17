@@ -61,7 +61,6 @@ return packer.startup(function(use)
 	use("tpope/vim-fugitive")
 	use("tpope/vim-rhubarb")
 	use("junegunn/gv.vim")
-	-- use 'ThePrimeagen/git-worktree.nvim'
 
 	-- Code highlighting, colors, look and feel
 	use({
@@ -106,6 +105,7 @@ return packer.startup(function(use)
 	use("ThePrimeagen/harpoon")
 	use({ "mg979/vim-visual-multi", branch = "master" })
 	use("lewis6991/impatient.nvim") -- speed up loading Lua modules
+	use("numToStr/FTerm.nvim")
 	use({
 		"kylechui/nvim-surround",
 		tag = "*",

@@ -24,4 +24,4 @@ map("n", "<leader>3", ':lua require("harpoon.ui").nav_file(3)<CR>')
 map("n", "<leader>4", ':lua require("harpoon.ui").nav_file(4)<CR>')
 map("n", "<leader>5", ':lua require("harpoon.ui").nav_file(5)<CR>')
 
-map("n", "<leader>t", ':lua require("harpoon.term").gotoTerminal(1)<CR>')
+-- map("n", "<leader>t", ':lua require("harpoon.term").gotoTerminal(1)<CR>')

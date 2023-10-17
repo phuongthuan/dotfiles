@@ -41,6 +41,7 @@ require("plugins/fugitive") -- best Git client for vim
 require("plugins/mason") -- LSP manager
 require("plugins/nvim-web-devicons")
 require("plugins/fidget") -- progress for lsp
+require("plugins/fterm") -- terminal
 
 require("colorschemes/gruvbox")
 
