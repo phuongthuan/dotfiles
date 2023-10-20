@@ -49,6 +49,26 @@ return packer.startup(function(use)
 	use("hrsh7th/cmp-nvim-lua")
 	use("saadparwaiz1/cmp_luasnip")
 
+	-- Copilot
+	use({
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
+		config = function()
+			require("copilot").setup({
+				suggestion = { enabled = false },
+				panel = { enabled = false },
+			})
+		end,
+	})
+	use({
+		"zbirenbaum/copilot-cmp",
+		after = { "copilot.lua" },
+		config = function()
+			require("copilot_cmp").setup()
+		end,
+	})
+
 	-- Snippets
 	use("L3MON4D3/LuaSnip")
 
