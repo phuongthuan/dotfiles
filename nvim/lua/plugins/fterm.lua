@@ -22,3 +22,4 @@ fterm.setup({
 -- Example keybindings
 map("n", "<leader>t", '<CMD>lua require("FTerm").toggle()<CR>')
 map("t", "<leader>t", '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
+map("t", "<leader>T", '<C-\\><C-n><CMD>lua require("FTerm").exit()<CR>')

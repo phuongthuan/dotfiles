@@ -1,6 +1,7 @@
 # ~/.zshrc
 
 export ZSH="$HOME/.oh-my-zsh"
+export EDITOR="nvim"
 
 # DOTFILES folder
 export DOTFILES=~/Programming/dotfiles
@@ -27,8 +28,9 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 # https://github.com/wting/autojump
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
-export EDITOR="nvim"
-export PATH="/usr/local/sbin:$PATH"
+# go
+export GO_ROOT="/usr/local/go/bin"
+export PATH="$GO_ROOT:/usr/local/sbin:$PATH"
 
 export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
