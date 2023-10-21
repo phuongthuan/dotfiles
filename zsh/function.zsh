@@ -74,6 +74,7 @@ get_eben_token() {
   echo "{\"Authorization\":\"Bearer $eben_access_token\",\"X-EH-Session-Token\":\"$session_token\"}"
 }
 
+# get_bff_headers t+swag1@employmenthero.com Khoa@10AM
 get_bff_headers() {
   local email="$1"
   local password="$2"

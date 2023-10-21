@@ -15,7 +15,7 @@ local fn = vim.fn
 local start_time = fn.reltime()
 
 -- Speed up Lua modules
-require("impatient").enable_profile()
+vim.loader.enable()
 
 -- Always map leader first
 vim.g.mapleader = " "

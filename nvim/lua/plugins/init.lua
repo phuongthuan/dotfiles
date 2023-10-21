@@ -39,7 +39,7 @@ return packer.startup(function(use)
 	use("williamboman/mason.nvim")
 	use("williamboman/mason-lspconfig.nvim")
 	use("neovim/nvim-lspconfig")
-	use("jose-elias-alvarez/null-ls.nvim")
+	use("nvimtools/none-ls.nvim")
 
 	-- Autocompletion
 	use("hrsh7th/nvim-cmp")
@@ -124,7 +124,6 @@ return packer.startup(function(use)
 	use("JoosepAlviste/nvim-ts-context-commentstring")
 	use("ThePrimeagen/harpoon")
 	use({ "mg979/vim-visual-multi", branch = "master" })
-	use("lewis6991/impatient.nvim") -- speed up loading Lua modules
 	use("numToStr/FTerm.nvim")
 	use({
 		"kylechui/nvim-surround",
