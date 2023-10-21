@@ -8,3 +8,6 @@ require("gruvbox").setup({
 	invert_selection = false,
 	contrast = "hard",
 })
+
+vim.o.background = "dark"
+vim.cmd([[colorscheme gruvbox]])

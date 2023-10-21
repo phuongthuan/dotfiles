@@ -25,7 +25,7 @@ require("options")
 require("remaps")
 
 -- Plugins
-require("plugins")
+require("plugins/lazy")
 require("plugins/nvim-tree") -- file explorer
 require("plugins/lualine") -- statusline
 require("plugins/cmp") -- autocomplete
@@ -39,8 +39,7 @@ require("plugins/colorizer") -- colorizer
 require("plugins/harpoon") -- harpoon
 require("plugins/fugitive") -- best Git client for vim
 require("plugins/mason") -- LSP manager
-require("plugins/nvim-web-devicons")
-require("plugins/fidget") -- progress for lsp
+require("plugins/devicons")
 require("plugins/fterm") -- terminal
 
 require("colorschemes/gruvbox")
