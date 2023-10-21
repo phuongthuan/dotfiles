@@ -25,13 +25,12 @@ require("options")
 require("remaps")
 
 -- Plugins
-require("plugins/lazy")
+require("plugins")
 require("plugins/nvim-tree") -- file explorer
 require("plugins/lualine") -- statusline
 require("plugins/cmp") -- autocomplete
 require("plugins/gitsigns") -- git checking tool
 require("plugins/treesitter") -- code highlighting
-require("plugins/vim-sneak") -- better jump word
 require("plugins/telescope") -- search tool
 require("plugins/lspkind") -- icon types
 require("plugins/vimwiki") -- personal note

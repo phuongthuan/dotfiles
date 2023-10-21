@@ -71,7 +71,7 @@ map("n", "<leader>s", ":w<CR>")
 map("n", "<leader>S", ":wa<CR>")
 
 -- Source file and install plugins
-map("n", "<leader>P", ":PackerSync<CR>")
+map("n", "<leader>L", ":Lazy<CR>")
 
 -- Delete without changing the registers
 map({ "n", "x" }, "x", '"_x')

@@ -90,7 +90,21 @@ require("lazy").setup({
 	},
 	"vimwiki/vimwiki",
 	"wakatime/vim-wakatime",
-	"justinmk/vim-sneak",
+	{
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		opts = {},
+		keys = {
+			{
+				"s",
+				mode = { "n", "x", "o" },
+				function()
+					require("flash").jump()
+				end,
+				desc = "Flash",
+			},
+		},
+	},
 	"tpope/vim-commentary",
 	"mattn/emmet-vim",
 	"JoosepAlviste/nvim-ts-context-commentstring",
