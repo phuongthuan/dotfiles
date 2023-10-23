@@ -32,7 +32,6 @@ require("plugins/cmp") -- autocomplete
 require("plugins/gitsigns") -- git checking tool
 require("plugins/treesitter") -- code highlighting
 require("plugins/telescope") -- search tool
-require("plugins/lspkind") -- icon types
 require("plugins/vimwiki") -- personal note
 require("plugins/colorizer") -- colorizer
 require("plugins/harpoon") -- harpoon
@@ -40,6 +39,7 @@ require("plugins/fugitive") -- best Git client for vim
 require("plugins/mason") -- LSP manager
 require("plugins/devicons")
 require("plugins/fterm") -- terminal
+require("plugins/copilot")
 
 require("colorschemes/gruvbox")
 

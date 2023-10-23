@@ -36,9 +36,8 @@ require("lazy").setup({
 	"saadparwaiz1/cmp_luasnip",
 
 	-- Copilot
-	-- "zbirenbaum/copilot.lua",
-	-- "zbirenbaum/copilot-cmp",
-	"github/copilot.vim",
+	{ "zbirenbaum/copilot.lua", cmd = "Copilot", event = "InsertEnter" },
+	{ "zbirenbaum/copilot-cmp", dependencies = { "zbirenbaum/copilot.lua" } },
 
 	-- Snippets
 	"L3MON4D3/LuaSnip",
