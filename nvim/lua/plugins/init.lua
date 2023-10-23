@@ -33,7 +33,6 @@ require("lazy").setup({
 	"hrsh7th/cmp-path",
 	"hrsh7th/cmp-nvim-lsp",
 	"hrsh7th/cmp-nvim-lua",
-	"saadparwaiz1/cmp_luasnip",
 
 	-- Copilot
 	{ "zbirenbaum/copilot.lua", cmd = "Copilot", event = "InsertEnter" },
@@ -41,6 +40,7 @@ require("lazy").setup({
 
 	-- Snippets
 	"L3MON4D3/LuaSnip",
+	"saadparwaiz1/cmp_luasnip",
 
 	-- Markdown
 	"jxnblk/vim-mdx-js",
@@ -60,8 +60,7 @@ require("lazy").setup({
 
 	-- UI
 	"onsails/lspkind-nvim",
-	"nvim-tree/nvim-web-devicons",
-	"nvim-lualine/lualine.nvim",
+	{ "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons", lazy = true } },
 	"norcalli/nvim-colorizer.lua",
 	"lukas-reineke/indent-blankline.nvim",
 	{ "nvim-tree/nvim-tree.lua", version = "nightly" },
@@ -89,21 +88,6 @@ require("lazy").setup({
 	},
 	"vimwiki/vimwiki",
 	"wakatime/vim-wakatime",
-	{
-		"folke/flash.nvim",
-		event = "VeryLazy",
-		opts = {},
-		keys = {
-			{
-				"s",
-				mode = { "n", "x", "o" },
-				function()
-					require("flash").jump()
-				end,
-				desc = "Flash",
-			},
-		},
-	},
 	"tpope/vim-commentary",
 	"mattn/emmet-vim",
 	"JoosepAlviste/nvim-ts-context-commentstring",

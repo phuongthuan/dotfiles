@@ -1,6 +1,32 @@
 local cmd = vim.cmd
 local map = vim.keymap.set
 
+-- Source Vim configuration file and install plugins
+map("n", "<leader><leader>1", ':source ~/.config/nvim/init.lua<CR>:echo "Reloaded ~/.config/nvim/init.lua"<CR>')
+
+-- Open file in same directory
+cmd([[ nnoremap ,e :e <C-R>=expand('%:p:h') . '/'<CR> ]])
+
+-- Open EH configuration
+map("n", "<leader>eh", ":e ~/.dotfiles/zsh/eh.zsh<CR>")
+
+-- Windows remapping
+-- Vertically split screen
+map("n", "<leader>wv", ":vs<CR>")
+map("n", "<leader>ws", ":split<CR>")
+
+-- Close window
+map("n", "<leader>wc", ":wq<CR>")
+
+-- Close window without save
+map("n", "<leader>q", ":q!<CR>")
+
+-- Quicker window movement
+map("n", "<C-h>", "<C-w>h")
+map("n", "<C-j>", "<C-w>j")
+map("n", "<C-k>", "<C-w>k")
+map("n", "<C-l>", "<C-w>l")
+
 -- Buffers stuff
 map("n", "<tab>", ":bp<CR>")
 map("n", "<S-tab>", ":bn<CR>")
@@ -61,9 +87,6 @@ map("", "<down>", "<nop>", { noremap = true })
 map("", "<left>", "<nop>", { noremap = true })
 map("", "<right>", "<nop>", { noremap = true })
 
--- Source Vim configuration file and install plugins
-map("n", "<leader><leader>1", ':source ~/.config/nvim/init.lua<CR>:echo "Reloaded ~/.config/nvim/init.lua"<CR>')
-
 -- Fast saving with <leader> and s
 map("n", "<leader>s", ":w<CR>")
 
@@ -78,22 +101,6 @@ map({ "n", "x" }, "x", '"_x')
 
 map("x", "<leader>p", '"_dP')
 
--- Quicker window movement
-map("n", "<C-h>", "<C-w>h")
-map("n", "<C-j>", "<C-w>j")
-map("n", "<C-k>", "<C-w>k")
-map("n", "<C-l>", "<C-w>l")
-
--- Vertically split screen
-map("n", "<leader>wv", ":vs<CR>")
-map("n", "<leader>ws", ":split<CR>")
-
--- Close window
-map("n", "<leader>wc", ":wq<CR>")
-
--- Close window without save
-map("n", "<leader>q", ":q!<CR>")
-
 -- Rename current file
 cmd([[
   function! RenameFile()
@@ -107,9 +114,3 @@ cmd([[
   endfunction
   map <Leader>rnf :call RenameFile()<cr>
 ]])
-
--- Open file in same directory
-cmd([[ nnoremap ,e :e <C-R>=expand('%:p:h') . '/'<CR> ]])
-
--- Open EH configuration
-map("n", "<leader>eh", ":e ~/.dotfiles/zsh/eh.zsh<CR>")

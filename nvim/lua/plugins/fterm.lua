@@ -10,16 +10,16 @@ end
 
 fterm.setup({
 	border = "single",
-  blend = 1,
+	blend = 1,
 	dimensions = {
-		height = 0.5, -- Height of the terminal window
-		width = 0.5, -- Width of the terminal window
-		x = 0.5, -- X axis of the terminal window
+		height = 0.5,
+		width = 0.5,
+		x = 0.5,
 		y = 0.5,
 	},
 })
 
 -- Example keybindings
-map("n", "<leader>t", '<CMD>lua require("FTerm").toggle()<CR>')
-map("t", "<leader>t", '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
-map("t", "<leader>T", '<C-\\><C-n><CMD>lua require("FTerm").exit()<CR>')
+map("n", "<leader>t", '<cmd>lua require("FTerm").toggle()<CR>')
+map("t", "<leader>t", '<C-\\><C-n><cmd>lua require("FTerm").toggle()<CR>')
+map("t", "<leader>T", '<C-\\><C-n><cmd>lua require("FTerm").exit()<CR>')

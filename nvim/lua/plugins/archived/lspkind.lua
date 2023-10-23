@@ -31,6 +31,7 @@ lspkind.init({
 		Struct = "פּ",
 		Event = "",
 		Operator = "",
+		Copilot = "",
 		TypeParameter = "",
 	},
 })
