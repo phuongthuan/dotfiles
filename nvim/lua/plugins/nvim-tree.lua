@@ -31,14 +31,10 @@ require("nvim-tree").setup({
 		cmd = nil,
 		args = {},
 	},
-	-- view = {
-	-- 	width = 50,
-	-- 	side = "left",
-	-- 	mappings = {
-	-- 		custom_only = false,
-	-- 		list = {},
-	-- 	},
-	-- },
+	view = {
+		width = 50,
+		side = "left",
+	},
 	git = {
 		enable = true,
 		ignore = true,

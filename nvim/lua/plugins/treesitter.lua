@@ -29,7 +29,9 @@ ts.setup({
 		"scss",
 		"ruby",
 		"html",
-    "graphql",
+		"graphql",
+		"go",
+		"gomod",
 	},
 	autotag = {
 		enable = true,
