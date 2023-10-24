@@ -1,0 +1,13 @@
+# /Users/thuan/.config/tmuxinator/frontend.yml
+
+name: fe-core
+root: ~/Programming/EmploymentHero/frontend-core
+
+windows:
+  - editor: nvim
+  - terminal: nvm use 16
+  - logs:
+      layout: main-vertical
+      panes:
+        - node -v
+        - nvm use 16 && yarn start

@@ -1,0 +1,9 @@
+# /Users/thuan/.config/tmuxinator/bff.yml
+
+name: bff
+root: ~/Programming/EmploymentHero/ebf-bff-mobile
+
+windows:
+  - editor: nvim
+  - terminal: git status
+  - logs: go version

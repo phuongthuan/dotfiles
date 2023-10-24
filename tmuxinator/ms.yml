@@ -1,0 +1,11 @@
+# /Users/thuan/.config/tmuxinator/ms.yml
+
+name: marketplace
+root: ~/Programming/EmploymentHero/marketplace-service
+
+windows:
+  - editor: nvim
+  - terminal: ruby -v
+  - server:
+  - logs:
+      - ruby -v

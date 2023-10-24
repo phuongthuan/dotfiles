@@ -1,0 +1,14 @@
+# /Users/thuan/.config/tmuxinator/swagp.yml
+
+name: swag
+root: ~/Programming/EmploymentHero/ebf-swag-personal
+
+windows:
+  - editor: nvim
+  - git: git status
+  - ios: cd example
+  - logs:
+      layout: main-vertical
+      panes:
+        - node -v
+        - cd example && yarn start

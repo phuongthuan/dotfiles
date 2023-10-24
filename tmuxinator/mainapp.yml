@@ -1,20 +1,13 @@
-# /Users/thuan/.config/tmuxinator/server.yml
+# /Users/thuan/.config/tmuxinator/mainapp.yml
 
-name: server
+name: mainapp
 root: ~/Programming/EmploymentHero/employment-hero
 
 windows:
-  - main-app: nvim
-      # layout: b7a8,239x61,0,0[239x47,0,0,0,239x13,0,48,4]
-      # panes:
-      #   - nvim
-      #   - nvim
-  - market:
-      - cd ~/Programming/EmploymentHero/marketplace-service
-      - nvim
-  - market-log:
+  - editor: nvim
+  - server:
       - rms
-  - eh-log:
+  - logs:
       - bundle install
       - rma # alias to run main-app -> Check alias.zsh for more information.
   - auth|grpc:
