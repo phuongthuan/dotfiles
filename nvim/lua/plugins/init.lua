@@ -92,7 +92,6 @@ require("lazy").setup({
 	"mattn/emmet-vim",
 	"JoosepAlviste/nvim-ts-context-commentstring",
 	"ThePrimeagen/harpoon",
-	"numToStr/FTerm.nvim",
 	{ "mg979/vim-visual-multi", branch = "master" },
 	{
 		"kylechui/nvim-surround",

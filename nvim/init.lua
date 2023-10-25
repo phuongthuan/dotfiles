@@ -37,8 +37,7 @@ require("plugins/colorizer") -- colorizer
 require("plugins/harpoon") -- harpoon
 require("plugins/fugitive") -- best Git client for vim
 require("plugins/mason") -- LSP manager
-require("plugins/devicons")
-require("plugins/fterm") -- terminal
+require("plugins/devicons") -- icons
 require("plugins/copilot")
 
 require("colorschemes/gruvbox")
