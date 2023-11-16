@@ -100,6 +100,12 @@ require("lazy").setup({
 			require("nvim-surround").setup({})
 		end,
 	},
+	{
+		"ggandor/leap.nvim",
+		config = function()
+			require("leap").add_default_mappings()
+		end,
+	},
 
 	-- Telescope
 	"nvim-telescope/telescope.nvim",
