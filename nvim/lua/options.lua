@@ -90,8 +90,8 @@ cmd([[ autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml setlocal shi
 g.indentLine_char = "·"
 
 -- Disable netrw
-g.loaded_netrw = 1
-g.loaded_netrwPlugin = 1
+-- g.loaded_netrw = 1
+-- g.loaded_netrwPlugin = 1
 
 -- Disable IndentLine for markdown files (avoid concealing)
 cmd([[autocmd FileType markdown let g:indentLine_enabled=0]])
