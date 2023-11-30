@@ -35,10 +35,11 @@ require("plugins/telescope") -- search tool
 require("plugins/vimwiki") -- personal note
 require("plugins/colorizer") -- colorizer
 require("plugins/harpoon") -- harpoon
-require("plugins/fugitive") -- best Git client for vim
+require("plugins/fugitive") -- git client
 require("plugins/mason") -- LSP manager
 require("plugins/devicons") -- icons
-require("plugins/copilot")
+require("plugins/copilot") -- copilot
+require("plugins/comment") -- comment utils
 
 require("colorschemes/gruvbox")
 

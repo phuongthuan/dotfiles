@@ -39,20 +39,6 @@ ts.setup({
 	autopairs = {
 		enable = true,
 	},
-
-	-- enable module 'nvim-ts-context-commentstring' in treesitter
-	context_commentstring = {
-		enable = true,
-		config = {
-			javascript = {
-				__default = "// %s",
-				jsx_element = "{/* %s */}",
-				jsx_fragment = "{/* %s */}",
-				jsx_attribute = "// %s",
-				comment = "// %s",
-			},
-		},
-	},
 })
 
 local parser_config = require("nvim-treesitter.parsers").get_parser_configs()

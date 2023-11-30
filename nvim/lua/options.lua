@@ -95,3 +95,6 @@ g.indentLine_char = "·"
 
 -- Disable IndentLine for markdown files (avoid concealing)
 cmd([[autocmd FileType markdown let g:indentLine_enabled=0]])
+
+-- nvim context commentstring
+g.skip_ts_context_commentstring_module = true

@@ -88,9 +88,7 @@ require("lazy").setup({
 	},
 	"vimwiki/vimwiki",
 	"wakatime/vim-wakatime",
-	"tpope/vim-commentary",
 	"mattn/emmet-vim",
-	"JoosepAlviste/nvim-ts-context-commentstring",
 	"ThePrimeagen/harpoon",
 	{ "mg979/vim-visual-multi", branch = "master" },
 	{
@@ -104,6 +102,15 @@ require("lazy").setup({
 		"ggandor/leap.nvim",
 		config = function()
 			require("leap").add_default_mappings()
+		end,
+	},
+	{ "numToStr/Comment.nvim", lazy = false },
+	{
+		"JoosepAlviste/nvim-ts-context-commentstring",
+		config = function()
+			require("ts_context_commentstring").setup({
+				enable_autocmd = false,
+			})
 		end,
 	},
 
