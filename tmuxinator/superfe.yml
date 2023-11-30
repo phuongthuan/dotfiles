@@ -1,0 +1,12 @@
+# /Users/thuan/.config/tmuxinator/superfe
+
+name: ebf-super-fe
+root: ~/Programming/EmploymentHero/ebf-super-fe
+
+windows:
+  - editor: nvim
+  - terminal: nvm use 20
+  - logs:
+      layout: main-vertical
+      panes:
+        - nvm use 20

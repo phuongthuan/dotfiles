@@ -5,10 +5,11 @@ root: ~/Programming/EmploymentHero/ebf-swag-personal
 
 windows:
   - editor: nvim
-  - git: git status
+  - git: nvm use 18.13.0
+  - worktree: j eh-worktree/ebf-swag-personal/main
   - ios: cd example
   - logs:
       layout: main-vertical
       panes:
-        - node -v
-        - cd example && yarn start
+        - nvm use 18.13.0
+        - yarn start

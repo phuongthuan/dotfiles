@@ -6,6 +6,7 @@ root: ~/Programming/EmploymentHero/frontend-core
 windows:
   - editor: nvim
   - terminal: nvm use 16
+  - worktree: j eh-worktree/frontend-core/hotfix-fe-core
   - logs:
       layout: main-vertical
       panes:
