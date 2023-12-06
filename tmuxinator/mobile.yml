@@ -3,11 +3,11 @@
 name: mobile
 root: ~/Programming/EmploymentHero/eh-mobile-pro
 
+pre_window: nvm use <%= @settings["node_version"] %>
+
 windows:
   - editor: nvim
-  - terminal: nvm use 14.20.0
+  - terminal: git status
   - worktree: j eh-worktree/eh-mobile-pro/master
-  - ios: nvm use 14.20.0
-  - logs:
-      - nvm use 14.20.0
-      - yarn start
+  - ios: node -v
+  - logs: node -v

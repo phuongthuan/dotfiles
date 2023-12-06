@@ -3,12 +3,10 @@
 name: fe-core
 root: ~/Programming/EmploymentHero/frontend-core
 
+pre_window: nvm use <%= @settings["node_version"] %>
+
 windows:
   - editor: nvim
-  - terminal: nvm use 16
+  - terminal: git status
   - worktree: j eh-worktree/frontend-core/hotfix-fe-core
-  - logs:
-      layout: main-vertical
-      panes:
-        - node -v
-        - nvm use 16 && yarn start
+  - logs: yarn nx start hr-web-app

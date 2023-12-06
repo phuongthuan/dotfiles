@@ -3,13 +3,15 @@
 name: swag
 root: ~/Programming/EmploymentHero/ebf-swag-personal
 
+pre_window: nvm use <%= @settings["node_version"] %>
+
 windows:
   - editor: nvim
-  - git: nvm use 18.13.0
+  - git: git status
   - worktree: j eh-worktree/ebf-swag-personal/main
   - ios: cd example
   - logs:
       layout: main-vertical
       panes:
-        - nvm use 18.13.0
+        - node -v
         - yarn start

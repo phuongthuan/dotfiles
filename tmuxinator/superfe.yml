@@ -3,10 +3,9 @@
 name: ebf-super-fe
 root: ~/Programming/EmploymentHero/ebf-super-fe
 
+pre_window: nvm use <%= @settings["node_version"] %>
+
 windows:
   - editor: nvim
-  - terminal: nvm use 20
-  - logs:
-      layout: main-vertical
-      panes:
-        - nvm use 20
+  - terminal: node -v
+  - logs: node -v
