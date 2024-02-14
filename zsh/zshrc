@@ -21,16 +21,12 @@ plugins=(
   dotenv
 )
 
-# Lazyload rbenv
-# export PATH="$HOME/.rbenv/bin:$PATH"
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-
 # https://github.com/wting/autojump
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 # go
-export GO_ROOT="/usr/local/go/bin"
-export PATH="$GO_ROOT:/usr/local/sbin:$PATH"
+# export GO_ROOT="/usr/local/go/bin"
+# export PATH="$GO_ROOT:/usr/local/sbin:$PATH"
 
 export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
@@ -43,11 +39,14 @@ done
 unset conf
 
 # Lazyload nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                    # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                    # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 source $ZSH/oh-my-zsh.sh
 
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# asdf
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
