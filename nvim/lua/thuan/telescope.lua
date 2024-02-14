@@ -36,6 +36,7 @@ M.search_note_files = function()
 	})
 end
 
+-- Short key: <leader>si
 M.search_files_in_path = function(path)
 	local _path = path or vim.fn.input("Directory: > ", "", "dir")
 	builtin.find_files({
@@ -44,7 +45,7 @@ M.search_files_in_path = function(path)
 	})
 end
 
--- Keymap: space + l + i
+-- Short key: <leader>li
 M.live_grep_in_path = function(path)
 	local _path = path or vim.fn.input("Directory: > ", "", "dir")
 	builtin.live_grep({

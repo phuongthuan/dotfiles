@@ -73,8 +73,8 @@ telescope.setup({
 	pickers = {
 		find_files = {
 			-- theme = "dropdown",
-			-- previewer = false,
-			no_ignore = false,
+			previewer = false,
+			-- no_ignore = false,
 			hidden = true,
 		},
 		buffers = {
