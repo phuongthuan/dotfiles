@@ -3,7 +3,7 @@
 name: ebf-super-fe
 root: ~/Programming/EmploymentHero/ebf-super-fe
 
-pre_window: nvm use <%= @settings["node_version"] %>
+pre_window: asdf local nodejs <%= @settings["node_version"] %>
 
 windows:
   - editor: nvim

@@ -3,11 +3,12 @@
 name: mobile
 root: ~/Programming/EmploymentHero/eh-mobile-pro
 
-pre_window: nvm use <%= @settings["node_version"] %>
+# pre_window: nvm use <%= @settings["node_version"] %>
+pre_window: asdf local nodejs 20
 
 windows:
   - editor: nvim
-  - terminal: git status
+  - terminal: asdf local nodejs <%= @settings["node_version"] %>
   - worktree: j eh-worktree/eh-mobile-pro/master
   - ios: node -v
   - logs: node -v
