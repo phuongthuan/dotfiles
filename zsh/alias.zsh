@@ -4,8 +4,11 @@ alias onvim='~/nvim9/bin/nvim'
 # Source zshrc
 alias reload="source ~/.zshrc; echo 'Source zshrc complete!';"
 
-# Open EH config
-alias ehconf='nvim ~/.config/zsh/eh.zsh'
+# Open iCloud Drive
+alias ic='nvim $ICLOUD_DRIVE'
+
+# Open iCloud Obsidian
+alias ob='nvim ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Notes'
 
 # Open dotfiles
 alias dot='nvim ~/.dotfiles'

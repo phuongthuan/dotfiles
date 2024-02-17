@@ -6,6 +6,10 @@ export EDITOR="nvim"
 # DOTFILES folder
 export DOTFILES=~/Programming/dotfiles
 
+# iCloud Drive
+export ICLOUD_DRIVE='~/Library/Mobile\ Documents/com~apple~CloudDocs'
+export ICLOUD_DRIVE_OBSIDIAN='~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Notes'
+
 # Enable vim mode
 bindkey -v
 
@@ -37,11 +41,6 @@ for conf in "$HOME/.config/zsh/"*.zsh; do
   source "${conf}"
 done
 unset conf
-
-# Lazyload nvm
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                    # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 source $ZSH/oh-my-zsh.sh
 
