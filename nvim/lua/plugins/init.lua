@@ -63,10 +63,16 @@ require("lazy").setup({
 	{ "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons", lazy = true } },
 	"norcalli/nvim-colorizer.lua",
 	"lukas-reineke/indent-blankline.nvim",
-	{ "nvim-tree/nvim-tree.lua", version = "nightly" },
+	{
+		"nvim-tree/nvim-tree.lua",
+		version = "*",
+		lazy = false,
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+		},
+	},
 	{
 		"j-hui/fidget.nvim",
-		version = "legacy",
 		event = "LspAttach",
 		config = function()
 			require("fidget").setup({})

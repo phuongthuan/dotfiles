@@ -6,10 +6,8 @@ local map = vim.keymap.set
 --- Migrate guide: https://github.com/nvim-tree/nvim-tree.lua/issues/674
 
 require("nvim-tree").setup({
-	-- disable_netrw = true,
+	disable_netrw = true,
 	hijack_netrw = true,
-	-- open_on_setup = false,
-	-- ignore_ft_on_setup = {},
 	open_on_tab = false,
 	hijack_cursor = false,
 	update_cwd = false,
