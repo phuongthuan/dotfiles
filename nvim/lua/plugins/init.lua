@@ -92,7 +92,6 @@ require("lazy").setup({
 			require("nvim-ts-autotag").setup({})
 		end,
 	},
-	"vimwiki/vimwiki",
 	"wakatime/vim-wakatime",
 	"mattn/emmet-vim",
 	"ThePrimeagen/harpoon",

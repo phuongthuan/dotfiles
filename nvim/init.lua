@@ -32,7 +32,6 @@ require("plugins/cmp") -- autocomplete
 require("plugins/gitsigns") -- git checking tool
 require("plugins/treesitter") -- code highlighting
 require("plugins/telescope") -- search tool
-require("plugins/vimwiki") -- personal note
 require("plugins/colorizer") -- colorizer
 require("plugins/harpoon") -- harpoon
 require("plugins/fugitive") -- git client

@@ -22,7 +22,7 @@ M.search_notes = function()
 	builtin.live_grep({
 		prompt_title = " Grep Notes",
 		prompt_prefix = " ﮷ ",
-		cwd = "~/vimwiki",
+		cwd = "$ICLOUD_DRIVE_OBSIDIAN",
 		hidden = true,
 	})
 end
@@ -31,7 +31,7 @@ M.search_note_files = function()
 	builtin.find_files({
 		prompt_title = " Find Notes",
 		prompt_prefix = " ﮷ ",
-		cwd = "~/vimwiki",
+		cwd = "$ICLOUD_DRIVE_OBSIDIAN",
 		hidden = true,
 	})
 end
