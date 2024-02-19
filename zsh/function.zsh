@@ -49,7 +49,7 @@ get_session_token_by_email() {
     --header "Content-Type: application/json" \
     --header "Cookie: visid_incap_2661834=GDtswK8KQJa9372ILJMYRQctRWMAAAAAQUIPAAAAAADUXoBOfM9ApDQfC8Sm3BwV" \
     --data-raw "{\"data\": {\"attributes\": {\"email\": \"$email\", \"password\": \"$password\"}}}" \
-    | jq -r ".data.attributes.session_token"
+    | jq -r ".data.attributes.session_token" | tee >(pbcopy)
 }
 
 get_session_token() {
@@ -57,7 +57,7 @@ get_session_token() {
     --header "Content-Type: application/json" \
     --header "Cookie: visid_incap_2661834=GDtswK8KQJa9372ILJMYRQctRWMAAAAAQUIPAAAAAADUXoBOfM9ApDQfC8Sm3BwV" \
     --data-raw "{\"data\": {\"attributes\": {\"email\": \"t+swag1@employmenthero.com\", \"password\": \"Khoa@10AM\"}}}" \
-    | jq -r ".data.attributes.session_token"
+    | jq -r ".data.attributes.session_token" | tee >(pbcopy)
 }
 
 get_eben_token() {
@@ -71,7 +71,7 @@ get_eben_token() {
     --header "authorization: Bearer $session_token" \
     | jq -r '.access_token')
 
-  echo "{\"Authorization\":\"Bearer $eben_access_token\",\"X-EH-Session-Token\":\"$session_token\"}"
+  echo "{\"Authorization\":\"Bearer $eben_access_token\",\"X-EH-Session-Token\":\"$session_token\"}" | tee >(pbcopy)
 }
 
 # get_bff_headers t+swag1@employmenthero.com Khoa@10AM
@@ -94,5 +94,5 @@ get_bff_headers() {
     --header "authorization: Bearer $session_token" \
     | jq -r '.access_token')
 
-  echo "{\"Authorization\":\"Bearer $eben_access_token\",\"X-EH-Session-Token\":\"$session_token\"}"
+    echo "{\"Authorization\":\"Bearer $eben_access_token\",\"X-EH-Session-Token\":\"$session_token\"}" | tee >(pbcopy)
 }
