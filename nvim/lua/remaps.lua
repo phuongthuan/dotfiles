@@ -1,14 +1,20 @@
+local variable = require("thuan.variable")
+
 local cmd = vim.cmd
 local map = vim.keymap.set
 
+-- Open today note
+local new_note_file = variable.icloud_drive_obsidian_path .. "/diary/" .. os.date("%Y-%m-%d") .. ".md"
+map("n", "<leader>td", ":e " .. new_note_file .. "<CR>", { noremap = false })
+
 -- Source Vim configuration file and install plugins
-map("n", "<leader><leader>1", ':source ~/.config/nvim/init.lua<CR>:echo "Reloaded ~/.config/nvim/init.lua"<CR>')
+map("n", "<leader><leader>1", ":source " .. variable.nvim_config_path .. '<CR>:echo "Reloaded nvim config ;)"<CR>')
 
 -- Open file in same directory
 cmd([[ nnoremap ,e :e <C-R>=expand('%:p:h') . '/'<CR> ]])
 
 -- Open EH configuration
-map("n", "<leader>eh", ":e ~/.dotfiles/zsh/eh.zsh<CR>")
+map("n", "<leader>eh", ":e " .. variable.eh_config_path .. "<CR>")
 
 -- Windows remapping
 -- Vertically split screen

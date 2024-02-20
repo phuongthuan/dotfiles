@@ -4,11 +4,12 @@ export ZSH="$HOME/.oh-my-zsh"
 export EDITOR="nvim"
 
 # DOTFILES folder
-export DOTFILES=~/Programming/dotfiles
+export DOTFILES="~/.dotfiles"
+export NVIM_CONFIG="~/.config/nvim/init.lua"
 
 # iCloud Drive
-export ICLOUD_DRIVE='~/Library/Mobile\ Documents/com~apple~CloudDocs'
-export ICLOUD_DRIVE_OBSIDIAN='~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Notes'
+export ICLOUD_DRIVE="~/Library/Mobile\ Documents/com~apple~CloudDocs"
+export ICLOUD_DRIVE_OBSIDIAN="~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Notes"
 
 # Enable vim mode
 bindkey -v
