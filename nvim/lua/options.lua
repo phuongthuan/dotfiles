@@ -16,18 +16,12 @@ opt.showmode = false -- we don't need to see things like -- INSERT -- anymore
 opt.completeopt = "menuone,noselect,noinsert" -- completion options
 opt.shortmess = "c" -- don't show completion messages
 
-cmd([[
-  set nocompatible
-  filetype plugin on
-  filetype indent on
-]])
-
 -- UI
 opt.syntax = "enable" -- enable syntax highlighting
 opt.number = true -- show line number
 opt.showmatch = true -- highlight matching parenthesis
--- opt.foldmethod = "marker" -- enable folding (default 'foldmarker')
-opt.colorcolumn = "80" -- line lenght marker at 80 columns
+opt.foldmethod = "marker" -- enable folding (default 'foldmarker')
+opt.colorcolumn = "" -- line lenght marker at 80 columns, "" mean hide it
 opt.splitright = true -- vertical split to the right
 opt.splitbelow = true -- horizontal split to the bottom
 opt.ignorecase = true -- ignore case letters when search
@@ -39,7 +33,7 @@ opt.termguicolors = true -- enable 24-bit RGB colors
 opt.relativenumber = false
 
 -- highlight on yank
-exec(
+vim.api.nvim_exec(
 	[[
   augroup YankHighlight
     autocmd!
@@ -57,7 +51,14 @@ opt.synmaxcol = 240 -- max column for syntax highlight
 -- Colorscheme
 cmd([[ highlight Normal ctermbg=None ]])
 
+cmd([[
+  set nocompatible
+  filetype plugin on
+  filetype indent on
+]])
+
 -- Cursor
+-- opt.guicursor = ""
 cmd([[
   hi Cursor2 guifg=#fe8019 guibg=#fe8019
   set guicursor=i-r-v-ci:block-Cursor2
@@ -66,10 +67,10 @@ cmd([[
 -- Highlight error
 -- cmd([[ autocmd ColorScheme * :lua require('vim.lsp.diagnostic')._define_default_signs_and_highlights() ]])
 cmd([[ autocmd VimEnter * hi Normal ctermbg=NONE guibg=NONE ]])
-
 -- Tabs, indent
 opt.expandtab = true -- use spaces instead of tabs
 opt.shiftwidth = 2 -- shift 2 spaces when tab
+
 opt.tabstop = 2 -- 1 tab == 2 spaces
 opt.smartindent = true -- autoindent new lines
 

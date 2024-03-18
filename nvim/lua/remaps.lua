@@ -8,7 +8,7 @@ local new_note_file = variable.icloud_drive_obsidian_path .. "/diary/" .. os.dat
 map("n", "<leader>td", ":e " .. new_note_file .. "<CR>", { noremap = false })
 
 -- Source Vim configuration file and install plugins
-map("n", "<leader><leader>1", ":source " .. variable.nvim_config_path .. '<CR>:echo "Reloaded nvim config ;)"<CR>')
+map("n", "<leader><leader>1", ":source " .. variable.nvim_config_path .. '<CR>:echo " Reloaded neovim config !!"<CR>')
 
 -- Open file in same directory
 cmd([[ nnoremap ,e :e <C-R>=expand('%:p:h') . '/'<CR> ]])
@@ -104,8 +104,10 @@ map("n", "<leader>L", ":Lazy<CR>")
 
 -- Delete without changing the registers
 map({ "n", "x" }, "x", '"_x')
-
 map("x", "<leader>p", '"_dP')
+
+-- Replace multiple words
+map("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- Rename current file
 cmd([[

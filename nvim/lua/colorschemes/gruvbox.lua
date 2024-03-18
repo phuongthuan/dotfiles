@@ -6,9 +6,10 @@ require("gruvbox").setup({
 		comments = true,
 	},
 	invert_selection = false,
-	contrast = "hard",
+	contrast = "soft",
+  transparent_mode = true
 })
 
 vim.o.background = "dark"
-vim.g.gruvbox_transparent_bg = 1
-vim.cmd([[colorscheme gruvbox]])
+-- vim.g.gruvbox_transparent_bg = 1
+vim.cmd.colorscheme("gruvbox")

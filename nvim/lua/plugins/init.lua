@@ -25,7 +25,12 @@ require("lazy").setup({
 	"williamboman/mason.nvim",
 	"williamboman/mason-lspconfig.nvim",
 	"neovim/nvim-lspconfig",
-	"nvimtools/none-ls.nvim",
+	{
+		"nvimtools/none-ls.nvim",
+		dependencies = {
+			"nvimtools/none-ls-extras.nvim",
+		},
+	},
 
 	-- Autocompletion
 	"hrsh7th/nvim-cmp",
@@ -59,6 +64,7 @@ require("lazy").setup({
 	"RRethy/nvim-treesitter-endwise",
 
 	-- UI
+	{ "rose-pine/neovim", name = "rose-pine" },
 	"onsails/lspkind-nvim",
 	{ "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons", lazy = true } },
 	"norcalli/nvim-colorizer.lua",

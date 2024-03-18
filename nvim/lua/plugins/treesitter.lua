@@ -19,6 +19,7 @@ ts.setup({
 		enable = true,
 	},
 	ensure_installed = {
+    "vimdoc",
 		"javascript",
 		"typescript",
 		"tsx",

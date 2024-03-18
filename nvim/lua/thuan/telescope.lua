@@ -27,7 +27,7 @@ M.search_notes = function()
 		prompt_title = " Grep Notes",
 		prompt_prefix = " ﮷ ",
 		cwd = variable.icloud_drive_obsidian_path,
-		layout_config = { preview_width = 0.45, width = 0.9 },
+		layout_config = { preview_width = 0.65 },
 		hidden = true,
 	})
 end

@@ -1,5 +1,8 @@
 local map = vim.keymap.set
+
 local actions = require("telescope.actions")
+local builtin = require("telescope.builtin")
+local custom = require("thuan.telescope")
 
 local status, telescope = pcall(require, "telescope")
 if not status then
@@ -72,7 +75,7 @@ telescope.setup({
 	-- overriding default settings
 	pickers = {
 		find_files = {
-			theme = "dropdown",
+			-- theme = "dropdown",
 			previewer = false,
 			-- no_ignore = false,
 			hidden = true,
@@ -106,30 +109,31 @@ map("n", "<leader>tb", ":Telescope builtin<CR>")
 map("n", "<leader>wd", ":Telescope diagnostics<CR>")
 map("n", "<leader>ts", ":Telescope treesitter<CR>")
 
-map("n", "<C-p>", ':lua require("telescope.builtin").find_files()<CR>')
+map("n", "<C-p>", builtin.find_files)
+map("n", "<leader>pf", builtin.git_files)
 
-map("n", "<leader>ps", ':lua require("telescope.builtin").grep_string({ search = vim.fn.input("Grep For > ")})<CR>')
+map("n", "<leader>ps", function()
+	builtin.grep_string({ search = vim.fn.input("Grep > ") })
+end)
 
--- Search string in open buffers
-map(
-	"n",
-	"<leader>l",
-	':lua require("telescope.builtin").live_grep({ prompt_title="< Search string in open buffers >", grep_open_files=true })<CR>'
-)
+--- Search string in open buffers
+map("n", "<leader>l", function()
+	builtin.live_grep({ prompt_title = "< Search string in open buffers >", grep_open_files = true })
+end)
 
-map("n", "<leader>?", ':lua require("telescope.builtin").oldfiles()<CR>')
-map("n", "<leader>sb", ':lua require("telescope.builtin").buffers()<CR>')
-map("n", "<leader>gb", ':lua require("telescope.builtin").git_branches()<CR>')
-map("n", "<leader>rs", ':lua require("telescope.builtin").resume()<CR>')
+map("n", "<leader>?", builtin.oldfiles)
+map("n", "<leader>sb", builtin.buffers)
+map("n", "<leader>gb", builtin.git_branches)
+map("n", "<leader>rs", builtin.resume)
 
--- Custom function should require from thuan.telescope instead
-map("n", "<leader>sdf", ':lua require("thuan.telescope").search_dotfiles()<CR>')
-map("n", "<leader>si", ':lua require("thuan.telescope").search_files_in_path()<CR>')
-map("n", "<leader>li", ':lua require("thuan.telescope").live_grep_in_path()<CR>')
-map("n", "<leader>P", ':lua require("thuan.telescope").live_grep_all()<CR>')
+-- Custom functions
+map("n", "<leader>sdf", custom.search_dotfiles)
+map("n", "<leader>si", custom.search_files_in_path)
+map("n", "<leader>li", custom.live_grep_in_path)
+map("n", "<leader>P", custom.live_grep_all)
 
-map("n", "<leader>sn", ':lua require("thuan.telescope").search_notes()<CR>')
-map("n", "<leader>snf", ':lua require("thuan.telescope").search_note_files()<CR>')
-map("n", "<leader>sr", ':lua require("thuan.telescope").search_references()<CR>')
+map("n", "<leader>sn", custom.search_notes)
+map("n", "<leader>snf", custom.search_note_files)
+map("n", "<leader>sr", custom.search_references)
 
-map("n", "<leader>fb", ':lua require("thuan.telescope").file_explorer()<CR>')
+map("n", "<leader>fb", custom.file_explorer)
