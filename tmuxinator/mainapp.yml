@@ -14,8 +14,8 @@ windows:
       layout: b7a8,239x61,0,0[239x47,0,0,0,239x13,0,48,4]
       panes:
         # - rau
-        - open -a Docker && cd ~/Programming/EmploymentHero/auth && docker-compose up --build
-        - bundle exec eh_protobuf start -c './config/environment.rb'
+        # - open -a Docker && cd ~/Programming/EmploymentHero/auth && docker-compose up --build
+        # - bundle exec eh_protobuf start -c './config/environment.rb'
   # - ff:
   #     - cd ~/Programming/EmploymentHero/feature-flag-api
   #     - bundle exec puma -p 9293

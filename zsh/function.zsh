@@ -23,6 +23,10 @@ function oci() {
   fi
 }
 
+function opl() {
+  open "https://github.com/Thinkei/employment-hero/actions/workflows/release_pipeline.yml"
+}
+
 # Simple Git commit: mygcm "commit message"
 function cgc() {
   # Check if a commit message is provided as an argument
