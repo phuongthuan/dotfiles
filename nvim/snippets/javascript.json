@@ -207,12 +207,6 @@
       "import fetchMock from 'fetch-mock-jest';\n"
 		]
 	},
-  "import React": {
-		"prefix": "imr",
-		"body": [
-			"import React from 'react';"
-		]
-	},
   "import Component hero-design": {
 		"prefix": "ihd",
 		"body": [
@@ -234,7 +228,7 @@
  	"expect getByText": {
 		"prefix": "egbt",
 		"body": [
-			"expect(getByText('$1')).toBeInTheDocument();$0"
+			"expect(getByText('$1')).toBeVisible();$0"
 		]
 	},
   "expect queryByText": {
@@ -246,7 +240,6 @@
 	"describe block test": {
 		"prefix": "desc",
 		"body": [
-      "import React from 'react';",
       "import { screen } from '@testing-library/react';",
       "import { renderWithRedux as render } from 'eh-test-helper';\n",
 			"describe('$1', () => {",

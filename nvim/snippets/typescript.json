@@ -187,10 +187,6 @@
     ],
     "description": "React useReducer() hook"
   },
-  "import React": {
-    "prefix": "imr",
-    "body": ["import React from 'react';"]
-  },
   "import Component hero-design": {
     "prefix": "ihd",
     "body": ["import { $1 } from 'hero-design';$0"]
@@ -222,8 +218,7 @@
   "Typescript React Functional Component": {
     "prefix": "tsrfc",
     "body": [
-      "import React from 'react';",
-      "import { Box } from '@hero-design/rn';",
+      "import { Box } from '@hero-design/react';",
       "",
       "type ${1}Props = {}",
       "",
@@ -241,7 +236,6 @@
     "body": [
       "import { renderWithRedux as render, mockFrontendEnv } from 'eh-test-helper';\n",
       "import fetchMock from 'fetch-mock-jest';\n",
-      "import React from 'react';",
       "import { getMarketplaceHost } from 'eh-utils/getFrontendEnv';",
       "import { screen, fireEvent } from '@testing-library/react';\n",
       "mockFrontendEnv('REACT_APP_MARKETPLACE_HOST', 'marketplaceHost');\n",
@@ -261,6 +255,10 @@
   "expect getByText": {
     "prefix": "egbt",
     "body": ["expect(screen.getByText(\"$1\")).toBeVisible();$0"]
+  },
+  "expect getByLabelText": {
+    "prefix": "egbl",
+    "body": ["expect(screen.getByLabelText(\"$1\")).toBeVisible();$0"]
   },
   "expect await findByText": {
     "prefix": "efbt",
