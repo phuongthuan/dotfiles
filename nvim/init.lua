@@ -22,7 +22,7 @@ vim.g.mapleader = " "
 
 -- Core
 require("options")
-require("remaps")
+require("keymaps")
 
 -- Plugins
 require("plugins")
