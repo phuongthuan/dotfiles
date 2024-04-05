@@ -1,5 +1,13 @@
 return {
   {
+    "kylechui/nvim-surround",
+    version = "*",
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup()
+    end,
+  },
+  {
     "L3MON4D3/LuaSnip",
     dependencies = {
       {
@@ -54,24 +62,5 @@ return {
         end, { "i", "s" }),
       })
     end,
-  },
-  {
-    "echasnovski/mini.surround",
-    keys = function(_, keys)
-      local plugin = require("lazy.core.config").spec.plugins["mini.surround"]
-      local opts = require("lazy.core.plugin").values(plugin, "opts", false)
-      local mappings = {
-        { opts.mappings.add, desc = "Add surrounding", mode = { "n", "v" } },
-        { opts.mappings.delete, desc = "Delete surrounding" },
-        { opts.mappings.replace, desc = "Replace surrounding" },
-      }
-      mappings = vim.tbl_filter(function(m)
-        return m[1] and #m[1] > 0
-      end, mappings)
-      return vim.list_extend(mappings, keys)
-    end,
-    opts = {
-      mappings = { add = "S", delete = "ds", replace = "cs" },
-    },
   },
 }

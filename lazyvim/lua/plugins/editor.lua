@@ -1,7 +1,15 @@
 return {
   {
+    "folke/trouble.nvim",
+    keys = {
+      { "<leader>xX", false },
+      { "<leader>wd", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
+    },
+  },
+  {
     "lewis6991/gitsigns.nvim",
     opts = {
+      current_line_blame = true,
       on_attach = function(buffer)
         local gs = package.loaded.gitsigns
 

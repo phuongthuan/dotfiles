@@ -105,6 +105,19 @@ return {
       end,
       desc = "Search git branches",
     },
+    {
+      ";d",
+      function(path)
+        local builtin = require("telescope.builtin")
+        local _path = path or vim.fn.input("Directory: > ")
+        builtin.live_grep({
+          search_dirs = { _path },
+          prompt_title = " Grep in Directory",
+          additional_args = { "--hidden" },
+        })
+      end,
+      desc = "Search for a input string in the given directory, respects .gitignore",
+    },
   },
   config = function(_, opts)
     local telescope = require("telescope")

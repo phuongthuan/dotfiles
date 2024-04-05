@@ -1,9 +1,8 @@
 local opt = vim.opt
 
--- Map leader key
+-- Override LazyVim config
 vim.g.mapleader = " "
-
--- Disable auto format
+vim.g.lazygit_theme = false
 vim.g.autoformat = false
 
 -- General
