@@ -10,4 +10,5 @@ windows:
   - editor: nvim
   - terminal: git status
   - worktree: j eh-worktree/frontend-core/hotfix-fe-core
+  - cli: node -v
   - logs: yarn nx start hr-web-app

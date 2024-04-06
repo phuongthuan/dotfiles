@@ -13,5 +13,5 @@ windows:
       layout: main-vertical
       panes:
         - node -v
-        - yarn start
+        - node -v
   - ios: cd example

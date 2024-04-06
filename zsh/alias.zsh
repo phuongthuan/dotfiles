@@ -1,6 +1,9 @@
 alias nvim='~/nvim-macos/bin/nvim'
 alias onvim='~/nvim9/bin/nvim'
 
+alias arm="arch -arm64"
+alias intel="arch -x86_64"
+
 # Source zshrc
 alias reload="source ~/.zshrc; echo 'Source zshrc complete!';"
 
@@ -8,10 +11,10 @@ alias reload="source ~/.zshrc; echo 'Source zshrc complete!';"
 alias ic='eval nvim $ICLOUD_DRIVE'
 
 # Open iCloud Obsidian
-alias ob='eval nvim $ICLOUD_DRIVE_OBSIDIAN'
+alias obs='eval nvim $ICLOUD_DRIVE_OBSIDIAN'
 
 # Open dotfiles
-alias dot='nvim $DOTFILES'
+alias dot='eval nvim $DOTFILES'
 
 # Homebrew
 alias brewup='brew update; brew upgrade; brew cleanup; brew doctor'
@@ -41,7 +44,6 @@ alias gb='git branch'
 alias gc='git commit -m'
 alias gd='git diff'
 alias sw='git checkout'
-alias swm='git checkout master && git pull origin master'
 alias new='git checkout -b'
 alias glo='git log --oneline -10'
 alias reflog='git reflog --relative-date'
@@ -59,6 +61,7 @@ alias pick='git cherry-pick'
 alias stl='git stash list'
 alias pop='git stash pop'
 alias gfo='git fetch origin'
+alias gco='git checkout origin/master'
 
 # Docker
 alias dps='docker ps -a'

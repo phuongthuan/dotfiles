@@ -40,3 +40,30 @@ function cgc() {
   git commit -m "$message"
   git push origin HEAD
 }
+
+# Create new branch and copy branch name to clipboard
+function cgb() {
+  if [ -z "$1" ]; then
+    echo "Please provide a branch name."
+    return 1
+  fi
+
+  branch_name="$1"
+  git branch $branch_name
+  echo "$branch_name" | pbcopy
+  echo "Copied branch '$branch_name' to clipboard."
+}
+
+# Checkout and pull current master branch
+function swm() {
+  branch_name=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+
+  if [ -z "$branch_name" ]; then
+    echo "Error: No branch name found."
+    return 1
+  fi
+
+  echo "Switching to branch: $branch_name"
+  git checkout "$branch_name"
+  git pull origin "$branch_name"
+}
