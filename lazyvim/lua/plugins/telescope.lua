@@ -40,11 +40,13 @@ return {
       function()
         local builtin = require("telescope.builtin")
         builtin.live_grep({
-          propmt_title = " Grep String",
+          propmt_title = " Live Grep String",
           additional_args = { "--hidden" },
+          grep_open_files = true,
+          layout_strategy = "vertical",
         })
       end,
-      desc = "Search for a string in the current working directory and get results live as typed, respects .gitignore",
+      desc = "Search for a string in the current open buffers and get results live as typed, respects .gitignore",
     },
     {
       "<leader>ps",
@@ -53,6 +55,8 @@ return {
         builtin.grep_string({
           search = vim.fn.input("Grep > "),
           additional_args = { "--hidden" },
+          layout_strategy = "vertical",
+          propmt_title = " Grep String",
         })
       end,
       desc = "Search for a input string in the current working directory, respects .gitignore",
@@ -65,7 +69,7 @@ return {
         builtin.live_grep({
           prompt_title = " Grep Notes",
           cwd = variable.icloud_drive_obsidian_path,
-          layout_config = { preview_width = 0.65 },
+          -- layout_config = { preview_width = 0.65 },
           hidden = true,
         })
       end,
@@ -126,6 +130,7 @@ return {
     opts.defaults = vim.tbl_deep_extend("force", opts.defaults, {
       winblend = 0,
       file_ignore_patterns = { "node_modules", ".git/" },
+      layout_strategy = "vertical",
       layout_config = {
         width = 0.95,
         height = 0.85,

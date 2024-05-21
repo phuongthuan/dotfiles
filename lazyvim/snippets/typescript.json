@@ -274,6 +274,12 @@
       "expect(screen.getByRole('${1:img}')).toHaveAttribute('src', '${2:url_link}');$0"
     ]
   },
+  "fireEvent click": {
+    "prefix": "fec",
+    "body": [
+      "fireEvent.click(screen.getByText('$1', { selector: 'button' }));$0"
+    ]
+  },
   "Intl formatMessage": {
     "prefix": "intlf",
     "body": "Intl.formatMessage({ id: '$1' })$0",

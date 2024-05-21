@@ -1,5 +1,20 @@
 return {
   {
+    "folke/flash.nvim",
+    keys = function()
+      return {
+        {
+          "s",
+          mode = { "n", "x", "o" },
+          function()
+            require("flash").jump()
+          end,
+          desc = "Flash",
+        },
+      }
+    end,
+  },
+  {
     "folke/trouble.nvim",
     keys = {
       { "<leader>xX", false },
@@ -39,7 +54,7 @@ return {
       {
         "<C-a>",
         function()
-          require("harpoon"):list():append()
+          require("harpoon"):list():add()
         end,
         desc = "Harpoon file",
       },
@@ -86,5 +101,6 @@ return {
     },
   },
   { "tpope/vim-fugitive" },
+  { "tpope/vim-rhubarb" },
   { "mg979/vim-visual-multi", branch = "master" },
 }

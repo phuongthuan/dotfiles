@@ -3,7 +3,7 @@ local opt = vim.opt
 -- Override LazyVim config
 vim.g.mapleader = " "
 vim.g.lazygit_theme = false
-vim.g.autoformat = false
+-- vim.g.autoformat = false
 
 -- General
 opt.mouse = "a" -- enable mouse support
