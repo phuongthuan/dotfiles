@@ -1,0 +1,12 @@
+# /Users/thuan/.config/tmuxinator/ats.yml
+
+name: ats
+root: ~/Programming/EmploymentHero/ats
+
+windows:
+  - editor: nvim
+  - terminal: ruby -v
+  - worktree: j eh-worktree/marketplace-service/master
+  - server:
+  - logs:
+      - ruby -v

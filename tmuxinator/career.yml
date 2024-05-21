@@ -1,0 +1,11 @@
+# /Users/thuan/.config/tmuxinator/career.yml
+
+name: career
+root: ~/Programming/EmploymentHero/career-page
+
+windows:
+  - editor: nvim
+  - terminal: node -v
+  - worktree: j eh-worktree/marketplace-service/master
+  - logs:
+      - node -v
