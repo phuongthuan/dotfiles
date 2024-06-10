@@ -1,9 +1,13 @@
+local g = vim.g
 local opt = vim.opt
+
+-- Skip providers
+g.loaded_python3_provider = 0
+g.loaded_perl_provider = 0
 
 -- Override LazyVim config
 vim.g.mapleader = " "
-vim.g.lazygit_theme = false
--- vim.g.autoformat = false
+vim.g.lazygit_config = false
 
 -- General
 opt.mouse = "a" -- enable mouse support

@@ -8,7 +8,7 @@
 	helper = osxkeychain
 [core]
 	compression = 0
-	editor = /Users/thuan/nvim-macos/bin/nvim
+	editor = /usr/bin/vim
 [pull]
 	rebase = false
 [url "git@github.com:Thinkei"]
