@@ -3,8 +3,8 @@ function bgkill() {
   kill -9 $(jobs -l | head -1 | awk '{print $3}')
 }
 
-# Open Github PR: mypr <project_name>
-function opr() {
+# Open Github PR: oprl <project_name>
+function oprl() {
   if [ -z "$1" ]; then
     open 'https://github.com/thinkei/frontend-core/pulls/phuongthuan'
   else
@@ -13,8 +13,32 @@ function opr() {
   fi
 }
 
-# Open Circle CI: myci <project_name>
+# Open Github PR ID: opr <pr_id>
+function opr() {
+  if [ -z "$1" ]; then
+    recent_pr_id=$(gh pr list --state open --author phuongthuan --repo Thinkei/frontend-core --json number --jq '.[0].number')
+    open "https://github.com/thinkei/frontend-core/pull/${recent_pr_id}"
+  else
+    project="$1"
+    recent_pr_id=$(gh pr list --state open --author phuongthuan --repo "Thinkei/${project}" --json number --jq '.[0].number')
+    open "https://github.com/thinkei/${project}/pull/${recent_pr_id}"
+  fi
+}
+
+# Open Circle CI: oci <project_name> <branch_name>
 function oci() {
+  # https://github.com/Thinkei/frontend-core/actions/workflows/build-dev.yml?query=actor%3Aphuongthuan
+  if [ -z "$1" ]; then
+    open 'https://app.circleci.com/pipelines/github/Thinkei?filter=mine'
+  else
+    project="$1"
+    open "https://app.circleci.com/pipelines/github/Thinkei/${project}?filter=mine"
+  fi
+}
+
+# Open Github Actions workflows: oga <project_name> <branch_name>
+function oga() {
+  # https://github.com/Thinkei/frontend-core/actions/workflows/build-dev.yml?query=actor%3Aphuongthuan
   if [ -z "$1" ]; then
     open 'https://app.circleci.com/pipelines/github/Thinkei?filter=mine'
   else
@@ -67,3 +91,4 @@ function swm() {
   git checkout "$branch_name"
   git pull origin "$branch_name"
 }
+

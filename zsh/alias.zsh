@@ -1,5 +1,5 @@
-alias nvim='~/nvim-macos/bin/nvim'
-alias onvim='~/nvim9/bin/nvim'
+alias nvim='~/nvim-macos-arm64/bin/nvim'
+alias nvim-kickstart='NVIM_APPNAME="nvim-kickstart" nvim'
 
 alias arm="arch -arm64"
 alias intel="arch -x86_64"
@@ -32,6 +32,8 @@ alias how='howdoi'
 # Ruby
 alias bi='bundle install'
 alias be='bundle exec'
+alias rub='bundle exec rubocop'
+alias rsp='bundle exec rspec'
 
 # Gitmoji
 alias gj='gitmoji'
@@ -43,6 +45,7 @@ alias gw='git worktree'
 alias gb='git branch'
 alias gc='git commit -m'
 alias gd='git diff'
+alias gdn='git diff --name-only master'
 alias sw='git checkout'
 alias new='git checkout -b'
 alias glo='git log --oneline -10'
@@ -62,6 +65,9 @@ alias stl='git stash list'
 alias pop='git stash pop'
 alias gfo='git fetch origin'
 alias gco='git checkout origin/master'
+
+# Github CLI
+alias ghpr='gh pr list --state open --author phuongthuan --repo Thinkei/frontend-core'
 
 # Docker
 alias dps='docker ps -a'
