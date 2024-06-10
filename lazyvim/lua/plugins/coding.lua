@@ -9,22 +9,27 @@ return {
   },
   {
     "L3MON4D3/LuaSnip",
+    build = (not LazyVim.is_win())
+        and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
+      or nil,
     dependencies = {
       {
         "rafamadriz/friendly-snippets",
         config = function()
-          require("luasnip.loaders.from_vscode").lazy_load({ paths = vim.fn.stdpath("config") .. "/snippets" })
+          require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets" } })
         end,
       },
     },
-    keys = function()
-      return {}
-    end,
+    opts = {
+      history = true,
+      delete_check_events = "TextChanged",
+    },
   },
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-emoji",
+      "saadparwaiz1/cmp_luasnip",
     },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
@@ -36,6 +41,14 @@ return {
 
       local luasnip = require("luasnip")
       local cmp = require("cmp")
+
+      opts.snippet = {
+        expand = function(args)
+          luasnip.lsp_expand(args.body)
+        end,
+      }
+      table.insert(opts.sources, { name = "luasnip" })
+      table.insert(opts.sources, { name = "emoji" })
 
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
         ["<Tab>"] = cmp.mapping(function(fallback)

@@ -238,9 +238,10 @@
       "import fetchMock from 'fetch-mock-jest';\n",
       "import { getMarketplaceHost } from 'eh-utils/getFrontendEnv';",
       "import { screen, fireEvent } from '@testing-library/react';\n",
+      "import $1 from '../$1';\n",
       "mockFrontendEnv('REACT_APP_MARKETPLACE_HOST', 'marketplaceHost');\n",
       "describe('$1', () => {",
-      "\tit('$2', () => {",
+      "\tit('${2:should renders correctly}', () => {",
       "\t\t$3",
       "\t});",
       "});$0"
