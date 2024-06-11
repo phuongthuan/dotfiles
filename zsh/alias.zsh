@@ -1,5 +1,5 @@
-alias nvim='~/nvim-macos-arm64/bin/nvim'
-alias nvim-kickstart='NVIM_APPNAME="nvim-kickstart" nvim'
+alias lazynvim='~/nvim-macos-arm64/bin/nvim'
+alias nvim='NVIM_APPNAME="nvim-kickstart" ~/nvim-macos-arm64/bin/nvim'
 
 alias arm="arch -arm64"
 alias intel="arch -x86_64"
