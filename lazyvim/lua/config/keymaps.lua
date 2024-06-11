@@ -1,13 +1,13 @@
-local variable = require("phuongthuan.variable")
+local env = require("env")
 
 local map = vim.keymap.set
 
 -- Open today note
-local new_note_file = variable.icloud_drive_obsidian_path .. "/diary/" .. os.date("%Y-%m-%d") .. ".md"
+local new_note_file = env.icloud_drive_obsidian_path .. "/diary/" .. os.date("%Y-%m-%d") .. ".md"
 map("n", "<leader>td", ":e " .. new_note_file .. "<cr>", { desc = "Open today note", noremap = false })
 
 -- Open EH configuration
-map("n", "<leader>eh", ":e " .. variable.eh_config_path .. "<cr>", { desc = "Open EH configuration" })
+map("n", "<leader>eh", ":e " .. env.eh_config_path .. "<cr>", { desc = "Open EH configuration" })
 
 -- Map Esc to jk
 map("i", "jk", "<Esc>", { noremap = true })

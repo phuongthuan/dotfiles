@@ -1,5 +1,5 @@
 local builtin = require("telescope.builtin")
-local variable = require("thuan.variable")
+local env = require("env")
 
 local M = {}
 
@@ -7,7 +7,7 @@ local M = {}
 M.search_dotfiles = function()
 	builtin.find_files({
 		prompt_title = " Dotfiles",
-		cwd = variable.dotfiles_path,
+		cwd = env.dotfiles_path,
 		-- hidden = true,
 	})
 end
@@ -16,7 +16,7 @@ end
 M.search_references = function()
 	builtin.find_files({
 		prompt_title = " References",
-		cwd = variable.references_path,
+		cwd = env.references_path,
 		hidden = true,
 	})
 end
@@ -26,7 +26,7 @@ M.search_notes = function()
 	builtin.live_grep({
 		prompt_title = " Grep Notes",
 		prompt_prefix = " ﮷ ",
-		cwd = variable.icloud_drive_obsidian_path,
+		cwd = env.icloud_drive_obsidian_path,
 		layout_config = { preview_width = 0.65 },
 		hidden = true,
 	})
@@ -37,7 +37,7 @@ M.search_note_files = function()
 	builtin.find_files({
 		prompt_title = " Find Notes",
 		prompt_prefix = " ﮷ ",
-		cwd = variable.icloud_drive_obsidian_path,
+		cwd = env.icloud_drive_obsidian_path,
 		hidden = true,
 	})
 end

@@ -8,8 +8,9 @@ local lspkind = require("lspkind")
 
 -- Plugin: nvim-cmp
 --- https://github.com/hrsh7th/nvim-cmp
-
-require("luasnip.loaders.from_vscode").lazy_load({ paths = vim.fn.stdpath("config") .. "/snippets" })
+local env = require("env")
+local snippets_path = env.dotfiles_path .. "/snippets"
+require("luasnip.loaders.from_vscode").lazy_load({ paths = { snippets_path } })
 
 local has_words_before = function()
 	if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then

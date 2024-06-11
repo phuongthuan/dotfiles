@@ -65,10 +65,10 @@ return {
       "<leader>sn",
       function()
         local builtin = require("telescope.builtin")
-        local variable = require("phuongthuan.variable")
+        local env = require("env")
         builtin.live_grep({
           prompt_title = " Grep Notes",
-          cwd = variable.icloud_drive_obsidian_path,
+          cwd = env.icloud_drive_obsidian_path,
           -- layout_config = { preview_width = 0.65 },
           hidden = true,
         })
@@ -79,10 +79,10 @@ return {
       "<leader>fn",
       function()
         local builtin = require("telescope.builtin")
-        local variable = require("phuongthuan.variable")
+        local env = require("env")
         builtin.find_files({
           prompt_title = " Note Files",
-          cwd = variable.icloud_drive_obsidian_path,
+          cwd = env.icloud_drive_obsidian_path,
           hidden = true,
         })
       end,
@@ -92,10 +92,10 @@ return {
       "<leader>sdf",
       function()
         local builtin = require("telescope.builtin")
-        local variable = require("phuongthuan.variable")
+        local env = require("env")
         builtin.find_files({
           prompt_title = " Dotfiles",
-          cwd = variable.dotfiles_path,
+          cwd = env.dotfiles_path,
           hidden = true,
         })
       end,
