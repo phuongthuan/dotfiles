@@ -25,6 +25,17 @@ function opr() {
   fi
 }
 
+# Open Github repo: orp <repo_name>
+function orp() {
+  # https://github.com/Thinkei/frontend-core/actions/workflows/build-dev.yml?query=actor%3Aphuongthuan
+  if [ -z "$1" ]; then
+    open 'https://github.com/Thinkei/frontend-core'
+  else
+    repo_name="$1"
+    open "https://github.com/Thinkei/${repo_name}"
+  fi
+}
+
 # Open Circle CI: oci <project_name> <branch_name>
 function oci() {
   # https://github.com/Thinkei/frontend-core/actions/workflows/build-dev.yml?query=actor%3Aphuongthuan
