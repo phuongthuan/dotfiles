@@ -6,7 +6,7 @@ export EDITOR="nvim"
 # DOTFILES folder
 export DOTFILES="~/.dotfiles"
 export NVIM_CONFIG="~/.config/nvim/init.lua"
-export NVIM_KICKSTART_CONFIG="~/.config/nvim-kickstart/init.lua"
+export NVIM_KICKSTART_CONFIG="~/.config/kickstart-nvim/init.lua"
 
 # iCloud Drive
 export ICLOUD_DRIVE="~/Library/Mobile Documents/com~apple~CloudDocs"
