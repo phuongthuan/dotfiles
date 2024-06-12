@@ -5,3 +5,6 @@ node_modules/
 zsh/eh.zsh
 
 plugin/
+
+kickstart-nvim/lazy-lock.json
+lazyvim/lazy-lock.json

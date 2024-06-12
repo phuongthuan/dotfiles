@@ -150,14 +150,16 @@ return { -- Fuzzy Finder (files, lsp, etc)
         grep_open_files = true,
         layout_strategy = 'vertical',
       }
-    end, { desc = '[S]earch for a string in the current open buffers and get results live as typed, respects .gitignore' })
+    end, {
+      desc = '[S]earch for a string in the current open buffers and get results live as typed, respects .gitignore',
+    })
 
     vim.keymap.set('n', '<leader>ps', function()
       builtin.grep_string {
         search = vim.fn.input 'Grep > ',
         additional_args = { '--hidden' },
         layout_strategy = 'vertical',
-        propmt_title = ' Grep String',
+        propmt_title = '🔭 Grep String',
       }
     end, { desc = '[S]earch for a input string in the current working directory, respects .gitignore' })
 
