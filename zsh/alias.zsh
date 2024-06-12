@@ -5,7 +5,7 @@ alias arm="arch -arm64"
 alias intel="arch -x86_64"
 
 # Source zshrc
-alias reload="source ~/.zshrc; echo 'Source zshrc complete!';"
+alias rl="source ~/.zshrc; echo 'Source zshrc complete!';"
 
 # Open iCloud Drive
 alias ic='eval nvim $ICLOUD_DRIVE'

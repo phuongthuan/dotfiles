@@ -5,27 +5,27 @@ local map = vim.keymap.set
 
 -- Open today note
 local new_note_file = env.icloud_drive_obsidian_path .. "/diary/" .. os.date("%Y-%m-%d") .. ".md"
-map("n", "<leader>td", ":e " .. new_note_file .. "<CR>", { noremap = false })
+map("n", "<leader>td", ":e " .. new_note_file .. "<cr>", { noremap = false })
 
 -- Source Vim configuration file and install plugins
-map("n", "<leader><leader>1", ":source " .. env.nvim_config_path .. '<CR>:echo " Reloaded neovim config !!"<CR>')
+map("n", "<leader><leader>1", ":source " .. env.nvim_config_path .. '<cr>:echo " Reloaded neovim config !!"<cr>')
 
 -- Open file in same directory
-cmd([[ nnoremap ,e :e <C-R>=expand('%:p:h') . '/'<CR> ]])
+cmd([[ nnoremap ,e :e <C-R>=expand('%:p:h') . '/'<cr> ]])
 
 -- Open EH configuration
-map("n", "<leader>eh", ":e " .. env.eh_config_path .. "<CR>")
+map("n", "<leader>eh", ":e " .. env.eh_config_path .. "<cr>")
 
 -- Windows remapping
 -- Vertically split screen
-map("n", "<leader>wv", ":vs<CR>")
-map("n", "<leader>ws", ":split<CR>")
+map("n", "<leader>wv", ":vs<cr>")
+map("n", "<leader>ws", ":split<cr>")
 
 -- Close window
-map("n", "<leader>wc", ":wq<CR>")
+map("n", "<leader>wc", ":wq<cr>")
 
 -- Close window without save
-map("n", "<leader>q", ":q!<CR>")
+map("n", "<leader>q", ":q!<cr>")
 
 -- Quicker window movement
 map("n", "<C-h>", "<C-w>h")
@@ -34,10 +34,10 @@ map("n", "<C-k>", "<C-w>k")
 map("n", "<C-l>", "<C-w>l")
 
 -- Buffers stuff
-map("n", "<tab>", ":bp<CR>")
-map("n", "<S-tab>", ":bn<CR>")
+map("n", "<tab>", ":bp<cr>")
+map("n", "<S-tab>", ":bn<cr>")
 map("n", "<BS>", "<C-^>") -- switch between last two files
-map("n", "<leader>bk", ":bd<CR>")
+map("n", "<leader>bk", ":bd<cr>")
 
 -- Make life more easier
 map("n", "H", "^")
@@ -51,7 +51,7 @@ map("x", "L", "$")
 map("n", "Z", "yi")
 
 -- Select all file
-map("n", "<leader>a", ":keepjumps normal! ggVG<CR>")
+map("n", "<leader>a", ":keepjumps normal! ggVG<cr>")
 
 -- Create folder
 map("n", "<leader><leader>cf", ":!mkdir -p<Space>")
@@ -82,7 +82,7 @@ map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
 
 -- Clear search highlighting
-map("n", "<Esc>", ":nohl<CR>")
+map("n", "<Esc>", ":nohl<cr>")
 
 -- Map Esc to jk
 map("i", "jk", "<Esc>", { noremap = true })
@@ -94,13 +94,13 @@ map("", "<left>", "<nop>", { noremap = true })
 map("", "<right>", "<nop>", { noremap = true })
 
 -- Fast saving with <leader> and s
-map("n", "<leader>s", ":w<CR>")
+map("n", "<leader>s", ":w<cr>")
 
 -- Saving all working buffers
-map("n", "<leader>S", ":wa<CR>")
+map("n", "<leader>S", ":wa<cr>")
 
 -- Source file and install plugins
-map("n", "<leader>L", ":Lazy<CR>")
+map("n", "<leader>L", ":Lazy<cr>")
 
 -- Delete without changing the registers
 map({ "n", "x" }, "x", '"_x')
