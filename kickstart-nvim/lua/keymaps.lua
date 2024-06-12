@@ -29,8 +29,8 @@ map('i', 'jk', '<Esc>', { noremap = true })
 map('n', 'Z', 'vi')
 
 -- Buffers next and prev
-map('n', '<tab>', ':bp<CR>')
-map('n', '<S-tab>', ':bn<CR>')
+map('n', '<tab>', ':bp<cr>')
+map('n', '<S-tab>', ':bn<cr>')
 
 -- Switch between last two files
 map('n', '<BS>', '<C-^>')
@@ -90,11 +90,11 @@ map('x', '<leader>p', '"_dP')
 map('n', '<leader>r', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- Get current file path
-map('n', '<leader>cp', [[:let @+=expand("%:p")<CR>:echo " File path copied to clipboard 📝"<cr>]], { noremap = true, silent = true })
+map('n', '<leader>cp', [[:let @+=expand("%:p")<cr>:echo " File path copied to clipboard 📝"<cr>]], { noremap = true, silent = true })
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
-map('n', '<Esc>', '<cmd>nohlsearch<CR>')
+map('n', '<Esc>', '<cmd>nohlsearch<cr>')
 
 -- Diagnostic keymaps
 map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
@@ -111,10 +111,10 @@ map('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rr
 map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TIP: Disable arrow keys in normal mode
-map('n', '<left>', '<cmd>echo "Use h to move ❌"<CR>')
-map('n', '<right>', '<cmd>echo "Use l to move ❌"<CR>')
-map('n', '<up>', '<cmd>echo "Use k to move ❌"<CR>')
-map('n', '<down>', '<cmd>echo "Use j to move ❌"<CR>')
+map('n', '<left>', '<cmd>echo "Use h to move ❌"<cr>')
+map('n', '<right>', '<cmd>echo "Use l to move ❌"<cr>')
+map('n', '<up>', '<cmd>echo "Use k to move ❌"<cr>')
+map('n', '<down>', '<cmd>echo "Use j to move ❌"<cr>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -129,5 +129,19 @@ map('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Vim-fugitive
 map('n', '<leader>g', ':G<cr>')
+
 map('n', '<leader>gp', ':G push origin HEAD<cr>')
 map('n', '<leader>gP', ':G push origin HEAD -f<cr>')
+map('n', '<leader>gM', ':G push origin master<cr>')
+
+map('n', '<leader>gl', ':GV<cr>')
+map('n', '<leader>gL', ":GV <C-R>=expand('%:p')<cr><cr>")
+
+map('n', '<leader>gm', ':G merge<Space>')
+
+-- Resolve conflict
+map('n', '<leader>grc', ':Gvdiffsplit!<cr>')
+
+-- on the Gvdiffsplit mode
+-- d2o : get the left column
+-- d3o : get the right column
