@@ -6,7 +6,7 @@ local M = {}
 -- Short key: <leader>sdf
 M.search_dotfiles = function()
 	builtin.find_files({
-		prompt_title = " Dotfiles",
+		prompt_title = "🔭 Dotfiles",
 		cwd = env.dotfiles_path,
 		-- hidden = true,
 	})
@@ -15,7 +15,7 @@ end
 -- Short key: <leader>sr
 M.search_references = function()
 	builtin.find_files({
-		prompt_title = " References",
+		prompt_title = "🔭 References",
 		cwd = env.references_path,
 		hidden = true,
 	})
@@ -35,7 +35,7 @@ end
 -- Short key: <leader>snf
 M.search_note_files = function()
 	builtin.find_files({
-		prompt_title = " Find Notes",
+		prompt_title = "🔭 Find Notes",
 		prompt_prefix = " ﮷ ",
 		cwd = env.icloud_drive_obsidian_path,
 		hidden = true,
@@ -47,7 +47,7 @@ M.search_files_in_path = function(path)
 	local _path = path or vim.fn.input("Directory: > ", "", "dir")
 	builtin.find_files({
 		search_dirs = { _path },
-		prompt_title = " Files",
+		prompt_title = "🔭 Files",
 	})
 end
 

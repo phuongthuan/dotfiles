@@ -33,6 +33,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
       --  All the info you're looking for is in `:help telescope.setup()`
       --
       defaults = {
+        prompt_prefix = ' 🔍 ',
         winblend = 0,
         file_ignore_patterns = { 'node_modules', '.git/' },
         layout_strategy = 'vertical',
@@ -112,7 +113,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
     vim.keymap.set('n', '<leader>sdf', function()
       builtin.find_files {
-        prompt_title = ' Dotfiles',
+        prompt_title = '🔭 Dotfiles',
         cwd = env.dotfiles_path,
         hidden = true,
       }
@@ -120,7 +121,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
     vim.keymap.set('n', '<leader>fn', function()
       builtin.find_files {
-        prompt_title = ' Note Files',
+        prompt_title = '🔭 Note Files',
         cwd = env.icloud_drive_obsidian_path,
         hidden = true,
       }
@@ -128,7 +129,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
     vim.keymap.set('n', '<leader>sn', function()
       builtin.live_grep {
-        prompt_title = ' Grep Notes',
+        prompt_title = '🔭 Grep Notes',
         cwd = env.icloud_drive_obsidian_path,
         -- layout_config = { preview_width = 0.65 },
         hidden = true,
@@ -137,7 +138,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
     vim.keymap.set('n', ';f', function()
       builtin.find_files {
-        propmt_title = ' Files',
+        propmt_title = '🔭 Files',
         no_ignore = false,
         hidden = true,
       }
@@ -145,7 +146,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
     vim.keymap.set('n', ';r', function()
       builtin.live_grep {
-        propmt_title = ' Live Grep String',
+        propmt_title = '🔭 Live Grep String',
         additional_args = { '--hidden' },
         grep_open_files = true,
         layout_strategy = 'vertical',
@@ -156,7 +157,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
     vim.keymap.set('n', '<leader>ps', function()
       builtin.grep_string {
-        search = vim.fn.input 'Grep > ',
+        search = vim.fn.input 'Grep ▶️ ',
         additional_args = { '--hidden' },
         layout_strategy = 'vertical',
         propmt_title = '🔭 Grep String',
@@ -164,24 +165,26 @@ return { -- Fuzzy Finder (files, lsp, etc)
     end, { desc = '[S]earch for a input string in the current working directory, respects .gitignore' })
 
     vim.keymap.set('n', ';d', function(path)
-      local _path = path or vim.fn.input 'Directory: > '
+      local _path = path or vim.fn.input '📁 Directory: ▶️ '
       builtin.live_grep {
         search_dirs = { _path },
-        prompt_title = ' Grep in Directory',
+        prompt_title = '🔭 Grep in Directory',
         additional_args = { '--hidden' },
       }
     end, { desc = 'Search for a input string in the given directory, respects .gitignore' })
 
     vim.keymap.set('n', '<leader>fb', function()
       require('telescope').extensions.file_browser.file_browser {
-        prompt_title = ' File Browser',
+        prompt_title = '🔭 File Browser',
         path_display = { 'smart' },
         cwd = '~',
       }
     end, { desc = '[F]ind files in [B]rowser' })
 
     vim.keymap.set('n', '<leader>gb', function()
-      builtin.git_branches()
+      builtin.git_branches {
+        propmt_title = '🔭 Git Branches',
+      }
     end, { desc = '[S]earch git [B]ranches' })
   end,
 }

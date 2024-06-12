@@ -8,3 +8,4 @@ plugin/
 
 kickstart-nvim/lazy-lock.json
 lazyvim/lazy-lock.json
+nvim/lazy-lock.json

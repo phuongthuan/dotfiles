@@ -131,6 +131,3 @@ map('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 map('n', '<leader>g', ':G<cr>')
 map('n', '<leader>gp', ':G push origin HEAD<cr>')
 map('n', '<leader>gP', ':G push origin HEAD -f<cr>')
-
--- Mason
-map('n', '<leader>ms', '<cmd>Mason<cr>')
