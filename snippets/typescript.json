@@ -44,11 +44,6 @@
     "body": "export default function ${1:${TM_FILENAME_BASE}}(${2:params}) {\n\t$0\n};\n",
     "description": "Export default function in ES6 syntax"
   },
-  "constructor": {
-    "prefix": "con",
-    "body": "constructor(${1:params}) {\n\t${0}\n}",
-    "description": "Add default constructor in a class in ES6 syntax"
-  },
   "method": {
     "prefix": "met",
     "body": "${1:methodName}(${2:params}) {\n\t${0}\n}",
@@ -161,9 +156,9 @@
     "body": [
       "const ${1:memoizedCallback} = useCallback(",
       "\t() => {",
-      "\t\t${2:doSomething}(${3:a}, ${4:b})",
+      "\t\t$2",
       "\t},",
-      "\t[${5:a}, ${6:b}],",
+      "\t[$3],",
       ");$0"
     ],
     "description": "React useCallback() hook"
@@ -171,7 +166,9 @@
   "useMemo": {
     "prefix": "umh",
     "body": [
-      "const ${1:memoizedValue} = useMemo(() => ${2:computeExpensiveValue}(${3:a}, ${4:b}), [${5:a}, ${6:b}]);$0"
+      "const ${1:memoizedValue} = useMemo(() => {",
+      "\t$2",
+      "}, []);$0"
     ],
     "description": "React useMemo() hook"
   },
@@ -250,8 +247,20 @@
   },
   "it test case": {
     "prefix": "it",
-    "body": ["it('$1', () => {", "\t$2", "});$0"],
+    "body": ["it('${1:should renders correctly}', () => {", "\t$2", "});$0"],
     "description": "single unit test syntax"
+  },
+  "it each test case": {
+    "prefix": "ite",
+    "body": [
+      "it.each`",
+      "\tinput                     | output ",
+      "\t${'input-value'}          | ${'output-value'}",
+      "`('should works correctly', ({ input, output }) => {",
+      "\texpect(${1:function}(input)).toEqual(output);",
+      "});$0"
+    ],
+    "description": "nultiple unit test syntax"
   },
   "expect getByText": {
     "prefix": "egbt",
@@ -293,12 +302,12 @@
   },
   "Typography.Text": {
     "prefix": "typotx",
-    "body": "<Typography.Text>$1</Typography.Text>$0",
+    "body": "<Typography.Text>{Intl.formatMessage({ id: '$1' })}</Typography.Text>$0",
     "description": ""
   },
   "Typography.Title": {
     "prefix": "typoti",
-    "body": "<Typography.Title level={$2}>$1</Typography.Title>$0",
+    "body": "<Typography.Title level={$2}>{Intl.formatMessage({ id: '$1' })}</Typography.Title>$0",
     "description": ""
   },
   "createSelector": {

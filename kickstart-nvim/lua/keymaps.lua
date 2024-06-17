@@ -8,7 +8,7 @@ local new_note_file = env.icloud_drive_obsidian_path .. '/diary/' .. os.date '%Y
 map('n', '<leader>td', ':e ' .. new_note_file .. '<cr>', { desc = '[T]o[D]ay note', noremap = false })
 
 -- Source Neovim configuration
-map('n', '<leader><leader>1', ':source ' .. env.nvim_kickstart_config_path .. '<cr>:echo "Reloaded neovim config 🚀"<cr>')
+map('n', '<leader><leader>1', ':source ' .. env.nvim_kickstart_config_path .. '<cr>:echo " Reloaded Neovim config 🚀"<cr>')
 
 -- Open file in same directory
 cmd [[ nnoremap ,e :e <C-R>=expand('%:p:h') . '/'<cr> ]]
@@ -17,10 +17,10 @@ cmd [[ nnoremap ,e :e <C-R>=expand('%:p:h') . '/'<cr> ]]
 map('n', '<leader>eh', ':e ' .. env.eh_config_path .. '<cr>', { desc = 'Open EH configuration' })
 
 -- Fast saving with <leader> and s
-map('n', '<leader>s', ':w<cr>:echo "Saved current buffer ✅"<cr>')
+map('n', '<leader>s', ':w<cr>:echo " Saved current buffer ✅"<cr>')
 
 -- Saving all working buffers
-map('n', '<leader>S', ':wa<cr>:echo "Saved all buffers ✅"<cr>')
+map('n', '<leader>S', ':wa<cr>:echo " Saved all buffers ✅"<cr>')
 
 -- Map Esc to jk
 map('i', 'jk', '<Esc>', { noremap = true })
@@ -111,10 +111,10 @@ map('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rr
 map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TIP: Disable arrow keys in normal mode
-map('n', '<left>', '<cmd>echo "Use h to move ❌"<cr>')
-map('n', '<right>', '<cmd>echo "Use l to move ❌"<cr>')
-map('n', '<up>', '<cmd>echo "Use k to move ❌"<cr>')
-map('n', '<down>', '<cmd>echo "Use j to move ❌"<cr>')
+-- map('n', '<left>', '<cmd>echo "Use h to move ❌"<cr>')
+-- map('n', '<right>', '<cmd>echo "Use l to move ❌"<cr>')
+-- map('n', '<up>', '<cmd>echo "Use k to move ❌"<cr>')
+-- map('n', '<down>', '<cmd>echo "Use j to move ❌"<cr>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows

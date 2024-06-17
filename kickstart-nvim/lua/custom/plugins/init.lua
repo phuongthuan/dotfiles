@@ -1,4 +1,5 @@
 return {
+  -- Typescript LSP server
   {
     'pmizio/typescript-tools.nvim',
     dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
@@ -9,12 +10,6 @@ return {
   { 'mg979/vim-visual-multi', branch = 'master' },
   { 'kylechui/nvim-surround', opts = {} },
   { 'windwp/nvim-ts-autotag', opts = {} },
-  {
-    'zbirenbaum/copilot-cmp',
-    config = function()
-      require('copilot_cmp').setup()
-    end,
-  },
   {
     'folke/flash.nvim',
     event = 'VeryLazy',
@@ -41,5 +36,13 @@ return {
         desc = 'Buffer Diagnostics (Trouble)',
       },
     },
+  },
+
+  -- Copilot
+  {
+    'zbirenbaum/copilot-cmp',
+    config = function()
+      require('copilot_cmp').setup()
+    end,
   },
 }
