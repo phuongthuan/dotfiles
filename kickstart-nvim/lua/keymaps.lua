@@ -145,3 +145,11 @@ map('n', '<leader>grc', ':Gvdiffsplit!<cr>')
 -- on the Gvdiffsplit mode
 -- d2o : get the left column
 -- d3o : get the right column
+
+-- mpc for Music Player Daemon (MPD)
+-- silent to prevent neovim display message after command executed
+map('n', '<leader>mn', ':silent !mpc next<cr>:echo " Next song ♫ "<cr>', { silent = true })
+map('n', '<leader>mb', ':silent !mpc prev<cr>:echo " Back song ♫ "<cr>', { silent = true })
+map('n', '<leader>mp', ':silent !mpc play<cr>', { silent = true })
+map('n', '<leader>mP', ':silent !mpc pause<cr>', { silent = true })
+map('n', '<leader>mS', ':silent !mpc stop<cr>', { silent = true })

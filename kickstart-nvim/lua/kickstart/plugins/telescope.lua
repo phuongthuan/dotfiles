@@ -65,7 +65,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
             ['<C-x>'] = false,
             ['<C-j>'] = actions.move_selection_next,
             ['<C-k>'] = actions.move_selection_previous,
-            ['<C-q>'] = actions.send_to_qflist + actions.open_qflist,
+            -- ['<C-q>'] = actions.send_to_qflist + actions.open_qflist,
             ['<Esc>'] = actions.close,
           },
         },
@@ -103,7 +103,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
     -- Slightly advanced example of overriding default behavior and theme
-    vim.keymap.set('n', '<leader>/', function()
+    vim.keymap.set('n', '<leader>f', function()
       -- You can pass additional configuration to Telescope to change the theme, layout, etc.
       builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
         winblend = 10,
@@ -165,7 +165,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     end, { desc = '[S]earch for a input string in the current working directory, respects .gitignore' })
 
     vim.keymap.set('n', ';d', function(path)
-      local _path = path or vim.fn.input '📁 Directory: ▶️ '
+      local _path = path or vim.fn.input '📁 Directory ▶️ '
       builtin.live_grep {
         search_dirs = { _path },
         prompt_title = '🔭 Grep in Directory',

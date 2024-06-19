@@ -195,7 +195,7 @@ return {
     }
 
     -- Keymaps
-    vim.keymap.set('n', '<leader>ms', '<cmd>Mason<cr>')
+    vim.keymap.set('n', '<leader>M', '<cmd>Mason<cr>')
     vim.keymap.set('n', '<leader>li', '<cmd>LspInfo<cr>')
     vim.keymap.set('n', '<leader>ll', '<cmd>LspLog<cr>')
   end,
