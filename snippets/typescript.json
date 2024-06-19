@@ -165,11 +165,7 @@
   },
   "useMemo": {
     "prefix": "umh",
-    "body": [
-      "const ${1:memoizedValue} = useMemo(() => {",
-      "\t$2",
-      "}, []);$0"
-    ],
+    "body": ["const ${1:memoizedValue} = useMemo(() => {", "\t$2", "}, []);$0"],
     "description": "React useMemo() hook"
   },
   "useRef": {

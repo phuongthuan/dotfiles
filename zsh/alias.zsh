@@ -5,7 +5,7 @@ alias arm="arch -arm64"
 alias intel="arch -x86_64"
 
 # Source zshrc
-alias rl="source ~/.zshrc; echo 'Source zshrc complete!';"
+alias rl="source ~/.zshrc; echo ' Source zshrc complete 🚀';"
 
 # Open iCloud Drive
 alias ic='eval nvim $ICLOUD_DRIVE'
@@ -79,3 +79,13 @@ alias di='docker inspect'
 alias drM='docker container prune -f'
 
 alias dc='docker-compose'
+
+# mpd
+alias mpd_start="mpd --no-daemon --verbose ~/.config/mpd/mpd.conf; echo ' Server stopped 🔻';" # start mpd server
+alias mpd_stop="mpd --kill ~/.config/mpd/mpd.conf; echo ' Stopped mpd server ✅';" # stop mpd server
+
+# mpc
+alias mpa='mpc add'
+alias mpcl='mpc clear'
+alias mpl='mpc clear && mpc load'
+alias mps='mpc stop'
