@@ -180,14 +180,6 @@
     ],
     "description": "React useReducer() hook"
   },
-  "import Component hero-design": {
-    "prefix": "ihd",
-    "body": ["import { $1 } from 'hero-design';$0"]
-  },
-  "import lodash fp method": {
-    "prefix": "ilo",
-    "body": ["import ${1:methodName} from 'lodash/fp/${1:methodName}';$0"]
-  },
   "useSelector": {
     "prefix": "uss",
     "body": ["const $1 = useSelector($2);$0"]
@@ -195,51 +187,6 @@
   "useDispatch": {
     "prefix": "udp",
     "body": ["const dispatch = useDispatch();$0"]
-  },
-  "import react-redux hooks": {
-    "prefix": "irrh",
-    "body": ["import { useSelector, useDispatch } from 'react-redux';"]
-  },
-  "import renderWithRedux hooks": {
-    "prefix": "irwr",
-    "body": [
-      "import { renderWithRedux } from 'eh-test-helper';\n",
-      "import { screen, fireEvent } from '@testing-library/react';\n",
-      "import fetchMock from 'fetch-mock-jest';\n"
-    ]
-  },
-  "Typescript React Functional Component": {
-    "prefix": "tsrfc",
-    "body": [
-      "import { Box } from '@hero-design/react';",
-      "",
-      "type ${1}Props = {}",
-      "",
-      "const ${1} = ({}: ${1}Props) => {",
-      "\treturn <Box>${2:}</Box>;",
-      "};",
-      "",
-      "export default ${1};",
-      ""
-    ],
-    "description": "Create a Typescript React Function Component"
-  },
-  "describe block test": {
-    "prefix": "desc",
-    "body": [
-      "import { renderWithRedux as render, mockFrontendEnv } from 'eh-test-helper';\n",
-      "import fetchMock from 'fetch-mock-jest';\n",
-      "import { getMarketplaceHost } from 'eh-utils/getFrontendEnv';",
-      "import { screen, fireEvent } from '@testing-library/react';\n",
-      "import $1 from '../$1';\n",
-      "mockFrontendEnv('REACT_APP_MARKETPLACE_HOST', 'marketplaceHost');\n",
-      "describe('$1', () => {",
-      "\tit('${2:should renders correctly}', () => {",
-      "\t\t$3",
-      "\t});",
-      "});$0"
-    ],
-    "description": "describe unit test syntax"
   },
   "it test case": {
     "prefix": "it",
@@ -309,5 +256,200 @@
   "createSelector": {
     "prefix": "css",
     "body": ["const $1 = createSelector($2);$0"]
+  },
+  "import Component hero-design": {
+    "prefix": "ihd",
+    "body": ["import { $1 } from 'hero-design';$0"]
+  },
+  "import lodash fp method": {
+    "prefix": "ilo",
+    "body": ["import ${1:methodName} from 'lodash/fp/${1:methodName}';$0"]
+  },
+  "import react-redux hooks": {
+    "prefix": "irrh",
+    "body": ["import { useSelector, useDispatch } from 'react-redux';"]
+  },
+  "import renderWithRedux hooks": {
+    "prefix": "irwr",
+    "body": [
+      "import { renderWithRedux } from 'eh-test-helper';\n",
+      "import { screen, fireEvent } from '@testing-library/react';\n",
+      "import fetchMock from 'fetch-mock-jest';\n"
+    ]
+  },
+  "Typescript React Functional Component": {
+    "prefix": "tsrfc",
+    "body": [
+      "import { Box } from '@hero-design/react';",
+      "",
+      "type ${1}Props = {}",
+      "",
+      "const ${1} = ({}: ${1}Props) => {",
+      "\treturn <Box>${2:}</Box>;",
+      "};",
+      "",
+      "export default ${1};",
+      ""
+    ],
+    "description": "Create a Typescript React Function Component"
+  },
+  "describe block test": {
+    "prefix": "desc",
+    "body": [
+      "import { renderWithRedux as render, mockFrontendEnv } from 'eh-test-helper';\n",
+      "import fetchMock from 'fetch-mock-jest';\n",
+      "import { getMarketplaceHost } from 'eh-utils/getFrontendEnv';",
+      "import { screen, fireEvent } from '@testing-library/react';\n",
+      "import $1 from '../$1';\n",
+      "mockFrontendEnv('REACT_APP_MARKETPLACE_HOST', 'marketplaceHost');\n",
+      "describe('$1', () => {",
+      "\tit('${2:should renders correctly}', () => {",
+      "\t\t$3",
+      "\t});",
+      "});$0"
+    ],
+    "description": "describe unit test syntax"
+  },
+  "useApi GET": {
+    "prefix": "uahg",
+    "body": [
+      "import { getAtsServiceApiHost } from 'eh-utils/getFrontendEnv';",
+      "import { useApi } from '@ehrocks/api';",
+      "",
+      "type ApiPayload = {};",
+      "",
+      "type ApiResponse = {",
+      "  data: {",
+      "    id: string;",
+      "  };",
+      "};",
+      "",
+      "type ApiParams = ApiPayload;",
+      "",
+      "export const FETCH_API_NAME =",
+      "  'ats/unverifiedHiringEssential/FETCH';",
+      "",
+      "export const useFetchApi = ({",
+      "  userId,",
+      "  onComplete,",
+      "  onFailed,",
+      "}: {",
+      "  userId: string;",
+      "  onComplete?: () => void;",
+      "  onFailed?: () => void;",
+      "}) =>",
+      "  useApi<ApiResponse, ApiParams>(",
+      "    {",
+      "      endpoint: `${getAtsServiceApiHost()}/api/v3/get/${userId}`,",
+      "      method: 'GET',",
+      "      extractApiName: () => FETCH_API_NAME,",
+      "      notify: 'errorOnly',",
+      "      onComplete,",
+      "      onFailed,",
+      "    },",
+      "    [onComplete, onFailed, userId]",
+      "  );$0"
+    ],
+    "description": "useApi GET method"
+  },
+  "useApi POST": {
+    "prefix": "uahp",
+    "body": [
+      "import { decamelizeKeys } from 'eh-utils/formatObject';",
+      "import { getAtsServiceApiHost } from 'eh-utils/getFrontendEnv';",
+      "import { useApi } from '@ehrocks/api';",
+      "",
+      "type ApiPayload = {};",
+      "",
+      "type ApiResponse = {",
+      "  data: {",
+      "    id: string;",
+      "  };",
+      "};",
+      "",
+      "type ApiParams = ApiPayload;",
+      "",
+      "export const CREATE_API_NAME =",
+      "  'ats/unverifiedHiringEssential/CREATE';",
+      "",
+      "export const useCreateApi = ({",
+      "  userId,",
+      "  onComplete,",
+      "  onFailed,",
+      "}: {",
+      "  userId: string;",
+      "  onComplete?: () => void;",
+      "  onFailed?: () => void;",
+      "}) =>",
+      "  useApi<ApiResponse, ApiParams>(",
+      "    {",
+      "      endpoint: `${getAtsServiceApiHost()}/api/v3/post`,",
+      "      method: 'POST',",
+      "      extractApiName: () => CREATE_API_NAME,",
+      "      extractBody: payload => JSON.stringify(decamelizeKeys(payload)),",
+      "      notify: 'errorOnly',",
+      "      onComplete,",
+      "      onFailed,",
+      "    },",
+      "    [onComplete, onFailed, userId]",
+      "  );$0"
+    ],
+    "description": "useApi POST method"
+  },
+  "makeFetchAction GET": {
+    "prefix": "mfa",
+    "body": [
+      "import { ApiConfig, makeFetchAction } from 'redux-api-call';",
+      "import { createSelector } from 'reselect';",
+      "",
+      "import { dataReadyHandler } from 'eh-utils/data';",
+      "import { getMainAppHost } from 'eh-utils/getFrontendEnv';",
+      "import generateGetURL from 'eh-utils/urlGenerator';",
+      "",
+      "import { currentOrganisationIdSelector } from 'shared/sessions/state';",
+      "",
+      "type ApiResponse = {",
+      "  data: {",
+      "    id: string;",
+      "  };",
+      "};",
+      "",
+      "type ApiParams = {",
+      "  workerId: string;",
+      "};",
+      "",
+      "export const FETCH_API_NAME = 'FETCH_API_NAME';",
+      "",
+      "const genFetchParams = ({ workerId }: ApiParams): ApiConfig => ({",
+      "  endpoint: state => {",
+      "    const orgId = currentOrganisationIdSelector(state);",
+      "    return generateGetURL(`${getMainAppHost()}/api/v3/get/${workerId}`);",
+      "  },",
+      "  method: 'GET',",
+      "});",
+      "",
+      "const {",
+      "  actionCreator: fetchDataAC,",
+      "  dataSelector: rawDataSelector,",
+      "  isFetchingSelector,",
+      "  errorSelector,",
+      "} = makeFetchAction<ApiResponse, ApiParams>(FETCH_API_NAME, genFetchParams);",
+      "",
+      "const extractedDataSelector = createSelector(",
+      "  rawDataSelector,",
+      "  data => data?.data",
+      ");",
+      "",
+      "const isDataReadySelector = createSelector(",
+      "  isFetchingSelector,",
+      "  rawDataSelector,",
+      "  errorSelector,",
+      "  dataReadyHandler",
+      ");",
+      "",
+      "export { fetchDataAC, extractedDataSelector, isDataReadySelector };",
+      "$0"
+    ],
+    "description": "makeFetchAction GET"
   }
 }

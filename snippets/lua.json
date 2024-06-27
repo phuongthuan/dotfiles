@@ -40,5 +40,13 @@
   "vimlsp": {
     "prefix": "llsp",
     "body": ["local lsp = vim.lsp"]
+  },
+  "vim.keymap.set": {
+    "prefix": "vks",
+    "body": ["vim.keymap.set('${1:n}', '${2:key}', '${3:command}')\n$0"]
+  },
+  "vim.cmd": {
+    "prefix": "vcmd",
+    "body": ["vim.cmd [[ ${1:command} ]]\n$0"]
   }
 }
