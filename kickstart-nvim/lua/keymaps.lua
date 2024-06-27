@@ -8,7 +8,7 @@ local new_note_file = env.icloud_drive_obsidian_path .. '/diary/' .. os.date '%Y
 map('n', '<leader>td', ':e ' .. new_note_file .. '<cr>', { desc = '[T]o[D]ay note', noremap = false })
 
 -- Source Neovim configuration
-map('n', '<leader><leader>1', ':source ' .. env.nvim_kickstart_config_path .. '<cr>:echo " Reloaded Neovim config 🚀"<cr>')
+map('n', '<leader><leader>1', ':source ' .. env.nvim_kickstart_config_path .. '<cr>:echo " Reloaded Neovim config 🚀"<cr>', { silent = true })
 
 -- Open file in same directory
 cmd [[ nnoremap ,e :e <C-R>=expand('%:p:h') . '/'<cr> ]]
@@ -17,10 +17,10 @@ cmd [[ nnoremap ,e :e <C-R>=expand('%:p:h') . '/'<cr> ]]
 map('n', '<leader>eh', ':e ' .. env.eh_config_path .. '<cr>', { desc = 'Open EH configuration' })
 
 -- Fast saving with <leader> and s
-map('n', '<leader>s', ':w<cr>:echo " Saved current buffer ✅"<cr>')
+map('n', '<leader>s', ':silent w<cr>:echo " Saved current buffer ✅"<cr>', { silent = true })
 
 -- Saving all working buffers
-map('n', '<leader>S', ':wa<cr>:echo " Saved all buffers ✅"<cr>')
+map('n', '<leader>S', ':silent wa<cr>:echo " Saved all buffers ✅"<cr>', { silent = true })
 
 -- Map Esc to jk
 map('i', 'jk', '<Esc>', { noremap = true })
@@ -36,7 +36,7 @@ map('n', '<S-tab>', ':bn<cr>')
 map('n', '<BS>', '<C-^>')
 
 -- Close window without save
-map('n', '<leader>q', ':q!<cr>')
+map('n', '<leader>q', ':q!<cr>', { silent = true })
 
 -- Select all file
 map('n', '<leader>a', ':keepjumps normal! ggVG<cr>')
@@ -90,7 +90,12 @@ map('x', '<leader>p', '"_dP')
 map('n', '<leader>r', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- Get current file path
-map('n', '<leader>cp', [[:let @+=expand("%:p")<cr>:echo " File path copied to clipboard 📝"<cr>]], { noremap = true, silent = true })
+map(
+  'n',
+  '<leader>cp',
+  [[:let @+=substitute(expand("%:p"), getcwd() . '/', '', '')<cr>:echo " File path copied to clipboard 📝"<cr>]],
+  { noremap = true, silent = true }
+)
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
@@ -125,23 +130,17 @@ map('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 map('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 map('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
--- =========================================== Plugins keymaps ==============================================
-
 -- Vim-fugitive
-map('n', '<leader>g', ':G<cr>')
-
-map('n', '<leader>gp', ':G push origin HEAD<cr>')
-map('n', '<leader>gP', ':G push origin HEAD -f<cr>')
-map('n', '<leader>gM', ':G push origin master<cr>')
-
-map('n', '<leader>gl', ':GV<cr>')
-map('n', '<leader>gL', ":GV <C-R>=expand('%:p')<cr><cr>")
-
+map('n', '<leader>g', ':G<cr>', { silent = true })
+map('n', '<leader>gp', ':G push origin HEAD<cr>', { silent = true })
+map('n', '<leader>gP', ':G push origin HEAD -f<cr>', { silent = true })
+map('n', '<leader>gM', ':G push origin master<cr>', { silent = true })
+map('n', '<leader>gl', ':GV<cr>', { silent = true })
+map('n', '<leader>gL', ":GV <C-R>=expand('%:p')<cr><cr>", { silent = true })
 map('n', '<leader>gm', ':G merge<Space>')
 
 -- Resolve conflict
-map('n', '<leader>grc', ':Gvdiffsplit!<cr>')
-
+map('n', '<leader>grc', ':Gvdiffsplit!<cr>', { silent = true })
 -- on the Gvdiffsplit mode
 -- d2o : get the left column
 -- d3o : get the right column

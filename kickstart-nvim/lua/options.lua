@@ -1,3 +1,10 @@
+-- Skip providers
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_python3_provider = 0
+
+-- skip backwards compatibility routines and speed up loading
+vim.g.skip_ts_context_commentstring_module = true
+
 -- Make line numbers default
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
@@ -42,8 +49,9 @@ vim.opt.splitbelow = true
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
--- vim.opt.list = true
+vim.opt.list = true
 -- vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+-- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'

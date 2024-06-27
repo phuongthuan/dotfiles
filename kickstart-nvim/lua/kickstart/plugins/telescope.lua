@@ -1,6 +1,9 @@
 local env = require 'env'
 
-return { -- Fuzzy Finder (files, lsp, etc)
+-- Recipes
+-- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes
+
+return {
   'nvim-telescope/telescope.nvim',
   event = 'VimEnter',
   branch = '0.1.x',
@@ -157,7 +160,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
     vim.keymap.set('n', '<leader>ps', function()
       builtin.grep_string {
-        search = vim.fn.input 'Grep ▶️ ',
+        search = vim.fn.input 'Grep >',
         additional_args = { '--hidden' },
         layout_strategy = 'vertical',
         propmt_title = '🔭 Grep String',

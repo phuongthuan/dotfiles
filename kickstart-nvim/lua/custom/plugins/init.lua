@@ -37,7 +37,6 @@ return {
       },
     },
   },
-
   -- Copilot
   {
     'zbirenbaum/copilot-cmp',
@@ -45,4 +44,13 @@ return {
       require('copilot_cmp').setup()
     end,
   },
+  {
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    config = function()
+      require('ts_context_commentstring').setup {
+        enable_autocmd = false,
+      }
+    end,
+  },
+  { 'nvim-notify', opts = { background_colour = '#000000' } },
 }

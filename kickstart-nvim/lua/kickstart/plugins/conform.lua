@@ -1,4 +1,5 @@
 -- Autoformat
+-- Recipes https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md
 return {
   'stevearc/conform.nvim',
   event = { 'BufWritePre' },
@@ -28,21 +29,22 @@ return {
     formatters_by_ft = {
       lua = { 'stylua' },
       zsh = { 'shfmt' },
+      ruby = { 'rubocop' },
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
       --
       -- You can use a sub-list to tell conform to run *until* a formatter
       -- is found.
-      javascript = { 'prettier' },
-      typescript = { 'prettier' },
-      typescriptreact = { 'prettier' },
-      javascriptreact = { 'prettier' },
-      json = { 'prettier' },
-      jsonc = { 'prettier' },
-      markdown = { 'prettier' },
-      css = { 'prettier' },
-      scss = { 'prettier' },
-      html = { 'prettier' },
+      javascript = { { 'prettierd', 'prettier' } },
+      typescript = { { 'prettierd', 'prettier' } },
+      typescriptreact = { { 'prettierd', 'prettier' } },
+      javascriptreact = { { 'prettierd', 'prettier' } },
+      json = { { 'prettierd', 'prettier' } },
+      jsonc = { { 'prettierd', 'prettier' } },
+      markdown = { { 'prettierd', 'prettier' } },
+      css = { { 'prettierd', 'prettier' } },
+      scss = { { 'prettierd', 'prettier' } },
+      html = { { 'prettierd', 'prettier' } },
     },
     formatters = {
       prettier = {
