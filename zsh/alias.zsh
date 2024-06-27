@@ -14,7 +14,7 @@ alias ic='eval nvim $ICLOUD_DRIVE'
 alias obs='eval nvim $ICLOUD_DRIVE_OBSIDIAN'
 
 # Open dotfiles
-alias dot='eval nvim $DOTFILES'
+alias dot='nvim $DOTFILES'
 
 # Homebrew
 alias brewup='brew update; brew upgrade; brew cleanup; brew doctor'
@@ -81,11 +81,11 @@ alias drM='docker container prune -f'
 alias dc='docker-compose'
 
 # mpd
-alias mpd_start="mpd --no-daemon --verbose ~/.config/mpd/mpd.conf; echo ' Server stopped 🔻';" # start mpd server
-alias mpd_stop="mpd --kill ~/.config/mpd/mpd.conf; echo ' Stopped mpd server ✅';" # stop mpd server
+alias mpd_start="mpd --no-daemon --verbose ~/.config/mpd/mpd.conf; echo ' Server was stopped 🔻';" # start mpd server
+alias mpd_stop="mpd --kill ~/.config/mpd/mpd.conf; echo ' Stopped mpd server ✅';"                 # stop mpd server
 
 # mpc
 alias mpa='mpc add'
 alias mpcl='mpc clear'
 alias mpl='mpc clear && mpc load'
-alias mps='mpc stop'
+alias mps='mpc stop && mpc clear'

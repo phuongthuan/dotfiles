@@ -1,5 +1,7 @@
 # ~/.zshrc
 
+export MY_GITHUB_USERNAME="phuongthuan"
+
 export ZSH="$HOME/.oh-my-zsh"
 export EDITOR="nvim"
 

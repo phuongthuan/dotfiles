@@ -12,24 +12,24 @@ function github_project_url() {
   echo "$EH_GITHUB_URL/$1"
 }
 
-# Open Github PR: oprl <project_name>
+# Open Github PR: oprl <project:optional> <author:optional>
 function oprl() {
-  if [ -z "$1" ]; then
-    open 'https://github.com/thinkei/frontend-core/pulls/phuongthuan'
-  else
+  if [ -z "$1" ] && [ -z "$2" ]; then # if non arguments were provided, default project and author would be frontend-core, me
+    echo "Open $project's Github PR ✅"
+    open "https://github.com/thinkei/${EH_DEFAULT_PROJECT}/pulls/${MY_GITHUB_USERNAME}"
+  elif [ -n $1 ] && [ -z "$2" ]; then # if project is provided but author is not
     project="$1"
-    open "https://github.com/thinkei/${project}/pulls/phuongthuan"
+    echo "Open $project's Github PR "
+    open "https://github.com/thinkei/${project}/pulls/${MY_GITHUB_USERNAME}"
+  else # if all arguments were provided
+    project="$1"
+    author="$2"
+    open "https://github.com/thinkei/${project}/pulls/${author}"
   fi
 }
 
 # Open Github PR ID: opr <pr_id> <author>
 function opr() {
-
-  # if [ -z "$1" ] || [ -z "$2" ]; then
-  #   recent_pr_id=$(gh pr list --state open --author phuongthuan --repo Thinkei/frontend-core --json number --jq '.[0].number')
-  #   open "https://github.com/thinkei/frontend-core/pull/${recent_pr_id}"
-  # fi
-
   if [ -z "$1" ]; then
     recent_pr_id=$(gh pr list --state open --author phuongthuan --repo Thinkei/frontend-core --json number --jq '.[0].number')
     open "https://github.com/thinkei/frontend-core/pull/${recent_pr_id}"
@@ -44,7 +44,7 @@ function opr() {
 function orp() {
   # https://github.com/Thinkei/frontend-core/actions/workflows/build-dev.yml?query=actor%3Aphuongthuan
   if [ -z "$1" ]; then
-    open 'https://github.com/Thinkei/frontend-core'
+    open "https://github.com/Thinkei/${EH_DEFAULT_PROJECT}"
   else
     repo_name="$1"
     open "https://github.com/Thinkei/${repo_name}"
@@ -65,7 +65,7 @@ function oci() {
 # Open Github Actions workflows: oga <env> <project_name> <branch_name>
 function oga() {
   if [ -z "$1" ]; then
-    open 'https://github.com/Thinkei/frontend-core/actions/workflows/build-sandbox--hr-web-app.yml?query=actor%3Aphuongthuan'
+    open "https://github.com/Thinkei/${EH_DEFAULT_PROJECT}/actions/workflows/build-sandbox--hr-web-app.yml?query=actor%3Aphuongthuan"
   else
     project="$1"
     open "https://github.com/Thinkei/${project}/actions/workflows/build-sandbox--hr-web-app.yml?query=actor%3Aphuongthuan"
@@ -74,7 +74,7 @@ function oga() {
 
 # Open main app release
 function opl() {
-  open "https://github.com/Thinkei/employment-hero/actions/workflows/release_pipeline.yml"
+  open "https://github.com/Thinkei/${EH_MAIN_APP_PROJECT}/actions/workflows/release_pipeline.yml"
 }
 
 # Simple Git commit: mygcm "commit message"
@@ -116,6 +116,11 @@ function swm() {
   echo "Switching to branch: $branch_name"
   git checkout "$branch_name"
   git pull origin "$branch_name"
+}
+
+function reset_master() {
+  git reset --hard origin/master
+  git push origin -f
 }
 
 # Clear all local branches except given branches: ex clear_all_local_branches_except "master|development"
