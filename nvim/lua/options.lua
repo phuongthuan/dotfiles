@@ -1,101 +1,103 @@
-local g = vim.g
-local cmd = vim.cmd
-local exec = vim.api.nvim_exec
-local opt = vim.opt
+-- Skip providers
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_python3_provider = 0
+
+-- skip backwards compatibility routines and speed up loading
+vim.g.skip_ts_context_commentstring_module = true
+
+-- Make line numbers default
+vim.opt.number = true
+-- You can also add relative line numbers, to help with jumping.
+--  Experiment for yourself to see if you like it!
+-- vim.opt.relativenumber = true
+
+-- Enable mouse mode, can be useful for resizing splits for example!
+vim.opt.mouse = 'a'
+
+-- Don't show the mode, since it's already in the status line
+vim.opt.showmode = false
+
+-- Sync clipboard between OS and Neovim.
+--  Remove this option if you want your OS clipboard to remain independent.
+--  See `:help 'clipboard'`
+vim.opt.clipboard = 'unnamedplus'
+
+-- Enable break indent
+vim.opt.breakindent = true
+
+-- Save undo history
+vim.opt.undofile = true
+
+-- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
+-- Keep signcolumn on by default
+vim.opt.signcolumn = 'yes'
+
+-- Decrease update time
+vim.opt.updatetime = 250
+
+-- Decrease mapped sequence wait time
+-- Displays which-key popup sooner
+vim.opt.timeoutlen = 300
+
+-- Configure how new splits should be opened
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+
+-- Sets how neovim will display certain whitespace characters in the editor.
+--  See `:help 'list'`
+--  and `:help 'listchars'`
+vim.opt.list = true
+-- vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+-- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+-- Preview substitutions live, as you type!
+vim.opt.inccommand = 'split'
 
 -- General
-opt.mouse = "a" -- enable mouse support
-opt.mouse = "v" -- enable mouse middle click paste
-opt.clipboard = "unnamedplus" -- copy/paste to system clipboard
-opt.swapfile = false -- don't use swapfile
-opt.fileencoding = "utf-8" -- the encoding written to file
-opt.scrolloff = 8
-opt.cmdheight = 2
-opt.conceallevel = 0 -- make `` is visible in markdown files
-opt.showmode = false -- we don't need to see things like -- INSERT -- anymore
-opt.completeopt = "menuone,noselect,noinsert" -- completion options
-opt.shortmess = "c" -- don't show completion messages
+vim.opt.mouse = 'v' -- enable mouse middle click paste
+vim.opt.swapfile = false -- don't use swapfile
+vim.opt.fileencoding = 'utf-8' -- the encoding written to file
+vim.opt.scrolloff = 8
+vim.opt.cmdheight = 2
+vim.opt.conceallevel = 0 -- make `` is visible in markdown files
+vim.opt.showmode = false -- we don't need to see things like -- INSERT -- anymore
+vim.opt.completeopt = 'menuone,noselect,noinsert' -- completion options
+vim.opt.shortmess = 'c' -- don't show completion messages
 
 -- UI
-opt.syntax = "enable" -- enable syntax highlighting
-opt.number = true -- show line number
-opt.showmatch = true -- highlight matching parenthesis
-opt.foldmethod = "marker" -- enable folding (default 'foldmarker')
-opt.colorcolumn = "" -- line lenght marker at 80 columns, "" mean hide it
-opt.splitright = true -- vertical split to the right
-opt.splitbelow = true -- horizontal split to the bottom
-opt.ignorecase = true -- ignore case letters when search
-opt.smartcase = true -- ignore lowercase for the whole pattern
-opt.ruler = true -- show the cursor position all the time
-opt.cursorline = true -- Enable cursorline all time
-opt.hlsearch = true -- highlight search result
-opt.termguicolors = true -- enable 24-bit RGB colors
-opt.relativenumber = false
+vim.opt.syntax = 'enable' -- enable syntax highlighting
+vim.opt.number = true -- show line number
+vim.opt.showmatch = true -- highlight matching parenthesis
+vim.opt.foldmethod = 'marker' -- enable folding (default 'foldmarker')
+vim.opt.colorcolumn = '' -- line lenght marker at 80 columns, "" mean hide it
+vim.opt.splitright = true -- vertical split to the right
+vim.opt.splitbelow = true -- horizontal split to the bottom
+vim.opt.ignorecase = true -- ignore case letters when search
+vim.opt.smartcase = true -- ignore lowercase for the whole pattern
+vim.opt.ruler = true -- show the cursor position all the time
+vim.opt.cursorline = true -- show which line your cursor is on
+vim.opt.hlsearch = true -- highlight search result
+vim.opt.termguicolors = true -- enable 24-bit RGB colors
+vim.opt.relativenumber = false -- disable relative number
 
--- highlight on yank
-vim.api.nvim_exec(
-	[[
-  augroup YankHighlight
-    autocmd!
-    autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}
-  augroup end
-]],
-	false
-)
+-- Tabs, indent
+vim.opt.expandtab = true -- use spaces instead of tabs
+vim.opt.shiftwidth = 2 -- shift 2 spaces when tab
+vim.opt.tabstop = 2 -- 1 tab == 2 spaces
+vim.opt.smartindent = true -- autoindent new lines
 
 -- Memory, CPU
-opt.history = 100 -- remember n lines in history
-opt.lazyredraw = true -- faster scrolling
-opt.synmaxcol = 240 -- max column for syntax highlight
+vim.opt.history = 100 -- remember n lines in history
+vim.opt.lazyredraw = true -- faster scrolling
+vim.opt.synmaxcol = 240 -- max column for syntax highlight
 
--- Colorscheme
-cmd([[ highlight Normal ctermbg=None ]])
+-- Add asterisks in block comments
+vim.opt.formatoptions:append { 'r' }
 
-cmd([[
-  set nocompatible
-  filetype plugin on
-  filetype indent on
-]])
-
--- Cursor
--- opt.guicursor = ""
-cmd([[
+vim.cmd [[
   hi Cursor2 guifg=#fe8019 guibg=#fe8019
   set guicursor=i-r-v-ci:block-Cursor2
-]])
-
--- Highlight error
--- cmd([[ autocmd ColorScheme * :lua require('vim.lsp.diagnostic')._define_default_signs_and_highlights() ]])
-cmd([[ autocmd VimEnter * hi Normal ctermbg=NONE guibg=NONE ]])
--- Tabs, indent
-opt.expandtab = true -- use spaces instead of tabs
-opt.shiftwidth = 2 -- shift 2 spaces when tab
-
-opt.tabstop = 2 -- 1 tab == 2 spaces
-opt.smartindent = true -- autoindent new lines
-
-cmd([[au BufEnter * set fo-=c fo-=r fo-=o]]) -- don't auto commenting new lines
-
-cmd([[autocmd BufWritePre * :%s/\s\+$//e]]) -- remove all trailing space when saving file
-
--- remove line length marker for selected filetypes
-cmd([[autocmd FileType text,markdown,xml,html,xhtml,javascript setlocal cc=0]])
-
--- 2 spaces for selected filetypes
-cmd([[ autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml setlocal shiftwidth=2 tabstop=2 ]])
-
--- IndentLine
--- g.indentLine_enabled = 0
--- g.indentLine_setColors = 0
--- g.indentLine_char_list = { '|', '¦', '┆', '┊', '·' }
-g.indentLine_char = "·"
-
--- Disable netrw
--- g.loaded_netrw = 1
--- g.loaded_netrwPlugin = 1
-
--- Disable IndentLine for markdown files (avoid concealing)
-cmd([[autocmd FileType markdown let g:indentLine_enabled=0]])
-
--- nvim context commentstring
-g.skip_ts_context_commentstring_module = true
+]]

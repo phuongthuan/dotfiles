@@ -11,37 +11,27 @@
             https://github.com/phuongthuan
 --]]
 
-local fn = vim.fn
-local start_time = fn.reltime()
+-- See `:help mapleader`
+--  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
--- Speed up Lua modules
-vim.loader.enable()
+vim.g.have_nerd_font = true
 
--- Always map leader first
-vim.g.mapleader = " "
+-- [[ Setting options ]]
+require 'options'
 
--- Core
-require("options")
-require("keymaps")
+-- [[ Basic Keymaps ]]
+require 'keymaps'
 
--- Plugins
-require("plugins")
-require("plugins/nvim-tree") -- file explorer
-require("plugins/lualine") -- statusline
-require("plugins/cmp") -- autocomplete
-require("plugins/gitsigns") -- git checking tool
-require("plugins/treesitter") -- code highlighting
-require("plugins/telescope") -- search tool
-require("plugins/colorizer") -- colorizer
-require("plugins/harpoon") -- harpoon
-require("plugins/fugitive") -- git client
-require("plugins/mason") -- LSP manager
-require("plugins/devicons") -- icons
-require("plugins/copilot") -- copilot
-require("plugins/comment") -- comment utils
+-- [[ Autocommands ]]
+require 'autocmds'
 
-require("colorschemes/gruvbox")
+-- [[ Install `lazy.nvim` plugin manager ]]
+require 'lazy-bootstrap'
 
-require("lsp")
+-- [[ Configure and install plugins ]]
+require 'lazy-plugins'
 
-print("Loaded in " .. fn.printf("%.3f", fn.reltimefloat(fn.reltime(start_time))) .. " seconds.")
+-- The line beneath this is called `modeline`. See `:help modeline`
+-- vim: ts=2 sts=2 sw=2 et

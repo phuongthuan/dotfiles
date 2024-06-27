@@ -1,4 +1,12 @@
 return {
+  -- Git plugins
+  'tpope/vim-fugitive',
+  'junegunn/gv.vim',
+  'tpope/vim-rhubarb',
+
+  -- Detect tabstop and shiftwidth automatically
+  'tpope/vim-sleuth',
+
   -- Typescript LSP server
   {
     'pmizio/typescript-tools.nvim',
@@ -7,7 +15,8 @@ return {
   },
   { 'onsails/lspkind-nvim' },
   { 'tpope/vim-endwise' },
-  { 'mg979/vim-visual-multi', branch = 'master' },
+
+  -- { 'mg979/vim-visual-multi', branch = 'master' },
   { 'kylechui/nvim-surround', opts = {} },
   { 'windwp/nvim-ts-autotag', opts = {} },
   {
@@ -37,6 +46,7 @@ return {
       },
     },
   },
+
   -- Copilot
   {
     'zbirenbaum/copilot-cmp',
