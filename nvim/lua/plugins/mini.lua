@@ -16,7 +16,7 @@ return { -- Collection of various small independent plugins/modules
     local bufremove = require 'mini.bufremove'
     bufremove.setup {}
 
-    vim.keymap.set('n', '<leader>bk', function()
+    vim.keymap.set('n', '<leader>z', function()
       local bd = bufremove.delete
       if vim.bo.modified then
         local choice = vim.fn.confirm(('Save changes to %q?'):format(vim.fn.bufname()), '&Yes\n&No\n&Cancel')

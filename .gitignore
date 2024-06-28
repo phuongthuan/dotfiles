@@ -6,6 +6,6 @@ zsh/eh.zsh
 
 plugin/
 
-kickstart-nvim/lazy-lock.json
-lazyvim/lazy-lock.json
 nvim/lazy-lock.json
+lazyvim/lazy-lock.json
+legacy-nvim/lazy-lock.json

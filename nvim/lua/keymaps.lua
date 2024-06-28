@@ -8,7 +8,7 @@ local new_note_file = env.icloud_drive_obsidian_path .. '/diary/' .. os.date '%Y
 map('n', '<leader>td', ':e ' .. new_note_file .. '<cr>', { desc = '[T]o[D]ay note', noremap = false })
 
 -- Source Neovim configuration
-map('n', '<leader><leader>1', ':source ' .. env.nvim_kickstart_config_path .. '<cr>:echo " Reloaded Neovim config 🚀"<cr>', { silent = true })
+map('n', '<leader><leader>1', ':source ' .. env.nvim_config_path .. '<cr>:echo " Reloaded Neovim config 🚀"<cr>', { silent = true })
 
 -- Open file in same directory
 cmd [[ nnoremap ,e :e <C-R>=expand('%:p:h') . '/'<cr> ]]

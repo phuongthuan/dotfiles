@@ -63,6 +63,7 @@ alias gcl='git clone'
 alias pick='git cherry-pick'
 alias stl='git stash list'
 alias pop='git stash pop'
+alias gcm='git checkout origin/master'
 alias gfo='git fetch origin'
 alias gco='git checkout origin/master'
 
