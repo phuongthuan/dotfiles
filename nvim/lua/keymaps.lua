@@ -14,7 +14,7 @@ map('n', '<leader><leader>1', ':source ' .. env.nvim_config_path .. '<cr>:echo "
 cmd [[ nnoremap ,e :e <C-R>=expand('%:p:h') . '/'<cr> ]]
 
 -- Open EH configuration
-map('n', '<leader>eh', ':e ' .. env.eh_config_path .. '<cr>', { desc = 'Open EH configuration' })
+map('n', '<leader>eh', ':e ' .. env.eh_config_path .. '<cr>', { desc = 'Open EH configuration', silent = true })
 
 -- Fast saving with <leader> and s
 map('n', '<leader>s', ':silent w<cr>:echo " Saved current buffer ✅"<cr>', { silent = true })
