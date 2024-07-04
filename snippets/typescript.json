@@ -297,6 +297,7 @@
     "prefix": "desc",
     "body": [
       "import { renderWithRedux as render, mockFrontendEnv } from 'eh-test-helper';\n",
+      "import { renderHook } from '@testing-library/react-hooks';",
       "import fetchMock from 'fetch-mock-jest';\n",
       "import { getMarketplaceHost } from 'eh-utils/getFrontendEnv';",
       "import { screen, fireEvent } from '@testing-library/react';\n",
