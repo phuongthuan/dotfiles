@@ -19,6 +19,9 @@ map('n', '<leader>eh', ':e ' .. env.eh_config_path .. '<cr>', { desc = 'Open EH 
 -- Fast saving with <leader> and s
 map('n', '<leader>s', ':silent w<cr>:echo " Saved current buffer ✅"<cr>', { silent = true })
 
+-- :wq
+map({ 'n', 'i' }, '<leader>w', '<esc>:wq<cr>:echo " Git commit created ✅"<cr>', { silent = true })
+
 -- Saving all working buffers
 map('n', '<leader>S', ':silent wa<cr>:echo " Saved all buffers ✅"<cr>', { silent = true })
 
