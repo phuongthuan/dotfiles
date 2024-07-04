@@ -1,7 +1,15 @@
 return {
   'nvim-pack/nvim-spectre',
   config = function()
-    require('spectre').setup()
+    require('spectre').setup {
+      mapping = {
+        ['send_to_qf'] = {
+          map = '<leader>qf',
+          cmd = "<cmd>lua require('spectre.actions').send_to_qf()<CR>",
+          desc = 'send all items to quickfix',
+        },
+      },
+    }
 
     -- Keymaps
     vim.keymap.set('n', '<leader>sr', '<cmd>lua require("spectre").toggle()<cr>', { desc = 'Toggle Spectre' })
