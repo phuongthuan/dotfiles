@@ -9,6 +9,8 @@
 [core]
 	compression = 0
 	editor = /usr/bin/vim
+	fsmonitor = true
+	untrackedcache = true
 [pull]
 	rebase = false
 [url "git@github.com:Thinkei"]

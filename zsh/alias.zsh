@@ -1,8 +1,11 @@
 alias nvim='~/nvim-macos-arm64/bin/nvim'
-alias lz='NVIM_APPNAME="lazynvim" ~/nvim-macos-arm64/bin/nvim'
+alias lz='NVIM_APPNAME="lazyvim" ~/nvim-macos-arm64/bin/nvim'
 
 alias arm="arch -arm64"
 alias intel="arch -x86_64"
+
+# Kill all node process
+alias nka="killall node; echo ' Killed all node processes 🚀';"
 
 # Source zshrc
 alias rl="source ~/.zshrc; echo ' Source zshrc complete 🚀';"
@@ -46,8 +49,8 @@ alias gb='git branch'
 alias gc='git commit -m'
 alias gd='git diff'
 alias gdn='git diff --name-only master'
-alias sw='git checkout'
-alias new='git checkout -b'
+alias sw='git switch'
+alias new='git switch -c'
 alias glo='git log --oneline -10'
 alias reflog='git reflog --relative-date'
 alias del='git branch -D'
