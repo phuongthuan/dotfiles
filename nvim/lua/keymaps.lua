@@ -39,7 +39,7 @@ map('n', '<S-tab>', ':bn<cr>')
 map('n', '<BS>', '<C-^>')
 
 -- Close window without save
-map('n', '<leader>q', ':q!<cr>', { silent = true })
+map({ 'n', 'i' }, '<leader>q', '<esc>:q!<cr>', { silent = true })
 
 -- Select all file
 map('n', '<leader>a', ':keepjumps normal! ggVG<cr>')
