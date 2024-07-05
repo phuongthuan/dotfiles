@@ -91,7 +91,14 @@ function cgc() {
   git push origin HEAD
 }
 
-# Create new branch and copy branch name to clipboard
+# Copy current branch name to clipboard
+function ccb() {
+  current_branch=$(git branch --show-current)
+  echo "$current_branch" | pbcopy
+  echo "Copied current branch to clipboard 📝"
+}
+
+# Create Git branch and copy branch name to clipboard
 function cgb() {
   if [ -z "$1" ]; then
     echo "Please provide a branch name 🔴"
@@ -114,7 +121,7 @@ function swm() {
   fi
 
   echo "Switching to branch: $branch_name"
-  git checkout "$branch_name"
+  git switch "$branch_name"
   git pull origin "$branch_name"
 }
 
@@ -132,7 +139,7 @@ function clear_all_local_branches_except() {
     return 1
   fi
 
-  git checkout $excluded_branches
+  git switch $excluded_branches
 
   # Loop through all local branches except given branches
   for branch in $(git branch --format='%(refname:short)' | grep -vE "^($excluded_branches)"); do
