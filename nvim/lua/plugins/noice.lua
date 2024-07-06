@@ -1,3 +1,4 @@
+-- https://github.com/folke/noice.nvim/wiki/Configuration-Recipes
 return {
   {
     'folke/noice.nvim',
@@ -35,18 +36,16 @@ return {
             input = { view = 'cmdline_input', icon = '📝' }, -- Used by input()k
           },
         },
-        -- views = {
-        --   cmdline_popup = {
-        --     border = {
-        --       style = 'none',
-        --       padding = { 2, 3 },
-        --     },
-        --     filter_options = {},
-        --     win_options = {
-        --       winhighlight = 'NormalFloat:NormalFloat,FloatBorder:FloatBorder',
-        --     },
-        --   },
-        -- },
+        routes = {
+          -- Hide all "" message, eg: message when open a new file
+          {
+            filter = {
+              event = 'msg_show',
+              kind = '',
+            },
+            opts = { skip = true },
+          },
+        },
       }
 
       vim.keymap.set('n', '<leader>er', ':Noice telescope<cr>', { desc = 'Open message history', silent = true })
