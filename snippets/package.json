@@ -19,10 +19,6 @@
         "path": "./shell.json"
       },
       {
-        "language": "javascript",
-        "path": "./javascript.json"
-      },
-      {
         "language": [
           "javascript",
           "javascriptreact",
