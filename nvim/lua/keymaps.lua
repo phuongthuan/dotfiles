@@ -32,17 +32,17 @@ map('i', 'jk', '<Esc>', { noremap = true })
 map('n', 'Z', 'vi')
 
 -- Buffers next and prev
-map('n', '<tab>', ':bp<cr>')
-map('n', '<S-tab>', ':bn<cr>')
+map('n', '<tab>', ':bp<cr>', { silent = true })
+map('n', '<S-tab>', ':bn<cr>', { silent = true })
 
 -- Switch between last two files
-map('n', '<BS>', '<C-^>')
+map('n', '<BS>', '<C-^>', { silent = true })
 
 -- Close window without save
 map({ 'n', 'i' }, '<leader>q', '<esc>:q!<cr>', { silent = true })
 
 -- Select all file
-map('n', '<leader>a', ':keepjumps normal! ggVG<cr>')
+map('n', '<leader>a', ':keepjumps normal! ggVG<cr>', { silent = true })
 
 -- Prevent to used arrow keys ;)
 map('', '<up>', '<nop>', { noremap = true })
