@@ -14,7 +14,8 @@
         "language": [
           "shellscript",
           "shell",
-          "sh"
+          "sh",
+          "zsh"
         ],
         "path": "./shell.json"
       },

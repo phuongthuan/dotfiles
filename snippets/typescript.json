@@ -99,6 +99,11 @@
     "body": "return new Promise((resolve, reject) => {\n\t${1}\n});",
     "description": "Creates and returns a new Promise in the standard ES6 syntax"
   },
+  "pre": {
+    "prefix": "pre",
+    "body": "<pre>{JSON.stringify(${1:object}, undefined, 2)}</pre>$0",
+    "description": "Prints a JavaScript representation of the specified object"
+  },
   "consoleDir": {
     "prefix": "cdi",
     "body": "console.dir(${1:object});",
@@ -250,7 +255,7 @@
   },
   "Typography.Title": {
     "prefix": "typoti",
-    "body": "<Typography.Title level={$2}>{Intl.formatMessage({ id: '$1' })}</Typography.Title>$0",
+    "body": "<Typography.Title level={1}>{Intl.formatMessage({ id: '$1' })}</Typography.Title>$0",
     "description": ""
   },
   "createSelector": {
@@ -299,6 +304,22 @@
   },
   "describe block test": {
     "prefix": "desc",
+    "body": [
+      "import { renderHook } from '@testing-library/react-hooks';",
+      "import { screen, render, fireEvent } from '@testing-library/react';\n",
+      "import $1 from '..';\n",
+      "describe('$1', () => {",
+      "\tit('${2:should renders correctly}', () => {",
+      "\t\trender(<$1 />);",
+      "\t\texpect(screen.getByText('$1')).toBeTruthy();",
+      "\t\t$3",
+      "\t});",
+      "});$0"
+    ],
+    "description": "describe unit test syntax"
+  },
+  "describe hr-web-app block test": {
+    "prefix": "deschr",
     "body": [
       "import { renderWithRedux as render, mockFrontendEnv } from 'eh-test-helper';\n",
       "import { renderHook } from '@testing-library/react-hooks';",
