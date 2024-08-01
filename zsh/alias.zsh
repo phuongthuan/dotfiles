@@ -5,7 +5,7 @@ alias arm="arch -arm64"
 alias intel="arch -x86_64"
 
 # Kill all node process
-alias nka="killall node; echo ' Killed all node processes 🚀';"
+alias nka="killall node && killall eslint_d && killall prettierd; echo ' Killed all node processes 🚀';"
 
 # Source zshrc
 alias rl="source ~/.zshrc; echo ' Source zshrc complete 🚀';"
@@ -17,7 +17,7 @@ alias ic='eval nvim $ICLOUD_DRIVE'
 alias obs='eval nvim $ICLOUD_DRIVE_OBSIDIAN'
 
 # Open dotfiles
-alias dot='nvim $DOTFILES'
+alias dot='nvim ~/.dotfiles/'
 
 # Homebrew
 alias brewup='brew update; brew upgrade; brew cleanup; brew doctor'
@@ -93,3 +93,6 @@ alias mpa='mpc add'
 alias mpcl='mpc clear'
 alias mpl='mpc clear && mpc load'
 alias mps='mpc stop && mpc clear'
+
+alias nls='npm ls --depth=0'
+alias nd='npm run dev'

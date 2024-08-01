@@ -3,51 +3,26 @@ function bgkill() {
   kill -9 $(jobs -l | head -1 | awk '{print $3}')
 }
 
-# Open Github repo by project name: github_project_url <project_name>
-function github_project_url() {
-  if [ -z "$1" ]; then
-    echo "Please provide a project name 🔴"
+# Search a string in a directory
+function ssd() {
+  local search_string="$1"
+  local directory_path="$2"
+
+  if [ -z "$search_string" ]; then
+    echo "Please provide a search string 🔴"
     return 1
   fi
-  echo "$EH_GITHUB_URL/$1"
+
+  grep -r --exclude-dir={node_modules} --exclude=yarn.lock --exclude=package-lock.json "$search_string" "$directory_path"
 }
 
-# Open Github PR: oprl <project:optional> <author:optional>
-function oprl() {
-  if [ -z "$1" ] && [ -z "$2" ]; then # if non arguments were provided, default project and author would be frontend-core, me
-    echo "Open $project's Github PR ✅"
-    open "https://github.com/thinkei/${EH_DEFAULT_PROJECT}/pulls/${MY_GITHUB_USERNAME}"
-  elif [ -n $1 ] && [ -z "$2" ]; then # if project is provided but author is not
-    project="$1"
-    echo "Open $project's Github PR "
-    open "https://github.com/thinkei/${project}/pulls/${MY_GITHUB_USERNAME}"
-  else # if all arguments were provided
-    project="$1"
-    author="$2"
-    open "https://github.com/thinkei/${project}/pulls/${author}"
-  fi
-}
-
-# Open Github PR ID: opr <pr_id> <author>
-function opr() {
-  if [ -z "$1" ]; then
-    recent_pr_id=$(gh pr list --state open --author phuongthuan --repo Thinkei/frontend-core --json number --jq '.[0].number')
-    open "https://github.com/thinkei/frontend-core/pull/${recent_pr_id}"
+# Open localhost with given port
+function ol() {
+  local port="$1"
+  if [ -z "$port" ]; then
+    open "http://localhost:3000"
   else
-    project="$1"
-    recent_pr_id=$(gh pr list --state open --author phuongthuan --repo "Thinkei/${project}" --json number --jq '.[0].number')
-    open "https://github.com/thinkei/${project}/pull/${recent_pr_id}"
-  fi
-}
-
-# Open Github repo: orp <repo_name>
-function orp() {
-  # https://github.com/Thinkei/frontend-core/actions/workflows/build-dev.yml?query=actor%3Aphuongthuan
-  if [ -z "$1" ]; then
-    open "https://github.com/Thinkei/${EH_DEFAULT_PROJECT}"
-  else
-    repo_name="$1"
-    open "https://github.com/Thinkei/${repo_name}"
+    open "http://localhost:${port}"
   fi
 }
 
@@ -62,113 +37,7 @@ function oci() {
   fi
 }
 
-# Open Github Actions workflows: oga <env> <project_name> <branch_name>
-function oga() {
-  if [ -z "$1" ]; then
-    open "https://github.com/Thinkei/${EH_DEFAULT_PROJECT}/actions/workflows/build-sandbox--hr-web-app.yml?query=actor%3Aphuongthuan"
-  else
-    project="$1"
-    open "https://github.com/Thinkei/${project}/actions/workflows/build-sandbox--hr-web-app.yml?query=actor%3Aphuongthuan"
-  fi
-}
-
 # Open main app release
 function opl() {
   open "https://github.com/Thinkei/${EH_MAIN_APP_PROJECT}/actions/workflows/release_pipeline.yml"
-}
-
-# Simple Git commit: mygcm "commit message"
-function cgc() {
-  # Check if a commit message is provided as an argument
-  if [ -z "$1" ]; then
-    echo "Please provide a commit message 🔴"
-    return 1
-  fi
-
-  message="$1"
-  git add .
-  git commit -m "$message"
-  git push origin HEAD
-}
-
-# Copy current branch name to clipboard
-function ccb() {
-  current_branch=$(git branch --show-current)
-  echo "$current_branch" | pbcopy
-  echo "Copied current branch to clipboard 📝"
-}
-
-# Create Git branch and copy branch name to clipboard
-function cgb() {
-  if [ -z "$1" ]; then
-    echo "Please provide a branch name 🔴"
-    return 1
-  fi
-
-  branch_name="$1"
-  git branch $branch_name
-  echo "$branch_name" | pbcopy
-  echo "Copied branch '$branch_name' to clipboard 📝"
-}
-
-# Checkout and pull current master branch
-function swm() {
-  branch_name=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
-
-  if [ -z "$branch_name" ]; then
-    echo "Error: No branch name found 🔴"
-    return 1
-  fi
-
-  echo "Switching to branch: $branch_name"
-  git switch "$branch_name"
-  git pull origin "$branch_name"
-}
-
-function reset_master() {
-  git reset --hard origin/master
-  git push origin -f
-}
-
-# Clear all local branches except given branches: ex clear_all_local_branches_except "master|development"
-function clear_all_local_branches_except() {
-  excluded_branches="$1"
-
-  if [ -z "$excluded_branches" ]; then
-    echo "Please provide a branch 🔴"
-    return 1
-  fi
-
-  git switch $excluded_branches
-
-  # Loop through all local branches except given branches
-  for branch in $(git branch --format='%(refname:short)' | grep -vE "^($excluded_branches)"); do
-    echo "Deleting local branch: $branch 🟠"
-    git branch -D $branch
-  done
-}
-
-function yt_dl() {
-  if [ -z "$1" ]; then
-    echo "Please provide a Youtube video URL 🔴"
-    return 1
-  fi
-  yt-dlp --extract-audio --audio-format mp3 "$1"
-}
-
-function mp() {
-  if [ -z "$1" ]; then
-    echo "Please provide a playlist 🔴"
-    return 1
-  fi
-  mpc load "$1" && mpc play
-}
-
-function mppl() {
-  if [ -z "$1" ]; then
-    mpc lsplaylists
-    return 1
-  else
-    mpc playlist -f "%title%" "$1"
-  fi
 }
