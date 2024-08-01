@@ -27,6 +27,9 @@ require 'keymaps'
 -- [[ Autocommands ]]
 require 'autocmds'
 
+-- [[ Commands ]]
+require 'cmds'
+
 -- [[ Configure and install plugins ]]
 require 'lazy-nvim'
 

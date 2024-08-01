@@ -14,6 +14,7 @@ require('lazy').setup({
   { import = 'plugins' },
 
   require 'plugins.extras.copilot',
+  -- require 'plugins.extras.copilot-chat',
   require 'plugins.extras.noice',
 }, {
   ui = {

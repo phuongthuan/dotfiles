@@ -15,7 +15,6 @@ return {
   },
   { 'onsails/lspkind-nvim' },
   { 'tpope/vim-endwise' },
-
   { 'mg979/vim-visual-multi', branch = 'master' },
   -- {
   --   'smoka7/multicursors.nvim',
@@ -63,8 +62,6 @@ return {
       },
     },
   },
-
-  -- Copilot
   {
     'zbirenbaum/copilot-cmp',
     config = function()

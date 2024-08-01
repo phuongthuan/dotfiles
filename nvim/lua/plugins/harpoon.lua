@@ -15,5 +15,6 @@ return {
     vim.keymap.set('n', '<leader>3', '<cmd>lua require("harpoon.ui").nav_file(3)<cr>', { silent = true })
     vim.keymap.set('n', '<leader>4', '<cmd>lua require("harpoon.ui").nav_file(4)<cr>', { silent = true })
     vim.keymap.set('n', '<leader>5', '<cmd>lua require("harpoon.ui").nav_file(5)<cr>', { silent = true })
+    vim.keymap.set('n', '<leader><leader>t', '<cmd>lua require("harpoon.term").gotoTerminal(1)<cr>', { silent = true })
   end,
 }

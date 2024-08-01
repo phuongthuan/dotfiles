@@ -48,6 +48,7 @@ return {
         },
       }
 
+      -- Keymaps
       vim.keymap.set('n', '<leader>er', ':Noice telescope<cr>', { desc = 'Open message history', silent = true })
       vim.keymap.set('n', '<leader>un', ':Noice dismiss<cr>', { desc = 'Open message history', silent = true })
     end,
