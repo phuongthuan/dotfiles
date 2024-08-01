@@ -42,7 +42,6 @@ npm run <script> --prefix <folder>
 $ script: node -p "Object.keys(require('./package.json').scripts).join('\n')"
 
 
-
 % yarn, node, js
 
 # initial new package
@@ -67,8 +66,6 @@ yarn global add <package_name>
 yarn run <script>
 
 $ script: node -p "Object.keys(require('./package.json').scripts).join('\n')"
-
-
 
 % nvm, node, js
 
