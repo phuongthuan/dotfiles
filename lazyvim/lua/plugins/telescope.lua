@@ -68,7 +68,7 @@ return {
         local env = require("env")
         builtin.live_grep({
           prompt_title = " Grep Notes",
-          cwd = env.icloud_drive_obsidian_path,
+          cwd = env.icloud_drive_obsidian_dir,
           -- layout_config = { preview_width = 0.65 },
           hidden = true,
         })
@@ -82,7 +82,7 @@ return {
         local env = require("env")
         builtin.find_files({
           prompt_title = " Note Files",
-          cwd = env.icloud_drive_obsidian_path,
+          cwd = env.icloud_drive_obsidian_dir,
           hidden = true,
         })
       end,

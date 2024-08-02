@@ -14,7 +14,7 @@ alias rl="source ~/.zshrc; echo ' Source zshrc complete 🚀';"
 alias ic='eval nvim $ICLOUD_DRIVE'
 
 # Open iCloud Obsidian
-alias obs='eval nvim $ICLOUD_DRIVE_OBSIDIAN'
+alias obs='eval nvim $ICLOUD_DRIVE_OBSIDIAN_DIR'
 
 # Open dotfiles
 alias dot='nvim ~/.dotfiles/'

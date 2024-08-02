@@ -20,7 +20,7 @@ return {
           'rafamadriz/friendly-snippets',
           config = function()
             require('luasnip.loaders.from_vscode').lazy_load {
-              paths = { require('env').dotfiles_path .. '/snippets' },
+              paths = { require('core.env').DOTFILES .. '/snippets' },
             }
           end,
         },

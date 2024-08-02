@@ -1,4 +1,4 @@
-local env = require 'env'
+local env = require 'core.env'
 
 -- Recipes
 -- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes
@@ -117,7 +117,7 @@ return {
     vim.keymap.set('n', '<leader>sdf', function()
       builtin.find_files {
         prompt_title = '🔭 Dotfiles',
-        cwd = env.dotfiles_path,
+        cwd = env.DOTFILES,
         hidden = true,
       }
     end, { desc = '[S]earch [D]ot[F]iles' })
@@ -125,7 +125,7 @@ return {
     vim.keymap.set('n', '<leader>fn', function()
       builtin.find_files {
         prompt_title = '🔭 Note Files',
-        cwd = env.icloud_drive_obsidian_path,
+        cwd = env.ICLOUD_DRIVE_OBSIDIAN_DIR,
         hidden = true,
       }
     end, { desc = '[S]earch all [N]ote files' })
@@ -133,7 +133,7 @@ return {
     vim.keymap.set('n', '<leader>sn', function()
       builtin.live_grep {
         prompt_title = '🔭 Grep Notes',
-        cwd = env.icloud_drive_obsidian_path,
+        cwd = env.ICLOUD_DRIVE_OBSIDIAN_DIR,
         -- layout_config = { preview_width = 0.65 },
         hidden = true,
       }

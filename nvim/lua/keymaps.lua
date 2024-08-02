@@ -1,20 +1,20 @@
-local env = require 'env'
+local env = require 'core.env'
 
 local map = vim.keymap.set
 local cmd = vim.cmd
 
 -- Open today note
-local new_note_file = env.icloud_drive_obsidian_path .. '/diary/' .. os.date '%Y-%m-%d' .. '.md'
+local new_note_file = env.ICLOUD_DRIVE_OBSIDIAN_DIR .. '/diary/' .. os.date '%Y-%m-%d' .. '.md'
 map('n', '<leader>td', ':e ' .. new_note_file .. '<cr>', { desc = '[T]o[D]ay note', noremap = false })
 
 -- Source Neovim configuration
-map('n', '<leader><leader>1', ':source ' .. env.nvim_config_path .. '<cr>:echo " Reloaded Neovim config 🚀"<cr>', { silent = true })
+map('n', '<leader><leader>1', ':source ' .. env.NVIM_CONFIG_DIR .. '/init.lua' .. '<cr>:echo " Reloaded Neovim config 🚀"<cr>', { silent = true })
 
 -- Open file in same directory
 cmd [[ nnoremap ,e :e <C-R>=expand('%:p:h') . '/'<cr> ]]
 
 -- Open EH configuration
-map('n', '<leader>eh', ':e ' .. env.eh_config_path .. '<cr>', { desc = 'Open EH configuration', silent = true })
+map('n', '<leader>eh', ':e ' .. env.EH_CONFIG_FILE .. '<cr>', { desc = 'Open EH configuration', silent = true })
 
 -- Fast saving with <leader> and s
 map('n', '<leader>s', ':silent w<cr>:echo " Saved current buffer ✅"<cr>', { silent = true })

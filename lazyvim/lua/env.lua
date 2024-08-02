@@ -3,9 +3,9 @@
 local M = {}
 
 M.dotfiles_path = os.getenv("DOTFILES")
-M.nvim_config_path = os.getenv("NVIM_CONFIG")
-M.icloud_drive_obsidian_path = os.getenv("ICLOUD_DRIVE_OBSIDIAN")
-M.eh_config_path = os.getenv("EH_CONFIG_PATH")
+M.nvim_config_dir = os.getenv("NVIM_CONFIG_DIR")
+M.icloud_drive_obsidian_dir = os.getenv("ICLOUD_DRIVE_OBSIDIAN_DIR")
+M.eh_config_file = os.getenv("EH_CONFIG_FILE")
 M.references_path = "~/Programming/References/"
 
 return M

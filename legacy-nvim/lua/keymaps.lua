@@ -4,17 +4,21 @@ local cmd = vim.cmd
 local map = vim.keymap.set
 
 -- Open today note
-local new_note_file = env.icloud_drive_obsidian_path .. "/diary/" .. os.date("%Y-%m-%d") .. ".md"
+local new_note_file = env.icloud_drive_obsidian_dir .. "/diary/" .. os.date("%Y-%m-%d") .. ".md"
 map("n", "<leader>td", ":e " .. new_note_file .. "<cr>", { noremap = false })
 
 -- Source Vim configuration file and install plugins
-map("n", "<leader><leader>1", ":source " .. env.nvim_config_path .. '<cr>:echo " Reloaded neovim config !!"<cr>')
+map(
+	"n",
+	"<leader><leader>1",
+	":source " .. env.nvim_config_dir .. "/init.lua" .. '<cr>:echo " Reloaded neovim config !!"<cr>'
+)
 
 -- Open file in same directory
 cmd([[ nnoremap ,e :e <C-R>=expand('%:p:h') . '/'<cr> ]])
 
 -- Open EH configuration
-map("n", "<leader>eh", ":e " .. env.eh_config_path .. "<cr>")
+map("n", "<leader>eh", ":e " .. env.eh_config_file .. "<cr>")
 
 -- Windows remapping
 -- Vertically split screen

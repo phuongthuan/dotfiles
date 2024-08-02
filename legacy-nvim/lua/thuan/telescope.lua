@@ -26,7 +26,7 @@ M.search_notes = function()
 	builtin.live_grep({
 		prompt_title = " Grep Notes",
 		prompt_prefix = " ﮷ ",
-		cwd = env.icloud_drive_obsidian_path,
+		cwd = env.icloud_drive_obsidian_dir,
 		layout_config = { preview_width = 0.65 },
 		hidden = true,
 	})
@@ -37,7 +37,7 @@ M.search_note_files = function()
 	builtin.find_files({
 		prompt_title = "🔭 Find Notes",
 		prompt_prefix = " ﮷ ",
-		cwd = env.icloud_drive_obsidian_path,
+		cwd = env.icloud_drive_obsidian_dir,
 		hidden = true,
 	})
 end
