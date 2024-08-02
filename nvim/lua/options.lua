@@ -95,9 +95,9 @@ vim.opt.lazyredraw = true -- faster scrolling
 vim.opt.synmaxcol = 240 -- max column for syntax highlight
 
 -- Add asterisks in block comments
-vim.opt.formatoptions:append { 'r' }
+vim.opt.formatoptions:append({ 'r' })
 
-vim.cmd [[
+vim.cmd([[
   hi Cursor2 guifg=#fe8019 guibg=#fe8019
   set guicursor=i-r-v-ci:block-Cursor2
-]]
+]])

@@ -8,11 +8,11 @@ return {
   'tpope/vim-sleuth',
 
   -- Typescript LSP server
-  {
-    'pmizio/typescript-tools.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-    opts = {},
-  },
+  -- {
+  --   'pmizio/typescript-tools.nvim',
+  --   dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+  --   opts = {},
+  -- },
   { 'onsails/lspkind-nvim' },
   { 'tpope/vim-endwise' },
   { 'mg979/vim-visual-multi', branch = 'master' },
@@ -71,9 +71,9 @@ return {
   {
     'JoosepAlviste/nvim-ts-context-commentstring',
     config = function()
-      require('ts_context_commentstring').setup {
+      require('ts_context_commentstring').setup({
         enable_autocmd = false,
-      }
+      })
     end,
   },
   { 'nvim-notify', opts = { background_colour = '#000000' } },

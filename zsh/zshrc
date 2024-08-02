@@ -9,8 +9,8 @@ export EDITOR="nvim"
 export DOTFILES="~/.dotfiles"
 
 export NVIM_CONFIG_DIR="~/.config/nvim"
-export NVIM_USE_TSSERVER=true
-export NVIM_ONLY_CORE=false
+export NVIM_USE_TSSERVER=false
+export NVIM_ONLY_CORE=true
 export LAZYVIM_CONFIG="~/.config/lazyvim/init.lua"
 export LAZYVIM_CONFIG_DIR="~/.config/lazyvim"
 

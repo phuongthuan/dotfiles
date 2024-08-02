@@ -12,5 +12,5 @@ return {
 	enable_scroll_bar = false,
 
 	-- Enable transparency
-	window_background_opacity = 0.90,
+	-- window_background_opacity = 0.90,
 }

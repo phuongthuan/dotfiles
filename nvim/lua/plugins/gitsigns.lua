@@ -26,7 +26,7 @@ return {
       map('n', '<leader>hu', gs.undo_stage_hunk, 'Undo Stage Hunk')
       map('n', '<leader>pv', gs.preview_hunk_inline, 'Preview Hunk Inline')
       map('n', '<leader>hb', function()
-        gs.blame_line { full = true }
+        gs.blame_line({ full = true })
       end, 'Blame Line')
       map('n', '<leader>hd', gs.diffthis, 'Diff This')
     end,

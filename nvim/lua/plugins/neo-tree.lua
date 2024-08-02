@@ -8,8 +8,16 @@ return {
   },
   cmd = 'Neotree',
   keys = {
-    { '<C-f>', '<cmd>Neotree reveal<cr>', { desc = 'NeoTree reveal', silent = true } },
-    { '<C-b>', '<cmd>Neotree toggle<cr>', { desc = 'NeoTree toggle', silent = true } },
+    {
+      '<C-f>',
+      '<cmd>Neotree reveal<cr>',
+      { desc = 'NeoTree reveal', silent = true },
+    },
+    {
+      '<C-b>',
+      '<cmd>Neotree toggle<cr>',
+      { desc = 'NeoTree toggle', silent = true },
+    },
   },
   opts = {
     filesystem = {

@@ -10,7 +10,7 @@ return {
         -- Build Step is needed for regex support in snippets.
         -- This step is not supported in many windows environments.
         -- Remove the below condition to re-enable on windows.
-        if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
+        if vim.fn.has('win32') == 1 or vim.fn.executable('make') == 0 then
           return
         end
         return 'make install_jsregexp'
@@ -19,9 +19,9 @@ return {
         {
           'rafamadriz/friendly-snippets',
           config = function()
-            require('luasnip.loaders.from_vscode').lazy_load {
+            require('luasnip.loaders.from_vscode').lazy_load({
               paths = { require('core.env').DOTFILES .. '/snippets' },
-            }
+            })
           end,
         },
       },
@@ -36,9 +36,10 @@ return {
     'hrsh7th/cmp-path',
   },
   config = function()
-    local cmp = require 'cmp'
-    local luasnip = require 'luasnip'
-    local lspkind = require 'lspkind'
+    local cmp = require('cmp')
+    local luasnip = require('luasnip')
+    local lspkind = require('lspkind')
+    local icons = require('core.icons')
 
     luasnip.config.setup()
 
@@ -47,10 +48,14 @@ return {
         return false
       end
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-      return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match '^%s*$' == nil
+      return col ~= 0
+        and vim.api
+            .nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]
+            :match('^%s*$')
+          == nil
     end
 
-    cmp.setup {
+    cmp.setup({
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
@@ -69,9 +74,9 @@ return {
             if luasnip.expandable() then
               luasnip.expand()
             else
-              cmp.confirm {
+              cmp.confirm({
                 select = true,
-              }
+              })
             end
           else
             fallback()
@@ -79,7 +84,7 @@ return {
         end),
         ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            cmp.select_next_item { behavior = cmp.SelectBehavior.Insert }
+            cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
           elseif luasnip.expand_or_jumpable() then
             luasnip.expand_or_jump()
           elseif has_words_before() then
@@ -90,7 +95,7 @@ return {
         end, { 'i', 's' }),
         ['<S-Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            cmp.select_prev_item { behavior = cmp.SelectBehavior.Insert }
+            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
           elseif luasnip.jumpable(-1) then
             luasnip.jump(-1)
           else
@@ -99,45 +104,10 @@ return {
         end, { 'i', 's' }),
       },
       formatting = {
-        format = lspkind.cmp_format {
+        format = lspkind.cmp_format({
           mode = 'symbol',
           max_width = 50,
-          symbol_map = {
-            Text = '󰉿',
-            -- Method = "󰆧",
-            Method = '💎',
-            Function = '󰊕',
-            -- Constructor = "",
-            Constructor = '🛞',
-            Field = '󰜢',
-            Variable = '󰀫',
-            Class = '󰠱',
-            Interface = '',
-            -- Module = "󰆧",
-            Module = '💎',
-            Property = '󰜢',
-            Unit = '󰑭',
-            -- Value = '󰎠',
-            Value = '🔤',
-            Enum = '',
-            -- Keyword = '󰌋',
-            Keyword = '🔑',
-            Snippet = '🔥',
-            -- Color = '󰏘',
-            Color = '🌈',
-            File = '󰈙',
-            Reference = '󰈇',
-            -- Folder = '󰉋',
-            Folder = '📁',
-            EnumMember = '',
-            Constant = '󰏿',
-            Struct = '󰙅',
-            Event = '',
-            Operator = '󰆕',
-            -- Copilot = '',
-            Copilot = '👽',
-            TypeParameter = '',
-          },
+          symbol_map = icons.lspkind,
           before = function(entry, vim_item)
             vim_item.menu = ({
               nvim_lsp = '[LSP]',
@@ -148,7 +118,7 @@ return {
             })[entry.source.name]
             return vim_item
           end,
-        },
+        }),
       },
       sorting = {
         priority_weight = 2,
@@ -175,6 +145,6 @@ return {
         { name = 'path', group_index = 2 },
         { name = 'emoji', group_index = 2 },
       },
-    }
+    })
   end,
 }

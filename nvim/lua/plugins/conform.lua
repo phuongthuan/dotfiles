@@ -9,7 +9,7 @@ return {
     {
       '<leader>cf',
       function()
-        require('conform').format { async = true, lsp_format = 'fallback' }
+        require('conform').format({ async = true, lsp_format = 'fallback' })
       end,
       mode = '',
       desc = '[C]ode [F]ormat buffer',
@@ -31,7 +31,7 @@ return {
 
       -- Disable autoformat for files in a certain path
       local bufname = vim.api.nvim_buf_get_name(bufnr)
-      if bufname:match '/node_modules/' then
+      if bufname:match('/node_modules/') then
         return
       end
 
@@ -41,7 +41,7 @@ return {
       end
 
       local function on_format(err)
-        if err and err:match 'timeout$' then
+        if err and err:match('timeout$') then
           slow_format_filetypes[vim.bo[bufnr].filetype] = true
         end
       end
@@ -62,16 +62,16 @@ return {
       lua = { 'stylua' },
       zsh = { 'shfmt' },
       ruby = { 'rubocop' },
-      javascript = { { 'prettierd', 'prettier' } },
-      typescript = { { 'prettierd', 'prettier' } },
-      typescriptreact = { { 'prettierd', 'prettier' } },
-      javascriptreact = { { 'prettierd', 'prettier' } },
-      json = { { 'prettierd', 'prettier' } },
-      jsonc = { { 'prettierd', 'prettier' } },
-      markdown = { { 'prettierd', 'prettier' } },
-      css = { { 'prettierd', 'prettier' } },
-      scss = { { 'prettierd', 'prettier' } },
-      html = { { 'prettierd', 'prettier' } },
+      javascript = { 'prettierd', 'prettier', stop_after_first = true },
+      typescript = { 'prettierd', 'prettier', stop_after_first = true },
+      typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+      javascriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+      json = { 'prettierd', 'prettier', stop_after_first = true },
+      jsonc = { 'prettierd', 'prettier', stop_after_first = true },
+      markdown = { 'prettierd', 'prettier', stop_after_first = true },
+      css = { 'prettierd', 'prettier', stop_after_first = true },
+      scss = { 'prettierd', 'prettier', stop_after_first = true },
+      html = { 'prettierd', 'prettier', stop_after_first = true },
     },
     formatters = {
       prettier = {
@@ -82,10 +82,6 @@ return {
       },
     },
   },
-  init = function()
-    -- If you want the formatexpr, here is the place to set it
-    vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-  end,
 }
 
 -- vim: ts=2 sts=2 sw=2 et

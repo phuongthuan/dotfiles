@@ -3,7 +3,7 @@ return {
   cmd = 'Copilot',
   event = 'InsertEnter',
   config = function()
-    require('copilot').setup {
+    require('copilot').setup({
       suggestion = {
         enabled = false,
         auto_trigger = true,
@@ -20,7 +20,7 @@ return {
       panel = {
         enabled = false,
       },
-    }
+    })
     require('copilot_cmp').setup()
   end,
 }

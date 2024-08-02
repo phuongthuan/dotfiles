@@ -1,3 +1,5 @@
+local icons = require 'core.icons'
+
 return {
   'nvim-lualine/lualine.nvim',
   dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -17,7 +19,7 @@ return {
         {
           'diagnostics',
           sources = { 'nvim_diagnostic' },
-          symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
+          symbols = icons.diagnostics,
         },
         'encoding',
         'filetype',

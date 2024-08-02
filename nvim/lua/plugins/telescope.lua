@@ -1,4 +1,5 @@
-local env = require 'core.env'
+local env = require('core.env')
+local nmap = require('core.utils').mapper_factory('n')
 
 -- Recipes
 -- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes
@@ -19,7 +20,7 @@ return {
       -- `cond` is a condition used to determine whether this plugin should be
       -- installed and loaded.
       cond = function()
-        return vim.fn.executable 'make' == 1
+        return vim.fn.executable('make') == 1
       end,
     },
     'nvim-telescope/telescope-ui-select.nvim',
@@ -29,9 +30,9 @@ return {
     { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
   },
   config = function()
-    local actions = require 'telescope.actions'
+    local actions = require('telescope.actions')
 
-    require('telescope').setup {
+    require('telescope').setup({
       -- You can put your default mappings / updates / etc. in here
       --  All the info you're looking for is in `:help telescope.setup()`
       --
@@ -88,7 +89,7 @@ return {
           require('telescope.themes').get_dropdown(),
         },
       },
-    }
+    })
 
     -- Enable Telescope extensions if they are installed
     pcall(require('telescope').load_extension, 'fzf')
@@ -96,98 +97,118 @@ return {
     pcall(require('telescope').load_extension, 'ui-select')
 
     -- See `:help telescope.builtin`
-    local builtin = require 'telescope.builtin'
-    vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
-    vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-    vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
-    vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
-    vim.keymap.set('n', '<leader>rs', builtin.resume, { desc = '[S]earch [R]esume' })
-    vim.keymap.set('n', '<leader>?', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-    vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+    local builtin = require('telescope.builtin')
+    nmap('<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
+    nmap('<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
+    nmap('<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
+    nmap(
+      '<leader>ss',
+      builtin.builtin,
+      { desc = '[S]earch [S]elect Telescope' }
+    )
+    nmap('<leader>rs', builtin.resume, { desc = '[S]earch [R]esume' })
+    nmap(
+      '<leader>?',
+      builtin.oldfiles,
+      { desc = '[S]earch Recent Files ("." for repeat)' }
+    )
+    nmap(
+      '<leader><leader>',
+      builtin.buffers,
+      { desc = '[ ] Find existing buffers' }
+    )
 
     -- Slightly advanced example of overriding default behavior and theme
-    vim.keymap.set('n', '<leader>f', function()
+    nmap('<leader>f', function()
       -- You can pass additional configuration to Telescope to change the theme, layout, etc.
-      builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-        winblend = 10,
-        previewer = false,
-      })
+      builtin.current_buffer_fuzzy_find(
+        require('telescope.themes').get_dropdown({
+          winblend = 10,
+          previewer = false,
+        })
+      )
     end, { desc = '[/] Fuzzily search in current buffer' })
 
-    vim.keymap.set('n', '<leader>sdf', function()
-      builtin.find_files {
+    nmap('<leader>sdf', function()
+      builtin.find_files({
         prompt_title = '🔭 Dotfiles',
         cwd = env.DOTFILES,
         hidden = true,
-      }
+      })
     end, { desc = '[S]earch [D]ot[F]iles' })
 
-    vim.keymap.set('n', '<leader>fn', function()
-      builtin.find_files {
+    nmap('<leader>fn', function()
+      builtin.find_files({
         prompt_title = '🔭 Note Files',
         cwd = env.ICLOUD_DRIVE_OBSIDIAN_DIR,
         hidden = true,
-      }
+      })
     end, { desc = '[S]earch all [N]ote files' })
 
-    vim.keymap.set('n', '<leader>sn', function()
-      builtin.live_grep {
+    nmap('<leader>sn', function()
+      builtin.live_grep({
         prompt_title = '🔭 Grep Notes',
         cwd = env.ICLOUD_DRIVE_OBSIDIAN_DIR,
         -- layout_config = { preview_width = 0.65 },
         hidden = true,
-      }
+      })
     end, { desc = '[S]earch for a string in the [N]ote folder' })
 
-    vim.keymap.set('n', ';f', function()
-      builtin.find_files {
+    nmap(';f', function()
+      builtin.find_files({
         propmt_title = '🔭 Files',
         no_ignore = false,
         hidden = true,
-      }
-    end, { desc = 'Search all [F]iles in the current working directory, respects .gitignore' })
+      })
+    end, {
+      desc = 'Search all [F]iles in the current working directory, respects .gitignore',
+    })
 
-    vim.keymap.set('n', ';r', function()
-      builtin.live_grep {
+    nmap(';r', function()
+      builtin.live_grep({
         propmt_title = '🔭 Live Grep String',
         additional_args = { '--hidden' },
         grep_open_files = true,
         layout_strategy = 'vertical',
-      }
+      })
     end, {
       desc = '[S]earch for a string in the current open buffers and get results live as typed, respects .gitignore',
     })
 
-    vim.keymap.set('n', '<leader>ps', function()
-      builtin.grep_string {
-        search = vim.fn.input 'Grep >',
+    nmap('<leader>ps', function()
+      builtin.grep_string({
+        search = vim.fn.input('Grep >'),
         additional_args = { '--hidden' },
         layout_strategy = 'vertical',
         propmt_title = '🔭 Grep String',
-      }
-    end, { desc = '[S]earch for a input string in the current working directory, respects .gitignore' })
+      })
+    end, {
+      desc = '[S]earch for a input string in the current working directory, respects .gitignore',
+    })
 
-    vim.keymap.set('n', ';d', function(path)
-      local _path = path or vim.fn.input '📁 Directory ▶️ '
-      builtin.live_grep {
+    nmap(';d', function(path)
+      local _path = path or vim.fn.input('📁 Directory ▶️ ')
+      builtin.live_grep({
         search_dirs = { _path },
         prompt_title = '🔭 Grep in Directory',
         additional_args = { '--hidden' },
-      }
-    end, { desc = 'Search for a input string in the given directory, respects .gitignore' })
+      })
+    end, {
+      desc = 'Search for a input string in the given directory, respects .gitignore',
+    })
 
-    vim.keymap.set('n', '<leader>fb', function()
-      require('telescope').extensions.file_browser.file_browser {
+    nmap('<leader>fb', function()
+      require('telescope').extensions.file_browser.file_browser({
         prompt_title = '🔭 File Browser',
         path_display = { 'smart' },
         cwd = '~',
-      }
+      })
     end, { desc = '[F]ind files in [B]rowser' })
 
-    vim.keymap.set('n', '<leader>gb', function()
-      builtin.git_branches {
+    nmap('<leader>gb', function()
+      builtin.git_branches({
         propmt_title = '🔭 Git Branches',
-      }
+      })
     end, { desc = '[S]earch git [B]ranches' })
   end,
 }
