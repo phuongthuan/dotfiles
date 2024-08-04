@@ -1,4 +1,4 @@
--- To use Neovim env, create a env variable in ~/.zshrc => source
+-- To use env in Neovim, create a env variable in ~/.zshrc => source
 -- vim.env only works in neovim
 return {
   NVIM_USE_TSSERVER = vim.env.NVIM_USE_TSSERVER and true or false,

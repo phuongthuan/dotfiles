@@ -18,7 +18,7 @@ local new_note_file = env.ICLOUD_DRIVE_OBSIDIAN_DIR
 nmap(
   '<leader>td',
   ':e ' .. new_note_file .. '<cr>',
-  { desc = '[T]o[D]ay note', noremap = false }
+  { desc = 'Open [T]o[D]ay note', noremap = false }
 )
 
 -- Source Neovim configuration
@@ -116,8 +116,15 @@ nmap('j', "v:count == 0 ? 'gj' : 'j'", { expr = true })
 mapper({ 'n', 'x' })('x', '"_x')
 xmap('<leader>p', '"_dP')
 
--- Replace multiple words
-nmap('<leader>r', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+-- Replace text
+nmap(
+  '<leader>rr',
+  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+  { silent = false }
+)
+
+-- Replace text in visual mode
+vmap('<leader>rr', [["zy:%s/<C-r><C-o>"/]], { silent = false })
 
 -- Get current file path
 nmap(
@@ -156,11 +163,17 @@ nmap(
 -- or just use <C-\><C-n> to exit terminal mode
 tmap('<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
--- TIP: Disable arrow keys in normal mode
--- nmap('<left>', '<cmd>echo "Use h to move ❌"<cr>')
--- nmap('<right>', '<cmd>echo "Use l to move ❌"<cr>')
--- nmap('<up>', '<cmd>echo "Use k to move ❌"<cr>')
--- nmap('<down>', '<cmd>echo "Use j to move ❌"<cr>')
+-- Resizing windows
+-- nmap('<H-Up>', ':resize +2<CR>')
+-- nmap('<M-Down>', ':resize -2<CR>')
+-- nmap('<M-Left>', ':vertical resize +2<CR>')
+-- nmap('<M-Right>', ':vertical resize -2<CR>')
+
+-- Disable arrow keys in normal mode
+nmap('<left>', '<cmd>echo "Use h to move ❌"<cr>')
+nmap('<right>', '<cmd>echo "Use l to move ❌"<cr>')
+nmap('<up>', '<cmd>echo "Use k to move ❌"<cr>')
+nmap('<down>', '<cmd>echo "Use j to move ❌"<cr>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -179,7 +192,6 @@ nmap('<leader>gM', ':G push origin master<cr>')
 nmap('<leader>gl', ':GV<cr>')
 nmap('<leader>gL', ":GV <C-R>=expand('%:p')<cr><cr>")
 nmap('<leader>gm', ':G merge<Space>')
-
 -- Resolve conflict
 nmap('<leader>grc', ':Gvdiffsplit!<cr>')
 -- on the Gvdiffsplit mode
