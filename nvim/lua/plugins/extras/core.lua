@@ -2,19 +2,27 @@ return {
   -- Git plugins
   'tpope/vim-fugitive',
   'junegunn/gv.vim',
+  {
+    'mbbill/undotree',
+    cmd = 'UndotreeToggle',
+    keys = {
+      {
+        '<leader>U',
+        '<cmd>UndotreeToggle<cr>',
+        desc = 'Toggle Undo tree',
+      },
+    },
+  },
+
   'tpope/vim-rhubarb',
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
-  -- Typescript LSP server
-  -- {
-  --   'pmizio/typescript-tools.nvim',
-  --   dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-  --   opts = {},
-  -- },
-  { 'onsails/lspkind-nvim' },
-  { 'tpope/vim-endwise' },
+  'tpope/vim-endwise',
+
+  'onsails/lspkind-nvim',
+
   { 'mg979/vim-visual-multi', branch = 'master' },
   -- {
   --   'smoka7/multicursors.nvim',
@@ -33,7 +41,11 @@ return {
   --     },
   --   },
   -- },
-  { 'kylechui/nvim-surround', opts = {} },
+  {
+    'kylechui/nvim-surround',
+    event = { 'BufReadPost', 'BufNewFile' },
+    config = true,
+  },
   { 'windwp/nvim-ts-autotag', opts = {} },
   {
     'folke/flash.nvim',
@@ -45,36 +57,22 @@ return {
       { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
     },
   },
-  {
-    'folke/trouble.nvim',
-    opts = {},
-    cmd = 'Trouble',
-    keys = {
-      {
-        '<leader>xx',
-        '<cmd>Trouble diagnostics toggle<cr>',
-        desc = 'Diagnostics (Trouble)',
-      },
-      {
-        '<leader>xX',
-        '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
-        desc = 'Buffer Diagnostics (Trouble)',
-      },
-    },
-  },
-  {
-    'zbirenbaum/copilot-cmp',
-    config = function()
-      require('copilot_cmp').setup()
-    end,
-  },
-  {
-    'JoosepAlviste/nvim-ts-context-commentstring',
-    config = function()
-      require('ts_context_commentstring').setup({
-        enable_autocmd = false,
-      })
-    end,
-  },
+  -- {
+  --   'folke/trouble.nvim',
+  --   opts = {},
+  --   cmd = 'Trouble',
+  --   keys = {
+  --     {
+  --       '<leader>xx',
+  --       '<cmd>Trouble diagnostics toggle<cr>',
+  --       desc = 'Diagnostics (Trouble)',
+  --     },
+  --     {
+  --       '<leader>xX',
+  --       '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
+  --       desc = 'Buffer Diagnostics (Trouble)',
+  --     },
+  --   },
+  -- },
   { 'nvim-notify', opts = { background_colour = '#000000' } },
 }

@@ -1,4 +1,3 @@
-local env = require('core.env')
 local nmap = require('core.utils').mapper_factory('n')
 
 -- LSP Configuration & Plugins
@@ -11,9 +10,18 @@ return {
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
-      -- Useful status updates for LSP.
-      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      {
+        'j-hui/fidget.nvim',
+        event = 'VeryLazy',
+        opts = {
+          notification = {
+            override_vim_notify = true,
+            window = {
+              winblend = 25,
+            },
+          },
+        },
+      },
 
       -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
       -- used for completion, annotations and signatures of Neovim apis
@@ -250,15 +258,20 @@ return {
       nmap('<leader>ll', '<cmd>LspLog<cr>')
     end,
   },
-  {
-    'yioneko/nvim-vtsls',
-    ft = {
-      'javascript',
-      'javascriptreact',
-      'typescript',
-      'typescriptreact',
-    },
-    enabled = not env.NVIM_USER_USE_TSSERVER,
-    dependencies = { 'nvim-lspconfig' },
+  { -- Typescript LSP server
+    'pmizio/typescript-tools.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+    opts = {},
   },
+  -- { -- vtsls
+  --   'yioneko/nvim-vtsls',
+  --   ft = {
+  --     'javascript',
+  --     'javascriptreact',
+  --     'typescript',
+  --     'typescriptreact',
+  --   },
+  --   enabled = not env.NVIM_USER_USE_TSSERVER,
+  --   dependencies = { 'nvim-lspconfig' },
+  -- },
 }

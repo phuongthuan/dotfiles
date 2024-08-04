@@ -3,19 +3,21 @@ return {
   event = { 'BufReadPre', 'BufNewFile' },
   config = function()
     local lint = require('lint')
+
     lint.linters_by_ft = {
-      -- markdown = { 'markdownlint' },
+      bash = { 'shellcheck' },
+      sh = { 'shellcheck' },
+      zsh = { 'zsh' },
       typescript = { 'eslint_d', 'eslint' },
       javascript = { 'eslint_d', 'eslint' },
       typescriptreact = { 'eslint_d', 'eslint' },
       javascriptreact = { 'eslint_d', 'eslint' },
+      -- markdown = { 'markdownlint' },
       -- json = { 'jsonlint' },
       -- text = { 'vale' },
     }
 
-    local eslint = lint.linters.eslint_d
-
-    eslint.args = {
+    lint.linters.eslint_d.args = {
       '--no-warn-ignored',
       '--format',
       'json',

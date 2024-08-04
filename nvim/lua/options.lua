@@ -1,9 +1,8 @@
+vim.g.have_nerd_font = true
+
 -- Skip providers
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_python3_provider = 0
-
--- skip backwards compatibility routines and speed up loading
-vim.g.skip_ts_context_commentstring_module = true
 
 -- Make line numbers default
 vim.opt.number = true

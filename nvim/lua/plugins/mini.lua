@@ -1,4 +1,4 @@
-return { -- Collection of various small independent plugins/modules
+return {
   'echasnovski/mini.nvim',
   version = false,
   config = function()
@@ -35,5 +35,3 @@ return { -- Collection of various small independent plugins/modules
     end, { desc = '[B]uffer [K]ill' })
   end,
 }
-
--- vim: ts=2 sts=2 sw=2 et

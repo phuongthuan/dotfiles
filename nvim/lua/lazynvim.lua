@@ -19,13 +19,34 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  { import = 'plugins.core' },
   { import = 'plugins' },
 
+  require('plugins.extras.core'),
   require('plugins.extras.copilot'),
-  -- require 'plugins.extras.copilot-chat',
   require('plugins.extras.noice'),
 }, {
+  change_detection = {
+    notify = false,
+  },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        'tohtml',
+        'gzip',
+        'matchit',
+        'netrw',
+        'netrwFileHandlers',
+        'netrwPlugin',
+        'netrwSettings',
+        'tar',
+        'tarPlugin',
+        'tutor',
+        'tutor_mode_plugin',
+        'zip',
+        'zipPlugin',
+      },
+    },
+  },
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
@@ -33,8 +54,4 @@ require('lazy').setup({
   },
 })
 
--- Open Lazy manager
-nmap('<leader>L', '<cmd>Lazy<cr>')
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
+nmap('<leader>L', '<cmd>Lazy<cr>', { desc = 'Open Lazy manager' })

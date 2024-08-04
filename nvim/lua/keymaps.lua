@@ -14,12 +14,7 @@ local new_note_file = env.ICLOUD_DRIVE_OBSIDIAN_DIR
   .. '/diary/'
   .. os.date('%Y-%m-%d')
   .. '.md'
-
-nmap(
-  '<leader>td',
-  ':e ' .. new_note_file .. '<cr>',
-  { desc = 'Open [T]o[D]ay note', noremap = false }
-)
+nmap('<leader>td', ':e ' .. new_note_file .. '<cr>', { noremap = false })
 
 -- Source Neovim configuration
 nmap(
@@ -39,6 +34,10 @@ nmap(
   ':e ' .. env.EH_CONFIG_FILE .. '<cr>',
   { desc = 'Open EH configuration' }
 )
+
+-- No need to keep holding shift
+nmap(';', ':', { silent = false })
+vmap(';', ':', { silent = false })
 
 -- Fast saving with <leader> and s
 nmap('<leader>s', ':w<cr>:echo " Saved current buffer ✅"<cr>')
@@ -70,12 +69,6 @@ mapper({ 'n', 'i' })('<leader>q', '<esc>:q!<cr>')
 
 -- Select all file
 nmap('<leader>a', ':keepjumps normal! ggVG<cr>')
-
--- Prevent to used arrow keys ;)
-nmap('<up>', '<nop>')
-nmap('<down>', '<nop>')
-nmap('<left>', '<nop>')
-nmap('<right>', '<nop>')
 
 -- Keep cursor center when search
 nmap('n', 'nzzzv')
@@ -163,17 +156,21 @@ nmap(
 -- or just use <C-\><C-n> to exit terminal mode
 tmap('<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
--- Resizing windows
--- nmap('<H-Up>', ':resize +2<CR>')
--- nmap('<M-Down>', ':resize -2<CR>')
--- nmap('<M-Left>', ':vertical resize +2<CR>')
--- nmap('<M-Right>', ':vertical resize -2<CR>')
+-- Resizing windows, M is option key in MacOS
+nmap('<M-Up>', ':resize +2<CR>')
+nmap('<M-Down>', ':resize -2<CR>')
+nmap('<M-Left>', ':vertical resize +2<CR>')
+nmap('<M-Right>', ':vertical resize -2<CR>')
 
--- Disable arrow keys in normal mode
-nmap('<left>', '<cmd>echo "Use h to move ❌"<cr>')
-nmap('<right>', '<cmd>echo "Use l to move ❌"<cr>')
-nmap('<up>', '<cmd>echo "Use k to move ❌"<cr>')
-nmap('<down>', '<cmd>echo "Use j to move ❌"<cr>')
+-- Prevent to used arrow keys ;)
+-- nmap('<up>', '<nop>')
+-- nmap('<down>', '<nop>')
+-- nmap('<left>', '<nop>')
+-- nmap('<right>', '<nop>')
+-- nmap('<left>', '<cmd>echo "Use h to move ❌"<cr>')
+-- nmap('<right>', '<cmd>echo "Use l to move ❌"<cr>')
+-- nmap('<up>', '<cmd>echo "Use k to move ❌"<cr>')
+-- nmap('<down>', '<cmd>echo "Use j to move ❌"<cr>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
