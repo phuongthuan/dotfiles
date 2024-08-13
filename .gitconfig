@@ -1,17 +1,55 @@
 [user]
+	; Sets Git username, which will appear in commits.
 	name = phuongthuan
+
+	; Sets email address associated with commits.
 	email = 20045189+phuongthuan@users.noreply.github.com
+
 [http]
+	; This increases the maximum size of an HTTP post buffer.
+	; The default is 1 MB (1048576 bytes). Here, it's set to 524288000 bytes (500 MB),
+	; which is useful for pushing large files to a remote repository
 	postBuffer = 524288000
+
+	; Disables SSL verification for HTTP requests.
+	; Setting this to false can be helpful in certain environments where SSL certificates aren't set up properly,
+	; but it can also expose to security risks.
 	sslVerify = false
+
 [credential]
+	; This specifies the credential helper used by Git to store credentials.
+	; is specific to macOS and stores Git credentials securely in the macOS Keychain,
+	; so we don't have to re-enter username and password every time interact with a remote repository.
 	helper = osxkeychain
+
 [core]
+	; Disables compression when Git transfers files.
+	; A value of 0 disables compression, which can speed up operations involving large files,
+	; but will increase the amount of data being transferred.
 	compression = 0
+
+; Specifies the default text editor for Git commands that require user input (e.g., commit messages).
+; Here, it's set to /usr/bin/vim, which is the path to the Vim editor.
 	editor = /usr/bin/vim
+
+; Improves the performance of git status by enabling a file system monitor to detect changes,
+; which can significantly speed up status checks, especially in large repositories.
 	fsmonitor = true
+
+	; Caches the list of untracked files in the working directory to speed up git status in large repositories.
+	; Setting this to true enables this feature.
 	untrackedcache = true
 [pull]
+	; This determines how git pull behaves when we have local changes that need to be integrated with upstream changes.
+	; If set to false, it merges the changes by default.
+	; If set to true, it would rebase the changes on top of the upstream changes instead.
 	rebase = false
+
+; This setting is used to rewrite URLs.
+; Here, it tells Git to use git@github.com:Thinkei instead of https://github.com/Thinkei for any Git operation.
+; This is often used to switch from HTTPS to SSH for repository access,
+; which can be more secure and convenient, especially if we have SSH keys set up.
 [url "git@github.com:Thinkei"]
 	insteadOf = https://github.com/Thinkei
+[commit]
+	gpgsign = false
