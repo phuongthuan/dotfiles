@@ -41,3 +41,8 @@ function oci() {
 function opl() {
   open "https://github.com/Thinkei/${EH_MAIN_APP_PROJECT}/actions/workflows/release_pipeline.yml"
 }
+
+# Copy content in a file to clipboard
+function cp_fe_pr_template() {
+  cat "$(eval echo ${ICLOUD_DRIVE_OBSIDIAN_DIR})/employmenthero/fe_core_pr_template.md" | pbcopy
+}

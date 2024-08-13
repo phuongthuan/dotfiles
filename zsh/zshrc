@@ -3,14 +3,15 @@
 export MY_GITHUB_USERNAME="phuongthuan"
 
 export ZSH="$HOME/.oh-my-zsh"
-export EDITOR="nvim"
 
 # DOTFILES folder
 export DOTFILES="~/.dotfiles"
 
+# nvim env
+export EDITOR="nvim"
 export NVIM_CONFIG_DIR="~/.config/nvim"
 export NVIM_USE_TSSERVER=false
-export NVIM_ONLY_CORE=true
+export NVIM_USE_VTSLS=true
 export LAZYVIM_CONFIG="~/.config/lazyvim/init.lua"
 export LAZYVIM_CONFIG_DIR="~/.config/lazyvim"
 
@@ -59,8 +60,16 @@ unset conf
 
 source $ZSH/oh-my-zsh.sh
 
+# GPG TTY
+# https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key
+if [ -r ~/.zshrc ]; then
+  echo -e '\nexport GPG_TTY=$(tty)' >>~/.zshrc
+else echo -e '\nexport GPG_TTY=$(tty)' >>~/.zprofile; fi
+
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # asdf
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
+
+export GPG_TTY=$(tty)

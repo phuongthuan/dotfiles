@@ -56,6 +56,16 @@ function oga() {
   fi
 }
 
+# Open Run NPM release workflow: orl <env> <project_name> <branch_name>
+function orl() {
+  if [ -z "$1" ]; then
+    open "https://github.com/Thinkei/${EH_DEFAULT_PROJECT}/actions/workflows/run-npm-release.yml"
+  else
+    project="$1"
+    open "https://github.com/Thinkei/${project}/actions/workflows/run-npm-release.yml"
+  fi
+}
+
 # Open main app release
 function opl() {
   open "https://github.com/Thinkei/${EH_MAIN_APP_PROJECT}/actions/workflows/release_pipeline.yml"
@@ -79,14 +89,15 @@ function cgc() {
 function cgcn() {
   # Check if a commit message is provided as an argument
   if [ -z "$1" ]; then
-    echo "Please provide a commit message 🔴"
-    return 1
+    git add .
+    git commit -m "chore: clean up"
+    git push origin HEAD --no-verify
+  else
+    message="$1"
+    git add .
+    git commit -m "$message"
+    git push origin HEAD --no-verify
   fi
-
-  message="$1"
-  git add .
-  git commit -m "$message"
-  git push origin HEAD --no-verify
 }
 
 # Copy current branch name to clipboard

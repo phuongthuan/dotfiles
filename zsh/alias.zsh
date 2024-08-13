@@ -69,6 +69,7 @@ alias pop='git stash pop'
 alias gcm='git checkout origin/master'
 alias gfo='git fetch origin'
 alias gco='git checkout origin/master'
+alias gcg='git config --global'
 
 # Github CLI
 alias ghpr='gh pr list --state open --author phuongthuan --repo Thinkei/frontend-core'
