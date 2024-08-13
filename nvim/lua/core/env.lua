@@ -2,7 +2,7 @@
 -- vim.env only works in neovim
 return {
   NVIM_USE_TSSERVER = vim.env.NVIM_USE_TSSERVER and true or false,
-  NVIM_ONLY_CORE = vim.env.NVIM_ONLY_CORE and true or false,
+  NVIM_USE_VTSLS = vim.env.NVIM_USE_VTSLS and true or false,
   DOTFILES = vim.env.DOTFILES or '~/.dotfiles',
   NVIM_CONFIG_DIR = vim.env.NVIM_CONFIG_DIR or '~/.config/nvim',
   LAZYVIM_CONFIG_DIR = vim.env.LAZYVIM_CONFIG_DIR or '~/.config/lazyvim',

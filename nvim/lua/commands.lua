@@ -3,7 +3,7 @@ local user_command = vim.api.nvim_create_user_command
 local nnoremap = require('core.utils').mapper_factory('n')
 
 local autocmds_group =
-  vim.api.nvim_create_augroup('autocmdsGroup', { clear = true })
+  vim.api.nvim_create_augroup('UserConfigGroup', { clear = true })
 
 -- AUTOCOMMANDS
 autocmd('TextYankPost', {

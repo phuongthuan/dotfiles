@@ -184,6 +184,7 @@ nmap('<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 -- Vim-fugitive
 nmap('<leader>g', ':G<cr>')
 nmap('<leader>gp', ':G push origin HEAD<cr>')
+nmap('<leader>gpn', ':G push origin HEAD --no-verify<cr>')
 nmap('<leader>gP', ':G push origin HEAD -f<cr>')
 nmap('<leader>gM', ':G push origin master<cr>')
 nmap('<leader>gl', ':GV<cr>')

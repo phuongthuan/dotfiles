@@ -5,9 +5,9 @@ return {
     local lint = require('lint')
 
     lint.linters_by_ft = {
-      bash = { 'shellcheck' },
-      sh = { 'shellcheck' },
-      zsh = { 'zsh' },
+      -- bash = { 'shellcheck' },
+      -- sh = { 'shellcheck' },
+      -- zsh = { 'zsh' },
       typescript = { 'eslint_d', 'eslint' },
       javascript = { 'eslint_d', 'eslint' },
       typescriptreact = { 'eslint_d', 'eslint' },
