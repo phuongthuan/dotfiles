@@ -1,3 +1,9 @@
+# # GPG TTY
+# https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key
+if ! grep -q "export GPG_TTY=\$(tty)" ~/.zshrc; then
+  echo -e '\nexport GPG_TTY=$(tty)' >>~/.zshrc
+fi
+
 # Open repo by project name: github_project_url <project_name>
 function github_project_url() {
   if [ -z "$1" ]; then
@@ -11,11 +17,11 @@ function github_project_url() {
 function oprl() {
   if [ -z "$1" ] && [ -z "$2" ]; then # if non arguments were provided, default project and author would be frontend-core, me
     echo "Open $project's Github PR ✅"
-    open "https://github.com/thinkei/${EH_DEFAULT_PROJECT}/pulls/${MY_GITHUB_USERNAME}"
+    open "https://github.com/thinkei/${EH_DEFAULT_PROJECT}/pulls/${GITHUB_USERNAME}"
   elif [ -n $1 ] && [ -z "$2" ]; then # if project is provided but author is not
     project="$1"
     echo "Open $project's Github PR "
-    open "https://github.com/thinkei/${project}/pulls/${MY_GITHUB_USERNAME}"
+    open "https://github.com/thinkei/${project}/pulls/${GITHUB_USERNAME}"
   else # if all arguments were provided
     project="$1"
     author="$2"

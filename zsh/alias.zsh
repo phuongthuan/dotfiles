@@ -8,7 +8,7 @@ alias intel="arch -x86_64"
 alias nka="killall node && killall eslint_d && killall prettierd; echo ' Killed all node processes 🚀';"
 
 # Source zshrc
-alias rl="source ~/.zshrc; echo ' Source zshrc complete 🚀';"
+alias rl="source ~/.zshrc; echo ' Source .zshrc completed 🚀';"
 
 # Open iCloud Drive
 alias ic='eval nvim $ICLOUD_DRIVE'

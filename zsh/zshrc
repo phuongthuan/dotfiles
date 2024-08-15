@@ -1,7 +1,5 @@
+echo ".zshrc loaded 🚀"
 # ~/.zshrc
-
-# load env
-source ~/.zshenv
 
 # enable vim mode
 bindkey -v
@@ -20,20 +18,13 @@ plugins=(
 # https://github.com/wting/autojump
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
-# GPG TTY
-# https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key
-if [ -r ~/.zshrc ]; then
-  echo -e '\nexport GPG_TTY=$(tty)' >>~/.zshrc
-else echo -e '\nexport GPG_TTY=$(tty)' >>~/.zprofile; fi
-
-# Load seperated config files
+# load seperated config files
 for conf in "$HOME/.config/zsh/"*.zsh; do
   source "${conf}"
 done
 unset conf
 
 # source zsh
-export ZSH="$HOME/.oh-my-zsh"
 source $ZSH/oh-my-zsh.sh
 
 # fzf
