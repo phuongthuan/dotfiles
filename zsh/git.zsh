@@ -157,3 +157,31 @@ function clear_all_local_branches_except() {
     git branch -D $branch
   done
 }
+
+# Open PR: oprb <branch_name>
+function oprb() {
+  local branch_name="$1"
+
+  if [ -z "$branch_name" ]; then
+    echo "Branch name is required"
+    return 1
+  fi
+
+  # Check if gh CLI is installed
+  if ! command -v gh &>/dev/null; then
+    echo "GitHub CLI (gh) is not installed. Please install it to use this function."
+    return 1
+  fi
+
+  # Get the PR URL using the GitHub CLI and open it in the browser
+  local pr_url
+  pr_url=$(gh pr view "$branch_name" --json url --jq '.url')
+
+  if [ -n "$pr_url" ]; then
+    echo "Opening PR: $pr_url"
+    open "$pr_url"
+  else
+    echo "No PR found for branch '$branch_name'"
+    return 1
+  fi
+}
