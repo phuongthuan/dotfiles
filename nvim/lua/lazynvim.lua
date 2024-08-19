@@ -22,7 +22,7 @@ require('lazy').setup({
   { import = 'plugins' },
 
   require('plugins.extras.core'),
-  require('plugins.extras.copilot'),
+  -- require('plugins.extras.copilot'),
   require('plugins.extras.noice'),
 }, {
   change_detection = {

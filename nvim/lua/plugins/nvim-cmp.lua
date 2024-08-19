@@ -112,7 +112,7 @@ return {
               buffer = ' [Buffer]',
               path = '[Path]',
               luasnip = '[Snippet]',
-              copilot = '[Copilot]',
+              -- copilot = '[Copilot]',
             })[entry.source.name]
             return vim_item
           end,
@@ -121,7 +121,7 @@ return {
       sorting = {
         priority_weight = 2,
         comparators = {
-          require('copilot_cmp.comparators').prioritize,
+          -- require('copilot_cmp.comparators').prioritize,
 
           -- Below is the default comparitor list and order for nvim-cmp
           cmp.config.compare.offset,
@@ -137,7 +137,7 @@ return {
         },
       },
       sources = {
-        { name = 'copilot', group_index = 2 },
+        -- { name = 'copilot', group_index = 2 },
         { name = 'nvim_lsp', group_index = 2 },
         { name = 'luasnip', group_index = 2 },
         { name = 'path', group_index = 2 },

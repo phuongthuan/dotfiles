@@ -33,8 +33,8 @@ return {
       local lsp_mappings = require('plugins.lsp.mappings')
 
       -- Setup handlers and diagnostics config
-      local lsp_handlers = require('plugins.lsp.handlers')
-      lsp_handlers.setup()
+      -- local lsp_handlers = require('plugins.lsp.handlers')
+      -- lsp_handlers.setup()
 
       -- local lsp_diagnostics = require('plugins.lsp.dianostics')
       -- lsp_diagnostics.setup()
@@ -74,7 +74,7 @@ return {
       local servers = {
         -- gopls = {},
         -- solargraph = {},
-        vtsls = {},
+        -- vtsls = {},
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},

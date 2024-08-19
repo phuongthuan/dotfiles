@@ -47,16 +47,25 @@ return {
     config = true,
   },
   { 'windwp/nvim-ts-autotag', opts = {} },
+
+  -- Blazingly fast movements
   {
-    'folke/flash.nvim',
-    event = 'VeryLazy',
-    ---@type Flash.Config
-    opts = {},
-    -- stylua: ignore
-    keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-    },
+    'ggandor/leap.nvim',
+    keys = { 's', 'S', 'gs' },
+    config = function()
+      require('leap').set_default_keymaps()
+    end,
   },
+  -- {
+  --   'folke/flash.nvim',
+  --   event = 'VeryLazy',
+  --   ---@type Flash.Config
+  --   opts = {},
+  --   -- stylua: ignore
+  --   keys = {
+  --     { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+  --   },
+  -- },
   -- {
   --   'folke/trouble.nvim',
   --   opts = {},
