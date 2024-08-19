@@ -1,4 +1,3 @@
-echo ".zshrc loaded 🚀"
 # ~/.zshrc
 
 # enable vim mode
@@ -32,3 +31,5 @@ source $ZSH/oh-my-zsh.sh
 
 # asdf
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
+
+export GPG_TTY=$(tty)

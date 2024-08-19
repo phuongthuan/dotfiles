@@ -1,2 +1,1 @@
-echo ".zshenv loaded 🚀"
 . "$HOME/.cargo/env"

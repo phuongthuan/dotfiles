@@ -67,6 +67,7 @@ alias pick='git cherry-pick'
 alias stl='git stash list'
 alias pop='git stash pop'
 alias gcm='git checkout origin/master'
+alias gmm='git merge master'
 alias gfo='git fetch origin'
 alias gco='git checkout origin/master'
 alias gcg='git config --global'
@@ -82,8 +83,12 @@ alias drmi='docker rmi'
 alias dl='docker logs'
 alias di='docker inspect'
 alias drM='docker container prune -f'
-
 alias dc='docker-compose'
+
+# Yarn
+alias yd='yarn dev'
+alias yt='yarn test'
+alias yi='yarn install'
 
 # mpd
 alias mpd_start="mpd --no-daemon --verbose ~/.config/mpd/mpd.conf; echo ' Server was stopped 🔻';" # start mpd server
