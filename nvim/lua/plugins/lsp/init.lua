@@ -44,10 +44,10 @@ return {
       --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
       --    function will be executed to configure the current buffer
       vim.api.nvim_create_autocmd('LspAttach', {
-        group = lsp_autocmds.lsp_augroup_id,
-        callback = function(args)
-          lsp_autocmds.attach(args)
-          lsp_mappings.attach(args)
+        group = lsp_autocmds.lsp_attach_augroup,
+        callback = function(event)
+          lsp_autocmds.attach(event)
+          lsp_mappings.attach(event)
         end,
       })
 
@@ -139,14 +139,14 @@ return {
   --   dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
   --   opts = {},
   -- },
-  { -- vtsls
-    'yioneko/nvim-vtsls',
-    ft = {
-      'javascript',
-      'javascriptreact',
-      'typescript',
-      'typescriptreact',
-    },
-    dependencies = { 'nvim-lspconfig' },
-  },
+  -- { -- vtsls
+  --   'yioneko/nvim-vtsls',
+  --   ft = {
+  --     'javascript',
+  --     'javascriptreact',
+  --     'typescript',
+  --     'typescriptreact',
+  --   },
+  --   dependencies = { 'nvim-lspconfig' },
+  -- },
 }
