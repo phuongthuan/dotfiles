@@ -46,3 +46,13 @@ function opl() {
 function cp_fe_pr_template() {
   cat "$(eval echo ${ICLOUD_DRIVE_OBSIDIAN_DIR})/employmenthero/fe_core_pr_template.md" | pbcopy
 }
+
+# Open ChatGPT
+function gpt() {
+  open "https://chatgpt.com/"
+}
+
+# Open Goggle Gemini (Goggle AI)
+function gai() {
+  open "https://gemini.google.com/gem/coding-partner"
+}

@@ -1,5 +1,6 @@
 alias nvim='~/nvim-macos-arm64/bin/nvim'
 alias lz='NVIM_APPNAME="lazyvim" ~/nvim-macos-arm64/bin/nvim'
+alias nks='NVIM_APPNAME="kickstart-nvim" ~/nvim-macos-arm64/bin/nvim'
 
 alias arm="arch -arm64"
 alias intel="arch -x86_64"
@@ -87,8 +88,12 @@ alias dc='docker-compose'
 
 # Yarn
 alias yd='yarn dev'
+alias ys='yarn start'
 alias yt='yarn test'
 alias yi='yarn install'
+alias yb='yarn build'
+alias yp='yarn pack'
+alias yl='yarn link'
 
 # mpd
 alias mpd_start="mpd --no-daemon --verbose ~/.config/mpd/mpd.conf; echo ' Server was stopped 🔻';" # start mpd server

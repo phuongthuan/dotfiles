@@ -72,6 +72,11 @@ function orl() {
   fi
 }
 
+# Open Release lib branch
+function orlb() {
+  open "https://github.com/Thinkei/frontend-core/compare/changeset-release/master"
+}
+
 # Open main app release
 function opl() {
   open "https://github.com/Thinkei/${EH_MAIN_APP_PROJECT}/actions/workflows/release_pipeline.yml"
