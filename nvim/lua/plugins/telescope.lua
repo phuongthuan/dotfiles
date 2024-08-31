@@ -108,7 +108,7 @@ return {
     )
     nmap('<leader>rs', builtin.resume, { desc = '[S]earch [R]esume' })
     nmap(
-      '<leader>/',
+      '<leader>r',
       builtin.oldfiles,
       { desc = '[S]earch Recent Files ("." for repeat)' }
     )

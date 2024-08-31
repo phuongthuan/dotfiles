@@ -1,3 +1,6 @@
+local mapper = require('core.utils').mapper_factory
+local nmap = mapper('n')
+
 return {
   'lewis6991/gitsigns.nvim',
   opts = {
@@ -11,24 +14,48 @@ return {
     },
     signcolumn = true,
     current_line_blame = true,
-    on_attach = function(buffer)
+    on_attach = function(bufnr)
       local gs = package.loaded.gitsigns
 
-      local function map(mode, l, r, desc)
-        vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
-      end
+      nmap(']c', gs.next_hunk, { buffer = bufnr, desc = 'Next Hunk' })
+      nmap('[c', gs.prev_hunk, { buffer = bufnr, desc = 'Prev Hunk' })
 
-      map('n', ']c', gs.next_hunk, 'Next Hunk')
-      map('n', '[c', gs.prev_hunk, 'Prev Hunk')
-      map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>', 'Stage Hunk')
-      map({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>', 'Reset Hunk')
-      map('n', '<leader>hS', gs.stage_buffer, 'Stage Buffer')
-      map('n', '<leader>hu', gs.undo_stage_hunk, 'Undo Stage Hunk')
-      map('n', '<leader>pv', gs.preview_hunk_inline, 'Preview Hunk Inline')
-      map('n', '<leader>hb', function()
+      mapper({ 'n', 'i' })('<leader>q', '<esc>:q!<cr>')
+
+      mapper({ 'n', 'v' })(
+        '<leader>hs',
+        ':Gitsigns stage_hunk<CR>',
+        { buffer = bufnr, desc = 'Stage Hunk' }
+      )
+
+      mapper({ 'n', 'v' })(
+        '<leader>hr',
+        ':Gitsigns reset_hunk<CR>',
+        { buffer = bufnr, desc = 'Reset Hunk' }
+      )
+
+      nmap(
+        '<leader>hS',
+        gs.stage_buffer,
+        { buffer = bufnr, desc = 'Stage Buffer' }
+      )
+      nmap(
+        '<leader>hu',
+        gs.undo_stage_hunk,
+        { buffer = bufnr, desc = 'Undo Stage Hunk' }
+      )
+
+      nmap(
+        '<leader>pv',
+        gs.preview_hunk_inline,
+        { buffer = bufnr, desc = 'Preview Hunk Inline' }
+      )
+
+      nmap('<leader>hb', function()
         gs.blame_line({ full = true })
-      end, 'Blame Line')
-      map('n', '<leader>hd', gs.diffthis, 'Diff This')
+      end, { buffer = bufnr, desc = 'Blame Line' })
+
+      nmap('<leader>hd', gs.diffthis, { buffer = bufnr, desc = 'Diff This' })
     end,
   },
 }
