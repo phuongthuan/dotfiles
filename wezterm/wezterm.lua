@@ -3,6 +3,9 @@ local wezterm = require("wezterm")
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
+-- Enable transparency
+config.window_background_opacity = 0.95
+
 -- Font configuration
 config.font = wezterm.font("Dank Mono", { weight = "Medium" })
 config.font_size = 13.5
@@ -21,9 +24,6 @@ config.color_scheme = "GruvboxDark"
 config.hide_tab_bar_if_only_one_tab = true
 config.enable_scroll_bar = false
 
--- Enable transparency
-config.window_background_opacity = 0.90
-
 -- Use zsh by default
 -- config.default_prog = { "/usr/bin/zsh" }
 
@@ -31,7 +31,7 @@ config.window_background_opacity = 0.90
 config.hide_mouse_cursor_when_typing = false
 
 -- Remove the title bar from the window
-config.window_decorations = "INTEGRATED_BUTTONS | RESIZE"
+config.window_decorations = "RESIZE"
 
 -- URLs in Markdown files are not handled properly by default
 -- Source: https://github.com/wez/wezterm/issues/3803#issuecomment-1608954312
