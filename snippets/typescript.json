@@ -266,6 +266,18 @@
     "prefix": "iri",
     "body": ["import { Intl } from 'redux-intl';$0"]
   },
+  "import useTheme from @ehrocks/hero-theme": {
+    "prefix": "iht",
+    "body": ["import { useTheme } from '@ehrocks/hero-theme';$0"]
+  },
+  "useTheme": {
+    "prefix": "uth",
+    "body": ["const theme = useTheme();$0"]
+  },
+  "import styled from styled-component": {
+    "prefix": "ims",
+    "body": ["import styled from 'styled-components';$0"]
+  },
   "import Component hero-design": {
     "prefix": "ihd",
     "body": ["import { $1 } from '@hero-design/react';$0"]
