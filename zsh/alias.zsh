@@ -94,6 +94,7 @@ alias yi='yarn install'
 alias yb='yarn build'
 alias yp='yarn pack'
 alias yl='yarn link'
+alias yx='yarn nx'
 
 # mpd
 alias mpd_start="mpd --no-daemon --verbose ~/.config/mpd/mpd.conf; echo ' Server was stopped 🔻';" # start mpd server

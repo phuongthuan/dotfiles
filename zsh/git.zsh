@@ -196,3 +196,63 @@ function oprb() {
     return 1
   fi
 }
+
+# Running linter in given directory (default dir is apps/hr-web-app)
+# fe_test <directory>
+#
+# fe_test apps/hr-web-app
+# fe_test libs/eh-marketing-ui
+function fe_lint() {
+
+  # Use the provided argument or default to 'apps/hr-web-app'
+  directory=${1:-apps/hr-web-app}
+
+  # Extract 'hr-web-app' from 'apps/hr-web-app'
+  app_name=$(basename "$directory")
+
+  echo "Start linting on $app_name 🧪"
+
+  executed_files=$(
+    # Lists all files that have been added, modified, copied, renamed, or had type changes compared to the master branch.
+    git diff --name-only --diff-filter=ACMRT master |
+      grep "^$directory/" |          # Filter all files that start with a directory (eg: apps/hr-web-app)
+      grep -E '\.(js|jsx|ts|tsx)$' | # Only included js,jsx,ts,tsx file
+      sed "s|$directory/||"          # Remove path directory (eg: apps/hr-web-app)
+  )
+
+  if [[ -n "$executed_files" ]]; then
+    yarn nx lint:ci $app_name $(echo "$executed_files" | xargs)
+  else
+    echo "No matching files to lint 🔴"
+  fi
+}
+
+# Running unit test on given directory (default dir is apps/hr-web-app)
+# fe_test <directory>
+#
+# fe_test apps/hr-web-app
+# fe_test libs/eh-marketing-ui
+function fe_test() {
+
+  # Use the provided argument or default to 'apps/hr-web-app'
+  directory=${1:-apps/hr-web-app}
+
+  # Extract 'hr-web-app' from 'apps/hr-web-app'
+  app_name=$(basename "$directory")
+
+  echo "Start testing on $app_name 🧪"
+
+  executed_files=$(
+    # Lists all files that have been added, modified, copied, renamed, or had type changes compared to the master branch.
+    git diff --name-only --diff-filter=ACMRT master |
+      grep "^$directory/" |                       # Filter all files that start with a directory (eg: apps/hr-web-app)
+      grep -E '\.(spec|test)\.(js|jsx|ts|tsx)$' | # Only included test files
+      sed "s|$directory/||"                       # Remove path directory (eg: apps/hr-web-app)
+  )
+
+  if [[ -n "$executed_files" ]]; then
+    yarn nx test:ci $app_name $(echo "$executed_files" | xargs) --skip-nx-cache
+  else
+    echo "No matching files to test 🔴"
+  fi
+}
