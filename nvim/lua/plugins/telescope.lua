@@ -140,7 +140,7 @@ return {
     nmap('<leader>fn', function()
       builtin.find_files({
         prompt_title = '🔭 Note Files',
-        cwd = env.ICLOUD_DRIVE_OBSIDIAN_DIR,
+        cwd = env.PERSONAL_NOTES,
         hidden = true,
       })
     end, { desc = '[S]earch all [N]ote files' })
@@ -148,7 +148,7 @@ return {
     nmap('<leader>sn', function()
       builtin.live_grep({
         prompt_title = '🔭 Grep Notes',
-        cwd = env.ICLOUD_DRIVE_OBSIDIAN_DIR,
+        cwd = env.PERSONAL_NOTES,
         -- layout_config = { preview_width = 0.65 },
         hidden = true,
       })

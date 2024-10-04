@@ -10,7 +10,7 @@ local xmap = mapper('x')
 local omap = mapper('o')
 
 -- Open today note
-local new_note_file = env.ICLOUD_DRIVE_OBSIDIAN_DIR
+local new_note_file = env.PERSONAL_NOTES
   .. '/diary/'
   .. os.date('%Y-%m-%d')
   .. '.md'
@@ -55,7 +55,7 @@ nmap('<leader>S', ':wa<cr>:echo " Saved all buffers ✅"<cr>')
 imap('jk', '<Esc>', { noremap = true })
 
 -- Z{symbol} to select inside
-nmap('Z', 'vi')
+nmap('Z', 'yi')
 
 -- Buffers next and prev
 nmap('<tab>', ':bp<cr>')
@@ -122,7 +122,7 @@ vmap('<leader>rr', [["zy:%s/<C-r><C-o>"/]], { silent = false })
 -- Get current file path
 nmap(
   '<leader>cp',
-  [[:let @+=substitute(expand("%:p"), getcwd() . '/', '', '')<cr>:echo " File path copied to clipboard 📝"<cr>]],
+  [[:let @+=substitute(expand("%:p"), getcwd() . '/', '', '')<cr>:echo " " . @+ . " copied to clipboard 📝"<cr>]],
   { noremap = true }
 )
 
@@ -184,7 +184,7 @@ nmap('<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 -- Vim-fugitive
 nmap('<leader>g', ':G<cr>')
 nmap('<leader>gp', ':G push origin HEAD<cr>')
-nmap('<leader>gpn', ':G push origin HEAD --no-verify<cr>')
+nmap('<leader>P', ':G push origin HEAD --no-verify<cr>')
 nmap('<leader>gP', ':G push origin HEAD -f<cr>')
 nmap('<leader>gM', ':G push origin master<cr>')
 nmap('<leader>gl', ':GV<cr>')

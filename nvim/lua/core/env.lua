@@ -8,6 +8,7 @@ return {
   LAZYVIM_CONFIG_DIR = vim.env.LAZYVIM_CONFIG_DIR or '~/.config/lazyvim',
   EH_CONFIG_DIR = vim.env.EH_CONFIG_DIR or '~/.config/eh',
   REFERENCES_DIR = vim.env.REFERENCES_DIR or '~/Programming/References',
+  PERSONAL_NOTES = vim.env.PERSONAL_NOTES or '~/Documents/Notes',
   ICLOUD_DRIVE_OBSIDIAN_DIR = vim.env.ICLOUD_DRIVE_OBSIDIAN_DIR
     or '~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes',
 
