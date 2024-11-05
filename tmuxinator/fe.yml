@@ -3,12 +3,12 @@
 name: fe-core
 root: ~/Programming/EmploymentHero/frontend-core
 
-# pre_window: nvm use <%= @settings["node_version"] %>
-pre_window: asdf local nodejs 18.17.1
+# pre_window: asdf local nodejs 18.17.1
 
 windows:
-  - editor: nvim
-  - terminal: git status
+  - main: nvim
+  - git:
   - worktree: j eh-worktree/frontend-core/hotfix-fe-core
-  - cli: node -v
-  - logs: yarn nx start hr-web-app
+  - git:
+  - terminal:
+  - logs:

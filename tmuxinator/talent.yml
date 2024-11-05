@@ -1,0 +1,14 @@
+# /Users/thuan/.config/tmuxinator/talent.yml
+
+name: talent
+root: ~/Programming/EmploymentHero/talent-marketplace-app
+
+pre_window: asdf local nodejs 20.11.1
+
+windows:
+  - main: nvim
+  - git:
+  - worktree: cd ~/Programming/EmploymentHero/eh-worktree/talent-marketplace-app/main
+  - git:
+  - terminal:
+  - logs:
