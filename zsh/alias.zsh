@@ -5,6 +5,9 @@ alias nks='NVIM_APPNAME="kickstart-nvim" ~/nvim-macos-arm64/bin/nvim'
 alias arm="arch -arm64"
 alias intel="arch -x86_64"
 
+alias nv="node -v"
+alias ni="npm install"
+
 # Kill all node process
 alias nka="killall node && killall eslint_d && killall prettierd; echo ' Killed all node processes 🚀';"
 
@@ -72,6 +75,7 @@ alias gmm='git merge master'
 alias gfo='git fetch origin'
 alias gco='git checkout origin/master'
 alias gcg='git config --global'
+alias gpm='git pull origin master'
 
 # Github CLI
 alias ghpr='gh pr list --state open --author phuongthuan --repo Thinkei/frontend-core'

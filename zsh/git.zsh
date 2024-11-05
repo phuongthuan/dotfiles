@@ -101,12 +101,12 @@ function cgcn() {
   # Check if a commit message is provided as an argument
   if [ -z "$1" ]; then
     git add .
-    git commit -m "chore: clean up"
+    git commit -m "chore: clean up" --no-verify
     git push origin HEAD --no-verify
   else
     message="$1"
     git add .
-    git commit -m "$message"
+    git commit -m "$message" --no-verify
     git push origin HEAD --no-verify
   fi
 }

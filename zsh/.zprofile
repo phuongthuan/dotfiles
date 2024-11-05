@@ -12,6 +12,7 @@ export PATH=$PATH:$HOME/.local/bin
 
 # Setting editor
 export EDITOR="nvim"
+export REACT_EDITOR="nvim"
 export NVIM_CONFIG_DIR="~/.config/nvim"
 export NVIM_USE_TSSERVER=false
 # export NVIM_USE_VTSLS=true
