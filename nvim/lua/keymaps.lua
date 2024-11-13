@@ -43,10 +43,7 @@ vmap(';', ':', { silent = false })
 nmap('<leader>s', ':w<cr>:echo " Saved current buffer ✅"<cr>')
 
 -- :wq
-mapper({ 'n', 'i' })(
-  '<leader>w',
-  '<esc>:wq<cr>:echo " Git commit created ✅"<cr>'
-)
+nmap('<leader>w', ':wq<cr>:echo " Git commit created ✅"<cr>')
 
 -- Saving all working buffers
 nmap('<leader>S', ':wa<cr>:echo " Saved all buffers ✅"<cr>')
@@ -65,7 +62,7 @@ nmap('<S-tab>', ':bn<cr>')
 nmap('<BS>', '<C-^>')
 
 -- Close window without save
-mapper({ 'n', 'i' })('<leader>q', '<esc>:q!<cr>')
+nmap('<leader>q', ':q!<cr>')
 
 -- Select all file
 nmap('<leader>a', ':keepjumps normal! ggVG<cr>')
@@ -198,9 +195,12 @@ nmap('<leader>grc', ':Gvdiffsplit!<cr>')
 
 -- mpc for Music Player Daemon (MPD)
 -- silent to prevent neovim display message after command executed
-nmap('<leader>mn', ':mpc next<cr>:echo " Next song ♫ "<cr>')
+-- nmap('<leader>mn', ':mpc next<cr>:echo " Next song ♫ "<cr>')
+--
+-- nmap('<leader>mb', ':mpc prev<cr>:echo " Back song ♫ "<cr>')
+-- nmap('<leader>mp', ':mpc play<cr>')
+-- nmap('<leader>mP', ':mpc pause<cr>')
+-- nmap('<leader>mS', ':mpc stop<cr>')
 
-nmap('<leader>mb', ':mpc prev<cr>:echo " Back song ♫ "<cr>')
-nmap('<leader>mp', ':mpc play<cr>')
-nmap('<leader>mP', ':mpc pause<cr>')
-nmap('<leader>mS', ':mpc stop<cr>')
+-- Markdown preview
+nmap('<leader>mp', ':Glow<cr>')

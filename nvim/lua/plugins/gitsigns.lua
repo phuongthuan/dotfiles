@@ -20,8 +20,6 @@ return {
       nmap(']c', gs.next_hunk, { buffer = bufnr, desc = 'Next Hunk' })
       nmap('[c', gs.prev_hunk, { buffer = bufnr, desc = 'Prev Hunk' })
 
-      mapper({ 'n', 'i' })('<leader>q', '<esc>:q!<cr>')
-
       mapper({ 'n', 'v' })(
         '<leader>hs',
         ':Gitsigns stage_hunk<CR>',

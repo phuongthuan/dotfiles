@@ -21,7 +21,7 @@ alias ic='eval nvim $ICLOUD_DRIVE'
 alias obs='eval nvim $ICLOUD_DRIVE_OBSIDIAN_DIR'
 
 # Open dotfiles
-alias dot='nvim ~/.dotfiles/'
+alias dot='cd ~/.dotfiles/ && nvim'
 
 # Homebrew
 alias brewup='brew update; brew upgrade; brew cleanup; brew doctor'

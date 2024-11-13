@@ -4,6 +4,7 @@ return {
   dependencies = {
     {
       'L3MON4D3/LuaSnip',
+      version = 'v2.*',
       build = (function()
         -- Build Step is needed for regex support in snippets.
         -- This step is not supported in many windows environments.
@@ -18,6 +19,7 @@ return {
           'rafamadriz/friendly-snippets',
           config = function()
             require('luasnip.loaders.from_vscode').lazy_load({
+              exclude = { 'javascript' },
               paths = { require('core.env').DOTFILES .. '/snippets' },
             })
           end,
@@ -42,14 +44,13 @@ return {
     luasnip.config.setup()
 
     local has_words_before = function()
-      if vim.api.nvim_buf_get_option(0, 'buftype') == 'prompt' then
-        return false
-      end
+      unpack = unpack or table.unpack
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
       return col ~= 0
         and vim.api
-            .nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]
-            :match('^%s*$')
+            .nvim_buf_get_lines(0, line - 1, line, true)[1]
+            :sub(col, col)
+            :match('%s')
           == nil
     end
 
