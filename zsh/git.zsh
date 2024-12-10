@@ -5,16 +5,16 @@ if ! grep -q "export GPG_TTY=\$(tty)" ~/.zshrc; then
 fi
 
 # Open repo by project name: github_project_url <project_name>
-function github_project_url() {
+github_project_url() {
   if [ -z "$1" ]; then
     echo "Please provide a project name 🔴"
     return 1
   fi
-  echo "$EH_GITHUB_URL/$1"
+  open "$EH_GITHUB_URL/$1"
 }
 
 # Open PR: oprl <project:optional> <author:optional>
-function oprl() {
+oprl() {
   if [ -z "$1" ] && [ -z "$2" ]; then # if non arguments were provided, default project and author would be frontend-core, me
     echo "Open $project's Github PR ✅"
     open "https://github.com/thinkei/${EH_DEFAULT_PROJECT}/pulls/${GITHUB_USERNAME}"
@@ -30,7 +30,7 @@ function oprl() {
 }
 
 # Open PR ID: opr <pr_id> <author>
-function opr() {
+opr() {
   if [ -z "$1" ]; then
     recent_pr_id=$(gh pr list --state open --author phuongthuan --repo Thinkei/frontend-core --json number --jq '.[0].number')
     open "https://github.com/thinkei/frontend-core/pull/${recent_pr_id}"
@@ -42,7 +42,7 @@ function opr() {
 }
 
 # Open repo: orp <repo_name>
-function orp() {
+orp() {
   # https://github.com/Thinkei/frontend-core/actions/workflows/build-dev.yml?query=actor%3Aphuongthuan
   if [ -z "$1" ]; then
     open "https://github.com/Thinkei/${EH_DEFAULT_PROJECT}"
@@ -53,7 +53,7 @@ function orp() {
 }
 
 # Open workflows: oga <env> <project_name> <branch_name>
-function oga() {
+oga() {
   if [ -z "$1" ]; then
     open "https://github.com/Thinkei/${EH_DEFAULT_PROJECT}/actions/workflows/build-sandbox--hr-web-app.yml?query=actor%3Aphuongthuan"
   else
@@ -63,7 +63,7 @@ function oga() {
 }
 
 # Open Run NPM release workflow: orl <env> <project_name> <branch_name>
-function orl() {
+orl() {
   if [ -z "$1" ]; then
     open "https://github.com/Thinkei/${EH_DEFAULT_PROJECT}/actions/workflows/run-npm-release.yml"
   else
@@ -73,17 +73,17 @@ function orl() {
 }
 
 # Open Release lib branch
-function orlb() {
+orlb() {
   open "https://github.com/Thinkei/frontend-core/compare/changeset-release/master"
 }
 
 # Open main app release
-function opl() {
+opl() {
   open "https://github.com/Thinkei/${EH_MAIN_APP_PROJECT}/actions/workflows/release_pipeline.yml"
 }
 
 # Create a commit: cgc "commit message"
-function cgc() {
+cgc() {
   # Check if a commit message is provided as an argument
   if [ -z "$1" ]; then
     echo "Please provide a commit message 🔴"
@@ -97,7 +97,7 @@ function cgc() {
 }
 
 # Create a commit and push --no-verify: cgcn "commit message"
-function cgcn() {
+cgcn() {
   # Check if a commit message is provided as an argument
   if [ -z "$1" ]; then
     git add .
@@ -112,14 +112,14 @@ function cgcn() {
 }
 
 # Copy current branch name to clipboard
-function ccb() {
+ccb() {
   current_branch=$(git branch --show-current)
   echo "$current_branch" | pbcopy
   echo "Copied current branch to clipboard 📝"
 }
 
 # Create a branch and copy branch name to clipboard
-function cgb() {
+cgb() {
   if [ -z "$1" ]; then
     echo "Please provide a branch name 🔴"
     return 1
@@ -131,28 +131,14 @@ function cgb() {
   echo "Copied branch '$branch_name' to clipboard 📝"
 }
 
-# Checkout and pull current master branch
-function swm() {
-  branch_name=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
-
-  if [ -z "$branch_name" ]; then
-    echo "Error: No branch name found 🔴"
-    return 1
-  fi
-
-  echo "Switching to branch: $branch_name"
-  git switch "$branch_name"
-  git pull origin "$branch_name"
-}
-
 # Reset master branch
-function reset_master() {
+reset_master() {
   git reset --hard origin/master
   git push origin -f
 }
 
 # Clear all local branches except given branches: ex clear_all_local_branches_except "master|development"
-function clear_all_local_branches_except() {
+clear_all_local_branches_except() {
   excluded_branches="$1"
 
   if [ -z "$excluded_branches" ]; then
@@ -170,12 +156,11 @@ function clear_all_local_branches_except() {
 }
 
 # Open PR: oprb <branch_name>
-function oprb() {
+oprb() {
   local branch_name="$1"
 
   if [ -z "$branch_name" ]; then
-    echo "Branch name is required"
-    return 1
+    branch_name=$(git rev-parse --abbrev-ref HEAD)
   fi
 
   # Check if gh CLI is installed
@@ -197,12 +182,25 @@ function oprb() {
   fi
 }
 
+# Open GitHub Actions workflow
+oga() {
+  local workflow="$1"
+
+  if [ -n "$workflow" ]; then
+    echo "📦 Opening GitHub Actions workflow: $workflow"
+    open "https://github.com/Thinkei/talent-marketplace-app/actions/workflows/$workflow"
+  else
+    echo "Please enter workflow name"
+    return 1
+  fi
+}
+
 # Running linter in given directory (default dir is apps/hr-web-app)
 # fe_test <directory>
 #
 # fe_test apps/hr-web-app
 # fe_test libs/eh-marketing-ui
-function fe_lint() {
+fe_lint() {
 
   # Use the provided argument or default to 'apps/hr-web-app'
   directory=${1:-apps/hr-web-app}
@@ -232,7 +230,7 @@ function fe_lint() {
 #
 # fe_test apps/hr-web-app
 # fe_test libs/eh-marketing-ui
-function fe_test() {
+fe_test() {
 
   # Use the provided argument or default to 'apps/hr-web-app'
   directory=${1:-apps/hr-web-app}

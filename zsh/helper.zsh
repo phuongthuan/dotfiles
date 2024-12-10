@@ -1,10 +1,10 @@
 # Kill background process
-function bgkill() {
+bgkill() {
   kill -9 $(jobs -l | head -1 | awk '{print $3}')
 }
 
 # Search a string in a directory
-function ssd() {
+ssd() {
   local search_string="$1"
   local directory_path="$2"
 
@@ -17,7 +17,7 @@ function ssd() {
 }
 
 # Open localhost with given port
-function ol() {
+ol() {
   local port="$1"
   if [ -z "$port" ]; then
     open "http://localhost:3000"
@@ -27,7 +27,7 @@ function ol() {
 }
 
 # Open Circle CI: oci <project_name> <branch_name>
-function oci() {
+oci() {
   # https://github.com/Thinkei/frontend-core/actions/workflows/build-dev.yml?query=actor%3Aphuongthuan
   if [ -z "$1" ]; then
     open 'https://app.circleci.com/pipelines/github/Thinkei?filter=mine'
@@ -37,22 +37,32 @@ function oci() {
   fi
 }
 
+# Open Expo Dev: oxp <project_name>
+oxp() {
+  if [ -z "$1" ]; then
+    open 'https://expo.dev/accounts/employmentos/projects/talent-marketplace-app/builds'
+  else
+    project="$1"
+    open "https://expo.dev/accounts/employmentos/projects/${project}/builds"
+  fi
+}
+
 # Open main app release
-function opl() {
+opl() {
   open "https://github.com/Thinkei/${EH_MAIN_APP_PROJECT}/actions/workflows/release_pipeline.yml"
 }
 
 # Copy content in a file to clipboard
-function cp_fe_pr_template() {
+cp_fe_pr_template() {
   cat "$(eval echo ${ICLOUD_DRIVE_OBSIDIAN_DIR})/employmenthero/fe_core_pr_template.md" | pbcopy
 }
 
 # Open ChatGPT
-function gpt() {
+gpt() {
   open "https://chatgpt.com/"
 }
 
 # Open Goggle Gemini (Goggle AI)
-function gai() {
+gai() {
   open "https://gemini.google.com/gem/coding-partner"
 }

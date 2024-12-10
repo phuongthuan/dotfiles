@@ -7,6 +7,7 @@ alias intel="arch -x86_64"
 
 alias nv="node -v"
 alias ni="npm install"
+alias ns="npm start"
 
 # Kill all node process
 alias nka="killall node && killall eslint_d && killall prettierd; echo ' Killed all node processes 🚀';"
@@ -112,3 +113,12 @@ alias mps='mpc stop && mpc clear'
 
 alias nls='npm ls --depth=0'
 alias nd='npm run dev'
+
+# Mobile Development
+alias bad='npx expo run:android'
+alias bi='npx expo run:ios'
+
+alias xc='xcrun simctl'
+alias xcl='xcrun simctl list devices'
+alias xcb='xcrun simctl boot 6790E0DD-55BB-42CA-97D2-7239DEF37A78'
+alias xcs='xcrun simctl shutdown 6790E0DD-55BB-42CA-97D2-7239DEF37A78'

@@ -1,5 +1,5 @@
 # Extract audio from a Youtube video
-function yt_dl() {
+yt_dl() {
   if [ -z "$1" ]; then
     echo "Please provide a Youtube video URL 🔴"
     return 1
@@ -8,7 +8,7 @@ function yt_dl() {
 }
 
 # Play a playlist in mpd
-function mp() {
+mp() {
   if [ -z "$1" ]; then
     echo "Please provide a playlist 🔴"
     return 1
@@ -17,7 +17,7 @@ function mp() {
 }
 
 # Show all songs in a playlist
-function mppl() {
+mppl() {
   if [ -z "$1" ]; then
     mpc lsplaylists
     return 1
