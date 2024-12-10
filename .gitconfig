@@ -4,6 +4,7 @@
 
 	; Sets email address associated with commits.
 	email = 20045189+phuongthuan@users.noreply.github.com
+	signingkey = ${GPG_SIGNING_KEY}
 
 [http]
 	; This increases the maximum size of an HTTP post buffer.
