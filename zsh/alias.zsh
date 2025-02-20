@@ -5,6 +5,7 @@ alias nks='NVIM_APPNAME="kickstart-nvim" ~/nvim-macos-arm64/bin/nvim'
 alias arm="arch -arm64"
 alias intel="arch -x86_64"
 
+alias rv="ruby -v"
 alias nv="node -v"
 alias ni="npm install"
 alias ns="npm start"

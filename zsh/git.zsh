@@ -20,7 +20,7 @@ oprl() {
     open "https://github.com/thinkei/${EH_DEFAULT_PROJECT}/pulls/${GITHUB_USERNAME}"
   elif [ -n $1 ] && [ -z "$2" ]; then # if project is provided but author is not
     project="$1"
-    echo "Open $project's Github PR "
+    echo "Open $project's Github PR ✅ "
     open "https://github.com/thinkei/${project}/pulls/${GITHUB_USERNAME}"
   else # if all arguments were provided
     project="$1"
@@ -53,14 +53,14 @@ orp() {
 }
 
 # Open workflows: oga <env> <project_name> <branch_name>
-oga() {
-  if [ -z "$1" ]; then
-    open "https://github.com/Thinkei/${EH_DEFAULT_PROJECT}/actions/workflows/build-sandbox--hr-web-app.yml?query=actor%3Aphuongthuan"
-  else
-    project="$1"
-    open "https://github.com/Thinkei/${project}/actions/workflows/build-sandbox--hr-web-app.yml?query=actor%3Aphuongthuan"
-  fi
-}
+# oga() {
+#   if [ -z "$1" ]; then
+#     open "https://github.com/Thinkei/${EH_DEFAULT_PROJECT}/actions/workflows/build-sandbox--hr-web-app.yml?query=actor%3Aphuongthuan"
+#   else
+#     project="$1"
+#     open "https://github.com/Thinkei/${project}/actions/workflows/build-sandbox--hr-web-app.yml?query=actor%3Aphuongthuan"
+#   fi
+# }
 
 # Open Run NPM release workflow: orl <env> <project_name> <branch_name>
 orl() {
@@ -187,7 +187,7 @@ oga() {
   local workflow="$1"
 
   if [ -n "$workflow" ]; then
-    echo "📦 Opening GitHub Actions workflow: $workflow"
+    echo "📦 Opening GitHub Actions talent-marketplace-app workflow: $workflow"
     open "https://github.com/Thinkei/talent-marketplace-app/actions/workflows/$workflow"
   else
     echo "Please enter workflow name"

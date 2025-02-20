@@ -47,6 +47,16 @@ oxp() {
   fi
 }
 
+# Open Google Translation
+otl() {
+  if [ -z "$1" ]; then
+    open 'https://translate.google.com/?sl=en&tl=vi'
+  else
+    text="$1"
+    open "https://translate.google.com/?sl=en&tl=vi&text=$text"
+  fi
+}
+
 # Open main app release
 opl() {
   open "https://github.com/Thinkei/${EH_MAIN_APP_PROJECT}/actions/workflows/release_pipeline.yml"
