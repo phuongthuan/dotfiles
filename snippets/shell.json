@@ -12,6 +12,16 @@
     "body": "echo \"${0:message}\"",
     "description": "Echo a message."
   },
+  "ecs": {
+    "prefix": "ecs",
+    "body": "echo -e \"\\033[32m${0:message} \\033[0m\"",
+    "description": "Echo a message with -e flag and green color"
+  },
+  "ecf": {
+    "prefix": "ecf",
+    "body": "echo -e \"\\033[31m${0:message} \\033[0m\"",
+    "description": "Echo a message with -e flag and red color"
+  },
   "read": {
     "prefix": "read",
     "body": "read -r ${0:VAR}",

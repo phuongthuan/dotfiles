@@ -15,7 +15,9 @@
           "shellscript",
           "shell",
           "sh",
-          "zsh"
+          "zsh",
+          "yml",
+          "yaml"
         ],
         "path": "./shell.json"
       },
@@ -23,8 +25,10 @@
         "language": [
           "javascript",
           "javascriptreact",
+          "javascript.jsx",
           "typescript",
-          "typescriptreact"
+          "typescriptreact",
+          "typescript.tsx"
         ],
         "path": "./typescript.json"
       },
