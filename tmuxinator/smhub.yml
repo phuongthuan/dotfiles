@@ -1,7 +1,7 @@
-# /Users/thuan/.config/tmuxinator/superfe
+# /Users/thuan/.config/tmuxinator/smhub
 
-name: ebf-super-fe
-root: ~/Programming/EmploymentHero/ebf-super-fe
+name: smartmatch-hub
+root: ~/Programming/EmploymentHero/smartmatch-hub
 
 pre_window: asdf local nodejs <%= @settings["node_version"] %>
 
