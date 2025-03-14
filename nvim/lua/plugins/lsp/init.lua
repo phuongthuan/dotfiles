@@ -1,7 +1,6 @@
 local env = require('core.env')
 local nmap = require('core.utils').mapper_factory('n')
 
--- LSP Configuration & Plugins
 return {
   {
     'folke/lazydev.nvim',
@@ -17,7 +16,6 @@ return {
   {
     'neovim/nvim-lspconfig',
     dependencies = {
-      -- Automatically install LSPs and related tools to stdpath for Neovim
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
@@ -34,7 +32,6 @@ return {
           },
         },
       },
-      -- Allows extra capabilities provided by nvim-cmp
       'hrsh7th/cmp-nvim-lsp',
     },
     config = function()
@@ -84,6 +81,14 @@ return {
         -- gopls = {},
         -- solargraph = {},
         -- vtsls = {},
+        yamlls = {
+          schemas = {
+            kubernetes = 'k8s-*.yaml',
+            ['https://json.schemastore.org/github-workflow.json'] = '/.github/workflows/*',
+            ['http://json.schemastore.org/github-action'] = '.github/action.{yml,yaml}',
+            ['http://json.schemastore.org/prettierrc'] = '.prettierrc.{yml,yaml}',
+          },
+        },
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},

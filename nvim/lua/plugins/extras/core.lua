@@ -15,32 +15,12 @@ return {
   },
 
   'tpope/vim-rhubarb',
-
-  -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
-
+  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'tpope/vim-endwise',
 
   'onsails/lspkind-nvim',
 
   { 'mg979/vim-visual-multi', branch = 'master' },
-  -- {
-  --   'smoka7/multicursors.nvim',
-  --   event = 'VeryLazy',
-  --   dependencies = {
-  --     'nvimtools/hydra.nvim',
-  --   },
-  --   opts = {},
-  --   cmd = { 'MCstart', 'MCvisual', 'MCclear', 'MCpattern', 'MCvisualPattern', 'MCunderCursor' },
-  --   keys = {
-  --     {
-  --       mode = { 'v', 'n' },
-  --       '<Leader>m',
-  --       '<cmd>MCstart<cr>',
-  --       desc = 'Create a selection for selected text or word under the cursor',
-  --     },
-  --   },
-  -- },
   {
     'kylechui/nvim-surround',
     event = { 'BufReadPost', 'BufNewFile' },
@@ -48,8 +28,7 @@ return {
   },
   { 'windwp/nvim-ts-autotag', opts = {} },
 
-  -- Blazingly fast movements
-  {
+  { -- Blazingly fast movements
     'ggandor/leap.nvim',
     keys = { 's', 'S', 'gs' },
     config = function()
