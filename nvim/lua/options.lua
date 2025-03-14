@@ -71,6 +71,22 @@ vim.opt.syntax = 'enable' -- enable syntax highlighting
 vim.opt.number = true -- show line number
 vim.opt.showmatch = true -- highlight matching parenthesis
 vim.opt.foldmethod = 'marker' -- enable folding (default 'foldmarker')
+-- vim.opt.foldmethod = 'indent'
+-- vim.opt.foldlevel = 1
+-- vim.api.nvim_buf_set_keymap(
+--   0,
+--   'n',
+--   'zj',
+--   ':lua NavigateFold("j")<CR>',
+--   { noremap = true, silent = true }
+-- )
+-- vim.api.nvim_buf_set_keymap(
+--   0,
+--   'n',
+--   'zk',
+--   ':lua NavigateFold("k")<CR>',
+--   { noremap = true, silent = true }
+-- )
 vim.opt.colorcolumn = '' -- line lenght marker at 80 columns, "" mean hide it
 vim.opt.splitright = true -- vertical split to the right
 vim.opt.splitbelow = true -- horizontal split to the bottom

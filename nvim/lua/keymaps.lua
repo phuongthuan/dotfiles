@@ -93,8 +93,8 @@ vmap('>', '>gv')
 -- Moving line
 nmap('<leader>j', '<cmd>m .+1<cr>==')
 nmap('<leader>k', '<cmd>m .-2<cr>==')
-imap('<leader>j', '<esc><cmd>m .+1<cr>==gi')
-imap('<leader>k', '<esc><cmd>m .-2<cr>==gi')
+-- imap('<leader>j', '<esc><cmd>m .+1<cr>==gi')
+-- imap('<leader>k', '<esc><cmd>m .-2<cr>==gi')
 vmap('<leader>j', ":m '>+1<cr>gv=gv")
 vmap('<leader>k', ":m '<-2<cr>gv=gv")
 
@@ -164,10 +164,10 @@ nmap('<M-Right>', ':vertical resize -2<CR>')
 -- nmap('<down>', '<nop>')
 -- nmap('<left>', '<nop>')
 -- nmap('<right>', '<nop>')
--- nmap('<left>', '<cmd>echo "Use h to move ❌"<cr>')
--- nmap('<right>', '<cmd>echo "Use l to move ❌"<cr>')
--- nmap('<up>', '<cmd>echo "Use k to move ❌"<cr>')
--- nmap('<down>', '<cmd>echo "Use j to move ❌"<cr>')
+nmap('<left>', '<cmd>echo "Use h to move ❌"<cr>')
+nmap('<right>', '<cmd>echo "Use l to move ❌"<cr>')
+nmap('<up>', '<cmd>echo "Use k to move ❌"<cr>')
+nmap('<down>', '<cmd>echo "Use j to move ❌"<cr>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -189,6 +189,7 @@ nmap('<leader>gL', ":GV <C-R>=expand('%:p')<cr><cr>")
 nmap('<leader>gm', ':G merge<Space>')
 -- Resolve conflict
 nmap('<leader>grc', ':Gvdiffsplit!<cr>')
+nmap('<leader>op', ':!oprl atsmobile<CR>')
 -- on the Gvdiffsplit mode
 -- d2o : get the left column
 -- d3o : get the right column
