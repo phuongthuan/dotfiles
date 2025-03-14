@@ -96,18 +96,55 @@ cgc() {
   git push origin HEAD
 }
 
-# Create a commit and push --no-verify: cgcn "commit message"
+# Staged all files and create a commit and push --no-verify: cgcn "commit message"
 cgcn() {
+  # Staged all files
+  git add .
+
   # Check if a commit message is provided as an argument
   if [ -z "$1" ]; then
-    git add .
     git commit -m "chore: clean up" --no-verify
-    git push origin HEAD --no-verify
   else
     message="$1"
-    git add .
     git commit -m "$message" --no-verify
-    git push origin HEAD --no-verify
+  fi
+
+  # push to origin
+  response=$(git push origin HEAD --no-verify 2>&1)
+  if [ $? -ne 0 ]; then
+    echo "Error: Push failed."
+    echo "$response"
+    return 1
+  fi
+
+  # Extract the URL from the output
+  url=$(echo "$response" | grep -oE 'https://github\.com/[^[:space:]]+/pull/new/[^[:space:]]+')
+
+  echo "Opening PR: $url"
+
+  # Open the URL in the default browser if it exists
+  [ -n "$url" ] && open "$url"
+}
+
+# Create a commit and push --no-verify: gcn "commit message"
+ccn() {
+  # Check if a commit message is provided as an argument
+  if [ -z "$1" ]; then
+    git commit -m "chore: clean up" --no-verify
+  else
+    message="$1"
+    git commit -m "$message" --no-verify
+  fi
+
+  # push to origin
+  response=$(git push origin HEAD --no-verify)
+
+  # Extract the URL from the output
+  url=$(echo "$response" | grep -oE 'https://github\.com/[^\s]+')
+
+  # Open the URL in the default browser if it exists
+  if [ -n "$url" ]; then
+    open "$url"
   fi
 }
 
