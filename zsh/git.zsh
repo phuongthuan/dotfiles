@@ -82,6 +82,24 @@ opl() {
   open "https://github.com/Thinkei/${EH_MAIN_APP_PROJECT}/actions/workflows/release_pipeline.yml"
 }
 
+# Commit, Push and Open PR in defaut Browser
+push_and_open_pr() {
+  # Commit changes
+  git commit -m "$message" --no-verify
+
+  # Push to origin
+  response=$(git push origin HEAD --no-verify 2>&1)
+
+  # Extract the URL from the output
+  url=$(echo "$response" | grep -oE 'https://github\.com/[^[:space:]]+/pull/new/[^[:space:]]+')
+
+  echo "⛳ Opening PR in Browser..."
+  echo -e "\033[32m$url \033[0m"
+
+  # Open the URL in the default browser if it exists
+  [ -n "$url" ] && open "$url"
+}
+
 # Create a commit: cgc "commit message"
 cgc() {
   # Check if a commit message is provided as an argument
@@ -98,54 +116,23 @@ cgc() {
 
 # Staged all files and create a commit and push --no-verify: cgcn "commit message"
 cgcn() {
+  # Use a default commit message if none is provided
+  message=${1:-"chore: clean up"}
+
   # Staged all files
   git add .
 
-  # Check if a commit message is provided as an argument
-  if [ -z "$1" ]; then
-    git commit -m "chore: clean up" --no-verify
-  else
-    message="$1"
-    git commit -m "$message" --no-verify
-  fi
-
-  # push to origin
-  response=$(git push origin HEAD --no-verify 2>&1)
-  if [ $? -ne 0 ]; then
-    echo "Error: Push failed."
-    echo "$response"
-    return 1
-  fi
-
-  # Extract the URL from the output
-  url=$(echo "$response" | grep -oE 'https://github\.com/[^[:space:]]+/pull/new/[^[:space:]]+')
-
-  echo "Opening PR: $url"
-
-  # Open the URL in the default browser if it exists
-  [ -n "$url" ] && open "$url"
+  # Commit and Open PR
+  push_and_open_pr
 }
 
 # Create a commit and push --no-verify: gcn "commit message"
 ccn() {
-  # Check if a commit message is provided as an argument
-  if [ -z "$1" ]; then
-    git commit -m "chore: clean up" --no-verify
-  else
-    message="$1"
-    git commit -m "$message" --no-verify
-  fi
+  # Use a default commit message if none is provided
+  message=${1:-"chore: clean up"}
 
-  # push to origin
-  response=$(git push origin HEAD --no-verify)
-
-  # Extract the URL from the output
-  url=$(echo "$response" | grep -oE 'https://github\.com/[^\s]+')
-
-  # Open the URL in the default browser if it exists
-  if [ -n "$url" ]; then
-    open "$url"
-  fi
+  # Commit and Open PR
+  push_and_open_pr
 }
 
 # Copy current branch name to clipboard
