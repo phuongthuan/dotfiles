@@ -7,8 +7,8 @@ pre_window: asdf local nodejs 20.11.1
 
 windows:
   - main: nvim
-  - git:
-  - worktree: cd ~/Programming/EmploymentHero/eh-worktree/talent-marketplace-app/main
-  - git:
   - terminal:
-  - logs:
+  - logs: node -v
+  - git:
+  - ios:
+  - worktree: j eh-worktree/talent-marketplace-app/worktree

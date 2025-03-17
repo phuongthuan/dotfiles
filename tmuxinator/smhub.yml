@@ -7,5 +7,5 @@ pre_window: asdf local nodejs <%= @settings["node_version"] %>
 
 windows:
   - editor: nvim
-  - terminal: node -v
-  - logs: node -v
+  - git: node -v
+  - logs:

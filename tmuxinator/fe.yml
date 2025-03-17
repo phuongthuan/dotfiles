@@ -7,8 +7,8 @@ root: ~/Programming/EmploymentHero/frontend-core
 
 windows:
   - main: nvim
-  - git:
+  - terminal:
+  - logs:
   - worktree: j eh-worktree/frontend-core/hotfix-fe-core
   - git:
   - terminal:
-  - logs:

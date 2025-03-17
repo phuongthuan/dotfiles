@@ -7,11 +7,11 @@ pre_window: asdf local nodejs <%= @settings["node_version"] %>
 
 windows:
   - editor: nvim
-  - git: git status
-  - worktree: j eh-worktree/ebf-swag-personal/main
+  - terminal:
   - logs:
       layout: main-vertical
       panes:
         - node -v
         - node -v
   - ios: cd example
+  - worktree: j eh-worktree/ebf-swag-personal/worktree

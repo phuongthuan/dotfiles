@@ -5,7 +5,6 @@ root: ~/Programming/EmploymentHero/career-page
 
 windows:
   - editor: nvim
-  - terminal: node -v
-  - worktree: j eh-worktree/marketplace-service/master
-  - logs:
-      - node -v
+  - git: node -v
+  - logs: node -v
+  - worktree: j eh-worktree/career-page/worktree

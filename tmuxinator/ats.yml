@@ -5,8 +5,6 @@ root: ~/Programming/EmploymentHero/ATSMobile
 
 windows:
   - editor: nvim
-  - terminal: ruby -v
-  - worktree: j eh-worktree/ATSMobile/master
-  - server:
+  - terminal: node -v
   - logs:
-      - ruby -v
+  - worktree: j eh-worktree/ATSMobile/worktree

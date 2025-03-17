@@ -5,5 +5,5 @@ root: ~/Programming/EmploymentHero/ebf-bff-mobile
 
 windows:
   - editor: nvim
-  - terminal: git status
+  - terminal:
   - logs: go version

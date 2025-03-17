@@ -9,6 +9,6 @@ pre_window: asdf local nodejs 20
 windows:
   - editor: nvim
   - terminal: asdf local nodejs <%= @settings["node_version"] %>
-  - worktree: j eh-worktree/eh-mobile-pro/master
-  - ios: node -v
   - logs: node -v
+  - ios: node -v
+  - worktree: j eh-worktree/eh-mobile-pro/worktree
