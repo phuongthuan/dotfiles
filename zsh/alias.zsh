@@ -124,3 +124,8 @@ alias xc='xcrun simctl'
 alias xcl='xcrun simctl list devices'
 alias xcb='xcrun simctl boot 6790E0DD-55BB-42CA-97D2-7239DEF37A78'
 alias xcs='xcrun simctl shutdown 6790E0DD-55BB-42CA-97D2-7239DEF37A78'
+
+# Bitwarden CLI
+alias bws='bw list items --search'
+alias bwg='bw get'
+alias bwd='bw delete item'
