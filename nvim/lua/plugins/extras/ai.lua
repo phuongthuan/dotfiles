@@ -46,12 +46,7 @@ return {
           yaml = true,
           markdown = true,
           sh = function()
-            if
-              string.match(
-                vim.fs.basename(vim.api.nvim_buf_get_name(0)),
-                '^%.env.*'
-              )
-            then
+            if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), '^%.env.*') then
               -- disable for .env files
               return false
             end
@@ -194,12 +189,7 @@ return {
 
       chat.setup(opts)
 
-      vim.keymap.set(
-        'n',
-        '<leader>cs',
-        ':CopilotChatStop<CR>',
-        { silent = true }
-      )
+      vim.keymap.set('n', '<leader>cs', ':CopilotChatStop<CR>', { silent = true })
       vim.keymap.set('n', '<leader>cw', ':CopilotChatSave')
       vim.keymap.set('n', '<leader>cl', ':CopilotChatLoad')
     end,

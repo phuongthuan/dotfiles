@@ -13,9 +13,6 @@ alias ns="npm start"
 # Kill all node process
 alias nka="killall node && killall eslint_d && killall prettierd; echo ' Killed all node processes 🚀';"
 
-# Source zshrc
-alias rl="source ~/.zshrc; echo ' Source .zshrc completed 🚀';"
-
 # Open iCloud Drive
 alias ic='eval nvim $ICLOUD_DRIVE'
 
@@ -127,5 +124,4 @@ alias xcs='xcrun simctl shutdown 6790E0DD-55BB-42CA-97D2-7239DEF37A78'
 
 # Bitwarden CLI
 alias bws='bw list items --search'
-alias bwg='bw get'
 alias bwd='bw delete item'

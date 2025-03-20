@@ -24,6 +24,7 @@ cmd([[ nnoremap ,e :e <C-R>=expand('%:p:h') . '/'<cr> ]])
 
 -- Open EH configuration
 nmap('<leader>eh', ':e ' .. env.EH_CONFIG_FILE .. '<cr>', { desc = 'Open EH configuration' })
+nmap('<leader>sc', ':e ' .. env.SECRET_ENV_FILE .. '<cr>', { desc = 'Open Secret configuration' })
 
 -- No need to keep holding shift
 nmap(';', ':', { silent = false })

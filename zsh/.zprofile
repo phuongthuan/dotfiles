@@ -10,12 +10,13 @@ export ZSH="$HOME/.oh-my-zsh"
 # Export path for EH herocli
 export PATH=$PATH:$HOME/.local/bin
 
+# Secret ENVs
+export SECRET_ENV_FILE='~/.dotfiles/zsh/secret.zsh'
+
 # Setting editor
 export EDITOR="nvim"
 export REACT_EDITOR="nvim"
 export NVIM_CONFIG_DIR="~/.config/nvim"
-export NVIM_USE_TSSERVER=false
-# export NVIM_USE_VTSLS=true
 export LAZYVIM_CONFIG="~/.config/lazyvim/init.lua"
 export LAZYVIM_CONFIG_DIR="~/.config/lazyvim"
 

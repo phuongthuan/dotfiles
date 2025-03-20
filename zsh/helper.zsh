@@ -37,3 +37,57 @@ gpt() {
 gai() {
   open "https://gemini.google.com/gem/coding-partner"
 }
+
+so() {
+  local file=""$HOME/.config/zsh/"$1.zsh"
+
+  if [[ -z $1 ]]; then
+    source "$HOME/.zshrc"
+    echo -e "\033[32m Source .zshrc completed 🚀 \033[0m"
+  else
+    source "$file"
+    echo -e "\033[32m Source $1.zsh completed 🚀 \033[0m"
+  fi
+}
+
+# Bitwarden unlock vault
+bwu() {
+  local secret_file="$HOME/.config/zsh/secret.zsh"
+  local bw_session=$(bw unlock --raw)
+
+  if [[ -z "$bw_session" ]]; then
+    return 1
+  fi
+
+  echo "\n Unlocking your vault ... ⏳"
+
+  awk -v new_line="export BW_SESSION=\"$bw_session\"" '
+        /^export BW_SESSION=/ { print new_line; next }
+        { print }
+    ' "$secret_file" >"${secret_file}.tmp" && mv "${secret_file}.tmp" "$secret_file"
+
+  source $secret_file
+  echo "\033[32m Your vault was unlocked 🔓! \033[0m"
+}
+
+# Bitwarden get data
+bwg() {
+  local object=$1
+  local id=$2
+
+  # Validate inputs
+  if [[ -z "$object" || -z "$id" ]]; then
+    echo -e "\033[31mError: Missing arguments. Usage: bwg <object> <id>\033[0m"
+    return 1
+  fi
+
+  local data=$(bw get "$object" "$id" 2>/dev/null)
+
+  if [[ -n "$data" ]]; then
+    echo "$data" | pbcopy
+    echo -e "\n\033[32m Data copied to clipboard 📝\033[0m"
+  else
+    echo -e "\n\033[31m Data not found ❌\033[0m"
+    return 1
+  fi
+}
