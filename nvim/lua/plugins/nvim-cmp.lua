@@ -34,6 +34,7 @@ return {
     'hrsh7th/cmp-emoji',
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-path',
+    'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-nvim-lua',
     'octaltree/cmp-look',
   },
@@ -42,6 +43,7 @@ return {
     local luasnip = require('luasnip')
     local lspkind = require('lspkind')
     local icons = require('core.icons')
+    local copilot_cmp = require('copilot_cmp.comparators')
 
     luasnip.config.setup()
 
@@ -63,6 +65,9 @@ return {
         end,
       },
       completion = { completeopt = 'menu,menuone,noinsert' },
+      window = {
+        completion = cmp.config,
+      },
       mapping = {
         ['<C-p>'] = cmp.mapping.select_prev_item(),
         ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -124,7 +129,7 @@ return {
       sorting = {
         priority_weight = 2,
         comparators = {
-          require('copilot_cmp.comparators').prioritize,
+          copilot_cmp.prioritize,
 
           -- Below is the default comparator list and order for nvim-cmp
           cmp.config.compare.offset,
@@ -140,11 +145,12 @@ return {
         },
       },
       sources = {
-        { name = 'copilot', group_index = 2 },
         { name = 'nvim_lsp', group_index = 2 },
+        { name = 'copilot', group_index = 2 },
         { name = 'nvim_lua', group_index = 2 },
         { name = 'luasnip', group_index = 2 },
         { name = 'path', group_index = 2 },
+        { name = 'buffer', group_index = 2 },
         { name = 'emoji', group_index = 2 },
         -- {
         --   name = 'look',
