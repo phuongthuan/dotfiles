@@ -10,30 +10,20 @@ local xmap = mapper('x')
 local omap = mapper('o')
 
 -- Open today note
-local new_note_file = env.PERSONAL_NOTES
-  .. '/diary/'
-  .. os.date('%Y-%m-%d')
-  .. '.md'
+local new_note_file = env.PERSONAL_NOTES .. '/diary/' .. os.date('%Y-%m-%d') .. '.md'
 nmap('<leader>td', ':e ' .. new_note_file .. '<cr>', { noremap = false })
 
 -- Source Neovim configuration
 nmap(
   '<leader><leader>1',
-  ':source '
-    .. env.NVIM_CONFIG_DIR
-    .. '/init.lua'
-    .. '<cr>:echo " Reloaded Neovim config 🚀"<cr>'
+  ':source ' .. env.NVIM_CONFIG_DIR .. '/init.lua' .. '<cr>:echo " Reloaded Neovim config 🚀"<cr>'
 )
 
 -- Open file in same directory
 cmd([[ nnoremap ,e :e <C-R>=expand('%:p:h') . '/'<cr> ]])
 
 -- Open EH configuration
-nmap(
-  '<leader>eh',
-  ':e ' .. env.EH_CONFIG_FILE .. '<cr>',
-  { desc = 'Open EH configuration' }
-)
+nmap('<leader>eh', ':e ' .. env.EH_CONFIG_FILE .. '<cr>', { desc = 'Open EH configuration' })
 
 -- No need to keep holding shift
 nmap(';', ':', { silent = false })
@@ -107,11 +97,7 @@ mapper({ 'n', 'x' })('x', '"_x')
 xmap('<leader>p', '"_dP')
 
 -- Replace text
-nmap(
-  '<leader>rr',
-  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-  { silent = false }
-)
+nmap('<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { silent = false })
 
 -- Replace text in visual mode
 vmap('<leader>rr', [["zy:%s/<C-r><C-o>"/]], { silent = false })
@@ -128,21 +114,9 @@ vim.opt.hlsearch = true
 nmap('<Esc>', '<cmd>nohlsearch<cr>')
 
 -- Diagnostic keymaps
-nmap(
-  '[d',
-  vim.diagnostic.goto_prev,
-  { desc = 'Go to previous [D]iagnostic message' }
-)
-nmap(
-  ']d',
-  vim.diagnostic.goto_next,
-  { desc = 'Go to next [D]iagnostic message' }
-)
-nmap(
-  '<leader>e',
-  vim.diagnostic.open_float,
-  { desc = 'Show diagnostic [E]rror messages' }
-)
+nmap('[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
+nmap(']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+nmap('<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 -- nmap('<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
