@@ -30,10 +30,12 @@ return {
 
     -- Adds other completion capabilities.
     --  nvim-cmp does not ship with all sources by default. They are split
-    --  into multiple repos for maintenance purposes.
+    --  into multiple repositories for maintenance purposes.
     'hrsh7th/cmp-emoji',
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-path',
+    'hrsh7th/cmp-nvim-lua',
+    'octaltree/cmp-look',
   },
   config = function()
     local cmp = require('cmp')
@@ -124,7 +126,7 @@ return {
         comparators = {
           require('copilot_cmp.comparators').prioritize,
 
-          -- Below is the default comparitor list and order for nvim-cmp
+          -- Below is the default comparator list and order for nvim-cmp
           cmp.config.compare.offset,
           cmp.config.compare.scopes, --this is commented in nvim-cmp too
           cmp.config.compare.exact,
@@ -140,9 +142,20 @@ return {
       sources = {
         { name = 'copilot', group_index = 2 },
         { name = 'nvim_lsp', group_index = 2 },
+        { name = 'nvim_lua', group_index = 2 },
         { name = 'luasnip', group_index = 2 },
         { name = 'path', group_index = 2 },
         { name = 'emoji', group_index = 2 },
+        -- {
+        --   name = 'look',
+        --   group_index = 2,
+        --   keyword_length = 3,
+        --   option = {
+        --     convert_case = true,
+        --     loud = true,
+        --     -- dict = '/usr/share/dict/words',
+        --   },
+        -- },
       },
     })
   end,
