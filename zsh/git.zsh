@@ -191,8 +191,8 @@ oprb() {
   pr_url=$(gh pr view "$branch_name" --json url --jq '.url')
 
   if [ -n "$pr_url" ]; then
-    echo "⛳ Opening PR in Browser..."
-    echo -e "\033[32m$pr_url \033[0m"
+    echo "⛳ Opening PR in Browser \033[32m$pr_url \033[0m"
+    open "$pr_url"
   else
     return 1
   fi
