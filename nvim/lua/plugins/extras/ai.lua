@@ -1,5 +1,4 @@
 local prompts = {
-  -- Code related prompts
   Explain = 'Please explain how the following code works.',
   Review = 'Please review the following code and provide suggestions for improvement.',
   Tests = 'Please explain how the selected code works, then generate unit tests for it.',
@@ -8,21 +7,13 @@ local prompts = {
   FixError = 'Please explain the error in the following text and provide a solution.',
   BetterNamings = 'Please provide better names for the following variables and functions.',
   Documentation = 'Please provide documentation for the following code.',
-  -- Text related prompts
   Summarize = 'Please summarize the following text.',
   Spelling = 'Please correct any grammar and spelling errors in the following text.',
   Wording = 'Please improve the grammar and wording of the following text.',
   Concise = 'Please rewrite the following text to make it more concise.',
-  MyCustomPrompt = {
-    prompt = 'Explain how it works.',
-    system_prompt = 'You are very good at explaining stuff',
-    mapping = '<leader>ccmc',
-    description = 'My custom prompt description',
-  },
 }
 
 return {
-  { 'David-Kunz/gen.nvim' },
   {
     'zbirenbaum/copilot-cmp',
     config = function()
@@ -163,17 +154,27 @@ return {
         silent = true,
       },
       {
-        '<leader>cq',
+        '<leader>ai',
         function()
-          local input = vim.fn.input('Quick Chat: ')
+          local input = vim.fn.input('Ask AI 👽: ')
           if input ~= '' then
-            require('CopilotChat').ask(input, {
-              selection = require('CopilotChat.select').buffer,
-            })
+            vim.cmd('CopilotChat ' .. input)
           end
         end,
-        mode = 'v',
-        desc = 'Quick Chat',
+        mode = { 'n', 'v', 'x' },
+        desc = 'Ask Input',
+        silent = true,
+      },
+      {
+        '<leader>ap',
+        function()
+          require('CopilotChat').select_prompt({
+            context = {
+              'buffers',
+            },
+          })
+        end,
+        desc = 'CopilotChat - Prompt actions',
         silent = true,
       },
     },
