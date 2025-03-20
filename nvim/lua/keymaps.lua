@@ -40,13 +40,13 @@ nmap(';', ':', { silent = false })
 vmap(';', ':', { silent = false })
 
 -- Fast saving with <leader> and s
-nmap('<leader>s', ':w<cr>:echo " Saved current buffer ✅"<cr>')
+nmap('<leader>s', ':w<cr>:echo " Saved current file ✅"<cr>')
 
 -- :wq
 nmap('<leader>w', ':wq<cr>:echo " Git commit created ✅"<cr>')
 
 -- Saving all working buffers
-nmap('<leader>S', ':wa<cr>:echo " Saved all buffers ✅"<cr>')
+nmap('<leader>S', ':wa<cr>:echo " Saved all files ✅"<cr>')
 
 -- Map Esc to jk
 imap('jk', '<Esc>', { noremap = true })
