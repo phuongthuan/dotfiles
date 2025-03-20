@@ -63,4 +63,16 @@ return {
   --   },
   -- },
   { 'nvim-notify', opts = { background_colour = '#000000' } },
+  {
+    'uga-rosa/translate.nvim',
+    keys = {
+      {
+        '<leader>tt',
+        ':Translate Vi<CR>',
+        mode = { 'n', 'v' },
+        desc = 'Translate under cursor and selected text',
+        silent = true,
+      },
+    },
+  },
 }
