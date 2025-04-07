@@ -1,6 +1,6 @@
 alias nvim='~/nvim-macos-arm64/bin/nvim'
-alias lz='NVIM_APPNAME="lazyvim" ~/nvim-macos-arm64/bin/nvim'
-alias nks='NVIM_APPNAME="kickstart-nvim" ~/nvim-macos-arm64/bin/nvim'
+# alias lz='NVIM_APPNAME="lazyvim" ~/nvim-macos-arm64/bin/nvim'
+# alias nks='NVIM_APPNAME="kickstart-nvim" ~/nvim-macos-arm64/bin/nvim'
 
 alias arm="arch -arm64"
 alias intel="arch -x86_64"
@@ -77,9 +77,6 @@ alias gco='git checkout origin/master'
 alias gcg='git config --global'
 alias gpm='git pull origin master'
 
-# Github CLI
-alias ghpr='gh pr list --state open --author phuongthuan --repo Thinkei/frontend-core'
-
 # Docker
 alias dps='docker ps -a'
 alias ds='docker stop'
@@ -100,28 +97,12 @@ alias yp='yarn pack'
 alias yl='yarn link'
 alias yx='yarn nx'
 
-# mpd
-alias mpd_start="mpd --no-daemon --verbose ~/.config/mpd/mpd.conf; echo ' Server was stopped 🔻';" # start mpd server
-alias mpd_stop="mpd --kill ~/.config/mpd/mpd.conf; echo ' Stopped mpd server ✅';"                 # stop mpd server
-
-# mpc
-alias mpa='mpc add'
-alias mpcl='mpc clear'
-alias mpl='mpc clear && mpc load'
-alias mps='mpc stop && mpc clear'
-
-alias nls='npm ls --depth=0'
-alias nd='npm run dev'
-
-# Mobile Development
-alias bad='npx expo run:android'
-alias bi='npx expo run:ios'
-
 alias xc='xcrun simctl'
 alias xcl='xcrun simctl list devices'
 alias xcb='xcrun simctl boot 6790E0DD-55BB-42CA-97D2-7239DEF37A78'
 alias xcs='xcrun simctl shutdown 6790E0DD-55BB-42CA-97D2-7239DEF37A78'
 
 # Bitwarden CLI
-alias bws='bw list items --search'
+alias bwf='bw list items --search'
 alias bwd='bw delete item'
+alias bws='bw sync'

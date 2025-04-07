@@ -1,3 +1,16 @@
+# mpd
+alias mpd_start="mpd --no-daemon --verbose ~/.config/mpd/mpd.conf; echo ' Server was stopped 🔻';" # start mpd server
+alias mpd_stop="mpd --kill ~/.config/mpd/mpd.conf; echo ' Stopped mpd server ✅';"                 # stop mpd server
+
+# mpc
+alias mpa='mpc add'
+alias mpcl='mpc clear'
+alias mpl='mpc clear && mpc load'
+alias mps='mpc stop && mpc clear'
+
+alias nls='npm ls --depth=0'
+alias nd='npm run dev'
+
 # Extract audio from a Youtube video
 yt_dl() {
   if [ -z "$1" ]; then
