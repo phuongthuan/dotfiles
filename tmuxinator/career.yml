@@ -5,6 +5,6 @@ root: ~/Programming/EmploymentHero/career-page
 
 windows:
   - editor: nvim
-  - git: node -v
-  - logs: node -v
+  - git: nv
+  - logs:
   - worktree: j eh-worktree/career-page/worktree

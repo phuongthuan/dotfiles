@@ -3,7 +3,7 @@
 name: swag
 root: ~/Programming/EmploymentHero/ebf-swag-personal
 
-pre_window: asdf local nodejs <%= @settings["node_version"] %>
+pre_window: asdf set nodejs <%= @settings["node_version"] %>
 
 windows:
   - editor: nvim
@@ -11,7 +11,7 @@ windows:
   - logs:
       layout: main-vertical
       panes:
-        - node -v
-        - node -v
+        - nv
+        - nv
   - ios: cd example
   - worktree: j eh-worktree/ebf-swag-personal/worktree

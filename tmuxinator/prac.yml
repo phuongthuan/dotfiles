@@ -6,5 +6,5 @@ root: ~/Programming/Practices/
 
 windows:
   - dotfiles: dot
-  - ex-1:
-  - ex-2:
+  - ex-1: j dotfiles
+  - ex-2: j dotfiles

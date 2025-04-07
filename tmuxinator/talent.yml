@@ -3,12 +3,12 @@
 name: talent
 root: ~/Programming/EmploymentHero/talent-marketplace-app
 
-pre_window: asdf local nodejs 20.11.1
+pre_window: asdf set nodejs 20.11.1
 
 windows:
   - main: nvim
-  - terminal:
-  - logs: node -v
+  - terminal: nv
+  - logs:
   - git:
   - ios:
   - worktree: j eh-worktree/talent-marketplace-app/worktree

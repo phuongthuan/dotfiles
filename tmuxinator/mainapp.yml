@@ -5,8 +5,7 @@ root: ~/Programming/EmploymentHero/employment-hero
 
 windows:
   - editor: nvim
-  - server:
-      - rms
+  - server: rms
   - logs:
       - bundle install
       - rma # alias to run main-app -> Check alias.zsh for more information.

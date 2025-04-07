@@ -5,8 +5,7 @@ root: ~/Programming/EmploymentHero/marketplace-service
 
 windows:
   - editor: nvim
-  - terminal: ruby -v
+  - terminal: rv
   - worktree: j eh-worktree/marketplace-service/master
   - server:
-  - logs:
-      - ruby -v
+  - logs: rv

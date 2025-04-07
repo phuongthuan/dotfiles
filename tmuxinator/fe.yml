@@ -3,7 +3,7 @@
 name: fe-core
 root: ~/Programming/EmploymentHero/frontend-core
 
-# pre_window: asdf local nodejs 18.17.1
+pre_window: asdf set nodejs 20.18.1
 
 windows:
   - main: nvim
