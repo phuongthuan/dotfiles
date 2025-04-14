@@ -73,7 +73,6 @@ alias stp='git stash pop'
 alias gcm='git checkout origin/master'
 alias gmm='git merge master'
 alias gfo='git fetch origin'
-alias gco='git checkout origin/master'
 alias gcg='git config --global'
 alias gpm='git pull origin master'
 
