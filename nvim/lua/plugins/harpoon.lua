@@ -10,7 +10,7 @@ return {
     })
 
     -- Keymaps
-    nmap('<C-a>', '<cmd>lua require("harpoon.mark").add_file()<cr>:echo "Bookmarked 🌟"<cr>')
+    nmap('<C-a>', '<cmd>lua require("harpoon.mark").add_file()<cr>:echo " Bookmarked 🌟"<cr>')
     nmap('<C-e>', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>')
     nmap('<leader>1', '<cmd>lua require("harpoon.ui").nav_file(1)<cr>')
     nmap('<leader>2', '<cmd>lua require("harpoon.ui").nav_file(2)<cr>')
