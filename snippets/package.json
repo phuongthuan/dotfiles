@@ -1,9 +1,5 @@
 {
-  "name": "nvim-snippets",
-  "author": "phuongthuan",
-  "engines": {
-    "vscode": "^1.11.0"
-  },
+  "name": "LuaSnip",
   "contributes": {
     "snippets": [
       {

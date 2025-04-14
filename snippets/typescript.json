@@ -19,6 +19,11 @@
     "body": "import { ${2:originalName} as ${3:alias} } from '${1:module}';$0",
     "description": "Imports a specific portion of the module by assigning a local alias in ES6 syntax"
   },
+  "importReact": {
+    "prefix": "imr",
+    "body": "import React from 'react';$0",
+    "description": "Import React"
+  },
   "require": {
     "prefix": "rqr",
     "body": "require('${1:package}');",
@@ -194,12 +199,12 @@
     "body": ["const dispatch = useDispatch();$0"]
   },
   "it test case": {
-    "prefix": "it",
+    "prefix": "tit",
     "body": ["it('${1:should renders correctly}', () => {", "\t$2", "});$0"],
     "description": "single unit test syntax"
   },
   "it each test case": {
-    "prefix": "ite",
+    "prefix": "tite",
     "body": [
       "it.each`",
       "\tinput                     | output ",
@@ -211,40 +216,40 @@
     "description": "nultiple unit test syntax"
   },
   "expect getByText": {
-    "prefix": "egbt",
+    "prefix": "tegbt",
     "body": ["expect(screen.getByText(\"$1\")).toBeVisible();$0"]
   },
   "expect getByLabelText": {
-    "prefix": "egbl",
+    "prefix": "tegbl",
     "body": ["expect(screen.getByLabelText(\"$1\")).toBeVisible();$0"]
   },
   "expect await findByText": {
-    "prefix": "efbt",
+    "prefix": "tefbt",
     "body": ["expect(await screen.findByText(\"$1\")).toBeInTheDocument();$0"]
   },
   "expect queryByText": {
-    "prefix": "eqbt",
+    "prefix": "teqbt",
     "body": ["expect(screen.queryByText(\"$1\")).not.toBeInTheDocument();$0"]
   },
   "expect getByRole": {
-    "prefix": "egbr",
+    "prefix": "tegbr",
     "body": [
       "expect(screen.getByRole('${1:img}')).toHaveAttribute('src', '${2:url_link}');$0"
     ]
   },
   "fireEvent click": {
-    "prefix": "fec",
+    "prefix": "tfec",
     "body": [
       "fireEvent.click(screen.getByText('$1', { selector: 'button' }));$0"
     ]
   },
   "Intl formatMessage": {
-    "prefix": "intlf",
+    "prefix": "ehintlf",
     "body": "Intl.formatMessage({ id: '$1' })$0",
     "description": "redux-intl formatMessage method"
   },
   "Intl formatHTMLMessage": {
-    "prefix": "intlfhtml",
+    "prefix": "ehintlfhtml",
     "body": "Intl.formatHTMLMessage({ id: '$1' })$0",
     "description": "redux-intl formatHTMLMessage method"
   },
@@ -267,7 +272,7 @@
     "body": ["import { Intl } from 'redux-intl';$0"]
   },
   "import useTheme from @ehrocks/hero-theme": {
-    "prefix": "iht",
+    "prefix": "ehht",
     "body": ["import { useTheme } from '@ehrocks/hero-theme';$0"]
   },
   "useTheme": {
@@ -279,8 +284,8 @@
     "body": ["import styled from 'styled-components';$0"]
   },
   "import Component hero-design": {
-    "prefix": "ihd",
-    "body": ["import { $1 } from '@hero-design/react';$0"]
+    "prefix": "ehhd",
+    "body": ["import { ${1:Box} } from '@hero-design/rn';$0"]
   },
   "import lodash fp method": {
     "prefix": "ilo",
@@ -291,7 +296,7 @@
     "body": ["import { useSelector, useDispatch } from 'react-redux';"]
   },
   "import renderWithRedux hooks": {
-    "prefix": "irwr",
+    "prefix": "ehrwr",
     "body": [
       "import { renderWithRedux } from 'eh-test-helper';\n",
       "import { screen, fireEvent } from '@testing-library/react';\n",
@@ -299,9 +304,10 @@
     ]
   },
   "Typescript React Functional Component": {
-    "prefix": "tsrfc",
+    "prefix": "tscomp",
     "body": [
-      "import { Box } from '@hero-design/react';",
+      "import React from 'react';",
+      "import { Box } from '@hero-design/rn';",
       "",
       "type ${1}Props = {}",
       "",
@@ -315,7 +321,7 @@
     "description": "Create a Typescript React Function Component"
   },
   "describe block test": {
-    "prefix": "desc",
+    "prefix": "tdesc",
     "body": [
       "import { renderHook } from '@testing-library/react-hooks';",
       "import { screen, render, fireEvent } from '@testing-library/react';\n",
@@ -331,7 +337,7 @@
     "description": "describe unit test syntax"
   },
   "describe hr-web-app block test": {
-    "prefix": "deschr",
+    "prefix": "ehfetest",
     "body": [
       "import { renderWithRedux as render, mockFrontendEnv } from 'eh-test-helper';\n",
       "import { renderHook } from '@testing-library/react-hooks';",
@@ -349,7 +355,7 @@
     "description": "describe unit test syntax"
   },
   "useApi GET": {
-    "prefix": "uahg",
+    "prefix": "ehget",
     "body": [
       "import { getAtsServiceApiHost } from 'eh-utils/getFrontendEnv';",
       "import { useApi } from '@ehrocks/api';",
@@ -391,7 +397,7 @@
     "description": "useApi GET method"
   },
   "useApi POST": {
-    "prefix": "uahp",
+    "prefix": "ehpost",
     "body": [
       "import { decamelizeKeys } from 'eh-utils/formatObject';",
       "import { getAtsServiceApiHost } from 'eh-utils/getFrontendEnv';",
@@ -435,7 +441,7 @@
     "description": "useApi POST method"
   },
   "makeFetchAction GET": {
-    "prefix": "mfa",
+    "prefix": "ehmfa",
     "body": [
       "import { ApiConfig, makeFetchAction } from 'redux-api-call';",
       "import { createSelector } from 'reselect';",

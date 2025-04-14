@@ -1,4 +1,3 @@
-local env = require('core.env')
 local nmap = require('core.utils').mapper_factory('n')
 
 return {
@@ -62,11 +61,7 @@ return {
       --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
       --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend(
-        'force',
-        capabilities,
-        require('cmp_nvim_lsp').default_capabilities()
-      )
+      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -131,12 +126,7 @@ return {
             -- This handles overriding only values explicitly passed
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for tsserver)
-            server.capabilities = vim.tbl_deep_extend(
-              'force',
-              {},
-              capabilities,
-              server.capabilities or {}
-            )
+            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             require('lspconfig')[server_name].setup(server)
           end,
         },
@@ -148,19 +138,4 @@ return {
       nmap('<leader>ll', '<cmd>LspLog<cr>')
     end,
   },
-  -- { -- Typescript LSP server
-  --   'pmizio/typescript-tools.nvim',
-  --   dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-  --   opts = {},
-  -- },
-  -- { -- vtsls
-  --   'yioneko/nvim-vtsls',
-  --   ft = {
-  --     'javascript',
-  --     'javascriptreact',
-  --     'typescript',
-  --     'typescriptreact',
-  --   },
-  --   dependencies = { 'nvim-lspconfig' },
-  -- },
 }
