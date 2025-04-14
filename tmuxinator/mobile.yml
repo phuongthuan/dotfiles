@@ -3,7 +3,7 @@
 name: mobile
 root: ~/Programming/EmploymentHero/eh-mobile-pro
 
-pre_window: asdf set nodejs <%= @settings["node_version"] %>
+pre_window: asdf set nodejs 20.11.1
 
 windows:
   - editor: nvim

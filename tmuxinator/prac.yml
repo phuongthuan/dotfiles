@@ -2,7 +2,7 @@
 # Tmux template for practice or free coding
 
 name: prac
-root: ~/Programming/Practices/
+root: ~/Programming/Practices
 
 windows:
   - dotfiles: dot
