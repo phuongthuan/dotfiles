@@ -76,9 +76,17 @@ opl() {
 push_and_open_pr() {
   # Commit changes
   git commit -m "$message" --no-verify
+  if [ $? -ne 0 ]; then
+    echo -e "\n\033[31m❌ Commit failed, please stage the files before commit \033[0m"
+    return 1
+  fi
 
   # Push to origin
   response=$(git push origin HEAD --no-verify 2>&1)
+  if [ $? -ne 0 ]; then
+    echo -e "\n\033[31m❌ Push failed \033[0m"
+    return 1
+  fi
 
   # Extract the URL from the output
   new_pr_url=$(echo "$response" | grep -oE 'https://github\.com/[^[:space:]]+/pull/new/[^[:space:]]+')
