@@ -110,6 +110,13 @@ nmap(
   { noremap = true }
 )
 
+-- Copy the content of current file to clipboard
+nmap(
+  '<leader>cP',
+  [[:%y+<cr>:echo "Content of " . expand("%:p") . " copied to clipboard 📝"<cr>]],
+  { noremap = true }
+)
+
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 nmap('<Esc>', '<cmd>nohlsearch<cr>')
