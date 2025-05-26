@@ -17,6 +17,11 @@ return {
           opts = { vertical = true },
           desc = 'Open the entry in a vertical split',
         },
+        ['<C-h>'] = {
+          'actions.select',
+          opts = { horizontal = true },
+          desc = 'Open the entry in a horizontal split',
+        },
         ['<C-r>'] = 'actions.refresh',
         ['gd'] = {
           desc = 'Toggle file detail view',

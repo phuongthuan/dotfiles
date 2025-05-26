@@ -107,19 +107,19 @@ return {
         desc = 'Fix Code Issues',
         silent = true,
       },
-      {
-        '<leader>cm',
-        ':CopilotChatCommit<CR>',
-        desc = 'Generate Commit Message',
-        silent = true,
-      },
-      {
-        '<leader>cs',
-        ':CopilotChatCommit<CR>',
-        mode = 'v',
-        desc = 'Generate Commit for Selection',
-        silent = true,
-      },
+      -- {
+      --   '<leader>cm',
+      --   ':CopilotChatCommit<CR>',
+      --   desc = 'Generate Commit Message',
+      --   silent = true,
+      -- },
+      -- {
+      --   '<leader>cs',
+      --   ':CopilotChatCommit<CR>',
+      --   mode = 'v',
+      --   desc = 'Generate Commit for Selection',
+      --   silent = true,
+      -- },
       {
         '<leader>cd',
         ':CopilotChatDocs<CR>',
@@ -127,13 +127,13 @@ return {
         desc = 'Generate Docs',
         silent = true,
       },
-      {
-        '<leader>cd',
-        ':CopilotChatTests<CR>',
-        mode = 'v',
-        desc = 'Generate Tests',
-        silent = true,
-      },
+      -- {
+      --   '<leader>cd',
+      --   ':CopilotChatTests<CR>',
+      --   mode = 'v',
+      --   desc = 'Generate Tests',
+      --   silent = true,
+      -- },
       {
         '<leader>cr',
         ':CopilotChatReview<CR>',
@@ -190,8 +190,8 @@ return {
       chat.setup(opts)
 
       vim.keymap.set('n', '<leader>cs', ':CopilotChatStop<CR>', { silent = true })
-      vim.keymap.set('n', '<leader>cw', ':CopilotChatSave')
-      vim.keymap.set('n', '<leader>cl', ':CopilotChatLoad')
+      -- vim.keymap.set('n', '<leader>cw', ':CopilotChatSave')
+      -- vim.keymap.set('n', '<leader>cl', ':CopilotChatLoad')
     end,
     event = 'VeryLazy',
   },

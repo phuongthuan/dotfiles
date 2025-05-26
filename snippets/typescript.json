@@ -161,6 +161,16 @@
     "body": ["const $1 = useContext($2);$0"],
     "description": "React useContext() hook"
   },
+  "useFormContext": {
+    "prefix": "ufch",
+    "body": ["const { ${1:control} } = useFormContext($2);$0"],
+    "description": "React Hook Form useFormContext() hook"
+  },
+  "useForm": {
+    "prefix": "ufh",
+    "body": ["const { ${1:control}, handleSubmit } = useForm($2);$0"],
+    "description": "React Hook Form useForm() hook"
+  },
   "useCallback": {
     "prefix": "ucbh",
     "body": [
@@ -334,7 +344,7 @@
       "\t});",
       "});$0"
     ],
-    "description": "describe unit test syntax"
+    "description": "frontend-core block test"
   },
   "describe hr-web-app block test": {
     "prefix": "ehfetest",
@@ -353,6 +363,20 @@
       "});$0"
     ],
     "description": "describe unit test syntax"
+  },
+  "describe eh-mobile-pro block test": {
+    "prefix": "ehmbtest",
+    "body": [
+      "import { screen } from '@testing-library/react-native';\n",
+      "import { renderWithRHForm as render } from 'testUtils';",
+      "import $1 from '../$1';\n",
+      "jest.unmock('react-redux');\n",
+      "describe('$1', () => {",
+      "\tit('${2:should renders correctly}', () => {",
+      "\t\t$3",
+      "\t});",
+      "});$0"
+    ]
   },
   "useApi GET": {
     "prefix": "ehget",
@@ -495,5 +519,91 @@
       "$0"
     ],
     "description": "makeFetchAction GET"
+  },
+  "useApiQuery hook": {
+    "prefix": "uaq",
+    "body": [
+      "import { useSelector } from 'react-redux';",
+      "import useApiQuery from '../shared/useApiQuery';",
+      "import { currentMemberIDSelector, currentOrgIDSelector } from '../../../libraries/sessions';",
+      "import { getEnvironmentConfig } from '../../../libraries/switch-environment';",
+      "import { MemberInfoData } from '../../../components/swagProfile/PersonalDetails/types';",
+      "import { ApiClientType } from '../../../api';",
+      "import useApiQueryClient from '../shared/useApiQueryClient';",
+      "",
+      "type ResponseData = {",
+      "  data: MemberInfoData;",
+      "};",
+      "",
+      "const QUERY_KEY = 'GetMemberInfo';",
+      "const STALE_TIME = 5 * 60 * 1000;",
+      "",
+      "export const ${1} = () => {",
+      "  const orgID = useSelector(currentOrgIDSelector);",
+      "",
+      "  return useApiQueryClient({",
+      "    queryKey: [QUERY_KEY, orgID],",
+      "  });",
+      "};",
+      "",
+      "const ${1} = () => {",
+      "  const orgID = useSelector(currentOrgIDSelector);",
+      "  const memberID = useSelector(currentMemberIDSelector);",
+      "",
+      "  return useApiQuery<ResponseData>({",
+      "    generateRequestConfig: () => ({",
+      "      url: `${getEnvironmentConfig().HOST}/api/v3/organisations/${orgID}/members/me`,",
+      "      method: 'GET',",
+      "    }),",
+      "    queryKey: [QUERY_KEY, orgID, memberID],",
+      "    apiClientType: ApiClientType.EH,",
+      "    staleTime: STALE_TIME,",
+      "  });",
+      "};",
+      "",
+      "export default ${1};",
+      "$0"
+    ]
+  },
+  "useApiMutation hook": {
+    "prefix": "uam",
+    "body": [
+      "import { useSelector } from 'react-redux';",
+      "import { currentOrgIDSelector } from '../../../libraries/sessions';",
+      "import useApiMutation from '../shared/useApiMutation';",
+      "import { getEnvironmentConfig } from '../../../libraries/switch-environment';",
+      "import { ApiClientType } from '../../../api';",
+      "import { useGetMemberInfoClient } from './useGetMemberInfo';",
+      "",
+      "const ${1} = ({",
+      "  onSuccess,",
+      "  onError,",
+      "}: {",
+      "  onSuccess?: () => void;",
+      "  onError?: (error: unknown) => void;",
+      "}) => {",
+      "  const orgID = useSelector(currentOrgIDSelector);",
+      "  const { invalidateQueries } = useGetMemberInfoClient();",
+      "",
+      "  return useApiMutation({",
+      "    generateRequestConfig: params => ({",
+      "      url: `${getEnvironmentConfig().HOST}/api/v3/organisations/${orgID}/members/me`,",
+      "      method: 'PUT',",
+      "      data: params,",
+      "    }),",
+      "    apiClientType: ApiClientType.EH,",
+      "    mutationKey: ['updatePersonalDetails'],",
+      "    onSuccess: () => {",
+      "      invalidateQueries();",
+      "",
+      "      onSuccess?.();",
+      "    },",
+      "    onError,",
+      "  });",
+      "};",
+      "",
+      "export default ${1};",
+      "$0"
+    ]
   }
 }

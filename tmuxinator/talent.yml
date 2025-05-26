@@ -9,6 +9,5 @@ windows:
   - main: nvim
   - terminal: nv
   - logs:
-  - git:
   - ios:
   - worktree: j eh-worktree/talent-marketplace-app/worktree
