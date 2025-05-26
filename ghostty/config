@@ -1,0 +1,19 @@
+theme = GruvboxDark
+
+font-family = DankMono Nerd Font Mono
+font-size = 18
+mouse-hide-while-typing = true
+background-opacity = 0.9
+
+keybind = super+a>n=new_window
+keybind = super+a>r=reload_config
+
+# window configs
+window-subtitle = false
+window-decoration = none
+# maximize = true
+# fullscreen = true
+# macos-non-native-fullscreen=visible-menu
+
+cursor-style = block
+# cursor-opacity = 0.9
