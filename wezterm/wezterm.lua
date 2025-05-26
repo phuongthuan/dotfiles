@@ -7,9 +7,9 @@ local config = wezterm.config_builder()
 config.window_background_opacity = 0.95
 
 -- Font configuration
--- config.font = wezterm.font("Dank Mono", { weight = "Regular" })
-config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Regular" })
-config.font_size = 13.5
+config.font = wezterm.font("DankMono Nerd Font Mono", { weight = "Bold" })
+-- config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Regular" })
+config.font_size = 17
 
 -- Remove all padding
 config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }

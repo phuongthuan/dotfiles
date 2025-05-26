@@ -83,9 +83,11 @@ push_and_open_pr() {
 
   # Push to origin
   response=$(git push origin HEAD --no-verify 2>&1)
-  if [ $? -ne 0 ]; then
+  exit_code=$?
+  if [ $exit_code -ne 0 ]; then
     echo -e "\n\033[31m❌ Push failed \033[0m"
-    return 1
+    echo -e "\n\033[31m$response \033[0m"
+    return $exit_code
   fi
 
   # Extract the URL from the output

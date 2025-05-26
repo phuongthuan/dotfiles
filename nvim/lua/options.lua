@@ -113,6 +113,7 @@ vim.opt.synmaxcol = 240 -- max column for syntax highlight
 vim.opt.formatoptions:append({ 'r' })
 
 vim.cmd([[
-  hi Cursor2 guifg=#fe8019 guibg=#fe8019
-  set guicursor=i-r-v-ci:block-Cursor2
+  hi CursorN guifg=#fbf1c7 guibg=#fbf1c7
+  hi CursorI guifg=#fb4934 guibg=#fb4934
+  set guicursor=n:block-CursorN,i-r-v-ci:block-CursorI
 ]])
