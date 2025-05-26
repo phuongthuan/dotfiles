@@ -11,9 +11,6 @@ keybind = super+a>r=reload_config
 # window configs
 window-subtitle = false
 window-decoration = none
-# maximize = true
-# fullscreen = true
-# macos-non-native-fullscreen=visible-menu
 
-cursor-style = block
+# cursor-style = block
 # cursor-opacity = 0.9
