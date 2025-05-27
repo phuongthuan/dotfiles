@@ -20,7 +20,7 @@ nmap(
 )
 
 -- Open file in same directory
-cmd([[ nnoremap ,e :e <C-R>=expand('%:p:h') . '/'<cr> ]])
+-- cmd([[ nnoremap ,e :e <C-R>=expand('%:p:h') . '/'<cr> ]])
 
 -- Open EH configuration
 nmap('<leader>eh', ':e ' .. env.EH_CONFIG_FILE .. '<cr>', { desc = 'Open EH configuration' })

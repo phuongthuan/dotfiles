@@ -16,13 +16,10 @@ return {
     local bufremove = require('mini.bufremove')
     bufremove.setup({})
 
-    vim.keymap.set('n', '<leader>z', function()
+    vim.keymap.set('n', '<leader>dB', function()
       local bd = bufremove.delete
       if vim.bo.modified then
-        local choice = vim.fn.confirm(
-          ('Save changes to %q?'):format(vim.fn.bufname()),
-          '&Yes\n&No\n&Cancel'
-        )
+        local choice = vim.fn.confirm(('Save changes to %q?'):format(vim.fn.bufname()), '&Yes\n&No\n&Cancel')
         if choice == 1 then -- Yes
           vim.cmd.write()
           bd(0)
