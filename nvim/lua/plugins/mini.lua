@@ -2,15 +2,25 @@ return {
   'echasnovski/mini.nvim',
   version = false,
   config = function()
-    -- Better Around/Inside textobjects
-    --
-    -- Examples:
-    --  - va)  - [V]isually select [A]round [)]paren
-    --  - yinq - [Y]ank [I]nside [N]ext [']quote
-    --  - ci'  - [C]hange [I]nside [']quote
     require('mini.ai').setup({ n_lines = 500 })
     require('mini.pairs').setup()
+    require('mini.icons').setup()
     require('mini.starter').setup()
+
+    require('mini.files').setup({
+      mappings = {
+        go_in = '<CR>',
+        go_in_plus = 'L',
+        go_out = '-',
+        go_out_plus = 'H',
+      },
+    })
+    -- keymaps
+    vim.keymap.set('n', '<leader>ee', '<cmd>lua MiniFiles.open()<CR>', { desc = 'Toggle Mini Files Explorer' })
+    vim.keymap.set('n', '<leader>ef', function()
+      MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
+      MiniFiles.reveal_cwd()
+    end, { desc = 'Toggle Current Opened File' })
 
     -- remove buffer
     local bufremove = require('mini.bufremove')
