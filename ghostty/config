@@ -1,16 +1,35 @@
 theme = GruvboxDark
 
-font-family = DankMono Nerd Font Mono
-font-size = 18
-mouse-hide-while-typing = true
-background-opacity = 0.9
+# Font settings
+font-family = FiraCode Nerd Font Mono
+font-family-bold = FiraCode Nerd Font Mono Bold
+font-family-italic = VictorMono Nerd Font Light Italic
+font-family-bold-italic = VictorMono Nerd Font Bold Italic
 
-keybind = super+a>n=new_window
-keybind = super+a>r=reload_config
+font-size = 18
+
+mouse-hide-while-typing = true
+
+# background = #000000
+background-opacity = 0.9
+# background-blur = true
 
 # window configs
-window-subtitle = false
-window-decoration = none
+# window-subtitle = false
+window-decoration = true
+window-padding-x = 10
+window-padding-y = 10
+window-padding-balance = true
+macos-titlebar-style = hidden
 
 # cursor-style = block
 # cursor-opacity = 0.9
+cursor-style-blink = false
+
+auto-update = check
+auto-update-channel = stable
+
+copy-on-select = clipboard
+
+# Custom Keybindings & Configs
+keybind = super+a>r=reload_config
