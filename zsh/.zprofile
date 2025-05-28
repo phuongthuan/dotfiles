@@ -3,6 +3,10 @@
 PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
 export PATH
 
+# Add Ruby Gem executables directory to PATH
+PATH="$HOME/.asdf/installs/ruby/3.1.4/bin:$PATH"
+export PATH
+
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 export ZSH="$HOME/.oh-my-zsh"
@@ -17,8 +21,6 @@ export SECRET_ENV_FILE='~/.dotfiles/zsh/secret.zsh'
 export EDITOR="nvim"
 export REACT_EDITOR="nvim"
 export NVIM_CONFIG_DIR="~/.config/nvim"
-export LAZYVIM_CONFIG="~/.config/lazyvim/init.lua"
-export LAZYVIM_CONFIG_DIR="~/.config/lazyvim"
 
 export GITHUB_USERNAME="phuongthuan"
 
