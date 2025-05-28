@@ -5,7 +5,6 @@ return {
   NVIM_USE_VTSLS = vim.env.NVIM_USE_VTSLS and true or false,
   DOTFILES = vim.env.DOTFILES or '~/.dotfiles',
   NVIM_CONFIG_DIR = vim.env.NVIM_CONFIG_DIR or '~/.config/nvim',
-  LAZYVIM_CONFIG_DIR = vim.env.LAZYVIM_CONFIG_DIR or '~/.config/lazyvim',
   EH_CONFIG_DIR = vim.env.EH_CONFIG_DIR or '~/.config/eh',
   REFERENCES_DIR = vim.env.REFERENCES_DIR or '~/Programming/References',
   PERSONAL_NOTES = vim.env.PERSONAL_NOTES or '~/Documents/Notes',
