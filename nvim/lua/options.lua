@@ -70,23 +70,13 @@ vim.opt.shortmess = 'c' -- don't show completion messages
 vim.opt.syntax = 'enable' -- enable syntax highlighting
 vim.opt.number = true -- show line number
 vim.opt.showmatch = true -- highlight matching parenthesis
-vim.opt.foldmethod = 'marker' -- enable folding (default 'foldmarker')
--- vim.opt.foldmethod = 'indent'
--- vim.opt.foldlevel = 1
--- vim.api.nvim_buf_set_keymap(
---   0,
---   'n',
---   'zj',
---   ':lua NavigateFold("j")<CR>',
---   { noremap = true, silent = true }
--- )
--- vim.api.nvim_buf_set_keymap(
---   0,
---   'n',
---   'zk',
---   ':lua NavigateFold("k")<CR>',
---   { noremap = true, silent = true }
--- )
+
+-- Folding (nvim-ufo)
+vim.o.foldenable = true -- Enable folding by default
+vim.o.foldmethod = 'manual' -- Default fold method (change as needed)
+vim.o.foldlevel = 99 -- Open most folds by default
+vim.o.foldcolumn = '0'
+
 vim.opt.colorcolumn = '' -- line lenght marker at 80 columns, "" mean hide it
 vim.opt.splitright = true -- vertical split to the right
 vim.opt.splitbelow = true -- horizontal split to the bottom
@@ -112,6 +102,7 @@ vim.opt.synmaxcol = 240 -- max column for syntax highlight
 -- Add asterisks in block comments
 vim.opt.formatoptions:append({ 'r' })
 
+-- Cursor highlighting
 vim.cmd([[
   hi CursorN guifg=#fbf1c7 guibg=#fbf1c7
   hi CursorI guifg=#fb4934 guibg=#fb4934
