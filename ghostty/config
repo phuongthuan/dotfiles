@@ -6,25 +6,26 @@ font-family-bold = FiraCode Nerd Font Mono Bold
 font-family-italic = VictorMono Nerd Font Light Italic
 font-family-bold-italic = VictorMono Nerd Font Bold Italic
 
-font-size = 18
+font-size = 16
 
-mouse-hide-while-typing = true
-
-# background = #000000
-background-opacity = 0.9
+background = #000000
 # background-blur = true
+background-opacity = 0.6
+background-blur-radius = 30
 
 # window configs
-# window-subtitle = false
-window-decoration = true
+window-subtitle = false
+window-decoration = none
 window-padding-x = 10
 window-padding-y = 10
 window-padding-balance = true
-macos-titlebar-style = hidden
+# macos-titlebar-style = hidden
 
 # cursor-style = block
-# cursor-opacity = 0.9
+cursor-opacity = 0.9
 cursor-style-blink = false
+# cursor-invert-fg-bg = true
+mouse-hide-while-typing = true
 
 auto-update = check
 auto-update-channel = stable
