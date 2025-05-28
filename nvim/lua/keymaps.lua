@@ -160,22 +160,6 @@ nmap('<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 nmap('<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 nmap('<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
--- Vim-fugitive
-nmap('<leader>g', ':G<cr>')
-nmap('<leader>gp', ':G push origin HEAD<cr>')
-nmap('<leader>P', ':G push origin HEAD --no-verify<cr>')
-nmap('<leader>gP', ':G push origin HEAD -f<cr>')
-nmap('<leader>gM', ':G push origin master<cr>')
-nmap('<leader>gl', ':GV<cr>')
-nmap('<leader>gL', ":GV <C-R>=expand('%:p')<cr><cr>")
-nmap('<leader>gm', ':G merge<Space>')
--- Resolve conflict
-nmap('<leader>grc', ':Gvdiffsplit!<cr>')
-nmap('<leader>op', ':!oprl atsmobile<CR>')
--- on the Gvdiffsplit mode
--- d2o : get the left column
--- d3o : get the right column
-
 -- mpc for Music Player Daemon (MPD)
 -- silent to prevent neovim display message after command executed
 -- nmap('<leader>mn', ':mpc next<cr>:echo " Next song ♫ "<cr>')

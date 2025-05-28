@@ -1,20 +1,4 @@
 return {
-  -- Git plugins
-  'tpope/vim-fugitive',
-  'junegunn/gv.vim',
-  {
-    'mbbill/undotree',
-    cmd = 'UndotreeToggle',
-    keys = {
-      {
-        '<leader>U',
-        '<cmd>UndotreeToggle<cr>',
-        desc = 'Toggle Undo tree',
-      },
-    },
-  },
-
-  'tpope/vim-rhubarb',
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'tpope/vim-endwise',
 
