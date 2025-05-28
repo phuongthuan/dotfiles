@@ -25,6 +25,10 @@ require('lazy').setup({
   require('plugins.extras.ai'),
   require('plugins.extras.noice'),
 }, {
+  checker = {
+    enabled = true,
+    notify = false,
+  },
   change_detection = {
     notify = false,
   },

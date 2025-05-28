@@ -18,11 +18,11 @@ vim.g.maplocalleader = ' '
 -- [[ Setting options ]]
 require('options')
 
--- [[ Basic Keymaps ]]
+-- [[ Keymaps ]]
 require('keymaps')
 
 -- [[ Commands ]]
 require('commands')
 
--- [[ Configure and install plugins ]]
+-- [[ Manage plugins ]]
 require('lazynvim')
