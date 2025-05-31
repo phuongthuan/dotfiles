@@ -7,7 +7,13 @@ pre_window: asdf set nodejs 20.11.1
 
 windows:
   - editor: nvim
-  - terminal: nv
-  - logs:
+  - terminal:
+  - worktree-test: cd ~/Programming/EmploymentHero/eh-worktree/eh-mobile-pro/test
+  - worktree-dev: cd ~/Programming/EmploymentHero/eh-worktree/eh-mobile-pro/worktree
+  - metro:
+      layout: main-vertical
+      panes:
+        - nv
+        - nv
   - ios:
-  - worktree: j eh-worktree/eh-mobile-pro/worktree
+  - android:
