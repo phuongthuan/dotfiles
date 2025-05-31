@@ -1,12 +1,18 @@
 theme = GruvboxDark
 
 # Font settings
-font-family = FiraCode Nerd Font Mono
-font-family-bold = FiraCode Nerd Font Mono Bold
-font-family-italic = VictorMono Nerd Font Light Italic
-font-family-bold-italic = VictorMono Nerd Font Bold Italic
+font-family = JetBrainsMonoNL Nerd Font Mono
 
-font-size = 16
+# font-family = FiraCode Nerd Font Mono
+# font-style = Regular
+# font-family-bold = FiraCode Nerd Font Mono Bold
+# font-family-italic = Victor Mono Medium Italic
+# font-family-bold-italic = Victor Mono Bold Italic
+
+# font-thicken = true
+# font-thicken-strength = 50
+
+font-size = 15
 
 background = #000000
 # background-blur = true
@@ -32,5 +38,12 @@ auto-update-channel = stable
 
 copy-on-select = clipboard
 
-# Custom Keybindings & Configs
-keybind = super+a>r=reload_config
+# Custom Keybinds & Config (super represents cmd key on mac)
+keybind = super+b>r=reload_config
+keybind = super+b>x=close_surface
+
+keybind = super+b>,=toggle_quick_terminal
+
+# Splitting
+keybind = super+b>\=new_split:right
+keybind = super+b>-=new_split:down
