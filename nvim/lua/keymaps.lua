@@ -1,4 +1,3 @@
-local cmd = vim.cmd
 local env = require('core.env')
 local mapper = require('core.utils').mapper_factory
 
@@ -142,10 +141,6 @@ nmap('<M-Left>', ':vertical resize +2<CR>')
 nmap('<M-Right>', ':vertical resize -2<CR>')
 
 -- Prevent to used arrow keys ;)
--- nmap('<up>', '<nop>')
--- nmap('<down>', '<nop>')
--- nmap('<left>', '<nop>')
--- nmap('<right>', '<nop>')
 nmap('<left>', '<cmd>echo "Use h to move ❌"<cr>')
 nmap('<right>', '<cmd>echo "Use l to move ❌"<cr>')
 nmap('<up>', '<cmd>echo "Use k to move ❌"<cr>')

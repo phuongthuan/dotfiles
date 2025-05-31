@@ -69,10 +69,10 @@ return {
     'rcarriga/nvim-notify',
     opts = {
       background_colour = '#000000',
-      -- top_down = false,
-      render = 'compact',
       stages = 'fade',
-      icons = { INFO = ' 🐸', ERROR = ' ❌' },
+      icons = { INFO = '🐸', ERROR = '❌', WARN = '🌟' },
+      -- top_down = false,
+      -- render = 'compact',
     },
   },
 }
