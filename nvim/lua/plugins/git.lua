@@ -51,17 +51,6 @@ return {
   'junegunn/gv.vim', -- Display Git commits list
   'tpope/vim-rhubarb', -- For :GBrowse usages
   {
-    'mbbill/undotree',
-    cmd = 'UndotreeToggle',
-    keys = {
-      {
-        '<leader>U',
-        '<cmd>UndotreeToggle<cr>',
-        desc = 'Toggle Undo tree',
-      },
-    },
-  },
-  {
     'lewis6991/gitsigns.nvim',
     opts = {
       signs = {
@@ -97,6 +86,17 @@ return {
     },
   },
   {
+    'mbbill/undotree',
+    cmd = 'UndotreeToggle',
+    keys = {
+      {
+        '<leader>U',
+        '<cmd>UndotreeToggle<cr>',
+        desc = 'Toggle Undo Tree',
+      },
+    },
+  },
+  {
     'ThePrimeagen/git-worktree.nvim',
     dependencies = {
       'nvim-lua/plenary.nvim',
@@ -105,7 +105,6 @@ return {
 
     config = function()
       local gitworktree = require('git-worktree')
-
       gitworktree.setup()
 
       require('telescope').load_extension('git_worktree')

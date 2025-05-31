@@ -220,3 +220,9 @@ oga() {
     return 1
   fi
 }
+
+sta() {
+  local index=${1:-0} # Default index is 0 if not provided
+  echo -e "\n\033[32mApplying stash $index... \033[0m\n"
+  git stash apply stash@{$index}
+}
