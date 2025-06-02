@@ -6,7 +6,7 @@ root: ~/Programming/EmploymentHero/ebf-swag-personal
 pre_window: asdf set nodejs 20.11.1
 
 windows:
-  - editor: nvim
+  - editor: vi
   - terminal:
   - logs:
       layout: main-vertical

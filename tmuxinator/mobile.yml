@@ -6,7 +6,7 @@ root: ~/Programming/EmploymentHero/eh-mobile-pro
 pre_window: asdf set nodejs 20.11.1
 
 windows:
-  - editor: nvim
+  - editor: vi
   - terminal:
   - worktree-test: cd ~/Programming/EmploymentHero/eh-worktree/eh-mobile-pro/test
   - worktree-dev: cd ~/Programming/EmploymentHero/eh-worktree/eh-mobile-pro/worktree

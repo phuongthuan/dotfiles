@@ -1,4 +1,4 @@
-alias nvim='~/nvim-macos-arm64/bin/nvim'
+alias vi='~/nvim-macos-arm64/bin/nvim'
 # alias lz='NVIM_APPNAME="lazyvim" ~/nvim-macos-arm64/bin/nvim'
 
 alias arm="arch -arm64"

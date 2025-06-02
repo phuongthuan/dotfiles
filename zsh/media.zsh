@@ -38,3 +38,16 @@ mppl() {
     mpc playlist -f "%title%" "$1"
   fi
 }
+
+rename_last_recording_video() {
+  # Get the latest recording video
+  latest=$(ls -t ~/Pictures/recording/*.mov | head -n 1)
+
+  if [[ -n "$latest" ]]; then
+    mv "$latest" ~/Pictures/recording/$1.mov
+    echo -e "\033[32mRenamed file! \033[0m"
+  else
+    echo -e "\033[31mNo recording video found.\033[0m"
+    return 1
+  fi
+}

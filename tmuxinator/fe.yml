@@ -6,7 +6,7 @@ root: ~/Programming/EmploymentHero/frontend-core
 pre_window: asdf set nodejs 20.18.1
 
 windows:
-  - main: nvim
+  - main: vi
   - terminal:
   - logs:
   - worktree: j eh-worktree/frontend-core/hotfix-fe-core
