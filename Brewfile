@@ -8,7 +8,7 @@ tap "universal-ctags/universal-ctags"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.9"
 # Shell extension to jump to frequently used directories
-brew "autojump"
+brew "zoxide"
 # Programmable completion for Bash 3.2
 brew "bash-completion"
 # Cross-platform make
