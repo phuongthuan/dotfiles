@@ -98,103 +98,103 @@ return {
 
     -- See `:help telescope.builtin`
     local builtin = require('telescope.builtin')
-    nmap('<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
+    -- nmap('<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
     nmap('<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-    nmap('<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
-    nmap('<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
-    nmap('<leader>rs', builtin.resume, { desc = '[S]earch [R]esume' })
-    nmap('<leader>r', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-    nmap('<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
-
+    -- nmap('<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
+    -- nmap('<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
+    -- nmap('<leader>rs', builtin.resume, { desc = '[S]earch [R]esume' })
+    -- nmap('<leader>r', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+    -- nmap('<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+    --
     -- Slightly advanced example of overriding default behavior and theme
-    nmap('<leader>f', function()
-      -- You can pass additional configuration to Telescope to change the theme, layout, etc.
-      builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
-        winblend = 10,
-        previewer = false,
-      }))
-    end, { desc = '[/] Fuzzily search in current buffer' })
+    -- nmap('<leader>f', function()
+    --   -- You can pass additional configuration to Telescope to change the theme, layout, etc.
+    --   builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
+    --     winblend = 10,
+    --     previewer = false,
+    --   }))
+    -- end, { desc = '[/] Fuzzily search in current buffer' })
+    --
+    -- nmap('<leader>sdf', function()
+    --   builtin.find_files({
+    --     prompt_title = '🔭 Dotfiles',
+    --     cwd = env.DOTFILES,
+    --     hidden = true,
+    --   })
+    -- end, { desc = '[S]earch [D]ot[F]iles' })
+    --
+    -- nmap('<leader>fn', function()
+    --   builtin.find_files({
+    --     prompt_title = '🔭 Note Files',
+    --     cwd = env.PERSONAL_NOTES,
+    --     hidden = true,
+    --   })
+    -- end, { desc = '[S]earch all [N]ote files' })
+    --
+    -- nmap('<leader>sn', function()
+    --   builtin.live_grep({
+    --     prompt_title = '🔭 Grep Notes',
+    --     cwd = env.PERSONAL_NOTES,
+    --     -- layout_config = { preview_width = 0.65 },
+    --     hidden = true,
+    --   })
+    -- end, { desc = '[S]earch for a string in the [N]ote folder' })
+    --
+    -- nmap(';f', function()
+    --   builtin.find_files({
+    --     propmt_title = '🔭 Files',
+    --     no_ignore = false,
+    --     hidden = true,
+    --   })
+    -- end, {
+    --   desc = 'Search all [F]iles in the current working directory, respects .gitignore',
+    -- })
+    --
+    -- nmap(';r', function()
+    --   builtin.live_grep({
+    --     propmt_title = '🔭 Live Grep String',
+    --     additional_args = { '--hidden' },
+    --     grep_open_files = true,
+    --     layout_strategy = 'vertical',
+    --   })
+    -- end, {
+    --   desc = '[S]earch for a string in the current open buffers and get results live as typed, respects .gitignore',
+    -- })
 
-    nmap('<leader>sdf', function()
-      builtin.find_files({
-        prompt_title = '🔭 Dotfiles',
-        cwd = env.DOTFILES,
-        hidden = true,
-      })
-    end, { desc = '[S]earch [D]ot[F]iles' })
-
-    nmap('<leader>fn', function()
-      builtin.find_files({
-        prompt_title = '🔭 Note Files',
-        cwd = env.PERSONAL_NOTES,
-        hidden = true,
-      })
-    end, { desc = '[S]earch all [N]ote files' })
-
-    nmap('<leader>sn', function()
-      builtin.live_grep({
-        prompt_title = '🔭 Grep Notes',
-        cwd = env.PERSONAL_NOTES,
-        -- layout_config = { preview_width = 0.65 },
-        hidden = true,
-      })
-    end, { desc = '[S]earch for a string in the [N]ote folder' })
-
-    nmap(';f', function()
-      builtin.find_files({
-        propmt_title = '🔭 Files',
-        no_ignore = false,
-        hidden = true,
-      })
-    end, {
-      desc = 'Search all [F]iles in the current working directory, respects .gitignore',
-    })
-
-    nmap(';r', function()
-      builtin.live_grep({
-        propmt_title = '🔭 Live Grep String',
-        additional_args = { '--hidden' },
-        grep_open_files = true,
-        layout_strategy = 'vertical',
-      })
-    end, {
-      desc = '[S]earch for a string in the current open buffers and get results live as typed, respects .gitignore',
-    })
-
-    nmap('<leader>ps', function()
-      builtin.grep_string({
-        search = vim.fn.input('Grep >'),
-        additional_args = { '--hidden' },
-        layout_strategy = 'vertical',
-        propmt_title = '🔭 Grep String',
-      })
-    end, {
-      desc = '[S]earch for a input string in the current working directory, respects .gitignore',
-    })
-
-    nmap(';d', function(path)
-      local _path = path or vim.fn.input('📁 Directory ▶️ ')
-      builtin.live_grep({
-        search_dirs = { _path },
-        prompt_title = '🔭 Grep in Directory',
-        additional_args = { '--hidden' },
-      })
-    end, {
-      desc = 'Search for a input string in the given directory, respects .gitignore',
-    })
-
-    nmap('<leader>fb', function()
-      require('telescope').extensions.file_browser.file_browser({
-        prompt_title = '🔭 File Browser',
-        path_display = { 'smart' },
-        cwd = '~',
-      })
-    end, { desc = '[F]ind files in [B]rowser' })
-
-    nmap('<leader>gb', function()
-      builtin.git_branches({
-        propmt_title = '🔭 Git Branches',
-      })
-    end, { desc = '[S]earch git [B]ranches' })
+    -- nmap('<leader>ps', function()
+    --   builtin.grep_string({
+    --     search = vim.fn.input('Grep >'),
+    --     additional_args = { '--hidden' },
+    --     layout_strategy = 'vertical',
+    --     propmt_title = '🔭 Grep String',
+    --   })
+    -- end, {
+    --   desc = '[S]earch for a input string in the current working directory, respects .gitignore',
+    -- })
+    --
+    -- nmap(';d', function(path)
+    --   local _path = path or vim.fn.input('📁 Directory ▶️ ')
+    --   builtin.live_grep({
+    --     search_dirs = { _path },
+    --     prompt_title = '🔭 Grep in Directory',
+    --     additional_args = { '--hidden' },
+    --   })
+    -- end, {
+    --   desc = 'Search for a input string in the given directory, respects .gitignore',
+    -- })
+    --
+    -- nmap('<leader>fb', function()
+    --   require('telescope').extensions.file_browser.file_browser({
+    --     prompt_title = '🔭 File Browser',
+    --     path_display = { 'smart' },
+    --     cwd = '~',
+    --   })
+    -- end, { desc = '[F]ind files in [B]rowser' })
+    --
+    -- nmap('<leader>gb', function()
+    --   builtin.git_branches({
+    --     propmt_title = '🔭 Git Branches',
+    --   })
+    -- end, { desc = '[S]earch git [B]ranches' })
   end,
 }
