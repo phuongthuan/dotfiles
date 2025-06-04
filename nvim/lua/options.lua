@@ -6,9 +6,9 @@ vim.g.loaded_python3_provider = 0
 
 -- Make line numbers default
 vim.opt.number = true
--- You can also add relative line numbers, to help with jumping.
---  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+
+-- Relative line numbers, to help with jumping.
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -86,7 +86,6 @@ vim.opt.ruler = true -- show the cursor position all the time
 vim.opt.cursorline = true -- show which line your cursor is on
 vim.opt.hlsearch = true -- highlight search result
 vim.opt.termguicolors = true -- enable 24-bit RGB colors
-vim.opt.relativenumber = false -- disable relative number
 
 -- Tabs, indent
 vim.opt.expandtab = true -- use spaces instead of tabs
