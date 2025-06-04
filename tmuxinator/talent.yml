@@ -1,7 +1,7 @@
 # /Users/thuan/.config/tmuxinator/talent.yml
 
 name: talent
-root: ~/Programming/EmploymentHero/talent-marketplace-app
+root: ~/p/eh/talent-marketplace-app
 
 pre_window: asdf set nodejs 20.11.1
 

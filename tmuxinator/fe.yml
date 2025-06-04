@@ -1,7 +1,7 @@
 # /Users/thuan/.config/tmuxinator/frontend.yml
 
 name: fe-core
-root: ~/Programming/EmploymentHero/frontend-core
+root: ~/p/eh/frontend-core
 
 pre_window: asdf set nodejs 20.18.1
 

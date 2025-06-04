@@ -1,7 +1,7 @@
 # /Users/thuan/.config/tmuxinator/bff.yml
 
 name: bff
-root: ~/Programming/EmploymentHero/ebf-bff-mobile
+root: ~/p/eh/ebf-bff-mobile
 
 windows:
   - editor: nvim

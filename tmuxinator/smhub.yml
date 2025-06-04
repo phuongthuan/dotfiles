@@ -1,7 +1,7 @@
 # /Users/thuan/.config/tmuxinator/smhub
 
 name: smartmatch-hub
-root: ~/Programming/EmploymentHero/smartmatch-hub
+root: ~/p/eh/smartmatch-hub
 
 pre_window: asdf set nodejs <%= @settings["node_version"] %>
 

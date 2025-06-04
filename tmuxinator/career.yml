@@ -1,7 +1,7 @@
 # /Users/thuan/.config/tmuxinator/career.yml
 
 name: career
-root: ~/Programming/EmploymentHero/career-page
+root: ~/p/eh/career-page
 
 windows:
   - editor: nvim

@@ -6,7 +6,7 @@ return {
   DOTFILES = vim.env.DOTFILES or '~/.dotfiles',
   NVIM_CONFIG_DIR = vim.env.NVIM_CONFIG_DIR or '~/.config/nvim',
   EH_CONFIG_DIR = vim.env.EH_CONFIG_DIR or '~/.config/eh',
-  REFERENCES_DIR = vim.env.REFERENCES_DIR or '~/Programming/References',
+  REFERENCES_DIR = vim.env.REFERENCES_DIR or '~/p/references',
   PERSONAL_NOTES = vim.env.PERSONAL_NOTES or '~/Documents/Notes',
   SECRET_ENV_FILE = vim.env.SECRET_ENV_FILE or '~/.dotfiles/zsh/secret.zsh',
   ICLOUD_DRIVE_OBSIDIAN_DIR = vim.env.ICLOUD_DRIVE_OBSIDIAN_DIR
@@ -14,5 +14,5 @@ return {
 
   -- Company env
   EH_CONFIG_FILE = vim.env.EH_CONFIG_FILE or '~/.dotfiles/zsh/eh.zsh',
-  EH_REPOSITORY_DIR = vim.env.EH_REPOSITORY_DIR or '~/Programming/EmploymentHero',
+  EH_REPOSITORY_DIR = vim.env.EH_REPOSITORY_DIR or '~/p/eh',
 }

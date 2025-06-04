@@ -1,7 +1,7 @@
 # /Users/thuan/.config/tmuxinator/ms.yml
 
 name: marketplace
-root: ~/Programming/EmploymentHero/marketplace-service
+root: ~/p/eh/marketplace-service
 
 windows:
   - editor: nvim

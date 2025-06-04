@@ -1,7 +1,7 @@
 # /Users/thuan/.config/tmuxinator/ats.yml
 
 name: ats
-root: ~/Programming/EmploymentHero/ATSMobile
+root: ~/p/eh/ATSMobile
 
 windows:
   - editor: nvim
