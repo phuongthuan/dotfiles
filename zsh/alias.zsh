@@ -1,5 +1,4 @@
 alias vi='~/nvim-macos-arm64/bin/nvim'
-# alias lz='NVIM_APPNAME="lazyvim" ~/nvim-macos-arm64/bin/nvim'
 
 alias arm="arch -arm64"
 alias intel="arch -x86_64"
@@ -13,19 +12,28 @@ alias ns="npm start"
 alias nka="killall node && killall eslint_d && killall prettierd; echo ' Killed all node processes 🚀';"
 
 # Open iCloud Drive
-alias ic='eval nvim $ICLOUD_DRIVE'
+alias ic='eval vi $ICLOUD_DRIVE'
 
 # Open iCloud Obsidian
-alias obs='eval nvim $ICLOUD_DRIVE_OBSIDIAN_DIR'
+alias obs='eval vi $ICLOUD_DRIVE_OBSIDIAN_DIR'
 
 # Open dotfiles
-alias dot='cd ~/.dotfiles/ && nvim'
+alias dot='cd ~/.dotfiles/ && vi'
+
+alias c="clear"
+alias e="exit"
+
+# Binding zoxide to j - because I'm the autojump user :)
+alias j="z"
 
 # Homebrew
-alias brewup='brew update; brew upgrade; brew cleanup; brew doctor'
-alias bl='brew services list'
-alias bs='brew services'
-alias bd='brew doctor'
+alias br='brew'
+alias brup='brew update; brew upgrade; brew cleanup; brew doctor'
+alias bri='brew install'
+alias bru='brew uninstall'
+alias brsl='brew services list'
+alias brs='brew services'
+alias brd='brew doctor'
 
 # Tmux
 alias t='tmux'
@@ -62,6 +70,7 @@ alias grm='git checkout --'
 
 alias gp='git pull origin $(git rev-parse --abbrev-ref HEAD)'
 alias gpm='git pull origin master'
+alias gpd='git pull origin development'
 alias gps='git push origin HEAD'
 alias gpsm='git push origin master'
 alias gpsf='git push origin HEAD -f'
@@ -76,16 +85,17 @@ alias gcm='git checkout origin/master'
 alias gmm='git merge master'
 alias gfo='git fetch origin'
 alias gcg='git config --global'
+alias gh-create='gh repo create --private --source=. --remote=origin && git push -u --all && gh browse'
 
 # Docker
-alias dps='docker ps -a'
-alias ds='docker stop'
-alias drm='docker rm'
-alias drmi='docker rmi'
-alias dl='docker logs'
-alias di='docker inspect'
-alias drM='docker container prune -f'
-alias dc='docker-compose'
+# alias dps='docker ps -a'
+# alias ds='docker stop'
+# alias drm='docker rm'
+# alias drmi='docker rmi'
+# alias dl='docker logs'
+# alias di='docker inspect'
+# alias drM='docker container prune -f'
+# alias dc='docker-compose'
 
 # Yarn
 alias yd='yarn dev'

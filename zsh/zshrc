@@ -3,19 +3,13 @@
 # enable vim mode
 bindkey -v
 
-ZSH_THEME="refined"
-
+# ZSH_THEME="refined"
 plugins=(
   git
   vi-mode
   zsh-autosuggestions
-  zsh-syntax-highlighting
-  colorize
-  dotenv
+  # zsh-syntax-highlighting
 )
-
-# https://github.com/wting/autojump
-[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 # load seperated config files
 for conf in "$HOME/.config/zsh/"*.zsh; do
@@ -23,8 +17,18 @@ for conf in "$HOME/.config/zsh/"*.zsh; do
 done
 unset conf
 
-# source zsh
+# oh-my-zsh
 source $ZSH/oh-my-zsh.sh
+
+# starship
+eval "$(starship init zsh)"
+export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
+
+# zoxide
+eval "$(zoxide init zsh)"
+
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --zsh)"
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
