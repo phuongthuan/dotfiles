@@ -14,4 +14,4 @@ windows:
         - nv
         - nv
   - ios: cd example
-  - worktree: j eh-worktree/ebf-swag-personal/worktree
+  - worktree: cd ~/p/eh/ebf-swag-personal/worktree

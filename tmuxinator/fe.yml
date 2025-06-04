@@ -9,6 +9,6 @@ windows:
   - main: vi
   - terminal:
   - logs:
-  - worktree: j eh-worktree/frontend-core/hotfix-fe-core
+  - worktree: cd ~/p/eh/frontend-core/hotfix-fe-core
   - git:
   - terminal:

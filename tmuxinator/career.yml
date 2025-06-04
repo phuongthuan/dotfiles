@@ -7,4 +7,4 @@ windows:
   - editor: nvim
   - git: nv
   - logs:
-  - worktree: j eh-worktree/career-page/worktree
+  - worktree: cd ~/p/eh/career-page/worktree

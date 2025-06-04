@@ -7,4 +7,4 @@ windows:
   - editor: nvim
   - terminal: nv
   - logs:
-  - worktree: j eh-worktree/ATSMobile/worktree
+  - worktree: cd ~/p/eh/ATSMobile/worktree

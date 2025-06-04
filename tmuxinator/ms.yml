@@ -6,6 +6,6 @@ root: ~/p/eh/marketplace-service
 windows:
   - editor: nvim
   - terminal: rv
-  - worktree: j eh-worktree/marketplace-service/master
+  - worktree: cd ~/p/eh/marketplace-service/master
   - server:
   - logs: rv

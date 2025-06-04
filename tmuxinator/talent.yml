@@ -10,4 +10,4 @@ windows:
   - terminal: nv
   - logs:
   - ios:
-  - worktree: j eh-worktree/talent-marketplace-app/worktree
+  - worktree: cd ~/p/eh/talent-marketplace-app/worktree
