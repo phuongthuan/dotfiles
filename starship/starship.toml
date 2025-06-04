@@ -1,0 +1,59 @@
+command_timeout = 1000
+
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = false
+
+format = """
+➜ \
+$git_branch\
+$git_status\
+$nodejs\
+$ruby\
+$lua\
+$line_break\
+$character
+"""
+
+[os.symbols]
+Windows = "󰍲"
+Ubuntu = "󰕈"
+SUSE = ""
+Raspbian = "󰐿"
+Mint = "󰣭"
+Macos = " "
+Manjaro = ""
+Linux = "󰌽"
+Gentoo = "󰣨"
+Fedora = "󰣛"
+Alpine = ""
+Amazon = ""
+Android = ""
+Arch = "󰣇"
+Artix = "󰣇"
+CentOS = ""
+Debian = "󰣚"
+Redhat = "󱄛"
+RedHatEnterprise = "󱄛"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = "󰝚 "
+"Pictures" = " "
+"Developer" = "󰲋 "
+
+[nodejs]
+format = '[$symbol($version)]($style) '
+style = 'bold #b8bb26'
+
+[ruby]
+format = '[$symbol($version)]($style) '
+style = 'bold #cc241d'
+
+
+[git_branch]
+format = '[$symbol$branch(:$remote_branch)]($style) '
+symbol = '🌱'
+truncation_symbol = ''
+style = 'bold #d3869b'
