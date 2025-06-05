@@ -20,14 +20,20 @@ return {
 
       -- Centered on screen
       local window_config = function()
-        local height = math.floor(0.7 * vim.o.lines)
-        local width = math.floor(0.7 * vim.o.columns)
+        local height = math.floor(0.65 * vim.o.lines)
+        -- local width = math.floor(0.95 * vim.o.columns) -- 95% of full width
+        local full_width = vim.o.columns
+
+        -- native Neovim window, check :h nvim_open_win()
         return {
           anchor = 'NW',
           height = height,
-          width = width,
-          row = math.floor(0.5 * (vim.o.lines - height)),
-          col = math.floor(0.5 * (vim.o.columns - width)),
+          width = full_width,
+
+          -- row = math.floor(0.5 * (vim.o.lines - height)),
+          -- positions the window 0 row down from the top of the editor.
+          row = 0,
+          col = math.floor(0.5 * (vim.o.columns - full_width)),
           border = 'rounded',
         }
       end
@@ -46,7 +52,7 @@ return {
 
           delete_left = '<C-dl>',
         },
-        window = { config = window_config, prompt_cursor = '█ ', prompt_prefix = ' 🔍' },
+        window = { config = window_config, prompt_prefix = ' 🔍' },
         options = { content_from_bottom = true },
       })
 
@@ -57,7 +63,7 @@ return {
 
       -- Search all file in the current working directory
       nmap('<leader>,', function()
-        builtin.files({ tool = 'git' }, { source = { name = 'Find files' } })
+        builtin.files({ tool = 'git' }, { source = { name = 'Search all files' } })
       end)
 
       -- Search all loaded buffers
@@ -77,8 +83,24 @@ return {
 
       -- Search for a input string in the current working directory, respects .gitignore
       nmap('<leader>ps', function()
-        builtin.grep(nil, {
-          source = { name = 'Grep string' },
+        local pattern = vim.fn.input('Search string')
+
+        -- If input is empty, then hide the input prompt instead of showing empty window
+        if pattern == '' then
+          return
+        end
+
+        builtin.grep({ pattern = pattern }, {
+          source = { name = 'Search for: ' .. pattern },
+        })
+      end)
+
+      nmap('<leader>pw', function()
+        -- current word under cursor in the current buffer
+        local pattern = vim.fn.expand('<cword>')
+
+        builtin.grep({ pattern = pattern }, {
+          source = { name = 'Search for: ' .. pattern },
         })
       end)
 
@@ -137,10 +159,15 @@ return {
         extra.git_branches()
       end)
 
-      -- List all diagnostics
-      -- nmap('<leader>sd', function()
-      --   extra.dianostic()
-      -- end)
+      -- List all diagnostics in current buffer
+      nmap('<leader>d', function()
+        extra.diagnostic({ scope = 'current' }, { source = { name = 'Diagnostics (current) 🐛' } })
+      end)
+
+      -- List all diagnostics in loaded buffers
+      nmap('<leader>D', function()
+        extra.diagnostic(nil, { source = { name = 'Diagnostics (all) 🐛' } })
+      end)
     end,
   },
   {
