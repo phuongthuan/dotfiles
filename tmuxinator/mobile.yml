@@ -7,9 +7,10 @@ pre_window: asdf set nodejs 20.11.1
 
 windows:
   - editor: vi
-  - terminal:
-  - worktree-test: cd ~/p/eh/worktree/eh-mobile-pro/test
-  - worktree-dev: cd ~/p/eh/worktree/eh-mobile-pro/dev
+  - git:
+  - wt-feature: cd ~/p/eh/worktree/eh-mobile-pro/feature
+  - wt-test: cd ~/p/eh/worktree/eh-mobile-pro/test
+  - wt-dev: cd ~/p/eh/worktree/eh-mobile-pro/dev
   - metro:
       layout: main-vertical
       panes:
@@ -17,3 +18,8 @@ windows:
         - nv
   - ios:
   - android:
+  - config:
+      layout: main-vertical
+      panes:
+        - cd ~/.dotfiles
+        - whoami
