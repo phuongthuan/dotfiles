@@ -4,15 +4,18 @@ command_timeout = 1000
 
 add_newline = false
 
+# ➜ \
+# $git_status\
+# $fill\
+# $character
+
 format = """
-➜ \
 $git_branch\
-$git_status\
 $nodejs\
 $ruby\
 $lua\
 $line_break\
-$character
+ ➜ \
 """
 
 [os.symbols]
