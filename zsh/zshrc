@@ -11,12 +11,6 @@ plugins=(
   # zsh-syntax-highlighting
 )
 
-# load seperated config files
-for conf in "$HOME/.config/zsh/"*.zsh; do
-  source "${conf}"
-done
-unset conf
-
 # oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
@@ -32,6 +26,12 @@ eval "$(fzf --zsh)"
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# load seperated config files
+for conf in "$HOME/.config/zsh/"*.zsh; do
+  source "${conf}"
+done
+unset conf
 
 # asdf
 . /opt/homebrew/opt/asdf/libexec/asdf.sh

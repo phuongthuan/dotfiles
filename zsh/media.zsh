@@ -1,32 +1,69 @@
-# mpd
-alias mpd_start="mpd --no-daemon --verbose ~/.config/mpd/mpd.conf; echo ' Server was stopped 🔻';" # start mpd server
-alias mpd_stop="mpd --kill ~/.config/mpd/mpd.conf; echo ' Stopped mpd server ✅';"                 # stop mpd server
+alias md='mpd'
+alias mc='mpc'
+
+# start mpd server
+alias mds="mpd --no-daemon --verbose ~/.config/mpd/mpd.conf; echo ' Server was stopped 🔻';"
+
+# kill mpd server
+alias mdk="mpd --kill ~/.config/mpd/mpd.conf; echo ' Stopped mpd server ✅';"
 
 # mpc
-alias mpa='mpc add'
-alias mpcl='mpc clear'
-alias mpl='mpc clear && mpc load'
-alias mps='mpc stop && mpc clear'
+# alias mca='mpc add'
+alias mcs='mpc status'
+alias mcc='mpc clear'
+alias mcn='mpc next'
+alias mcp='mpc playlist'
+alias mct='mpc toggle'
+# alias mps='mpc stop && mpc clear'
 
-alias nls='npm ls --depth=0'
-alias nd='npm run dev'
-
-# Extract audio from a Youtube video
+# Extract audio(.mp3) from a Youtube video
 yt_dl() {
   if [ -z "$1" ]; then
     echo "Please provide a Youtube video URL 🔴"
     return 1
   fi
-  yt-dlp --extract-audio --audio-format mp3 "$1"
+
+  # Default to ~/Music if no second argument is given
+  OUTPUT_DIR="${2:-$HOME/Music}"
+
+  yt-dlp \
+    --extract-audio \
+    --audio-format mp3 \
+    -o "${OUTPUT_DIR}/%(title)s.%(ext)s" \
+    "$1"
 }
 
-# Play a playlist in mpd
-mp() {
-  if [ -z "$1" ]; then
-    echo "Please provide a playlist 🔴"
+music() {
+  # Stop the current playlist
+  if ! mpc clear; then
+    echo "\n\033[31mFailed to clear the current playlist\033[0m"
     return 1
   fi
-  mpc load "$1" && mpc play
+
+  # Load the specified playlist or the default playlist if none is provided
+  if [ -z "$1" ]; then
+    if ! mpc load "peace"; then
+      echo "\n\033[31mFailed to load the default playlist 'peace'\033[0m"
+      return 1
+    fi
+  else
+    if ! mpc load "$1"; then
+      echo "\n\033[31mFailed to load the playlist '$1'\033[0m"
+      return 1
+    fi
+  fi
+
+  mpc play
+
+  echo "\n\033[32mStart playing music ... \033[0m"
+}
+
+mca() {
+  if [ -z "$1" ]; then
+    echo -e "\033[31mPlease provide song path❗\033[0m"
+    return 1
+  fi
+  mpc add "$1"
 }
 
 # Show all songs in a playlist
