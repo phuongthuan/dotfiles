@@ -99,7 +99,7 @@ return {
     -- See `:help telescope.builtin`
     local builtin = require('telescope.builtin')
     -- nmap('<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
-    nmap('<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
+    -- nmap('<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
     -- nmap('<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
     -- nmap('<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
     -- nmap('<leader>rs', builtin.resume, { desc = '[S]earch [R]esume' })

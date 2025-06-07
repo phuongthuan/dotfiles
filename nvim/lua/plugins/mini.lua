@@ -64,22 +64,22 @@ return {
       -- Search all file in the current working directory
       nmap('<leader>,', function()
         builtin.files({ tool = 'git' }, { source = { name = 'Search all files' } })
-      end)
+      end, { desc = 'Search all files in current working directory' })
 
       -- Search all loaded buffers
       nmap(';f', function()
         builtin.buffers()
-      end)
+      end, { desc = 'Search all loaded buffers' })
 
       -- Resume search
       nmap('<leader>rs', function()
         builtin.resume()
-      end)
+      end, { desc = 'Resume search' })
 
       -- Search help
       nmap('<leader>sh', function()
         builtin.help()
-      end)
+      end, { desc = 'Search help' })
 
       -- Search for a input string in the current working directory, respects .gitignore
       nmap('<leader>ps', function()
@@ -93,7 +93,7 @@ return {
         builtin.grep({ pattern = pattern }, {
           source = { name = 'Search for: ' .. pattern },
         })
-      end)
+      end, { desc = 'Search for a input string' })
 
       nmap('<leader>pw', function()
         -- current word under cursor in the current buffer
@@ -102,7 +102,7 @@ return {
         builtin.grep({ pattern = pattern }, {
           source = { name = 'Search for: ' .. pattern },
         })
-      end)
+      end, { desc = 'Search for the word under cursor' })
 
       -- Search for a string in the current opened buffer
       nmap('<leader>f', function()
@@ -111,63 +111,68 @@ return {
         }, {
           source = { name = 'Grep current buffer' },
         })
-      end)
+      end, { desc = 'Search for a string in the current opened buffer' })
 
       -- Search for a string in the all loaded buffers
       nmap('<leader>F', function()
         extra.buf_lines()
-      end)
+      end, { desc = 'Search for a string in all loaded buffers' })
 
-      -- [S]earch Recent Files
+      -- Search recent files
       nmap('<leader>r', function()
         extra.oldfiles()
-      end)
+      end, { desc = 'Search recent files' })
 
       -- Search for a string in the current open buffers and get results live as typed
       nmap(';r', function()
         builtin.grep_live(nil, { source = { name = 'Grep buffers' } })
-      end)
+      end, { desc = 'Search for a string in the current open buffers' })
 
       -- Search all files in env.DOTFILES
       nmap('<leader>fc', function()
         builtin.files(nil, { source = { name = '.dotfiles', cwd = env.DOTFILES } })
-      end)
+      end, { desc = 'Search all files in .dotfiles' })
 
       -- Search for a string in .dotfiles
       nmap('<leader>sd', function()
         builtin.grep_live(nil, {
           source = { name = 'Grep .dotfiles', cwd = env.DOTFILES },
         })
-      end)
+      end, { desc = 'Search for a string in .dotfiles' })
 
       -- Search all files in env.PERSONAL_NOTES
       nmap('<leader>fn', function()
         builtin.files(nil, {
           source = { name = 'Notes', cwd = env.PERSONAL_NOTES },
         })
-      end)
+      end, { desc = 'Search all files in Notes' })
 
       -- Search for a string in env.PERSONAL_NOTES
       nmap('<leader>sn', function()
         builtin.grep_live(nil, {
           source = { name = 'Grep Notes', cwd = env.PERSONAL_NOTES },
         })
-      end)
+      end, { desc = 'Search for a string in Notes' })
 
       -- List all git branches
       nmap('<leader>gb', function()
         extra.git_branches()
-      end)
+      end, { desc = 'List all git branches' })
 
       -- List all diagnostics in current buffer
       nmap('<leader>d', function()
         extra.diagnostic({ scope = 'current' }, { source = { name = 'Diagnostics (current) 🐛' } })
-      end)
+      end, { desc = 'List all diagnostics in current buffer' })
 
       -- List all diagnostics in loaded buffers
       nmap('<leader>D', function()
         extra.diagnostic(nil, { source = { name = 'Diagnostics (all) 🐛' } })
-      end)
+      end, { desc = 'List all diagnostics in loaded buffers' })
+
+      -- List all available keymaps
+      nmap('<leader>sk', function()
+        extra.keymaps()
+      end, { desc = 'List all available keymaps' })
     end,
   },
   {
@@ -202,7 +207,7 @@ return {
         else
           bd(0)
         end
-      end)
+      end, { desc = 'Kill current buffer' })
     end,
   },
   {
@@ -220,13 +225,13 @@ return {
       -- Toggle mini files explorer
       nmap('<leader>ee', function()
         MiniFiles.open()
-      end)
+      end, { desc = 'Toggle mini files explorer' })
 
       -- Toggle current opened file
       nmap('<leader>ef', function()
         MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
         MiniFiles.reveal_cwd()
-      end)
+      end, { desc = 'Toggle current opened file' })
     end,
   },
 }

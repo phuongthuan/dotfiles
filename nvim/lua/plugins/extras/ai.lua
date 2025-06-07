@@ -120,13 +120,13 @@ return {
       --   desc = 'Generate Commit for Selection',
       --   silent = true,
       -- },
-      {
-        '<leader>cd',
-        ':CopilotChatDocs<CR>',
-        mode = 'v',
-        desc = 'Generate Docs',
-        silent = true,
-      },
+      -- {
+      --   '<leader>cd',
+      --   ':CopilotChatDocs<CR>',
+      --   mode = 'v',
+      --   desc = 'Generate Docs',
+      --   silent = true,
+      -- },
       -- {
       --   '<leader>cd',
       --   ':CopilotChatTests<CR>',
@@ -135,21 +135,21 @@ return {
       --   silent = true,
       -- },
       {
-        '<leader>cr',
+        '<leader>cor',
         ':CopilotChatReview<CR>',
         mode = 'v',
         desc = 'Review Code',
         silent = true,
       },
       {
-        '<leader>co',
+        '<leader>coo',
         ':CopilotChatOptimize<CR>',
         mode = 'v',
         desc = 'Optimize Code',
         silent = true,
       },
       {
-        '<leader>cq',
+        '<leader>coq',
         function()
           local input = vim.fn.input('Ask AI 👽: ')
           if input ~= '' then

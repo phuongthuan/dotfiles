@@ -61,16 +61,16 @@ return {
       })
 
       -- Keymaps
-      nmap('<leader>er', ':Noice telescope<cr>', { desc = 'Open message history' })
-      nmap('<leader>un', ':Noice dismiss<cr>', { desc = 'Open message history' })
+      nmap('<leader><leader>n', ':Telescope notify<cr>', { desc = 'Open messages history' })
+      nmap('<leader>un', ':Noice dismiss<cr>', { desc = 'Dismiss notification' })
     end,
   },
   {
     'rcarriga/nvim-notify',
     opts = {
-      background_colour = '#000000',
+      background_colour = '#282828',
       stages = 'fade',
-      icons = { INFO = '🐸', ERROR = '❌', WARN = '🌟' },
+      -- icons = { ERROR = '❌' },
       -- top_down = false,
       -- render = 'compact',
     },
