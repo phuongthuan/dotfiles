@@ -141,10 +141,10 @@ nmap('<M-Left>', ':vertical resize +2<CR>')
 nmap('<M-Right>', ':vertical resize -2<CR>')
 
 -- Prevent to used arrow keys ;)
-nmap('<left>', '<cmd>echo "Use h to move ❌"<cr>')
-nmap('<right>', '<cmd>echo "Use l to move ❌"<cr>')
-nmap('<up>', '<cmd>echo "Use k to move ❌"<cr>')
-nmap('<down>', '<cmd>echo "Use j to move ❌"<cr>')
+-- nmap('<left>', '<cmd>echo "Use h to move ❌"<cr>')
+-- nmap('<right>', '<cmd>echo "Use l to move ❌"<cr>')
+-- nmap('<up>', '<cmd>echo "Use k to move ❌"<cr>')
+-- nmap('<down>', '<cmd>echo "Use j to move ❌"<cr>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -164,5 +164,11 @@ nmap('<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 -- nmap('<leader>mP', ':mpc pause<cr>')
 -- nmap('<leader>mS', ':mpc stop<cr>')
 
--- Markdown preview
-nmap('<leader>mp', ':Glow<cr>')
+-- Toggle spell checking
+nmap('<leader><leader>s', function()
+  local new_state = not vim.opt_local.spell:get()
+  vim.opt_local.spell = new_state
+  if new_state then
+    vim.opt_local.spelllang = 'en'
+  end
+end, { desc = 'Toggle Spell Checking' })

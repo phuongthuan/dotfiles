@@ -2,8 +2,7 @@ local autocmd = vim.api.nvim_create_autocmd
 local user_command = vim.api.nvim_create_user_command
 local nnoremap = require('core.utils').mapper_factory('n')
 
-local autocmds_group =
-  vim.api.nvim_create_augroup('UserConfigGroup', { clear = true })
+local autocmds_group = vim.api.nvim_create_augroup('UserConfigGroup', { clear = true })
 
 -- AUTOCOMMANDS
 autocmd('TextYankPost', {
@@ -45,11 +44,21 @@ autocmd('FileType', {
   desc = 'Maps q to exit on non-filetypes',
 })
 
+-- Hide the `colorcolumn` when new windows opened
+autocmd('WinEnter', {
+  pattern = '*',
+  callback = function()
+    vim.wo.colorcolumn = ''
+  end,
+})
+
+-- Enable spellcheck for certain files
 autocmd('FileType', {
   group = autocmds_group,
   pattern = {
     'gitcommit',
     'markdown',
+    'txt',
   },
   callback = function()
     vim.opt_local.spell = true
@@ -62,7 +71,7 @@ autocmd('BufWritePre', {
   group = autocmds_group,
   pattern = '*',
   command = [[%s/\s\+$//e]],
-  desc = 'remove trailing spaces',
+  desc = 'Remove trailing spaces',
 })
 
 -- COMMANDS

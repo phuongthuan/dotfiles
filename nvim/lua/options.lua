@@ -77,7 +77,6 @@ vim.o.foldmethod = 'manual' -- Default fold method (change as needed)
 vim.o.foldlevel = 99 -- Open most folds by default
 vim.o.foldcolumn = '0'
 
-vim.opt.colorcolumn = '' -- line lenght marker at 80 columns, "" mean hide it
 vim.opt.splitright = true -- vertical split to the right
 vim.opt.splitbelow = true -- horizontal split to the bottom
 vim.opt.ignorecase = true -- ignore case letters when search
