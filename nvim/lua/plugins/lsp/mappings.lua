@@ -10,16 +10,23 @@ M.attach = function(args)
     return
   end
 
+  local mini = require('mini.extra').pickers
   local bufnr = args.buf
   -- local lsp_utils = require('plugins.lsp.utils')
 
   -- Jump to the definition of the word under your cursor.
   --  This is where a variable was first declared, or where a function is defined, etc.
   --  To jump back, press <C-t>.
-  nmap('gd', vim.lsp.buf.definition, { buffer = bufnr })
+  -- nmap('gd', vim.lsp.buf.definition, { buffer = bufnr })
+  nmap('gd', function()
+    mini.lsp({ scope = 'definition' })
+  end, { buffer = bufnr })
 
   -- Find references for the word under your cursor.
-  nmap('gr', vim.lsp.buf.references, { buffer = bufnr })
+  -- nmap('gr', vim.lsp.buf.references, { buffer = bufnr })
+  nmap('gr', function()
+    mini.lsp({ scope = 'references' })
+  end, { buffer = bufnr })
 
   -- Jump to the implementation of the word under your cursor.
   --  Useful when your language has ways of declaring types without an actual implementation.
@@ -41,6 +48,10 @@ M.attach = function(args)
   --   require('telescope.builtin').lsp_dynamic_workspace_symbols,
   --   { buffer = bufnr }
   -- )
+
+  -- Fuzzy find all the symbols in your current document.
+  --  Symbols are things like variables, functions, types, etc.
+  -- nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, { buffer = bufnr })
 
   nmap('<leader>cr', vim.lsp.buf.rename, { buffer = bufnr })
 
