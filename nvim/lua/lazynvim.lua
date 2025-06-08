@@ -1,7 +1,5 @@
 local nmap = require('core.utils').mapper_factory('n')
 
--- [[ Install `lazy.nvim` plugin manager ]]
---    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 
 if not vim.loop.fs_stat(lazypath) then
@@ -24,14 +22,10 @@ require('lazy').setup({
   require('plugins.extras.core'),
   require('plugins.extras.ai'),
   require('plugins.extras.noice'),
+  require('plugins.extras.incline'),
 }, {
-  checker = {
-    enabled = true,
-    notify = false,
-  },
-  change_detection = {
-    notify = false,
-  },
+  checker = { enabled = true, notify = false },
+  change_detection = { notify = false },
   performance = {
     rtp = {
       disabled_plugins = {
@@ -52,10 +46,8 @@ require('lazy').setup({
     },
   },
   ui = {
-    -- If you are using a Nerd Font: set icons to an empty table which will use the
-    -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
     icons = vim.g.have_nerd_font and {} or require('core.icons').ui,
   },
 })
 
-nmap('<leader>L', '<cmd>Lazy<cr>', { desc = 'Open Lazy manager' })
+nmap('<leader>lz', '<cmd>Lazy<cr>', { desc = 'Open Lazy Manager' })

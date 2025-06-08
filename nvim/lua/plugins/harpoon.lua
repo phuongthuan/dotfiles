@@ -48,5 +48,11 @@ return {
       desc = 'Harpoon: Navigate to file 5',
       silent = true,
     },
+    {
+      '<leader>6',
+      '<cmd>lua require("harpoon.ui").nav_file(5)<cr>',
+      desc = 'Harpoon: Navigate to file 5',
+      silent = true,
+    },
   },
 }

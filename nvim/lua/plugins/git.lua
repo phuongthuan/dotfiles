@@ -2,42 +2,8 @@ local mapper = require('core.utils').mapper_factory
 local nmap = mapper('n')
 
 return {
-  -- Git stuffs
   {
     'tpope/vim-fugitive',
-    -- nmap('<leader>gp', ':G push origin HEAD<cr>')
-    -- nmap('<leader>P', ':G push origin HEAD --no-verify<cr>')
-    -- nmap('<leader>gP', ':G push origin HEAD -f<cr>')
-    -- nmap('<leader>gM', ':G push origin master<cr>')
-    -- nmap('<leader>gm', ':G merge<Space>')
-
-    -- Resolve conflict
-    -- nmap('<leader>grc', ':Gvdiffsplit!<cr>')
-    -- nmap('<leader>op', ':!oprl atsmobile<CR>')
-
-    -- Gvdiffsplit mode
-    -- d2o : get the left column
-    -- d3o : get the right column
-
-    -- local vimFugitive = vim.api.nvim_create_augroup('vimFugitive', {})
-    -- local autocmd = vim.api.nvim_create_autocmd
-    --
-    -- nmap('<leader>g', ':G<cr>')
-    -- autocmd('BufWinEnter', {
-    --   group = vimFugitive,
-    --   pattern = '*',
-    --   callback = function()
-    --     if vim.bo.ft ~= 'fugitive' then
-    --       return
-    --     end
-    --
-    --     local bufnr = vim.api.nvim_get_current_buf()
-    --     local opts = { buffer = bufnr, remap = false }
-    --
-    --     nmap('<leader>P', ':G push origin HEAD --no-verify<cr>', opts)
-    --     nmap('<leader>gl', ':GV<cr>', opts)
-    --     nmap('<leader>gL', ":GV <C-R>=expand('%:p')<cr><cr>", opts)
-    --     nmap('<leader>gP', ':G push origin HEAD -f<cr>', opts)
     keys = {
       {
         '<leader>g',
@@ -52,12 +18,14 @@ return {
         silent = true,
       },
       {
-        '<leader>gL',
-        "<cmd>GV <C-R>=expand('%:p')<cr><cr>",
+        '<leader>L',
+        function()
+          vim.cmd('GV ' .. vim.fn.expand('%:p'))
+        end,
         desc = 'Git Commits On Current File',
         silent = true,
       },
-      { '<leader>P', ':G push origin HEAD --no-verify<cr>', desc = 'Git Push without verify', silent = true },
+      { '<leader>P', '<cmd>G push origin HEAD --no-verify<cr>', desc = 'Git Push without verify', silent = true },
     },
   },
   'junegunn/gv.vim', -- Display Git commits list
@@ -140,3 +108,26 @@ return {
     },
   },
 }
+
+-- Fugitive keymaps
+-- nmap('<leader>g', ':G<cr>')
+-- nmap('<leader>gl', ':GV<cr>')
+-- nmap('<leader>gL', ":GV <C-R>=expand('%:p')<cr><cr>")
+-- nmap('<leader>gp', ':G push origin HEAD<cr>')
+-- nmap('<leader>P', ':G push origin HEAD --no-verify<cr>')
+-- nmap('<leader>gP', ':G push origin HEAD -f<cr>')
+-- nmap('<leader>gM', ':G push origin master<cr>')
+-- nmap('<leader>gm', ':G merge<Space>')
+-- nmap('<leader>gp', ':G push origin HEAD<cr>')
+-- nmap('<leader>P', ':G push origin HEAD --no-verify<cr>')
+-- nmap('<leader>gP', ':G push origin HEAD -f<cr>')
+-- nmap('<leader>gM', ':G push origin master<cr>')
+-- nmap('<leader>gm', ':G merge<Space>')
+
+-- Resolve conflict
+-- nmap('<leader>grc', ':Gvdiffsplit!<cr>')
+-- nmap('<leader>op', ':!oprl atsmobile<CR>')
+
+-- Gvdiffsplit mode
+-- d2o : get the left column
+-- d3o : get the right column

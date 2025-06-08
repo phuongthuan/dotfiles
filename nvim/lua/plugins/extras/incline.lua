@@ -2,7 +2,7 @@ return {
   -- Adding a filename to the top right corner
   {
     'b0o/incline.nvim',
-    enabled = true,
+    event = 'VeryLazy',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
       local helpers = require('incline.helpers')
@@ -14,8 +14,8 @@ return {
         },
         window = {
           margin = {
-            vertical = 2,
-            horizontal = 1,
+            vertical = 1,
+            horizontal = 0,
           },
           placement = {
             horizontal = 'right',
@@ -37,7 +37,7 @@ return {
             ' ',
             { filename, gui = modified and 'bold,italic' or 'regular' },
             ' ',
-            guibg = '#3c3836',
+            -- guibg = '#282828',
           }
         end,
       })

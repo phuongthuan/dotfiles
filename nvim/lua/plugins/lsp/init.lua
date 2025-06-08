@@ -15,16 +15,15 @@ return {
     dependencies = {
       { 'mason-org/mason.nvim', opts = {} },
       'mason-org/mason-lspconfig.nvim',
-      'WhoIsSethDaniel/mason-tool-installer.nvim',
       {
         'j-hui/fidget.nvim',
         event = 'VeryLazy',
         opts = {
           notification = {
             override_vim_notify = true,
-            -- window = {
-            --   winblend = 25,
-            -- },
+            window = {
+              winblend = 25,
+            },
           },
         },
       },
@@ -69,20 +68,18 @@ return {
         },
       }
 
-      local ensure_installed = vim.tbl_keys(servers or {})
-
-      vim.list_extend(ensure_installed, {
-        'stylua',
-        'shfmt',
-      })
-
-      require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
-
       require('mason-lspconfig').setup({
-        ensure_installed = {},
+        ensure_installed = {
+          'lua_ls',
+          'ts_ls',
+          'bashls',
+          -- 'yamlls',
+          -- 'pyright',
+        },
         automatic_enable = {
           'lua_ls',
           'ts_ls',
+          'bashls',
         },
         handlers = {
           function(server_name)
@@ -94,7 +91,7 @@ return {
       })
 
       -- Keymaps
-      nmap('<leader>M', '<cmd>Mason<cr>')
+      nmap('<leader>ms', '<cmd>Mason<cr>')
       nmap('<leader>li', '<cmd>LspInfo<cr>')
       nmap('<leader>ll', '<cmd>LspLog<cr>')
     end,

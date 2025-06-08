@@ -64,7 +64,7 @@ return {
 
       -- Search all file in the current working directory
       nmap('<leader>,', function()
-        builtin.files({ tool = 'git' }, { source = { name = 'Search all files' } })
+        builtin.files({ tool = 'fd' }, { source = { name = 'All files (fd)' } })
       end, { desc = 'Search all files in current working directory' })
 
       -- Search all loaded buffers
@@ -84,25 +84,21 @@ return {
 
       -- Search for a input string in the current working directory, respects .gitignore
       nmap('<leader>ps', function()
-        local pattern = vim.fn.input('Search string')
+        local pattern = vim.fn.input('Input string')
 
         -- If input is empty, then hide the input prompt instead of showing empty window
         if pattern == '' then
           return
         end
 
-        builtin.grep({ pattern = pattern }, {
-          source = { name = 'Search for: ' .. pattern },
-        })
+        builtin.grep({ pattern = pattern })
       end, { desc = 'Search for a input string' })
 
       nmap('<leader>pw', function()
         -- current word under cursor in the current buffer
         local pattern = vim.fn.expand('<cword>')
 
-        builtin.grep({ pattern = pattern }, {
-          source = { name = 'Search for: ' .. pattern },
-        })
+        builtin.grep({ tool = 'rg', pattern = pattern })
       end, { desc = 'Search for the word under cursor' })
 
       -- Search for a string in the current opened buffer
@@ -126,25 +122,25 @@ return {
 
       -- Search for a string in the current open buffers and get results live as typed
       nmap(';r', function()
-        builtin.grep_live(nil, { source = { name = 'Grep buffers' } })
+        builtin.grep_live({ tool = 'rg' }, { source = { name = 'Grep buffers (rg)' } })
       end, { desc = 'Search for a string in the current open buffers' })
 
       -- Search all files in env.DOTFILES
       nmap('<leader>fc', function()
-        builtin.files(nil, { source = { name = '.dotfiles', cwd = env.DOTFILES } })
+        builtin.files({ tool = 'fd' }, { source = { name = '.dotfiles (fd)', cwd = env.DOTFILES } })
       end, { desc = 'Search all files in .dotfiles' })
 
       -- Search for a string in .dotfiles
       nmap('<leader>sd', function()
-        builtin.grep_live(nil, {
-          source = { name = 'Grep .dotfiles', cwd = env.DOTFILES },
+        builtin.grep_live({ tool = 'rg' }, {
+          source = { name = 'Grep .dotfiles (rg)', cwd = env.DOTFILES },
         })
       end, { desc = 'Search for a string in .dotfiles' })
 
       -- Search all files in env.PERSONAL_NOTES
       nmap('<leader>fn', function()
-        builtin.files(nil, {
-          source = { name = 'Notes', cwd = env.PERSONAL_NOTES },
+        builtin.files({ tool = 'fd' }, {
+          source = { name = 'Notes (fd)', cwd = env.PERSONAL_NOTES },
         })
       end, { desc = 'Search all files in Notes' })
 
@@ -172,7 +168,7 @@ return {
 
       -- List all available keymaps
       mapper({ 'n', 'v' })('<leader>sk', function()
-        extra.keymaps({ scope = 'global' })
+        extra.keymaps()
       end, { desc = 'List all available keymaps' })
 
       -- Spell suggest word under cursor
@@ -259,6 +255,7 @@ return {
         -- tsx, jsx, html , svelte comment support
         options = {
           custom_commentstring = function()
+            ---@diagnostic disable-next-line: missing-fields
             return require('ts_context_commentstring.internal').calculate_commentstring({
               key = 'commentstring',
             }) or vim.bo.commentstring
