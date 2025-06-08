@@ -1,14 +1,14 @@
 local nmap = require('core.utils').mapper_factory('n')
 
 return {
-  -- Folding
   {
     'kevinhwang91/nvim-ufo',
     dependencies = {
       'kevinhwang91/promise-async',
     },
     config = function()
-      require('ufo').setup({
+      local ufo = require('ufo')
+      ufo.setup({
         -- treesitter not required
         -- ufo uses the same query files for folding (queries/<lang>/folds.scm)
         -- performance and stability are better than `foldmethod=nvim_treesitter#foldexpr()`-
@@ -24,8 +24,8 @@ return {
       vim.o.foldlevelstart = 99
 
       -- za to fold at cursor location is already enabled
-      nmap('zR', require('ufo').openAllFolds, { desc = 'Open All Folds' })
-      nmap('zM', require('ufo').closeAllFolds, { desc = 'Close All Folds' })
+      nmap('zR', ufo.openAllFolds, { desc = 'Open All Folds' })
+      nmap('zM', ufo.closeAllFolds, { desc = 'Close All Folds' })
     end,
   },
 }

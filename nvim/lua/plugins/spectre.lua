@@ -1,5 +1,3 @@
-local nmap = require('core.utils').mapper_factory('n')
-
 return {
   'nvim-pack/nvim-spectre',
   config = function()
@@ -22,25 +20,26 @@ return {
         },
       },
     })
-
-    -- Keymaps
-    nmap(
+  end,
+  keys = {
+    {
       '<leader>sr',
       '<cmd>lua require("spectre").toggle()<cr>',
-      { desc = 'Toggle Spectre' }
-    )
-    nmap(
+      desc = 'Toggle Spectre',
+      silent = true,
+    },
+    {
       '<leader>sp',
-      '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>',
-      {
-        desc = 'Search on current file',
-      }
-    )
-    -- nmap(
+      '<cmd>lua require("spectre").open_file_search({ select_word = true })<CR>',
+      desc = 'Search current word on current buffer',
+      silent = true,
+    },
+    -- {
     --   '<leader>sw',
-    --   '<cmd>lua require("spectre").open_visual({select_word=true})<cr>',
-    --   { desc = 'Search current word' }
-    -- )
-    -- vim.keymap.set('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<cr>', { desc = 'Search current word' })
-  end,
+    --   '<esc><cmd>lua require("spectre").open_visual()<cr>',
+    --   mode = 'v',
+    --   desc = 'Search current word',
+    --   silent = true,
+    -- },
+  },
 }

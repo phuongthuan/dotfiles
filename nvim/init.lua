@@ -7,7 +7,7 @@
   ██║██║ ╚████║██║   ██║██╗███████╗╚██████╔╝██║  ██║
   ╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝
                   Neovim init file
-                Author: Thuan Nguyen
+                Author: phuongthuan
             https://github.com/phuongthuan
 --]]
 
@@ -15,14 +15,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- [[ Setting options ]]
 require('options')
-
--- [[ Keymaps ]]
 require('keymaps')
-
--- [[ Commands ]]
 require('commands')
-
--- [[ Manage plugins ]]
 require('lazynvim')

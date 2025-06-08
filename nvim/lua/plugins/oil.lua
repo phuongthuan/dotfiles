@@ -1,11 +1,12 @@
-local nmap = require('core.utils').mapper_factory('n')
 local detail = false
 
 return {
   'stevearc/oil.nvim',
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()
-    require('oil').setup({
+    local oil = require('oil')
+
+    oil.setup({
       default_file_explorer = true,
       view_options = { show_hidden = true },
       win_options = { wrap = true },
@@ -28,14 +29,14 @@ return {
           callback = function()
             detail = not detail
             if detail then
-              require('oil').set_columns({
+              oil.set_columns({
                 'icon',
                 'permissions',
                 'size',
                 'mtime',
               })
             else
-              require('oil').set_columns({ 'icon' })
+              oil.set_columns({ 'icon' })
             end
           end,
         },
@@ -48,8 +49,13 @@ return {
         ['gs'] = false,
       },
     })
-
-    -- Keymaps
-    nmap('<C-f>', '<cmd>Oil<cr>', { desc = 'Open parent directory' })
   end,
+  keys = {
+    {
+      '<C-f>',
+      '<cmd>Oil<cr>',
+      desc = 'Open current opened file',
+      silent = true,
+    },
+  },
 }

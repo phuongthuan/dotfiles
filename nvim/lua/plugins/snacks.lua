@@ -6,15 +6,22 @@ return {
   opts = {
     image = { enabled = true },
     quickfile = { enabled = true },
-    rename = { enabled = true },
+    scroll = { enabled = false },
+    explorer = { enabled = false },
+    picker = { enabled = false },
+    statuscolumn = { enabled = false },
+    toggle = { enabled = false },
+    words = { enabled = false },
+    notifier = { enabled = false },
+    lazygit = { enabled = false },
+    input = { enabled = false },
+    rename = { enabled = false },
   },
   keys = {
     {
       '<leader>rN',
-      function()
-        require('snacks').rename.rename_file()
-      end,
-      desc = 'Fast Rename Current File',
+      '<cmd>lua require("snacks").rename.rename_file()<cr>',
+      desc = 'Fast rename current file',
     },
   },
 }

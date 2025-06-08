@@ -61,8 +61,8 @@ return {
       })
 
       -- Keymaps
-      nmap('<leader><leader>n', ':Telescope notify<cr>', { desc = 'Open messages history' })
-      nmap('<leader>un', ':Noice dismiss<cr>', { desc = 'Dismiss notification' })
+      nmap('<leader><leader>n', '<cmd>NoiceHistory<cr>', { desc = 'Open messages history' })
+      nmap('<leader>un', '<cmd>NoiceDismiss<cr>', { desc = 'Dismiss notification' })
     end,
   },
   {

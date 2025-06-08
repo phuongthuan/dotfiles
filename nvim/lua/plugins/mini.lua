@@ -1,5 +1,6 @@
 local env = require('core.env')
-local nmap = require('core.utils').mapper_factory('n')
+local mapper = require('core.utils').mapper_factory
+local nmap = mapper('n')
 
 return {
   {
@@ -56,7 +57,7 @@ return {
         options = { content_from_bottom = true },
       })
 
-      -- vim.ui.select = MiniPick.ui_select
+      vim.ui.select = MiniPick.ui_select
 
       local builtin = MiniPick.builtin
       local extra = MiniExtra.pickers
@@ -170,9 +171,14 @@ return {
       end, { desc = 'List all diagnostics in loaded buffers' })
 
       -- List all available keymaps
-      nmap('<leader>sk', function()
-        extra.keymaps()
+      mapper({ 'n', 'v' })('<leader>sk', function()
+        extra.keymaps({ scope = 'global' })
       end, { desc = 'List all available keymaps' })
+
+      -- Spell suggest word under cursor
+      nmap('<leader>sg', function()
+        extra.spellsuggest({ n_suggestions = 15 })
+      end, { desc = 'Spell suggest word under cursor' })
     end,
   },
   {
@@ -232,6 +238,33 @@ return {
         MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
         MiniFiles.reveal_cwd()
       end, { desc = 'Toggle current opened file' })
+    end,
+  },
+  {
+    'echasnovski/mini.comment',
+    version = false,
+    dependencies = {
+      'JoosepAlviste/nvim-ts-context-commentstring',
+    },
+    config = function()
+      -- skip backwards compatibility routines and speed up loading
+      vim.g.skip_ts_context_commentstring_module = true
+
+      -- disable the autocommand from ts-context-commentstring
+      require('ts_context_commentstring').setup({
+        enable_autocmd = false,
+      })
+
+      require('mini.comment').setup({
+        -- tsx, jsx, html , svelte comment support
+        options = {
+          custom_commentstring = function()
+            return require('ts_context_commentstring.internal').calculate_commentstring({
+              key = 'commentstring',
+            }) or vim.bo.commentstring
+          end,
+        },
+      })
     end,
   },
 }
