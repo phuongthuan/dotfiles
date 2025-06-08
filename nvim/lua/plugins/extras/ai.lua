@@ -1,27 +1,13 @@
-local prompts = {
-  Explain = 'Please explain how the following code works.',
-  Review = 'Please review the following code and provide suggestions for improvement.',
-  Tests = 'Please explain how the selected code works, then generate unit tests for it.',
-  Refactor = 'Please refactor the following code to improve its clarity and readability.',
-  FixCode = 'Please fix the following code to make it work as intended.',
-  FixError = 'Please explain the error in the following text and provide a solution.',
-  BetterNamings = 'Please provide better names for the following variables and functions.',
-  Documentation = 'Please provide documentation for the following code.',
-  Summarize = 'Please summarize the following text.',
-  Spelling = 'Please correct any grammar and spelling errors in the following text.',
-  Wording = 'Please improve the grammar and wording of the following text.',
-  Concise = 'Please rewrite the following text to make it more concise.',
-}
+local mapper = require('core.utils').mapper_factory
+local nmap = mapper('n')
+local vmap = mapper('v')
 
 return {
   {
-    'zbirenbaum/copilot-cmp',
-    config = function()
-      require('copilot_cmp').setup()
-    end,
-  },
-  {
     'zbirenbaum/copilot.lua',
+    dependencies = {
+      'zbirenbaum/copilot-cmp',
+    },
     cmd = 'Copilot',
     event = 'InsertEnter',
     config = function()
@@ -67,7 +53,20 @@ return {
     },
     build = 'make tiktoken',
     opts = {
-      prompts = prompts,
+      prompts = {
+        Explain = 'Please explain how the following code works.',
+        Review = 'Please review the following code and provide suggestions for improvement.',
+        Tests = 'Please explain how the selected code works, then generate unit tests for it.',
+        Refactor = 'Please refactor the following code to improve its clarity and readability.',
+        FixCode = 'Please fix the following code to make it work as intended.',
+        FixError = 'Please explain the error in the following text and provide a solution.',
+        BetterNamings = 'Please provide better names for the following variables and functions.',
+        Documentation = 'Please provide documentation for the following code.',
+        Summarize = 'Please summarize the following text.',
+        -- Spelling = 'Please correct any grammar and spelling errors in the following text.',
+        -- Wording = 'Please improve the grammar and wording of the following text.',
+        -- Concise = 'Please rewrite the following text to make it more concise.',
+      },
       mappings = {
         complete = {
           detail = 'Use @<Tab> or /<Tab> for options.',
@@ -86,100 +85,13 @@ return {
         },
       },
     },
-    keys = {
-      {
-        '<leader>cc',
-        ':CopilotChatToggle<CR>',
-        desc = 'Toggle Chat',
-        silent = true,
-      },
-      {
-        '<leader>ce',
-        ':CopilotChatExplain<CR>',
-        mode = 'v',
-        desc = 'Explain Code',
-        silent = true,
-      },
-      {
-        '<leader>cf',
-        ':CopilotChatFix<CR>',
-        mode = 'v',
-        desc = 'Fix Code Issues',
-        silent = true,
-      },
-      -- {
-      --   '<leader>cm',
-      --   ':CopilotChatCommit<CR>',
-      --   desc = 'Generate Commit Message',
-      --   silent = true,
-      -- },
-      -- {
-      --   '<leader>cs',
-      --   ':CopilotChatCommit<CR>',
-      --   mode = 'v',
-      --   desc = 'Generate Commit for Selection',
-      --   silent = true,
-      -- },
-      -- {
-      --   '<leader>cd',
-      --   ':CopilotChatDocs<CR>',
-      --   mode = 'v',
-      --   desc = 'Generate Docs',
-      --   silent = true,
-      -- },
-      -- {
-      --   '<leader>cd',
-      --   ':CopilotChatTests<CR>',
-      --   mode = 'v',
-      --   desc = 'Generate Tests',
-      --   silent = true,
-      -- },
-      {
-        '<leader>cor',
-        ':CopilotChatReview<CR>',
-        mode = 'v',
-        desc = 'Review Code',
-        silent = true,
-      },
-      {
-        '<leader>coo',
-        ':CopilotChatOptimize<CR>',
-        mode = 'v',
-        desc = 'Optimize Code',
-        silent = true,
-      },
-      {
-        '<leader>coq',
-        function()
-          local input = vim.fn.input('Ask AI 👽: ')
-          if input ~= '' then
-            vim.cmd('CopilotChat ' .. input)
-          end
-        end,
-        mode = { 'n', 'v', 'x' },
-        desc = 'Ask Input',
-        silent = true,
-      },
-      {
-        '<leader>ap',
-        function()
-          require('CopilotChat').select_prompt({
-            context = {
-              'buffers',
-            },
-          })
-        end,
-        desc = 'CopilotChat - Prompt actions',
-        silent = true,
-      },
-    },
     config = function(_, opts)
-      local chat = require('CopilotChat')
+      local copilot_chat = require('CopilotChat')
 
       local hostname = (io.popen('hostname'):read('*a') or ''):gsub('%s+', '')
       local user = os.getenv('USER') or hostname or 'User'
 
-      opts.question_header = '🐸 ' .. user .. ' '
+      opts.question_header = '🤖 ' .. user .. ' '
       opts.answer_header = '⚡AI '
       opts.error_header = '❌ Error '
 
@@ -187,12 +99,50 @@ return {
         prompt = '> #git:staged\n\nWrite a git commit message that summarizes all changes of each file. Write clear, informative commit messages. Including file path so for user to easy access in github.',
       }
 
-      chat.setup(opts)
+      -- Auto set current file to markdown if its filetype is copilot-chat
+      -- vim.api.nvim_create_autocmd('BufEnter', {
+      --   pattern = 'copilot-*',
+      --   callback = function()
+      --     local ft = vim.bo.filetype
+      --     if ft == 'copilot-chat' then
+      --       vim.bo.filetype = 'markdown'
+      --     end
+      --   end,
+      -- })
 
-      vim.keymap.set('n', '<leader>cs', ':CopilotChatStop<CR>', { silent = true })
-      -- vim.keymap.set('n', '<leader>cw', ':CopilotChatSave')
-      -- vim.keymap.set('n', '<leader>cl', ':CopilotChatLoad')
+      copilot_chat.setup(opts)
+
+      nmap('<leader>cok', '<cmd>CopilotChatStop<cr>', { desc = 'Stop CopilotChat' })
+      nmap('<leader>cos', '<cmd>CopilotChatSave<cr>', { desc = 'Save CopilotChat Session' })
+      nmap('<leader>col', '<cmd>CopilotChatLoad<cr>', { desc = 'Load CopilotChat Session' })
+      vmap('<leader>coe', '<cmd>CopilotChatExplain<cr>', { desc = 'Explain Code (CopilotChat)' })
+      nmap('<leader>cof', '<cmd>CopilotChatFix<cr>', { desc = 'Fix Code Issues (CopilotChat)' })
+      vmap('<leader>cor', '<cmd>CopilotChatReview<cr>', { desc = 'Review Code (CopilotChat)' })
+      vmap('<leader>coo', '<cmd>CopilotChatOptimize<cr>', { desc = 'Optimize Code (CopilotChat)' })
+
+      nmap('<leader>cop', function()
+        require('CopilotChat').select_prompt({
+          context = {
+            'buffers',
+          },
+        })
+      end, { desc = 'Prompt Actions (CopilotChat)' })
+
+      mapper({ 'n', 'v', 'x' })('<leader>coa', function()
+        local input = vim.fn.input('Ask Copilot 🤖')
+        if input ~= '' then
+          vim.cmd('CopilotChat ' .. input)
+        end
+      end, { desc = 'Ask Copilot' })
     end,
+    keys = {
+      {
+        '<leader>cc',
+        '<cmd>CopilotChatToggle<cr>',
+        desc = 'Toggle CopilotChat',
+        silent = true,
+      },
+    },
     event = 'VeryLazy',
   },
 }

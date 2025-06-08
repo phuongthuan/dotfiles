@@ -1,15 +1,17 @@
-alias vi='~/nvim-macos-arm64/bin/nvim'
+alias vi='~/nvim-0.11.2/bin/nvim'
 
-alias arm="arch -arm64"
-alias intel="arch -x86_64"
+alias arm='arch -arm64'
+alias intel='arch -x86_64'
 
-alias rv="ruby -v"
-alias nv="node -v"
-alias ni="npm install"
-alias ns="npm start"
+alias rv='ruby -v'
+alias nv='node -v'
+alias lv='lua -v'
+
+alias ni='npm install'
+alias ns='npm start'
 
 # Kill all node process
-alias nka="killall node && killall eslint_d && killall prettierd; echo ' Killed all node processes 🚀';"
+alias nka='killall node && killall eslint_d && killall prettierd; echo ' Killed all node processes 🚀';'
 
 # Open iCloud Drive
 alias ic='eval vi $ICLOUD_DRIVE'
@@ -20,11 +22,11 @@ alias obs='eval vi $ICLOUD_DRIVE_OBSIDIAN_DIR'
 # Open dotfiles
 alias dot='cd ~/.dotfiles/ && vi'
 
-alias c="clear"
-alias e="exit"
+alias c='clear'
+alias e='exit'
 
 # Binding zoxide to j - because I'm the autojump user :)
-alias j="z"
+alias j='z'
 
 # Homebrew
 alias br='brew'

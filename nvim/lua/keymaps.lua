@@ -18,9 +18,6 @@ nmap(
   ':source ' .. env.NVIM_CONFIG_DIR .. '/init.lua' .. '<cr>:echo " Reloaded Neovim config 🚀"<cr>'
 )
 
--- Open file in same directory
--- cmd([[ nnoremap ,e :e <C-R>=expand('%:p:h') . '/'<cr> ]])
-
 -- Open EH configuration
 nmap('<leader>eh', ':e ' .. env.EH_CONFIG_FILE .. '<cr>', { desc = 'Open EH configuration' })
 nmap('<leader>sc', ':e ' .. env.SECRET_ENV_FILE .. '<cr>', { desc = 'Open Secret configuration' })
@@ -119,12 +116,6 @@ nmap(
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 nmap('<Esc>', '<cmd>nohlsearch<cr>')
-
--- Diagnostic keymaps
-nmap('[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-nmap(']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-nmap('<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
--- nmap('<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which

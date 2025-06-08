@@ -12,7 +12,12 @@ return {
       desc = 'Harpoon: Add file to bookmarks',
       silent = true,
     },
-    { '<C-e>', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', desc = 'Harpoon: Toggle quick menu' },
+    {
+      '<C-e>',
+      '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>',
+      desc = 'Harpoon: Toggle quick menu',
+      silent = true,
+    },
     {
       '<leader>1',
       '<cmd>lua require("harpoon.ui").nav_file(1)<cr>',

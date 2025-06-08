@@ -1,31 +1,28 @@
 local autocmd = vim.api.nvim_create_autocmd
-local user_command = vim.api.nvim_create_user_command
-local nnoremap = require('core.utils').mapper_factory('n')
+local nmap = require('core.utils').mapper_factory('n')
 
-local autocmds_group = vim.api.nvim_create_augroup('UserConfigGroup', { clear = true })
+local group = vim.api.nvim_create_augroup('UserConfig', { clear = true })
 
--- AUTOCOMMANDS
 autocmd('TextYankPost', {
-  group = autocmds_group,
+  group = group,
   pattern = '*',
   callback = function()
     vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 40 })
   end,
-  desc = 'Highlight text on yank (copy)',
+  desc = 'Highlight Text On Yank',
 })
 
 autocmd('WinEnter', {
-  group = autocmds_group,
+  group = group,
   pattern = '*',
   callback = function()
     vim.wo.cursorline = true
-    vim.wo.colorcolumn = '80'
   end,
-  desc = 'Highlight cursorline and colorcolumn on active window',
+  desc = 'Highlight Cursorline On Active Window',
 })
 
 autocmd('FileType', {
-  group = autocmds_group,
+  group = group,
   pattern = {
     'vim',
     'man',
@@ -39,57 +36,38 @@ autocmd('FileType', {
   callback = function(e)
     -- Map q to exit in non-filetype buffers
     vim.bo[e.buf].buflisted = false
-    nnoremap('q', ':q<CR>', { buffer = e.buf })
+    nmap('q', ':q<CR>', { buffer = e.buf })
   end,
   desc = 'Maps q to exit on non-filetypes',
 })
 
--- Hide the `colorcolumn` when new windows opened
-autocmd('WinEnter', {
-  pattern = '*',
+autocmd({ 'BufRead', 'BufNewFile' }, {
+  group = group,
+  pattern = { '*.env', '.env.*' },
   callback = function()
-    vim.wo.colorcolumn = ''
+    vim.opt_local.filetype = 'sh'
   end,
+  desc = 'Auto set filetype for .env and .env.* files',
 })
 
 -- Enable spellcheck for certain files
-autocmd('FileType', {
-  group = autocmds_group,
-  pattern = {
-    'gitcommit',
-    'markdown',
-    'txt',
-  },
-  callback = function()
-    vim.opt_local.spell = true
-    vim.opt_local.spelllang = 'en'
-  end,
-  desc = 'Enable spellcheck for certain files',
-})
+-- autocmd('FileType', {
+--   group = autocmds_group,
+--   pattern = {
+--     'gitcommit',
+--     'markdown',
+--     'txt',
+--   },
+--   callback = function()
+--     vim.opt_local.spell = true
+--     vim.opt_local.spelllang = 'en'
+--   end,
+--   desc = 'Enable spellcheck for certain files',
+-- })
 
 autocmd('BufWritePre', {
-  group = autocmds_group,
+  group = group,
   pattern = '*',
   command = [[%s/\s\+$//e]],
-  desc = 'Remove trailing spaces',
-})
-
--- COMMANDS
-user_command('FormatDisable', function(args)
-  if args.bang then
-    -- FormatDisable! will disable formatting just for this buffer
-    vim.b.disable_autoformat = true
-  else
-    vim.g.disable_autoformat = true
-  end
-end, {
-  desc = 'Disable autoformat-on-save',
-  bang = true,
-})
-
-user_command('FormatEnable', function()
-  vim.b.disable_autoformat = false
-  vim.g.disable_autoformat = false
-end, {
-  desc = 'Re-enable autoformat-on-save',
+  desc = 'Remove Trailing Spaces',
 })

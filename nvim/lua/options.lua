@@ -13,7 +13,6 @@ vim.opt.relativenumber = true
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 
--- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 
 -- Sync clipboard between OS and Neovim.
@@ -41,10 +40,6 @@ vim.opt.updatetime = 250
 -- Displays which-key popup sooner
 vim.opt.timeoutlen = 300
 
--- Configure how new splits should be opened
-vim.opt.splitright = true
-vim.opt.splitbelow = true
-
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
@@ -57,13 +52,12 @@ vim.opt.inccommand = 'split'
 
 -- General
 vim.opt.mouse = 'v' -- enable mouse middle click paste
-vim.opt.swapfile = false -- don't use swapfile
-vim.opt.fileencoding = 'utf-8' -- the encoding written to file
+vim.opt.swapfile = false
+vim.opt.fileencoding = 'utf-8'
 vim.opt.scrolloff = 8
 vim.opt.cmdheight = 2
 vim.opt.conceallevel = 0 -- make `` is visible in markdown files
-vim.opt.showmode = false -- we don't need to see things like -- INSERT -- anymore
-vim.opt.completeopt = 'menuone,noselect,noinsert' -- completion options
+vim.opt.showmode = false
 vim.opt.shortmess = 'c' -- don't show completion messages
 
 -- UI
@@ -94,15 +88,19 @@ vim.opt.smartindent = true -- autoindent new lines
 
 -- Memory, CPU
 vim.opt.history = 100 -- remember n lines in history
-vim.opt.lazyredraw = true -- faster scrolling
+-- vim.opt.lazyredraw = true -- faster scrolling, disable for Noice
 vim.opt.synmaxcol = 240 -- max column for syntax highlight
 
 -- Add asterisks in block comments
 vim.opt.formatoptions:append({ 'r' })
 
 -- Cursor highlighting
-vim.cmd([[
-  hi CursorN guifg=#fbf1c7 guibg=#fbf1c7
-  hi CursorI guifg=#fb4934 guibg=#fb4934
-  set guicursor=n:block-CursorN,i-r-v-ci:block-CursorI
-]])
+vim.api.nvim_set_hl(0, 'CursorN', { fg = '#fbf1c7', bg = '#fbf1c7' })
+vim.api.nvim_set_hl(0, 'CursorI', { fg = '#fb4934', bg = '#fb4934' })
+vim.opt.guicursor = {
+  'n:block-CursorN',
+  'i:block-CursorI',
+  'r:block-CursorI',
+  'v:block-CursorI',
+  'ci:block-CursorI',
+}

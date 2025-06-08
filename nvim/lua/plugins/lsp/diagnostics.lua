@@ -1,56 +1,40 @@
 local icons = require('core.icons').diagnostics
+local nmap = require('core.utils').mapper_factory('n')
 
 local M = {}
 
--- Diagnostic signs and highlight group
-local diagnostics_signs = {
-  [vim.diagnostic.severity.ERROR] = {
-    sign = string.format('%s ', icons.error),
-    hl_group = 'DiagnosticSignError',
-  },
-  [vim.diagnostic.severity.WARN] = {
-    sign = string.format('%s ', icons.warning),
-    hl_group = 'DiagnosticSignWarn',
-  },
-  [vim.diagnostic.severity.HINT] = {
-    sign = string.format('%s ', icons.hint),
-    hl_group = 'DiagnosticSignHint',
-  },
-  [vim.diagnostic.severity.INFO] = {
-    sign = string.format('%s ', icons.info),
-    hl_group = 'DiagnosticSignInfo',
-  },
-}
-
----@param diagnostic lsp.Diagnostic
-local diagnostics_prefix = function(diagnostic)
-  local severity = diagnostics_signs[diagnostic.severity]
-  return severity.sign, severity.hl_group
-end
-
 function M.setup()
-  local signs = { text = {} }
-  for severity, config in pairs(diagnostics_signs) do
-    signs.text[severity] = config.sign
-  end
-
-  -- Global diagnostic config
   vim.diagnostic.config({
-    signs = signs,
-    virtual_text = { prefix = diagnostics_prefix },
-    float = {
-      max_width = 85,
-      max_height = 30,
-      border = 'rounded',
-      prefix = diagnostics_prefix,
-      scope = 'line',
+    severity_sort = true,
+    float = { border = 'rounded', source = true },
+    underline = { severity = vim.diagnostic.severity.ERROR },
+    signs = vim.g.have_nerd_font and {
+      text = {
+        [vim.diagnostic.severity.ERROR] = icons.error,
+        [vim.diagnostic.severity.WARN] = icons.warn,
+        [vim.diagnostic.severity.HINT] = icons.hint,
+        [vim.diagnostic.severity.INFO] = icons.info,
+      },
+    } or {},
+    virtual_text = {
       source = true,
-    },
-    underline = {
-      -- Do not underline text when severity is low (INFO or HINT).
-      severity = { min = vim.diagnostic.severity.WARN },
+      spacing = 2,
+      format = function(diagnostic)
+        local diagnostic_message = {
+          [vim.diagnostic.severity.ERROR] = diagnostic.message,
+          [vim.diagnostic.severity.WARN] = diagnostic.message,
+          [vim.diagnostic.severity.INFO] = diagnostic.message,
+          [vim.diagnostic.severity.HINT] = diagnostic.message,
+        }
+        return diagnostic_message[diagnostic.severity]
+      end,
     },
   })
+
+  -- Keymaps
+  -- nmap(']d', vim.diagnostic.goto_next, { desc = 'Go To Next Diagnostic' })
+  -- nmap('[d', vim.diagnostic.goto_prev, { desc = 'Go To Previous Diagnostic' })
+  nmap('<leader>e', vim.diagnostic.open_float, { desc = 'Show Line Diagnostic' })
 end
 
 return M

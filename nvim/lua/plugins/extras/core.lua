@@ -15,7 +15,7 @@ return {
     keys = {
       {
         '<leader>tt',
-        ':Translate Vi<CR>',
+        '<cmd>Translate Vi<cr>',
         mode = { 'n', 'v' },
         desc = 'Translate under cursor and selected text',
         silent = true,
@@ -25,7 +25,7 @@ return {
   {
     'szw/vim-maximizer',
     keys = {
-      { '<leader>sm', '<cmd>MaximizerToggle<CR>', desc = 'Maximize/minimize a split' },
+      { '<leader>sm', '<cmd>MaximizerToggle<CR>', desc = 'Maximize/minimize a split', silent = true },
     },
   },
 }

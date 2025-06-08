@@ -27,10 +27,6 @@ return {
       },
     },
     'saadparwaiz1/cmp_luasnip',
-
-    -- Adds other completion capabilities.
-    --  nvim-cmp does not ship with all sources by default. They are split
-    --  into multiple repositories for maintenance purposes.
     'hrsh7th/cmp-emoji',
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-path',
@@ -53,23 +49,54 @@ return {
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
     end
 
+    local select_next_item = function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      else
+        fallback()
+      end
+    end
+
+    local select_prev_item = function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      else
+        fallback()
+      end
+    end
+
     cmp.setup({
+      completion = {
+        completeopt = 'menu,menuone,noinsert,popup',
+      },
+      window = {
+        documentation = {
+          border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+        },
+        completion = {
+          border = { '┌', '─', '┐', '│', '┘', '─', '└', '│' },
+        },
+      },
+      -- config nvim cmp to work with snippet engine
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
         end,
       },
-      completion = { completeopt = 'menu,menuone,noinsert' },
-      window = {
-        completion = cmp.config,
-      },
       mapping = {
-        ['<C-p>'] = cmp.mapping.select_prev_item(),
-        ['<C-n>'] = cmp.mapping.select_next_item(),
+        ['<C-n>'] = cmp.mapping(select_next_item),
+        ['<C-p>'] = cmp.mapping(select_next_item),
+        ['<C-j>'] = cmp.mapping(select_next_item),
+        ['<C-k>'] = cmp.mapping(select_prev_item),
+        ['<Down>'] = cmp.mapping(select_next_item),
+        ['<Up>'] = cmp.mapping(select_prev_item),
+
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
+
         ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-        ['<C-e>'] = cmp.mapping.close(),
+        ['<C-e>'] = cmp.mapping.abort(), -- close completion window
+
         ['<CR>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             if luasnip.expandable() then
@@ -83,6 +110,7 @@ return {
             fallback()
           end
         end),
+
         ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
@@ -94,6 +122,7 @@ return {
             fallback()
           end
         end, { 'i', 's' }),
+
         ['<S-Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
@@ -139,11 +168,11 @@ return {
           cmp.config.compare.order,
         },
       },
-      sources = {
-        { name = 'nvim_lsp', group_index = 2 },
+      sources = cmp.config.sources({
         { name = 'copilot', group_index = 2 },
-        { name = 'nvim_lua', group_index = 2 },
         { name = 'luasnip', group_index = 2 },
+        { name = 'nvim_lsp', group_index = 2 },
+        { name = 'nvim_lua', group_index = 2 },
         { name = 'path', group_index = 2 },
         { name = 'buffer', group_index = 2 },
         { name = 'emoji', group_index = 2 },
@@ -157,7 +186,7 @@ return {
         --     -- dict = '/usr/share/dict/words',
         --   },
         -- },
-      },
+      }),
     })
   end,
 }
