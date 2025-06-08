@@ -47,16 +47,17 @@ return {
       },
       {
         '<leader>gl',
-        ':GV<cr>',
+        '<cmd>GV<cr>',
         desc = 'Open Git Commits',
         silent = true,
       },
       {
         '<leader>gL',
-        ":GV <C-R>=expand('%:p')<cr><cr>",
+        "<cmd>GV <C-R>=expand('%:p')<cr><cr>",
         desc = 'Git Commits On Current File',
         silent = true,
       },
+      { '<leader>P', ':G push origin HEAD --no-verify<cr>', desc = 'Git Push without verify', silent = true },
     },
   },
   'junegunn/gv.vim', -- Display Git commits list
