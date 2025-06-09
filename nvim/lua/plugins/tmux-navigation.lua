@@ -19,15 +19,16 @@ return {
     end
 
     local nvim_tmux_nav_group = vim.api.nvim_create_augroup('NvimTmuxNavigation', {})
+    local autocmd = vim.api.nvim_create_autocmd
 
-    vim.api.nvim_create_autocmd({ 'VimEnter', 'VimResume' }, {
+    autocmd({ 'VimEnter', 'VimResume' }, {
       group = nvim_tmux_nav_group,
       callback = function()
         tmux_command('set-option -p @is_vim yes')
       end,
     })
 
-    vim.api.nvim_create_autocmd({ 'VimLeave', 'VimSuspend' }, {
+    autocmd({ 'VimLeave', 'VimSuspend' }, {
       group = nvim_tmux_nav_group,
       callback = function()
         tmux_command('set-option -p -u @is_vim')
