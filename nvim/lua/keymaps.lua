@@ -26,13 +26,13 @@ nmap('<leader>sc', ':e ' .. env.SECRET_ENV_FILE .. '<cr>', { desc = 'Open Secret
 nmap(';', ':', { silent = false })
 vmap(';', ':', { silent = false })
 
--- Fast saving with <leader> and s
+-- Save current buffer
 nmap('<leader>s', ':w<cr>:echo " Saved current file ✅"<cr>')
 
 -- :wq
 nmap('<leader>w', ':wq<cr>:echo " Git commit created ✅"<cr>')
 
--- Saving all working buffers
+-- Save all loaded buffers
 nmap('<leader>S', ':wa<cr>:echo " Saved all files ✅"<cr>')
 
 -- Map Esc to jk
@@ -48,8 +48,8 @@ nmap('<S-tab>', ':bn<cr>')
 -- Switch between last two files
 nmap('<BS>', '<C-^>')
 
--- Close window without save
-nmap('<leader>q', ':q!<cr>')
+-- Exit Neovim ❌
+nmap('<leader>q', ':q<cr>')
 
 -- Select all file
 nmap('<leader>a', ':keepjumps normal! ggVG<cr>')
@@ -157,6 +157,7 @@ nmap('<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Toggle spell checking
 nmap('<leader><leader>s', function()
+  ---@diagnostic disable-next-line: undefined-field
   local new_state = not vim.opt_local.spell:get()
   vim.opt_local.spell = new_state
   if new_state then

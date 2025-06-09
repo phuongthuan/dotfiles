@@ -1,26 +1,24 @@
 return {
   'nvim-pack/nvim-spectre',
-  config = function()
-    require('spectre').setup({
-      replace_engine = {
-        ['sed'] = {
-          cmd = 'sed',
-          args = {
-            '-i',
-            '',
-            '-E',
-          },
+  opts = {
+    replace_engine = {
+      ['sed'] = {
+        cmd = 'sed',
+        args = {
+          '-i',
+          '',
+          '-E',
         },
       },
-      mapping = {
-        ['send_to_qf'] = {
-          map = '<leader>qf',
-          cmd = "<cmd>lua require('spectre.actions').send_to_qf()<CR>",
-          desc = 'send all items to quickfix',
-        },
+    },
+    mapping = {
+      ['send_to_qf'] = {
+        map = '<leader>qf',
+        cmd = "<cmd>lua require('spectre.actions').send_to_qf()<CR>",
+        desc = 'send all items to quickfix',
       },
-    })
-  end,
+    },
+  },
   keys = {
     {
       '<leader>sr',
@@ -34,12 +32,5 @@ return {
       desc = 'Search current word on current buffer',
       silent = true,
     },
-    -- {
-    --   '<leader>sw',
-    --   '<esc><cmd>lua require("spectre").open_visual()<cr>',
-    --   mode = 'v',
-    --   desc = 'Search current word',
-    --   silent = true,
-    -- },
   },
 }

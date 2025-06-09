@@ -73,9 +73,9 @@ return {
         documentation = {
           border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
         },
-        completion = {
-          border = { '┌', '─', '┐', '│', '┘', '─', '└', '│' },
-        },
+        -- completion = {
+        --   border = { '┌', '─', '┐', '│', '┘', '─', '└', '│' },
+        -- },
       },
       -- config nvim cmp to work with snippet engine
       snippet = {

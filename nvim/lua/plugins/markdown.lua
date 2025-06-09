@@ -6,6 +6,7 @@ return {
     'nvim-tree/nvim-web-devicons',
   },
   ---@module 'render-markdown'
+  ---@diagnostic disable-next-line: missing-fields
   ft = { 'markdown', 'copilot-chat' },
   init = function()
     local color1_bg = '#b8bb26'

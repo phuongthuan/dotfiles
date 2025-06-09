@@ -27,7 +27,7 @@ return {
         },
         cmdline = {
           format = {
-            cmdline = { pattern = '^:', icon = '💻', lang = 'vim' },
+            cmdline = { pattern = '^:', lang = 'vim', view = 'cmdline' },
             search_down = {
               kind = 'search',
               pattern = '^/',
@@ -40,7 +40,7 @@ return {
               icon = '🔍 ',
               lang = 'regex',
             },
-            input = { view = 'cmdline_input', icon = '📝' }, -- Used by input()
+            input = { view = 'cmdline', icon = '' }, -- Used by vim.fn.input()
           },
         },
         routes = {

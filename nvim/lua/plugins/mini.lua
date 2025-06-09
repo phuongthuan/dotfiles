@@ -1,4 +1,5 @@
 local env = require('core.env')
+local picker = require('core.picker')
 local mapper = require('core.utils').mapper_factory
 local nmap = mapper('n')
 
@@ -62,36 +63,32 @@ return {
       local builtin = MiniPick.builtin
       local extra = MiniExtra.pickers
 
-      -- Search all file in the current working directory
       nmap('<leader>,', function()
         builtin.files({ tool = 'fd' }, { source = { name = 'All files (fd)' } })
       end, { desc = 'Search all files in current working directory' })
 
-      -- Search all loaded buffers
       nmap(';f', function()
         builtin.buffers()
-      end, { desc = 'Search all loaded buffers' })
+      end, { desc = 'All loaded buffers' })
 
-      -- Resume search
       nmap('<leader>rs', function()
         builtin.resume()
       end, { desc = 'Resume search' })
 
-      -- Search help
       nmap('<leader>sh', function()
-        builtin.help()
+        builtin.help(nil, { source = { name = 'Help 🙌' } })
       end, { desc = 'Search help' })
 
-      -- Search for a input string in the current working directory, respects .gitignore
       nmap('<leader>ps', function()
-        local pattern = vim.fn.input('Input string')
+        local pattern = vim.fn.input('String  ')
 
         -- If input is empty, then hide the input prompt instead of showing empty window
         if pattern == '' then
           return
         end
 
-        builtin.grep({ pattern = pattern })
+        -- picker.grep({ pattern = pattern })
+        picker.grep_literal({ pattern = pattern }, { source = { name = 'Grep literal (rg)' } })
       end, { desc = 'Search for a input string' })
 
       nmap('<leader>pw', function()
@@ -137,44 +134,41 @@ return {
         })
       end, { desc = 'Search for a string in .dotfiles' })
 
-      -- Search all files in env.PERSONAL_NOTES
       nmap('<leader>fn', function()
         builtin.files({ tool = 'fd' }, {
           source = { name = 'Notes (fd)', cwd = env.PERSONAL_NOTES },
         })
-      end, { desc = 'Search all files in Notes' })
+      end, { desc = 'All notes (fd)' })
 
-      -- Search for a string in env.PERSONAL_NOTES
       nmap('<leader>sn', function()
         builtin.grep_live(nil, {
           source = { name = 'Grep Notes', cwd = env.PERSONAL_NOTES },
         })
       end, { desc = 'Search for a string in Notes' })
 
-      -- List all git branches
       nmap('<leader>gb', function()
         extra.git_branches()
       end, { desc = 'List all git branches' })
 
-      -- List all diagnostics in current buffer
       nmap('<leader>d', function()
         extra.diagnostic({ scope = 'current' }, { source = { name = 'Diagnostics (current) 🐛' } })
       end, { desc = 'List all diagnostics in current buffer' })
 
-      -- List all diagnostics in loaded buffers
       nmap('<leader>D', function()
         extra.diagnostic(nil, { source = { name = 'Diagnostics (all) 🐛' } })
       end, { desc = 'List all diagnostics in loaded buffers' })
 
-      -- List all available keymaps
       mapper({ 'n', 'v' })('<leader>sk', function()
         extra.keymaps()
       end, { desc = 'List all available keymaps' })
 
-      -- Spell suggest word under cursor
       nmap('<leader>sg', function()
         extra.spellsuggest({ n_suggestions = 15 })
       end, { desc = 'Spell suggest word under cursor' })
+
+      nmap('<leader>mc', function()
+        picker.mpc_commands()
+      end, { desc = 'Open MPC' })
     end,
   },
   {

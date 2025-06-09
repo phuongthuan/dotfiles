@@ -5,91 +5,94 @@ vim.g.loaded_perl_provider = 0
 vim.g.loaded_python3_provider = 0
 
 -- Make line numbers default
-vim.opt.number = true
+vim.o.number = true
 
 -- Relative line numbers, to help with jumping.
-vim.opt.relativenumber = true
+vim.o.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
-vim.opt.mouse = 'a'
+vim.o.mouse = 'a'
 
-vim.opt.showmode = false
+-- Don't show the mode, since it's already in the status line
+vim.o.showmode = false
 
 -- Sync clipboard between OS and Neovim.
---  Remove this option if you want your OS clipboard to remain independent.
+--  Schedule the setting after `UiEnter` because it can increase startup-time.
+--  Remove this.o.on if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.opt.clipboard = 'unnamedplus'
+vim.schedule(function()
+  vim.o.clipboard = 'unnamedplus'
+end)
 
 -- Enable break indent
-vim.opt.breakindent = true
+vim.o.breakindent = true
 
 -- Save undo history
-vim.opt.undofile = true
+vim.o.undofile = true
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
+vim.o.ignorecase = true
+vim.o.smartcase = true
 
 -- Keep signcolumn on by default
-vim.opt.signcolumn = 'yes'
+vim.o.signcolumn = 'yes'
 
 -- Decrease update time
-vim.opt.updatetime = 250
+vim.o.updatetime = 250
 
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
-vim.opt.timeoutlen = 300
+vim.o.timeoutlen = 300
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
-vim.opt.list = true
--- vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
--- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.o.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
-vim.opt.inccommand = 'split'
+vim.o.inccommand = 'split'
 
 -- General
-vim.opt.mouse = 'v' -- enable mouse middle click paste
-vim.opt.swapfile = false
-vim.opt.fileencoding = 'utf-8'
-vim.opt.scrolloff = 8
-vim.opt.cmdheight = 2
-vim.opt.conceallevel = 0 -- make `` is visible in markdown files
-vim.opt.showmode = false
-vim.opt.shortmess = 'c' -- don't show completion messages
+vim.o.mouse = 'v' -- enable mouse middle click paste
+vim.o.swapfile = false
+vim.o.fileencoding = 'utf-8'
+vim.o.scrolloff = 8
+vim.o.cmdheight = 2
+vim.o.conceallevel = 0 -- make `` is visible in markdown files
+vim.o.showmode = false
+vim.o.shortmess = 'c' -- don't show completion messages
 
 -- UI
-vim.opt.syntax = 'enable' -- enable syntax highlighting
-vim.opt.number = true -- show line number
-vim.opt.showmatch = true -- highlight matching parenthesis
+vim.o.syntax = 'enable' -- enable syntax highlighting
+vim.o.number = true -- show line number
+vim.o.showmatch = true -- highlight matching parenthesis
 
--- Folding (nvim-ufo)
+-- Folding (nvim-ufo.lua)
 vim.o.foldenable = true -- Enable folding by default
 vim.o.foldmethod = 'manual' -- Default fold method (change as needed)
 vim.o.foldlevel = 99 -- Open most folds by default
 vim.o.foldcolumn = '0'
 
-vim.opt.splitright = true -- vertical split to the right
-vim.opt.splitbelow = true -- horizontal split to the bottom
-vim.opt.ignorecase = true -- ignore case letters when search
-vim.opt.smartcase = true -- ignore lowercase for the whole pattern
-vim.opt.ruler = true -- show the cursor position all the time
-vim.opt.cursorline = true -- show which line your cursor is on
-vim.opt.hlsearch = true -- highlight search result
-vim.opt.termguicolors = true -- enable 24-bit RGB colors
+vim.o.splitright = true -- vertical split to the right
+vim.o.splitbelow = true -- horizontal split to the bottom
+vim.o.ignorecase = true -- ignore case letters when search
+vim.o.smartcase = true -- ignore lowercase for the whole pattern
+vim.o.ruler = true -- show the cursor position all the time
+vim.o.cursorline = true -- show which line your cursor is on
+vim.o.hlsearch = true -- highlight search result
+vim.o.termguicolors = true -- enable 24-bit RGB colors
 
 -- Tabs, indent
-vim.opt.expandtab = true -- use spaces instead of tabs
-vim.opt.shiftwidth = 2 -- shift 2 spaces when tab
-vim.opt.tabstop = 2 -- 1 tab == 2 spaces
-vim.opt.smartindent = true -- autoindent new lines
+vim.o.expandtab = true -- use spaces instead of tabs
+vim.o.shiftwidth = 2 -- shift 2 spaces when tab
+vim.o.tabstop = 2 -- 1 tab == 2 spaces
+vim.o.smartindent = true -- autoindent new lines
 
 -- Memory, CPU
-vim.opt.history = 100 -- remember n lines in history
--- vim.opt.lazyredraw = true -- faster scrolling, disable for Noice
-vim.opt.synmaxcol = 240 -- max column for syntax highlight
+vim.o.history = 100 -- remember n lines in history
+-- vim.o.lazyredraw = true -- faster scrolling, disable for Noice
+vim.o.synmaxcol = 240 -- max column for syntax highlight
 
 -- Add asterisks in block comments
 vim.opt.formatoptions:append({ 'r' })
@@ -104,3 +107,7 @@ vim.opt.guicursor = {
   'v:block-CursorI',
   'ci:block-CursorI',
 }
+
+-- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
+-- instead raise a dialog asking if you wish to save the current file(s)
+vim.o.confirm = true
