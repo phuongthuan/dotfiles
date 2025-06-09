@@ -17,7 +17,7 @@ alias mct='mpc toggle'
 # alias mps='mpc stop && mpc clear'
 
 # Extract audio(.mp3) from a Youtube video
-yt_dl() {
+ydl() {
   if [ -z "$1" ]; then
     echo "Please provide a Youtube video URL 🔴"
     return 1
