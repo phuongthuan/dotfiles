@@ -47,7 +47,7 @@ M.diagnostics = {
   hint = ' ',
 }
 
-M.devicons = {
+M.icons = {
   format = '󰉼',
   lock = '',
   download = '',
@@ -60,10 +60,18 @@ M.devicons = {
   check = '',
   speedometer = '󰾅',
   plus_circle = '󰐗',
+  check_fidget = '✔',
+  neovim = '',
+  bug = '',
+  music = '',
+  fire = '',
+  link = '',
 }
 
 M.git = {
   untracked = '',
+  github = '',
+  branch = '',
 }
 
 M.ui = {

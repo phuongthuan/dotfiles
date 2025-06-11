@@ -5,10 +5,7 @@ return {
   {
     'folke/noice.nvim',
     event = 'VeryLazy',
-    dependencies = {
-      'MunifTanjim/nui.nvim',
-      'rcarriga/nvim-notify',
-    },
+    dependencies = { 'MunifTanjim/nui.nvim' },
     config = function()
       require('noice').setup({
         lsp = {
@@ -27,7 +24,7 @@ return {
         },
         cmdline = {
           format = {
-            cmdline = { pattern = '^:', lang = 'vim', view = 'cmdline' },
+            cmdline = { pattern = '^:', lang = 'vim' },
             search_down = {
               kind = 'search',
               pattern = '^/',
@@ -40,7 +37,7 @@ return {
               icon = '🔍 ',
               lang = 'regex',
             },
-            input = { view = 'cmdline', icon = '' }, -- Used by vim.fn.input()
+            input = { icon = '✏️' }, -- Used by vim.fn.input()
           },
         },
         routes = {
@@ -55,19 +52,8 @@ return {
         },
       })
 
-      -- Keymaps
       nmap('<leader><leader>n', '<cmd>NoiceAll<cr>', { desc = 'Open messages' })
       nmap('<leader>un', '<cmd>NoiceDismiss<cr>', { desc = 'Dismiss notification' })
     end,
-  },
-  {
-    'rcarriga/nvim-notify',
-    opts = {
-      background_colour = '#282828',
-      stages = 'fade',
-      -- icons = { ERROR = '❌' },
-      -- top_down = false,
-      -- render = 'compact',
-    },
   },
 }

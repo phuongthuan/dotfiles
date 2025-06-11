@@ -8,17 +8,17 @@ return {
       -- bash = { 'shellcheck' },
       -- sh = { 'shellcheck' },
       -- zsh = { 'zsh' },
-      typescript = { 'eslint_d', 'eslint' },
-      javascript = { 'eslint_d', 'eslint' },
-      typescriptreact = { 'eslint_d', 'eslint' },
-      javascriptreact = { 'eslint_d', 'eslint' },
+      typescript = { 'eslint_d' },
+      javascript = { 'eslint_d' },
+      typescriptreact = { 'eslint_d' },
+      javascriptreact = { 'eslint_d' },
       -- markdown = { 'markdownlint' },
       -- json = { 'jsonlint' },
       -- text = { 'vale' },
     }
 
     lint.linters.eslint_d.args = {
-      '--no-warn-ignored',
+      -- '--no-warn-ignored',
       '--format',
       'json',
       '--stdin',
@@ -35,6 +35,8 @@ return {
     vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
       group = lint_augroup,
       callback = function()
+        -- try_lint without arguments runs the linters defined in `linters_by_ft`
+        -- for the current filetype
         lint.try_lint()
       end,
     })

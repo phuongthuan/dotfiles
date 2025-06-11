@@ -3,7 +3,7 @@ return {
   enabled = true,
   dependencies = {
     'nvim-treesitter/nvim-treesitter',
-    'nvim-tree/nvim-web-devicons',
+    'echasnovski/mini.icons',
   },
   ---@module 'render-markdown'
   ---@diagnostic disable-next-line: missing-fields

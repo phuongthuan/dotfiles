@@ -4,12 +4,6 @@ vim.g.have_nerd_font = true
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_python3_provider = 0
 
--- Make line numbers default
-vim.o.number = true
-
--- Relative line numbers, to help with jumping.
-vim.o.relativenumber = true
-
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
 
@@ -66,6 +60,7 @@ vim.o.shortmess = 'c' -- don't show completion messages
 -- UI
 vim.o.syntax = 'enable' -- enable syntax highlighting
 vim.o.number = true -- show line number
+-- vim.o.relativenumber = true -- relative line numbers, to help with jumping.
 vim.o.showmatch = true -- highlight matching parenthesis
 
 -- Folding (nvim-ufo.lua)

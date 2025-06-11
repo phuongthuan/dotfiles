@@ -1,6 +1,7 @@
 return {
   'nvim-lua/plenary.nvim',
-  'tpope/vim-endwise',
+  -- 'tpope/vim-endwise',
+  -- 'brianhuster/treesitter-endwise.nvim',
   'NMAC427/guess-indent.nvim',
   { 'mg979/vim-visual-multi', branch = 'master' },
   { 'windwp/nvim-ts-autotag', opts = {} },

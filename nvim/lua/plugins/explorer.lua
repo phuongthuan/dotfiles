@@ -4,7 +4,6 @@ local detail = false
 return {
   {
     'stevearc/oil.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
       local oil = require('oil')
 
@@ -60,29 +59,5 @@ return {
         silent = true,
       },
     },
-  },
-  {
-    'echasnovski/mini.files',
-    config = function()
-      require('mini.files').setup({
-        mappings = {
-          go_in = '<CR>',
-          go_in_plus = 'L',
-          go_out = '-',
-          go_out_plus = 'H',
-        },
-      })
-
-      -- Toggle mini files explorer
-      nmap('<leader>ee', function()
-        MiniFiles.open()
-      end, { desc = 'Toggle mini files explorer' })
-
-      -- Toggle current opened file
-      nmap('<leader>ef', function()
-        MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
-        MiniFiles.reveal_cwd()
-      end, { desc = 'Toggle current opened file' })
-    end,
   },
 }

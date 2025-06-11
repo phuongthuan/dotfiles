@@ -1,5 +1,6 @@
 local mapper = require('core.utils').mapper_factory
 local nmap = mapper('n')
+local vmap = mapper('v')
 
 return {
   {
@@ -26,6 +27,7 @@ return {
         silent = true,
       },
       { '<leader>P', '<cmd>G push origin HEAD --no-verify<cr>', desc = 'Git Push without verify', silent = true },
+      { '<leader>gc', '<cmd>Gvdiffsplit!<cr>', desc = 'Git Resolve Conflict', silent = true },
     },
   },
   'junegunn/gv.vim', -- Display Git commits list
@@ -33,47 +35,54 @@ return {
   {
     'lewis6991/gitsigns.nvim',
     opts = {
-      signs = {
-        add = { text = '┃' },
-        change = { text = '┃' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-        untracked = { text = '┆' },
-      },
-      signcolumn = true,
       current_line_blame = true,
       on_attach = function(bufnr)
-        local gs = package.loaded.gitsigns
+        local gitsigns = require('gitsigns')
 
-        nmap(']c', gs.next_hunk, { buffer = bufnr, desc = 'Next Hunk' })
-        nmap('[c', gs.prev_hunk, { buffer = bufnr, desc = 'Prev Hunk' })
+        -- Navigation
+        nmap(']c', function()
+          if vim.wo.diff then
+            vim.cmd.normal({ ']c', bang = true })
+          else
+            gitsigns.nav_hunk('next')
+          end
+        end, { buffer = bufnr, desc = 'Next Hunk' })
 
-        mapper({ 'n', 'v' })('<leader>hs', ':Gitsigns stage_hunk<CR>', { buffer = bufnr, desc = 'Stage Hunk' })
-        mapper({ 'n', 'v' })('<leader>hr', ':Gitsigns reset_hunk<CR>', { buffer = bufnr, desc = 'Reset Hunk' })
+        nmap('[c', function()
+          if vim.wo.diff then
+            vim.cmd.normal({ '[c', bang = true })
+          else
+            gitsigns.nav_hunk('prev')
+          end
+        end, { buffer = bufnr, desc = 'Previous Hunk' })
 
-        nmap('<leader>hS', gs.stage_buffer, { buffer = bufnr, desc = 'Stage Buffer' })
-        nmap('<leader>hu', gs.undo_stage_hunk, { buffer = bufnr, desc = 'Undo Stage Hunk' })
+        -- Actions
+        nmap('<leader>hs', gitsigns.stage_hunk, { desc = 'Stage Hunk' })
+        nmap('<leader>hr', gitsigns.reset_hunk, { desc = 'Reset Hunk' })
 
-        nmap('<leader>pv', gs.preview_hunk_inline, { buffer = bufnr, desc = 'Preview Hunk Inline' })
+        vmap('<leader>hs', function()
+          gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+        end)
+        vmap('<leader>hr', function()
+          gitsigns.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+        end)
+
+        nmap('<leader>hS', gitsigns.stage_buffer, { desc = 'Stage Buffer' })
+        nmap('<leader>hR', gitsigns.reset_buffer, { desc = 'Reset Buffer' })
+        nmap('<leader>pv', gitsigns.preview_hunk_inline, { desc = 'Preview Hunk Inline' })
 
         nmap('<leader>hb', function()
-          gs.blame_line({ full = true })
-        end, { buffer = bufnr, desc = 'Blame Line' })
+          gitsigns.blame_line({ full = true })
+        end)
 
-        nmap('<leader>hd', gs.diffthis, { buffer = bufnr, desc = 'Diff This' })
+        nmap('<leader>hd', gitsigns.diffthis)
+
+        nmap('<leader>hD', function()
+          gitsigns.diffthis('~')
+        end)
+
+        mapper({ 'o', 'x' })('ih', gitsigns.select_hunk, { desc = 'Select Hunk' })
       end,
-    },
-  },
-  {
-    'mbbill/undotree',
-    cmd = 'UndotreeToggle',
-    keys = {
-      {
-        '<leader>U',
-        '<cmd>UndotreeToggle<cr>',
-        desc = 'Toggle Undo Tree',
-      },
     },
   },
   {

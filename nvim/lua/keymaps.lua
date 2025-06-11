@@ -27,13 +27,13 @@ nmap(';', ':', { silent = false })
 vmap(';', ':', { silent = false })
 
 -- Save current buffer
-nmap('<leader>s', ':w<cr>:echo " Saved current file ✅"<cr>')
-
--- :wq
-nmap('<leader>w', ':wq<cr>:echo " Git commit created ✅"<cr>')
+nmap('<leader>s', ':w<cr>:echo "Saved current file ✔"<cr>')
 
 -- Save all loaded buffers
-nmap('<leader>S', ':wa<cr>:echo " Saved all files ✅"<cr>')
+nmap('<leader>S', ':wa<cr>:echo "Saved all files ✔"<cr>')
+
+-- :wq
+nmap('<leader>w', ':wq<cr>:echo "Git commit created ✔"<cr>')
 
 -- Map Esc to jk
 imap('jk', '<Esc>', { noremap = true })
@@ -96,21 +96,18 @@ xmap('<leader>p', '"_dP')
 -- Replace text
 nmap('<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { silent = false })
 
--- Replace text in visual mode
-vmap('<leader>rr', [["zy:%s/<C-r><C-o>"/]], { silent = false })
-
 -- Get current file path
 nmap(
   '<leader>cp',
-  [[:let @+=substitute(expand("%:p"), getcwd() . '/', '', '')<cr>:echo " " . @+ . " copied to clipboard 📝"<cr>]],
-  { noremap = true }
+  [[:let @+=substitute(expand("%:p"), getcwd() . '/', '', '')<cr>:echo " " . @+ . " copied to clipboard ✔"<cr>]],
+  { desc = 'Copy current file path', noremap = true }
 )
 
 -- Copy the content of current file to clipboard
 nmap(
   '<leader>cP',
-  [[:%y+<cr>:echo "Content of " . expand("%:p") . " copied to clipboard 📝"<cr>]],
-  { noremap = true }
+  [[:%y+<cr>:echo "Content copied to clipboard ✔"<cr>]],
+  { desc = 'Copy current file content', noremap = true }
 )
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
@@ -131,12 +128,6 @@ nmap('<M-Down>', ':resize -2<CR>')
 nmap('<M-Left>', ':vertical resize +2<CR>')
 nmap('<M-Right>', ':vertical resize -2<CR>')
 
--- Prevent to used arrow keys ;)
--- nmap('<left>', '<cmd>echo "Use h to move ❌"<cr>')
--- nmap('<right>', '<cmd>echo "Use l to move ❌"<cr>')
--- nmap('<up>', '<cmd>echo "Use k to move ❌"<cr>')
--- nmap('<down>', '<cmd>echo "Use j to move ❌"<cr>')
-
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
 --
@@ -146,16 +137,6 @@ nmap('<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 nmap('<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 nmap('<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
--- mpc for Music Player Daemon (MPD)
--- silent to prevent neovim display message after command executed
--- nmap('<leader>mn', ':mpc next<cr>:echo " Next song ♫ "<cr>')
---
--- nmap('<leader>mb', ':mpc prev<cr>:echo " Back song ♫ "<cr>')
--- nmap('<leader>mp', ':mpc play<cr>')
--- nmap('<leader>mP', ':mpc pause<cr>')
--- nmap('<leader>mS', ':mpc stop<cr>')
-
--- Toggle spell checking
 nmap('<leader><leader>s', function()
   ---@diagnostic disable-next-line: undefined-field
   local new_state = not vim.opt_local.spell:get()

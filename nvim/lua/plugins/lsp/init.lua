@@ -15,18 +15,6 @@ return {
     dependencies = {
       { 'mason-org/mason.nvim', opts = {} },
       'mason-org/mason-lspconfig.nvim',
-      {
-        'j-hui/fidget.nvim',
-        event = 'VeryLazy',
-        opts = {
-          notification = {
-            override_vim_notify = true,
-            window = {
-              winblend = 25,
-            },
-          },
-        },
-      },
       'onsails/lspkind-nvim',
       'hrsh7th/cmp-nvim-lsp',
     },
