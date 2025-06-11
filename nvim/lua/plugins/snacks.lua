@@ -4,8 +4,14 @@ return {
   lazy = false,
   ---@type snacks.Config
   opts = {
+    -- Enabled plugins
     image = { enabled = true },
     quickfile = { enabled = true },
+    rename = { enabled = true },
+    bufdelete = { enabled = true },
+    gitbrowse = { enabled = true },
+
+    -- Disabled plugins
     scroll = { enabled = false },
     explorer = { enabled = false },
     picker = { enabled = false },
@@ -15,13 +21,48 @@ return {
     notifier = { enabled = false },
     lazygit = { enabled = false },
     input = { enabled = false },
-    rename = { enabled = false },
   },
   keys = {
     {
       '<leader>rN',
-      '<cmd>lua require("snacks").rename.rename_file()<cr>',
+      function()
+        Snacks.rename.rename_file()
+      end,
       desc = 'Fast rename current file',
+    },
+    {
+      '<leader>z',
+      function()
+        Snacks.bufdelete.delete()
+      end,
+      desc = 'Delete current buffer',
+    },
+    {
+      '<leader>Z',
+      function()
+        Snacks.bufdelete.other()
+      end,
+      desc = 'Delete all buffers except the current',
+    },
+    {
+      '<leader>gb',
+      function()
+        vim.ui.input({ prompt = 'Branch: ' }, function(branch)
+          -- User pressed <Esc> (cancel input)
+          if branch == nil then
+            return
+          end
+
+          -- User pressed Enter without typing (empty string)
+          if branch == '' then
+            branch = nil
+          end
+
+          Snacks.gitbrowse({ branch = branch })
+        end)
+      end,
+      mode = { 'n', 'v' },
+      desc = 'Open GitHub link for current file or selection',
     },
   },
 }
