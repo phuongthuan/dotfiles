@@ -2,7 +2,6 @@
 -- vim.env only works in neovim
 return {
   NVIM_USE_TSSERVER = vim.env.NVIM_USE_TSSERVER and true or false,
-  NVIM_USE_VTSLS = vim.env.NVIM_USE_VTSLS and true or false,
   DOTFILES = vim.env.DOTFILES or '~/.dotfiles',
   NVIM_CONFIG_DIR = vim.env.NVIM_CONFIG_DIR or '~/.config/nvim',
   EH_CONFIG_DIR = vim.env.EH_CONFIG_DIR or '~/.config/eh',
@@ -11,6 +10,7 @@ return {
   SECRET_ENV_FILE = vim.env.SECRET_ENV_FILE or '~/.dotfiles/zsh/secret.zsh',
   ICLOUD_DRIVE_OBSIDIAN_DIR = vim.env.ICLOUD_DRIVE_OBSIDIAN_DIR
     or '~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes',
+  LOCAL_SHARE_CONFIG_DIR = vim.env.LOCAL_SHARE_CONFIG_DIR or '~/.local/share/',
 
   -- Company env
   EH_CONFIG_FILE = vim.env.EH_CONFIG_FILE or '~/.dotfiles/zsh/eh.zsh',

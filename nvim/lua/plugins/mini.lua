@@ -1,4 +1,6 @@
-local nmap = require('core.utils').mapper_factory('n')
+local env = require('core.env')
+local mapper = require('core.utils').mapper_factory
+local nmap = mapper('n')
 
 return {
   {
@@ -6,14 +8,11 @@ return {
     version = false,
     config = function()
       require('mini.ai').setup({ n_lines = 500 })
+      require('mini.icons').setup()
       require('mini.pairs').setup()
       require('mini.starter').setup()
       require('mini.indentscope').setup()
-    end,
-  },
-  {
-    'echasnovski/mini.hipatterns',
-    config = function()
+      -- Hipatterns
       local hipatterns = require('mini.hipatterns')
       hipatterns.setup({
         highlighters = {
@@ -21,29 +20,40 @@ return {
           hex_color = hipatterns.gen_highlighter.hex_color(),
         },
       })
-    end,
-  },
-  {
-    'echasnovski/mini.bufremove',
-    config = function()
-      local bufremove = require('mini.bufremove')
-      bufremove.setup()
 
-      -- Kill the current buffer
-      nmap('<leader>z', function()
-        local bd = bufremove.delete
-        if vim.bo.modified then
-          local choice = vim.fn.confirm(('Save changes to %q?'):format(vim.fn.bufname()), '&Yes\n&No\n&Cancel')
-          if choice == 1 then -- Yes
-            vim.cmd.write()
-            bd(0)
-          elseif choice == 2 then -- No
-            bd(0, true)
-          end
-        else
-          bd(0)
-        end
-      end, { desc = 'Kill current buffer' })
+      -- Statusline
+      local statusline = require('mini.statusline')
+      statusline.setup({ use_icons = vim.g.have_nerd_font })
+
+      ---@diagnostic disable-next-line: duplicate-set-field
+      statusline.section_location = function()
+        return '%2l:%-2v'
+      end
+
+      -- Files
+      local files = require('mini.files')
+      files.setup({
+        mappings = {
+          go_in = '<CR>',
+          go_in_plus = 'L',
+          go_out = '-',
+          go_out_plus = 'H',
+        },
+      })
     end,
+    keys = {
+      {
+        '<leader>ee',
+        '<cmd>lua MiniFiles.open()<cr>',
+        desc = 'Toggle mini files explorer',
+        silent = true,
+      },
+      {
+        '<leader>ef',
+        '<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0), false)<cr>',
+        desc = 'Toggle current opened file',
+        silent = true,
+      },
+    },
   },
 }
