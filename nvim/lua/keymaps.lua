@@ -145,3 +145,13 @@ nmap('<leader><leader>s', function()
     vim.opt_local.spelllang = 'en'
   end
 end, { desc = 'Toggle Spell Checking' })
+
+nmap('<leader>rt', function()
+  local file = vim.api.nvim_buf_get_name(0)
+  vim.notify('🧪 Run test: ' .. file, vim.log.levels.INFO)
+  vim.system({
+    'zsh',
+    '-ic',
+    string.format("tmux new-window -n test 'yarn test %s; exec zsh'", file),
+  })
+end, { desc = 'Run test for current file' })
