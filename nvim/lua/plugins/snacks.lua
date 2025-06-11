@@ -1,8 +1,8 @@
+---@diagnostic disable: undefined-global
 return {
   'folke/snacks.nvim',
   priority = 1000,
   lazy = false,
-  ---@type snacks.Config
   opts = {
     -- Enabled plugins
     image = { enabled = true },
@@ -21,6 +21,10 @@ return {
     notifier = { enabled = false },
     lazygit = { enabled = false },
     input = { enabled = false },
+    dashboard = { enabled = false },
+    scratch = { enabled = false },
+    terminal = { enabled = false },
+    indent = { enabled = false },
   },
   keys = {
     {

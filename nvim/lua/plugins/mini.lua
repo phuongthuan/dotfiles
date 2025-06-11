@@ -1,4 +1,3 @@
-local env = require('core.env')
 local mapper = require('core.utils').mapper_factory
 local nmap = mapper('n')
 
@@ -10,7 +9,7 @@ return {
       require('mini.ai').setup({ n_lines = 500 })
       require('mini.icons').setup()
       require('mini.pairs').setup()
-      require('mini.starter').setup()
+      require('mini.starter').setup({ silent = true })
       require('mini.indentscope').setup()
       -- Hipatterns
       local hipatterns = require('mini.hipatterns')
@@ -40,20 +39,14 @@ return {
           go_out_plus = 'H',
         },
       })
+
+      nmap('<leader>ee', function()
+        files.open()
+      end, { desc = 'Toggle mini files explorer' })
+
+      nmap('<leader>ef', function()
+        files.open(vim.api.nvim_buf_get_name(0), false)
+      end, { desc = 'Toggle current opened file' })
     end,
-    keys = {
-      {
-        '<leader>ee',
-        '<cmd>lua MiniFiles.open()<cr>',
-        desc = 'Toggle mini files explorer',
-        silent = true,
-      },
-      {
-        '<leader>ef',
-        '<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0), false)<cr>',
-        desc = 'Toggle current opened file',
-        silent = true,
-      },
-    },
   },
 }
