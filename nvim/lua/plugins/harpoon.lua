@@ -1,56 +1,94 @@
+local mapper = require('core.utils').mapper_factory
+local nmap = mapper('n')
+
 return {
   'ThePrimeagen/harpoon',
-  opts = {
-    menu = {
-      width = 100,
-    },
-  },
+  branch = 'harpoon2',
+  dependencies = { 'nvim-lua/plenary.nvim' },
+  config = function()
+    local harpoon = require('harpoon')
+
+    harpoon:setup({
+      global_settings = {
+        save_on_toggle = true,
+        save_on_change = true,
+      },
+    })
+
+    harpoon:extend({
+      UI_CREATE = function(cx)
+        nmap('<C-v>', function()
+          harpoon.ui:select_menu_item({ vsplit = true })
+        end, { buffer = cx.bufnr })
+
+        nmap('<C-h>', function()
+          harpoon.ui:select_menu_item({ split = true })
+        end, { buffer = cx.bufnr })
+      end,
+    })
+  end,
   keys = {
     {
       '<C-a>',
-      '<cmd>lua require("harpoon.mark").add_file()<cr>:echo " Bookmarked 🌟"<cr>',
+      function()
+        local harpoon = require('harpoon')
+        harpoon:list():add()
+        vim.notify('Added to bookmarks ✔', vim.log.levels.INFO, { title = 'Harpoon' })
+      end,
       desc = 'Harpoon: Add file to bookmarks',
       silent = true,
     },
     {
       '<C-e>',
-      '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>',
+      function()
+        local harpoon = require('harpoon')
+        harpoon.ui:toggle_quick_menu(harpoon:list())
+      end,
       desc = 'Harpoon: Toggle quick menu',
       silent = true,
     },
     {
       '<leader>1',
-      '<cmd>lua require("harpoon.ui").nav_file(1)<cr>',
+      function()
+        local harpoon = require('harpoon')
+        harpoon:list():select(1)
+      end,
       desc = 'Harpoon: Navigate to file 1',
       silent = true,
     },
     {
       '<leader>2',
-      '<cmd>lua require("harpoon.ui").nav_file(2)<cr>',
+      function()
+        local harpoon = require('harpoon')
+        harpoon:list():select(2)
+      end,
       desc = 'Harpoon: Navigate to file 2',
       silent = true,
     },
     {
       '<leader>3',
-      '<cmd>lua require("harpoon.ui").nav_file(3)<cr>',
+      function()
+        local harpoon = require('harpoon')
+        harpoon:list():select(3)
+      end,
       desc = 'Harpoon: Navigate to file 3',
       silent = true,
     },
     {
       '<leader>4',
-      '<cmd>lua require("harpoon.ui").nav_file(4)<cr>',
+      function()
+        local harpoon = require('harpoon')
+        harpoon:list():select(4)
+      end,
       desc = 'Harpoon: Navigate to file 4',
       silent = true,
     },
     {
       '<leader>5',
-      '<cmd>lua require("harpoon.ui").nav_file(5)<cr>',
-      desc = 'Harpoon: Navigate to file 5',
-      silent = true,
-    },
-    {
-      '<leader>6',
-      '<cmd>lua require("harpoon.ui").nav_file(5)<cr>',
+      function()
+        local harpoon = require('harpoon')
+        harpoon:list():select(5)
+      end,
       desc = 'Harpoon: Navigate to file 5',
       silent = true,
     },
