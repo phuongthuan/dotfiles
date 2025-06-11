@@ -13,7 +13,7 @@ alias ni='npm install'
 alias ns='npm start'
 
 # Kill all node process
-alias nka='killall node && killall eslint_d && killall prettierd; echo ' Killed all node processes 🚀';'
+alias nka='killall node && killall prettierd; echo ' Clean process 🚀';'
 
 # Open iCloud Drive
 alias ic='eval vi $ICLOUD_DRIVE'
@@ -84,6 +84,7 @@ alias gcl='git clone'
 alias pick='git cherry-pick'
 alias sts='git stash -u'
 alias stl='git stash list'
+alias sts='git stash save'
 alias stp='git stash pop'
 alias gcm='git checkout origin/master'
 alias gmm='git merge master'

@@ -1,7 +1,9 @@
 theme = GruvboxDark
 
 # Font settings
-font-family = JetBrainsMonoNL Nerd Font Mono
+# font-family = JetBrainsMonoNL Nerd Font Mono
+font-family = Victor Mono
+font-style = Bold
 
 # font-family = FiraCode Nerd Font Mono
 # font-style = Regular
