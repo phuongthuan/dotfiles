@@ -1,9 +1,18 @@
+local MiniPick = require('mini.pick')
+
 local M = {}
+
+local default_source_opts = {
+  source = {
+    show = function(buf_id, items, query)
+      MiniPick.default_show(buf_id, items, query, { show_icons = true })
+    end,
+  },
+}
 
 -- Picker for searching a literal string instead of regular expression (-F or --fixed-strings)
 M.grep_literal = function(local_opts, opts)
-  local pick = require('mini.pick')
-  local res = {
+  local command = {
     'rg',
     '--column',
     '--line-number',
@@ -15,14 +24,15 @@ M.grep_literal = function(local_opts, opts)
     '--fixed-strings',
     '--hidden',
   }
-  vim.list_extend(res, { '--', local_opts.pattern })
-  return pick.builtin.cli({ command = res }, opts)
+  opts = vim.tbl_deep_extend('force', default_source_opts, opts or {})
+  vim.list_extend(command, { '--', local_opts.pattern })
+
+  return MiniPick.builtin.cli({ command = command }, opts)
 end
 
 -- Picker for searching files (include hidden files)
 M.find_files = function(local_opts, opts)
-  local pick = require('mini.pick')
-  local res = {
+  local command = {
     'fd',
     '--type=f',
     '--no-follow',
@@ -30,29 +40,30 @@ M.find_files = function(local_opts, opts)
     '--hidden',
     '--exclude=.git/',
   }
-  vim.list_extend(res, { '--', local_opts.pattern })
-  return pick.builtin.cli({ command = res }, opts)
+  opts = vim.tbl_deep_extend('force', default_source_opts, opts or {})
+  vim.list_extend(command, { '--', local_opts.pattern })
+
+  return MiniPick.builtin.cli({ command = command }, opts)
 end
 
 -- Picker for searching files (include hidden files)
 M.grep = function(local_opts, opts)
-  local pick = require('mini.pick')
-  local res = {
+  local command = {
     'rg',
     '--type=f',
     '--no-follow',
     '--color=never',
     '--hidden',
   }
-  vim.list_extend(res, { '--', local_opts.pattern })
-  return pick.builtin.cli({ command = res }, opts)
+  opts = vim.tbl_deep_extend('force', default_source_opts, opts or {})
+  vim.list_extend(command, { '--', local_opts.pattern })
+
+  return MiniPick.builtin.cli({ command = command }, opts)
 end
 
 -- Picker for controlling Music Player Client (MPC) using mpc commands
 M.open_music = function()
-  local pick = require('mini.pick')
-
-  pick.start({
+  MiniPick.start({
     source = {
       name = '  Music Player ',
       items = function()
@@ -94,8 +105,8 @@ M.open_music = function()
             {
               'mpc',
               unpack(vim.split(mapped_command(item), ' ')),
-            },
-            { text = true }
+            }
+            -- { text = true }
             -- function()
             -- vim.notify('  ' .. item .. ' (Music Player)')
             -- end

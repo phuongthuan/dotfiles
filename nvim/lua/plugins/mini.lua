@@ -11,6 +11,20 @@ return {
       require('mini.pairs').setup()
       require('mini.starter').setup({ silent = true })
       require('mini.indentscope').setup()
+
+      require('mini.jump2d').setup({
+        mappings = {
+          start_jumping = 's',
+        },
+        allowed_lines = {
+          blank = false,
+        },
+        allowed_windows = {
+          not_current = false,
+        },
+        silent = true,
+      })
+
       -- Hipatterns
       local hipatterns = require('mini.hipatterns')
       hipatterns.setup({

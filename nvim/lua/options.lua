@@ -59,7 +59,7 @@ vim.o.shortmess = 'c' -- don't show completion messages
 
 -- UI
 vim.o.syntax = 'enable' -- enable syntax highlighting
-vim.o.number = true -- show line number
+vim.o.number = false -- line number
 -- vim.o.relativenumber = true -- relative line numbers, to help with jumping.
 vim.o.showmatch = true -- highlight matching parenthesis
 

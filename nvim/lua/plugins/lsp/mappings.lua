@@ -1,5 +1,6 @@
 local mapper = require('core.utils').mapper_factory
 local nmap = mapper('n')
+local imap = mapper('i')
 
 local M = {}
 
@@ -11,6 +12,19 @@ M.setup = function(args)
   end
 
   local mini_pickers = require('mini.extra').pickers
+
+  -- Wrapper default vim ui with snipe
+  local snipe = require('snipe')
+  snipe.ui_select_menu = require('snipe.menu'):new({ position = 'cursor' })
+  snipe.ui_select_menu:add_new_buffer_callback(function(m)
+    nmap('<esc>', function()
+      m:close()
+    end, { nowait = true, buffer = m.buf })
+    nmap('q', function()
+      m:close()
+    end, { nowait = true, buffer = m.buf })
+  end)
+  vim.ui.select = snipe.ui_select
 
   local bufnr = args.buf
   local opts = { buffer = bufnr }
@@ -26,12 +40,15 @@ M.setup = function(args)
     mini_pickers.lsp({ scope = 'definition' })
   end, opts)
 
-  -- nmap('gr', vim.lsp.buf.references, opts)
   nmap('gr', function()
     mini_pickers.lsp({ scope = 'references' })
   end, opts)
 
-  vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
+  nmap('gO', function()
+    mini_pickers.lsp({ scope = 'document_symbol' })
+  end, opts)
+
+  imap('<C-h>', vim.lsp.buf.signature_help, opts)
 
   if client.name == 'ts_ls' then
     nmap('<leader>sa', '<cmd>LspTypescriptSourceAction<cr>', opts)

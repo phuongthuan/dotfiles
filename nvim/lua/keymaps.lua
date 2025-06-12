@@ -4,7 +4,6 @@ local mapper = require('core.utils').mapper_factory
 local nmap = mapper('n')
 local vmap = mapper('v')
 local imap = mapper('i')
-local tmap = mapper('t')
 local xmap = mapper('x')
 local omap = mapper('o')
 
@@ -114,14 +113,6 @@ nmap(
 vim.opt.hlsearch = true
 nmap('<Esc>', '<cmd>nohlsearch<cr>')
 
--- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
---
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
-tmap('<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-
 -- Resizing windows, M is option key in MacOS
 nmap('<M-Up>', ':resize +2<CR>')
 nmap('<M-Down>', ':resize -2<CR>')
@@ -137,7 +128,7 @@ nmap('<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 nmap('<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 nmap('<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
-nmap('<leader><leader>s', function()
+nmap('<leader>ts', function()
   ---@diagnostic disable-next-line: undefined-field
   local new_state = not vim.opt_local.spell:get()
   vim.opt_local.spell = new_state
@@ -145,6 +136,12 @@ nmap('<leader><leader>s', function()
     vim.opt_local.spelllang = 'en'
   end
 end, { desc = 'Toggle Spell Checking' })
+
+nmap('<leader>tl', function()
+  local new_state = not vim.o.number
+  vim.o.number = new_state
+  vim.notify(new_state and 'Line number enabled ✔' or 'Line number disabled ✔', vim.log.levels.INFO)
+end, { desc = 'Toggle Line Number' })
 
 nmap('<leader>rt', function()
   local file = vim.api.nvim_buf_get_name(0)

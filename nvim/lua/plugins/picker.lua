@@ -1,6 +1,6 @@
 local env = require('core.env')
 local mapper = require('core.utils').mapper_factory
-local picker = require('core.my-picker')
+local Picker = require('core.my-picker')
 
 local nmap = mapper('n')
 
@@ -10,6 +10,7 @@ return {
   config = function()
     -- Extra pickers for mini.pick
     require('mini.extra').setup()
+    require('mini.visits').setup()
 
     -- Centered on screen
     local window_config = function()
@@ -53,17 +54,17 @@ return {
 
     -- Custom pickers
     nmap('<leader>,', function()
-      picker.find_files({ tool = 'fd' }, { source = { name = ' Files (fd)' } })
-    end, { desc = 'Search all files in current working directory' })
+      Picker.find_files({ tool = 'fd' }, { source = { name = ' Files (fd)' } })
+    end, { desc = 'Search all files in current working directory (fd)' })
 
     nmap('<leader>m', function()
-      picker.open_music()
+      Picker.open_music()
     end, { desc = 'Open MPC' })
 
     nmap('<leader>pw', function()
       -- current word under cursor in the current buffer
       local word = vim.fn.expand('<cword>')
-      picker.grep_literal({ pattern = word }, { source = { name = 'Grep (rg): ' .. word } })
+      Picker.grep_literal({ pattern = word }, { source = { name = 'Grep (rg): ' .. word } })
     end, { desc = 'Search word under cursor' })
 
     nmap('<leader>ps', function()
@@ -74,11 +75,11 @@ return {
         return
       end
 
-      picker.grep_literal({ pattern = string }, { source = { name = 'Grep literal string (rg)' } })
+      Picker.grep_literal({ pattern = string }, { source = { name = 'Grep literal string (rg)' } })
     end, { desc = 'Search for a literal string' })
 
     nmap('<leader>fr', function()
-      picker.find_files({ tool = 'fd' }, {
+      Picker.find_files({ tool = 'fd' }, {
         source = {
           cwd = env.REFERENCES_DIR,
           name = ' References (fd)',
@@ -89,7 +90,7 @@ return {
     -- MiniPick builtin pickers
     nmap('<leader>fg', function()
       MiniPick.builtin.files({ tool = 'git' }, { source = { name = ' Files (git)' } })
-    end, { desc = 'Search all files in current working directory' })
+    end, { desc = 'Search all files in current working directory (git)' })
 
     nmap('<leader>fl', function()
       MiniPick.builtin.files(
