@@ -37,3 +37,6 @@ unset conf
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 export GPG_TTY=$(tty)
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
