@@ -1,9 +1,6 @@
 return {
   'nvim-lua/plenary.nvim',
-  -- 'tpope/vim-endwise',
-  -- 'brianhuster/treesitter-endwise.nvim',
   'NMAC427/guess-indent.nvim',
-  { 'mg979/vim-visual-multi', branch = 'master' },
   { 'windwp/nvim-ts-autotag', opts = {} },
   {
     'szw/vim-maximizer',
@@ -15,7 +12,10 @@ return {
     'sphamba/smear-cursor.nvim',
     opts = {
       smear_between_buffers = false,
-      smear_between_neighbor_lines = false,
+      cursor_color = '#fbf1c7',
+      smear_to_cmd = false,
+      stiffness = 0.5,
+      trailing_stiffness = 0.49,
     },
   },
 }

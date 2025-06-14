@@ -18,7 +18,6 @@ return {
     }
 
     lint.linters.eslint_d.args = {
-      -- '--no-warn-ignored',
       '--format',
       'json',
       '--stdin',
@@ -35,8 +34,6 @@ return {
     vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
       group = lint_augroup,
       callback = function()
-        -- try_lint without arguments runs the linters defined in `linters_by_ft`
-        -- for the current filetype
         lint.try_lint()
       end,
     })
