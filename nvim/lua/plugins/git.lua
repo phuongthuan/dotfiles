@@ -4,34 +4,26 @@ local vmap = mapper('v')
 
 return {
   {
-    'tpope/vim-fugitive',
+    'NeogitOrg/neogit',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'echasnovski/mini.pick', -- optional
+    },
+    opts = {
+      commit_editor = {
+        spell_check = false,
+        show_staged_diff = false,
+      },
+    },
     keys = {
       {
         '<leader>g',
-        '<cmd>G<cr>',
+        '<cmd>Neogit<cr>',
         desc = 'Open Git',
         silent = true,
       },
-      {
-        '<leader>gl',
-        '<cmd>GV<cr>',
-        desc = 'Open Git Commits',
-        silent = true,
-      },
-      {
-        '<leader>L',
-        function()
-          vim.cmd('GV ' .. vim.fn.expand('%:p'))
-        end,
-        desc = 'Git Commits On Current File',
-        silent = true,
-      },
-      { '<leader>P', '<cmd>G push origin HEAD --no-verify<cr>', desc = 'Git Push without verify', silent = true },
-      { '<leader>gc', '<cmd>Gvdiffsplit!<cr>', desc = 'Git Resolve Conflict', silent = true },
     },
   },
-  'junegunn/gv.vim', -- Display Git commits list
-  'tpope/vim-rhubarb', -- For :GBrowse usages
   {
     'lewis6991/gitsigns.nvim',
     opts = {
@@ -85,58 +77,4 @@ return {
       end,
     },
   },
-  {
-    'ThePrimeagen/git-worktree.nvim',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope.nvim',
-    },
-    config = function()
-      require('git-worktree').setup()
-      require('telescope').load_extension('git_worktree')
-    end,
-    keys = {
-      -- HACK: by default
-      -- <Enter> - switches to that worktree
-      -- <c-d> - deletes that worktree
-      -- <c-f> - toggles forcing of the next deletion
-      {
-        '<leader>wl',
-        function()
-          require('telescope').extensions.git_worktree.git_worktrees()
-        end,
-        { desc = 'Git Worktree List' },
-      },
-      {
-        '<leader>wc',
-        function()
-          require('telescope').extensions.git_worktree.create_git_worktree()
-        end,
-        { desc = 'Create Git Worktree Branches' },
-      },
-    },
-  },
 }
-
--- Fugitive keymaps
--- nmap('<leader>g', ':G<cr>')
--- nmap('<leader>gl', ':GV<cr>')
--- nmap('<leader>gL', ":GV <C-R>=expand('%:p')<cr><cr>")
--- nmap('<leader>gp', ':G push origin HEAD<cr>')
--- nmap('<leader>P', ':G push origin HEAD --no-verify<cr>')
--- nmap('<leader>gP', ':G push origin HEAD -f<cr>')
--- nmap('<leader>gM', ':G push origin master<cr>')
--- nmap('<leader>gm', ':G merge<Space>')
--- nmap('<leader>gp', ':G push origin HEAD<cr>')
--- nmap('<leader>P', ':G push origin HEAD --no-verify<cr>')
--- nmap('<leader>gP', ':G push origin HEAD -f<cr>')
--- nmap('<leader>gM', ':G push origin master<cr>')
--- nmap('<leader>gm', ':G merge<Space>')
-
--- Resolve conflict
--- nmap('<leader>grc', ':Gvdiffsplit!<cr>')
--- nmap('<leader>op', ':!oprl atsmobile<CR>')
-
--- Gvdiffsplit mode
--- d2o : get the left column
--- d3o : get the right column
