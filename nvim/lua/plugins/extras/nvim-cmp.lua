@@ -1,37 +1,29 @@
 return {
   'hrsh7th/nvim-cmp',
-  event = 'InsertEnter',
+  event = { 'InsertEnter', 'CmdlineEnter' },
   dependencies = {
     {
       'L3MON4D3/LuaSnip',
       version = 'v2.*',
       build = (function()
-        -- Build Step is needed for regex support in snippets.
-        -- This step is not supported in many windows environments.
-        -- Remove the below condition to re-enable on windows.
         if vim.fn.has('win32') == 1 or vim.fn.executable('make') == 0 then
           return
         end
         return 'make install_jsregexp'
       end)(),
-      dependencies = {
-        {
-          'rafamadriz/friendly-snippets',
-          config = function()
-            require('luasnip.loaders.from_vscode').lazy_load({
-              -- exclude = { 'javascript' },
-              paths = { require('core.env').DOTFILES .. '/snippets' },
-            })
-          end,
-        },
-      },
+      config = function()
+        require('luasnip.loaders.from_vscode').lazy_load({
+          -- exclude = { 'javascript' },
+          paths = { require('core.env').DOTFILES .. '/snippets' },
+        })
+      end,
     },
     'saadparwaiz1/cmp_luasnip',
-    'hrsh7th/cmp-emoji',
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-nvim-lua',
+    -- 'hrsh7th/cmp-emoji',
+    -- 'hrsh7th/cmp-nvim-lua',
     -- 'octaltree/cmp-look',
   },
   config = function()
@@ -39,7 +31,7 @@ return {
     local luasnip = require('luasnip')
     local lspkind = require('lspkind')
     local icons = require('core.icons')
-    local copilot_cmp = require('copilot_cmp.comparators')
+    -- local copilot_cmp = require('copilot_cmp.comparators')
 
     luasnip.config.setup()
 
@@ -73,9 +65,6 @@ return {
         documentation = {
           border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
         },
-        -- completion = {
-        --   border = { '┌', '─', '┐', '│', '┘', '─', '└', '│' },
-        -- },
       },
       -- config nvim cmp to work with snippet engine
       snippet = {
@@ -95,7 +84,7 @@ return {
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
 
         ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-        ['<C-e>'] = cmp.mapping.abort(), -- close completion window
+        ['<C-e>'] = cmp.mapping.abort(),
 
         ['<CR>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
@@ -153,11 +142,10 @@ return {
       sorting = {
         priority_weight = 2,
         comparators = {
-          copilot_cmp.prioritize,
+          -- copilot_cmp.prioritize,
 
-          -- Below is the default comparator list and order for nvim-cmp
           cmp.config.compare.offset,
-          cmp.config.compare.scopes, --this is commented in nvim-cmp too
+          cmp.config.compare.scopes,
           cmp.config.compare.exact,
           cmp.config.compare.score,
           cmp.config.compare.recently_used,
@@ -169,16 +157,15 @@ return {
         },
       },
       sources = cmp.config.sources({
-        { name = 'copilot', group_index = 2 },
-        { name = 'luasnip', group_index = 2 },
-        { name = 'nvim_lsp', group_index = 2 },
-        { name = 'nvim_lua', group_index = 2 },
-        { name = 'path', group_index = 2 },
-        { name = 'buffer', group_index = 2 },
-        { name = 'emoji', group_index = 2 },
+        -- { name = 'copilot' },
+        { name = 'nvim_lsp' },
+        { name = 'luasnip' },
+        { name = 'lazydev' },
+        { name = 'buffer' },
+        { name = 'path' },
+        -- { name = 'emoji' },
         -- {
         --   name = 'look',
-        --   group_index = 2,
         --   keyword_length = 3,
         --   option = {
         --     convert_case = true,
