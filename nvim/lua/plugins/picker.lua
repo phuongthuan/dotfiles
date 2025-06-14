@@ -170,14 +170,6 @@ return {
       MiniExtra.pickers.git_branches(nil, { source = { name = ' Git branches' } })
     end, { desc = 'List all git branches' })
 
-    nmap('<leader>d', function()
-      MiniExtra.pickers.diagnostic({ scope = 'current' }, { source = { name = '  Diagnostics (current)' } })
-    end, { desc = 'List all diagnostics in current buffer' })
-
-    nmap('<leader>D', function()
-      MiniExtra.pickers.diagnostic(nil, { source = { name = '  Diagnostics (all)' } })
-    end, { desc = 'List all diagnostics in loaded buffers' })
-
     mapper({ 'n', 'v' })('<leader>sk', function()
       MiniExtra.pickers.keymaps()
     end, { desc = 'Search keymaps' })
