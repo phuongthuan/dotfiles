@@ -17,6 +17,8 @@ rtp:prepend(lazypath)
 require('lazy').setup({
   { import = 'plugins' },
 
+  require('plugins.colorscheme.gruvbox'),
+  require('plugins.extras.nvim-cmp'),
   require('plugins.extras.ai'),
   require('plugins.extras.noice'),
 }, {
