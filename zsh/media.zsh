@@ -23,14 +23,33 @@ ydl() {
     return 1
   fi
 
-  # Default to ~/Music if no second argument is given
-  OUTPUT_DIR="${2:-$HOME/Music}"
+  URL="$1"
+  FILENAME="$2"
+  OUTPUT=""
+
+  if [ -n "$FILENAME" ]; then
+    OUTPUT="$HOME/Music/$FILENAME.%(ext)s"
+  else
+    # Default to ~/Music/<video-title>.mp3
+    OUTPUT="$HOME/Music/%(title)s.%(ext)s"
+  fi
+
+  echo -e "\n\033[32mExtracting audio from "$URL" ... \033[0m\n"
 
   yt-dlp \
     --extract-audio \
     --audio-format mp3 \
-    -o "${OUTPUT_DIR}/%(title)s.%(ext)s" \
-    "$1"
+    --quiet \
+    --no-warnings \
+    --no-progres \
+    -o "$OUTPUT" \
+    "$URL"
+
+  echo -e "\033[32mDownload $FILENAME.mp3 completed! \033[0m"
+
+  echo -e "\033[32mUpdating mpd database ... \033[0m\n"
+  # Update mpd database after downloading
+  mpc update
 }
 
 music() {
@@ -55,7 +74,7 @@ music() {
 
   mpc play
 
-  echo "\n\033[32mStart playing music ... \033[0m"
+  echo "\n\033[32mStart playing music ... \033[0m\n"
 }
 
 mca() {
@@ -66,14 +85,23 @@ mca() {
   mpc add "$1"
 }
 
-# Show all songs in a playlist
-mppl() {
+# Play a song from the current mpc playlist: playsong <song_name>
+playsong() {
   if [ -z "$1" ]; then
-    mpc lsplaylists
+    echo -e "\033[31mPlease provide a song name❗\033[0m"
     return 1
-  else
-    mpc playlist -f "%title%" "$1"
   fi
+
+  # fuzzy search song in the current playlist
+  song_index="$(mpc playlist | rg -n "$1" | cut -d: -f1 | head -n1)"
+
+  if [ -z "$song_index" ]; then
+    echo -e "\033[31mSong not found in the current playlist ❌\033[0m"
+    return 1
+  fi
+
+  echo -e "\n\033[32mPlaying song   \033[0m\n"
+  mpc play $song_index
 }
 
 rename_last_recording_video() {
