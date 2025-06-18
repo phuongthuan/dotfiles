@@ -23,11 +23,6 @@ otl() {
   fi
 }
 
-# Copy content in a file to clipboard
-cp_fe_pr_template() {
-  cat "$(eval echo ${ICLOUD_DRIVE_OBSIDIAN_DIR})/employmenthero/fe_core_pr_template.md" | pbcopy
-}
-
 # Open ChatGPT
 gpt() {
   open "https://chatgpt.com/"
@@ -43,10 +38,10 @@ so() {
 
   if [[ -z $1 ]]; then
     source "$HOME/.zshrc"
-    echo -e "\033[32m Source .zshrc completed 🚀 \033[0m"
+    echo -e "\033[32m Source .zshrc completed 󱓟  \033[0m"
   else
     source "$file"
-    echo -e "\033[32m Source $1.zsh completed 🚀 \033[0m"
+    echo -e "\033[32m Source $1.zsh completed 󱓟  \033[0m"
   fi
 }
 
@@ -59,7 +54,7 @@ bwu() {
     return 1
   fi
 
-  echo "\n Unlocking your vault ... ⏳"
+  echo "\n Unlocking your vault ... 󰔟 "
 
   awk -v new_line="export BW_SESSION=\"$bw_session\"" '
         /^export BW_SESSION=/ { print new_line; next }
@@ -85,9 +80,25 @@ bwg() {
 
   if [[ -n "$data" ]]; then
     echo "$data" | pbcopy
-    echo -e "\n\033[32m Data copied to clipboard 📝\033[0m"
+    echo -e "\n\033[32m Data copied to clipboard 󰅎 \033[0m"
   else
-    echo -e "\n\033[31m Data not found ❌\033[0m"
+    echo -e "\n\033[31m Data not found 󱞄 \033[0m"
     return 1
   fi
+}
+
+# Kill all Chrome
+kac() {
+  killall "Google Chrome"
+  killall "Google Chrome Helper (Renderer)"
+  killall "Google Chrome Helper (GPU)"
+  echo -e "\033[32mClean Google Chrome! \033[0m"
+}
+
+# Kill all Slack
+kas() {
+  killall "Slack"
+  killall "Slack Helper (Renderer)"
+  killall "Slack Helper (GPU)"
+  echo -e "\033[32mClean Google Chrome! \033[0m"
 }

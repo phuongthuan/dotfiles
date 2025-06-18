@@ -12,9 +12,6 @@ alias lv='lua -v'
 alias ni='npm install'
 alias ns='npm start'
 
-# Kill all node process
-alias nka='killall node && killall prettierd; echo ' Clean process 🚀';'
-
 # Open iCloud Drive
 alias ic='eval vi $ICLOUD_DRIVE'
 
@@ -103,6 +100,7 @@ alias gh-create='gh repo create --private --source=. --remote=origin && git push
 # alias dc='docker-compose'
 
 # Yarn
+alias yv='yarn --version'
 alias yd='yarn dev'
 alias ys='yarn start'
 alias yt='yarn test'

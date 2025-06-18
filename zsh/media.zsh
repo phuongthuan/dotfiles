@@ -79,29 +79,53 @@ music() {
 
 mca() {
   if [ -z "$1" ]; then
-    echo -e "\033[31mPlease provide song path❗\033[0m"
+    echo -e "\033[31mPlease provide song path ❗\033[0m"
     return 1
   fi
   mpc add "$1"
 }
 
-# Play a song from the current mpc playlist: playsong <song_name>
+# Play a song from current playlist or database: playsong <song_name>
 playsong() {
   if [ -z "$1" ]; then
-    echo -e "\033[31mPlease provide a song name❗\033[0m"
+    echo -e "\033[31mPlease provide a song name ❗\033[0m\n"
     return 1
   fi
 
-  # fuzzy search song in the current playlist
+  # Search a index of song in the current playlist
   song_index="$(mpc playlist | rg -n "$1" | cut -d: -f1 | head -n1)"
 
-  if [ -z "$song_index" ]; then
-    echo -e "\033[31mSong not found in the current playlist ❌\033[0m"
-    return 1
-  fi
+  # Check if found a song in current playlist, play it
+  if [ "$song_index" ]; then
+    echo -e "\n\033[32mPlaying song ... 󰽰 󰎈 󰽴 \033[0m\n"
+    mpc play $song_index
+    return 0
 
-  echo -e "\n\033[32mPlaying song   \033[0m\n"
-  mpc play $song_index
+  # otherwise search in database and add it into current playlist
+  else
+    echo -e "\n\033[32m'$1' not found in current playlist, searching in database ... 󰲸 \033[0m"
+    # Search song name in database
+    song_name="$(mpc search filename "$1" | head -n1)"
+
+    if [ -z "$song_name" ]; then
+      echo -e "\n\033[31m'$1' not found in the database 󰝛  \033[0m"
+      return 1
+    fi
+
+    # Add song into current playlist
+    mpc add $song_name
+
+    song_index2="$(mpc playlist | rg -n "$song_name" | cut -d: -f1 | head -n1)"
+
+    if [ "$song_index2" ]; then
+      echo -e "\033[32mFound a song, playing ... 󰽰 󰎈 󰽴 \033[0m\n"
+      # Stop the current song
+      mpc stop
+      mpc play $song_index2
+      return 0
+    fi
+
+  fi
 }
 
 rename_last_recording_video() {
