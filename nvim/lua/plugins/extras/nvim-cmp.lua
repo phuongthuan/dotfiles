@@ -22,6 +22,7 @@ return {
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-buffer',
+    'chrisgrieser/cmp-nerdfont',
     -- 'hrsh7th/cmp-emoji',
     -- 'hrsh7th/cmp-nvim-lua',
     -- 'octaltree/cmp-look',
@@ -133,7 +134,7 @@ return {
               buffer = ' [Buffer]',
               path = '[Path]',
               luasnip = '[Snippet]',
-              copilot = '[Copilot]',
+              -- copilot = '[Copilot]',
             })[entry.source.name]
             return vim_item
           end,
@@ -158,12 +159,12 @@ return {
       },
       sources = cmp.config.sources({
         -- { name = 'copilot' },
-        { name = 'nvim_lsp' },
         { name = 'luasnip' },
         { name = 'lazydev' },
+        { name = 'nvim_lsp' },
         { name = 'buffer' },
         { name = 'path' },
-        -- { name = 'emoji' },
+        { name = 'nerdfont' },
         -- {
         --   name = 'look',
         --   keyword_length = 3,

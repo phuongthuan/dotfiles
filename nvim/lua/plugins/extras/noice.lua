@@ -6,6 +6,9 @@ return {
     dependencies = { 'MunifTanjim/nui.nvim' },
     opts = {
       lsp = {
+        progress = {
+          enabled = true,
+        },
         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
         override = {
           ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
@@ -25,13 +28,13 @@ return {
           search_down = {
             kind = 'search',
             pattern = '^/',
-            icon = '🔍 ',
+            icon = ' ',
             lang = 'regex',
           },
           search_up = {
             kind = 'search',
             pattern = '^%?',
-            icon = '🔍 ',
+            icon = ' ',
             lang = 'regex',
           },
         },
@@ -45,6 +48,9 @@ return {
           },
           opts = { skip = true },
         },
+      },
+      popupmenu = {
+        enabled = true,
       },
     },
     keys = {

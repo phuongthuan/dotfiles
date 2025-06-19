@@ -10,15 +10,20 @@ return {
       'echasnovski/mini.pick', -- optional
     },
     opts = {
+      disable_hint = true,
       commit_editor = {
         spell_check = false,
         show_staged_diff = false,
+      },
+      signs = {
+        item = { '', '󰘖' },
+        section = { '', '󰘖' },
       },
     },
     keys = {
       {
         '<leader>g',
-        '<cmd>Neogit<cr>',
+        '<cmd>Neogit cwd=%:p:h<cr>',
         desc = 'Open Git',
         silent = true,
       },

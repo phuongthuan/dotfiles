@@ -13,19 +13,6 @@ M.setup = function(args)
   end
 
   local MiniPick = require('mini.extra').pickers
-  local snipe = require('snipe')
-
-  snipe.ui_select_menu = require('snipe.menu'):new({ position = 'cursor' })
-  snipe.ui_select_menu:add_new_buffer_callback(function(m)
-    nmap('<esc>', function()
-      m:close()
-    end, { nowait = true, buffer = m.buf })
-    nmap('q', function()
-      m:close()
-    end, { nowait = true, buffer = m.buf })
-  end)
-
-  vim.ui.select = snipe.ui_select
 
   nmap('<leader>cr', vim.lsp.buf.rename, opts)
   nmap('gI', vim.lsp.buf.implementation, opts)

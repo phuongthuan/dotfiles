@@ -95,10 +95,6 @@ return {
       opts.answer_header = '⚡AI '
       opts.error_header = '❌ Error '
 
-      opts.prompts.Commit = {
-        prompt = '> #git:staged\n\nWrite a git commit message that summarizes all changes of each file. Write clear, informative commit messages. Including file path so for user to easy access in github.',
-      }
-
       -- Auto set current file to markdown if its filetype is copilot-chat
       -- vim.api.nvim_create_autocmd('BufEnter', {
       --   pattern = 'copilot-*',

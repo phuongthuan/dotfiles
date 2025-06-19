@@ -14,7 +14,7 @@ nmap('<leader>td', ':e ' .. new_note_file .. '<cr>', { noremap = false })
 -- Source Neovim configuration
 nmap(
   '<leader><leader>1',
-  ':source ' .. env.NVIM_CONFIG_DIR .. '/init.lua' .. '<cr>:echo " Reloaded Neovim config 🚀"<cr>'
+  ':source ' .. env.NVIM_CONFIG_DIR .. '/init.lua' .. '<cr>:echo " Reloaded Neovim config 󱓟 "<cr>'
 )
 
 -- Open EH configuration
@@ -24,6 +24,9 @@ nmap('<leader>sc', ':e ' .. env.SECRET_ENV_FILE .. '<cr>', { desc = 'Open Secret
 -- No need to keep holding shift
 nmap(';', ':', { silent = false })
 vmap(';', ':', { silent = false })
+
+-- Running lua code
+nmap(';l', ':lua ', { silent = false })
 
 -- Save current buffer
 nmap('<leader>s', ':w<cr>:echo "Saved current file ✔"<cr>')
@@ -145,7 +148,7 @@ end, { desc = 'Toggle Line Number' })
 
 nmap('<leader>rt', function()
   local file = vim.api.nvim_buf_get_name(0)
-  vim.notify('🧪 Run test: ' .. file, vim.log.levels.INFO)
+  vim.notify('󰙨 Run test: ' .. file, vim.log.levels.INFO)
   vim.system({
     'zsh',
     '-ic',

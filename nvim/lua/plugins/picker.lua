@@ -67,6 +67,10 @@ return {
       Picker.grep_literal({ pattern = word }, { source = { name = 'Grep (rg): ' .. word } })
     end, { desc = 'Search word under cursor' })
 
+    nmap('<leader>cl', function()
+      Picker.grep_literal({ pattern = ':>> ' }, { source = { name = '  Grep console.log (rg)' } })
+    end, { desc = 'Search all console.log' })
+
     nmap('<leader>ps', function()
       local string = vim.fn.input('Input String')
 
