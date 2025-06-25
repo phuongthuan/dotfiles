@@ -6,7 +6,24 @@ return {
   version = false,
   config = function()
     require('mini.ai').setup({ n_lines = 500 })
-    require('mini.icons').setup()
+
+    require('mini.icons').setup({
+      file = {
+        ['.eslintrc.js'] = { glyph = '󰱺', hl = 'MiniIconsYellow' },
+        ['.node-version'] = { glyph = '', hl = 'MiniIconsGreen' },
+        ['.prettierrc'] = { glyph = '', hl = 'MiniIconsPurple' },
+        ['eslint.config.js'] = { glyph = '󰱺', hl = 'MiniIconsYellow' },
+        ['package.json'] = { glyph = '', hl = 'MiniIconsGreen' },
+        ['tsconfig.json'] = { glyph = '', hl = 'MiniIconsAzure' },
+        ['tsconfig.build.json'] = { glyph = '', hl = 'MiniIconsAzure' },
+        ['.yarnrc.yml'] = { glyph = '', hl = 'MiniIconsBlue' },
+        ['yarn.lock'] = { glyph = '', hl = 'MiniIconsBlue' },
+      },
+      filetype = {
+        dotenv = { glyph = '', hl = 'MiniIconsYellow' },
+      },
+    })
+
     require('mini.pairs').setup()
 
     require('mini.tabline').setup()
