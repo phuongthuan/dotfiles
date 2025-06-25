@@ -8,19 +8,21 @@ return {
     require('mini.ai').setup({ n_lines = 500 })
     require('mini.icons').setup()
     require('mini.pairs').setup()
+
+    require('mini.tabline').setup()
+
     require('mini.starter').setup({ silent = true })
-    require('mini.indentscope').setup()
+
+    require('mini.indentscope').setup({
+      -- Which character to use for drawing scope indicator
+      -- alternative styles: ┆ ┊ ╎
+      symbol = '┆',
+    })
 
     require('mini.jump2d').setup({
-      mappings = {
-        start_jumping = 's',
-      },
-      allowed_lines = {
-        blank = false,
-      },
-      allowed_windows = {
-        not_current = false,
-      },
+      mappings = { start_jumping = 's' },
+      allowed_lines = { blank = false },
+      allowed_windows = { not_current = false },
       silent = true,
     })
 
@@ -55,10 +57,10 @@ return {
 
     nmap('<leader>ee', function()
       files.open()
-    end, { desc = 'Toggle mini files explorer' })
+    end, { desc = 'MiniFiles - Toggle Files Explorer' })
 
     nmap('<leader>ef', function()
       files.open(vim.api.nvim_buf_get_name(0), false)
-    end, { desc = 'Toggle current opened file' })
+    end, { desc = 'MiniFiles - Toggle Current Opened File' })
   end,
 }

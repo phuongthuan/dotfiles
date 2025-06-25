@@ -26,7 +26,7 @@ return {
       function()
         MiniDiff.toggle_overlay()
       end,
-      desc = 'MiniDiff Toggle Hunk',
+      desc = 'MiniDiff - Toggle Hunk',
       silent = true,
     },
   },

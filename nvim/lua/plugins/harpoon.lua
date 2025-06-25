@@ -33,9 +33,9 @@ return {
       function()
         local harpoon = require('harpoon')
         harpoon:list():add()
-        vim.notify('Added to bookmarks ✔', vim.log.levels.INFO, { title = 'Harpoon' })
+        vim.notify('Added a file to bookmarks ✔', vim.log.levels.INFO, { title = 'Harpoon' })
       end,
-      desc = 'Harpoon: Add file to bookmarks',
+      desc = 'Harpoon - Add file to bookmarks',
       silent = true,
     },
     {
@@ -44,7 +44,7 @@ return {
         local harpoon = require('harpoon')
         harpoon.ui:toggle_quick_menu(harpoon:list())
       end,
-      desc = 'Harpoon: Toggle quick menu',
+      desc = 'Harpoon - Toggle Quick Menu',
       silent = true,
     },
     {
@@ -53,7 +53,7 @@ return {
         local harpoon = require('harpoon')
         harpoon:list():select(1)
       end,
-      desc = 'Harpoon: Navigate to file 1',
+      desc = 'Harpoon - Navigate To File 1',
       silent = true,
     },
     {
@@ -62,7 +62,7 @@ return {
         local harpoon = require('harpoon')
         harpoon:list():select(2)
       end,
-      desc = 'Harpoon: Navigate to file 2',
+      desc = 'Harpoon - Navigate To File 2',
       silent = true,
     },
     {
@@ -71,7 +71,7 @@ return {
         local harpoon = require('harpoon')
         harpoon:list():select(3)
       end,
-      desc = 'Harpoon: Navigate to file 3',
+      desc = 'Harpoon - Navigate To File 3',
       silent = true,
     },
     {
@@ -80,7 +80,7 @@ return {
         local harpoon = require('harpoon')
         harpoon:list():select(4)
       end,
-      desc = 'Harpoon: Navigate to file 4',
+      desc = 'Harpoon - Navigate To File 4',
       silent = true,
     },
     {
@@ -89,7 +89,7 @@ return {
         local harpoon = require('harpoon')
         harpoon:list():select(5)
       end,
-      desc = 'Harpoon: Navigate to file 5',
+      desc = 'Harpoon - Navigate To File 5',
       silent = true,
     },
   },

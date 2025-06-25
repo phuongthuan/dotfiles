@@ -8,14 +8,4 @@ return {
       { '<leader>sm', '<cmd>MaximizerToggle<CR>', desc = 'Maximize/minimize a split', silent = true },
     },
   },
-  {
-    'sphamba/smear-cursor.nvim',
-    opts = {
-      smear_between_buffers = false,
-      cursor_color = '#fbf1c7',
-      smear_to_cmd = false,
-      -- stiffness = 0.5,
-      -- trailing_stiffness = 0.5,
-    },
-  },
 }

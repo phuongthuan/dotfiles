@@ -50,11 +50,8 @@ nmap('<S-tab>', ':bn<cr>')
 -- Switch between last two files
 nmap('<BS>', '<C-^>')
 
--- Exit Neovim ❌
+-- Exit Neovim
 nmap('<leader>q', ':q<cr>')
-
--- Select all file
-nmap('<leader>a', ':keepjumps normal! ggVG<cr>')
 
 -- Keep cursor center when search
 nmap('n', 'nzzzv')
@@ -154,4 +151,4 @@ nmap('<leader>rt', function()
     '-ic',
     string.format("tmux new-window -n test 'yarn test %s; exec zsh'", file),
   })
-end, { desc = 'Run test for current file' })
+end, { desc = 'Run Test For Current File' })

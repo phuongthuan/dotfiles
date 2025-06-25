@@ -180,10 +180,10 @@ return {
 
     nmap('<leader>sg', function()
       MiniExtra.pickers.spellsuggest({ n_suggestions = 15 })
-    end, { desc = 'Spell suggest word under cursor' })
+    end, { desc = 'Spell Suggest Word' })
 
     nmap('<leader>r', function()
       MiniExtra.pickers.visit_paths(nil, { source = { name = ' Frecently accessed files' } })
-    end, { desc = 'MiniVisits List Paths' })
+    end, { desc = 'List Paths' })
   end,
 }

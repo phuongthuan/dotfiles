@@ -101,12 +101,7 @@ vim.o.synmaxcol = 240 -- max column for syntax highlight
 -- Add asterisks in block comments
 vim.opt.formatoptions:append({ 'r' })
 
--- Cursor highlighting
--- vim.cmd([[
---   hi CursorN guifg=#fbf1c7 guibg=#fbf1c7
---   hi CursorI guifg=#fb4934 guibg=#fb4934
---   set guicursor=n:block-CursorN,i-r-v-ci:block-CursorI
--- ]])
+-- Custom cursor highlighting and appearance
 vim.api.nvim_set_hl(0, 'CursorN', { fg = '#fbf1c7', bg = '#fbf1c7' })
 vim.api.nvim_set_hl(0, 'CursorI', { fg = '#fb4934', bg = '#fb4934' })
 vim.opt.guicursor = {

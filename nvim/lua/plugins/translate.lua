@@ -5,7 +5,7 @@ return {
       '<leader>tt',
       '<cmd>Translate Vi<cr>',
       mode = { 'n', 'v' },
-      desc = 'Translate under cursor and selected text',
+      desc = 'Translate Selected Text',
       silent = true,
     },
   },

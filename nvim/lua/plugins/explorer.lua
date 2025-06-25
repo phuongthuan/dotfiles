@@ -24,7 +24,7 @@ return {
         },
         ['<C-r>'] = 'actions.refresh',
         ['gd'] = {
-          desc = 'Toggle file detail view',
+          desc = 'Oil - Toggle File Detail View',
           callback = function()
             detail = not detail
             if detail then
@@ -53,7 +53,7 @@ return {
     {
       '<C-f>',
       '<cmd>Oil<cr>',
-      desc = 'Open current opened file',
+      desc = 'Oil - Open Current Opened File',
       silent = true,
     },
   },
