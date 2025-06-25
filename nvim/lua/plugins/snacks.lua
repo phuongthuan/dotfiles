@@ -51,7 +51,7 @@ return {
     {
       '<leader>gb',
       function()
-        vim.ui.input({ prompt = 'Branch: ' }, function(branch)
+        vim.ui.input({ prompt = ' Branch' }, function(branch)
           -- User pressed <Esc> (cancel input)
           if branch == nil then
             return

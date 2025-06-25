@@ -5,32 +5,15 @@ local vmap = mapper('v')
 return {
   {
     'zbirenbaum/copilot.lua',
-    dependencies = {
-      'zbirenbaum/copilot-cmp',
-    },
+    -- enable for nvim cmp
+    -- dependencies = { 'zbirenbaum/copilot-cmp' },
     cmd = 'Copilot',
     event = 'InsertEnter',
     config = function()
       require('copilot').setup({
-        suggestion = {
-          enabled = false,
-          auto_trigger = true,
-          debounce = 50,
-          keymap = {
-            accept = '¬',
-            accept_word = false,
-            accept_line = false,
-            next = '∆',
-            prev = '˚',
-            dismiss = '<C-]>',
-          },
-        },
-        panel = {
-          enabled = false,
-        },
+        suggestion = { enabled = false, auto_trigger = true },
+        panel = { enabled = false },
         filetypes = {
-          yaml = true,
-          markdown = false,
           sh = function()
             if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), '^%.env.*') then
               -- disable for .env files
@@ -40,7 +23,8 @@ return {
           end,
         },
       })
-      require('copilot_cmp').setup()
+      -- enable for nvim-cmp
+      -- require('copilot_cmp').setup()
     end,
   },
   {
@@ -63,9 +47,8 @@ return {
         BetterNamings = 'Please provide better names for the following variables and functions.',
         Documentation = 'Please provide documentation for the following code.',
         Summarize = 'Please summarize the following text.',
-        -- Spelling = 'Please correct any grammar and spelling errors in the following text.',
-        -- Wording = 'Please improve the grammar and wording of the following text.',
-        -- Concise = 'Please rewrite the following text to make it more concise.',
+        Wording = 'Please improve the grammar and wording of the following text.',
+        Concise = 'Please rewrite the following text to make it more concise.',
       },
       mappings = {
         complete = {
@@ -116,15 +99,11 @@ return {
       vmap('<leader>cor', '<cmd>CopilotChatReview<cr>', { desc = 'Review Code (CopilotChat)' })
       vmap('<leader>coo', '<cmd>CopilotChatOptimize<cr>', { desc = 'Optimize Code (CopilotChat)' })
 
-      nmap('<leader>cop', function()
-        require('CopilotChat').select_prompt({
-          context = {
-            'buffers',
-          },
-        })
+      mapper({ 'n', 'v', 'x' })('<C-p>', function()
+        copilot_chat.select_prompt({ context = { 'buffer' } })
       end, { desc = 'Prompt Actions (CopilotChat)' })
 
-      mapper({ 'n', 'v', 'x' })('<leader>coa', function()
+      mapper({ 'n', 'v', 'x' })('<leader>ac', function()
         local input = vim.fn.input('Ask Copilot 🤖')
         if input ~= '' then
           vim.cmd('CopilotChat ' .. input)

@@ -23,7 +23,6 @@ return {
     vim.cmd(string.format([[highlight Headline3Bg guifg=%s guibg=%s gui=bold]], color_fg, color3_bg))
   end,
   opts = {
-    latex = { enabled = false },
     heading = {
       sign = false,
       icons = { '󰎤 ', '󰎧 ', '󰎪 ', '󰎭 ', '󰎱 ', '󰎳 ' },
@@ -44,5 +43,10 @@ return {
       right_pad = 1,
     },
     bullet = { enabled = true },
+    checkbox = { enabled = true },
+    latex = { enabled = false },
+  },
+  keys = {
+    { '<leader>tm', '<cmd>RenderMarkdown toggle<cr>', desc = 'Toggle Markdown render', silent = true },
   },
 }

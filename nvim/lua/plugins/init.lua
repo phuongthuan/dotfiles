@@ -14,8 +14,8 @@ return {
       smear_between_buffers = false,
       cursor_color = '#fbf1c7',
       smear_to_cmd = false,
-      stiffness = 0.5,
-      trailing_stiffness = 0.49,
+      -- stiffness = 0.5,
+      -- trailing_stiffness = 0.5,
     },
   },
 }

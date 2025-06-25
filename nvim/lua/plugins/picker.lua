@@ -118,7 +118,7 @@ return {
       MiniPick.builtin.resume()
     end, { desc = 'Resume search' })
 
-    nmap('<leader>sh', function()
+    mapper({ 'n', 'v' })('<leader>sh', function()
       MiniPick.builtin.help(nil, { source = { name = 'Help 🙌' } })
     end, { desc = 'Search help' })
 

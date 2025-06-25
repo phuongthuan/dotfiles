@@ -1,9 +1,6 @@
 ---@diagnostic disable: undefined-global
-local nmap = require('core.utils').mapper_factory('n')
-
 return {
   {
-    -- TODO: make
     'folke/todo-comments.nvim',
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = { 'nvim-lua/plenary.nvim' },
