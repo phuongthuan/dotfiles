@@ -54,7 +54,7 @@ return {
           'lazydev',
           -- 'copilot',
           'emoji',
-          -- 'nerdfont',
+          'nerdfont',
         },
         providers = {
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
@@ -76,19 +76,19 @@ return {
               end,
             },
             should_show_items = function()
-              return vim.tbl_contains(
-                -- Enable emoji completion for a set of file-types
-                -- By default, enabled for all file-types.
-                { 'gitcommit', 'markdown', 'zsh' },
-                vim.o.filetype
-              )
+              -- Enable emoji completion for a set of file-types
+              return vim.tbl_contains({ 'gitcommit', 'markdown' }, vim.o.filetype)
             end,
           },
           nerdfont = {
             module = 'blink-nerdfont',
             name = 'Nerd Fonts',
-            score_offset = 15, -- Tune by preference
-            opts = { insert = true }, -- Insert nerdfont icon (default) or complete its name
+            score_offset = 15,
+            opts = { insert = true },
+            should_show_items = function()
+              -- Enable nerdfont completion for a set of file-types
+              return vim.tbl_contains({ 'lua', 'zsh' }, vim.o.filetype)
+            end,
           },
         },
       },
@@ -99,7 +99,7 @@ return {
 
       -- Disable per file type
       enabled = function()
-        return not vim.tbl_contains({ 'copilot-chat' }, vim.bo.filetype)
+        return not vim.tbl_contains({ 'copilot-chat', 'codecompanion' }, vim.bo.filetype)
           and vim.bo.buftype ~= 'prompt'
           and vim.b.completion ~= false
       end,

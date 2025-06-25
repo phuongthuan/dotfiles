@@ -14,10 +14,10 @@ return {
       function()
         if vim.g.disable_autoformat then
           vim.cmd('FormatEnable')
-          vim.notify('Format On Save Enabled', vim.log.levels.INFO)
+          vim.notify('Format On Save Enabled ✔', vim.log.levels.INFO)
         else
           vim.cmd('FormatDisable')
-          vim.notify('Format On Save Disabled', vim.log.levels.INFO)
+          vim.notify('Format On Save Disabled ✔', vim.log.levels.INFO)
         end
       end,
       mode = '',
