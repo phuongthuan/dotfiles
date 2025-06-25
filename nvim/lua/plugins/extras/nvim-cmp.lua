@@ -165,6 +165,7 @@ return {
         { name = 'buffer' },
         { name = 'path' },
         { name = 'nerdfont' },
+        -- { name = 'emoji' },
         -- {
         --   name = 'look',
         --   keyword_length = 3,

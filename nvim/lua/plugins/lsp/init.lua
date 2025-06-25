@@ -16,8 +16,7 @@ return {
       { 'mason-org/mason.nvim', opts = {} },
       'mason-org/mason-lspconfig.nvim',
       'onsails/lspkind-nvim',
-      'hrsh7th/cmp-nvim-lsp',
-      -- 'saghen/blink.cmp',
+      'saghen/blink.cmp',
     },
     config = function()
       -- Attach LSP to current buffer
@@ -31,12 +30,8 @@ return {
 
       require('plugins.lsp.diagnostics').setup()
 
-      -- Add nvim-cmp capabilities for LSP
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
-
       -- Add blink.cmp capabilities for LSP
-      -- local capabilities = require('blink.cmp').get_lsp_capabilities()
+      local capabilities = require('blink.cmp').get_lsp_capabilities()
 
       local servers = {
         yamlls = {
