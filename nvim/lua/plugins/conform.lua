@@ -90,7 +90,12 @@ return {
 
       -- Disable autoformat for files in a certain path
       local bufname = vim.api.nvim_buf_get_name(bufnr)
-      if bufname:match('/node_modules/') or bufname:match('/ios/') or bufname:match('/android/') then
+      if
+        bufname:match('/node_modules/')
+        or bufname:match('/ios/')
+        or bufname:match('/android/')
+        or bufname:match('~/.local/share/nvim/')
+      then
         return
       end
 

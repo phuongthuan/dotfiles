@@ -2,7 +2,7 @@ local MiniPick = require('mini.pick')
 
 local M = {}
 
-local default_source_opts = {
+local _default_source_opts = {
   source = {
     show = function(buf_id, items, query)
       MiniPick.default_show(buf_id, items, query, { show_icons = true })
@@ -24,7 +24,15 @@ M.grep_literal = function(local_opts, opts)
     '--fixed-strings',
     '--hidden',
   }
-  opts = vim.tbl_deep_extend('force', default_source_opts, opts or {})
+
+  local globs = local_opts.globs or {}
+
+  -- Add glob patterns to command
+  for _, glob in ipairs(globs) do
+    table.insert(command, '--glob=' .. glob)
+  end
+
+  opts = vim.tbl_deep_extend('force', _default_source_opts, opts or {})
   vim.list_extend(command, { '--', local_opts.pattern })
 
   return MiniPick.builtin.cli({ command = command }, opts)
@@ -38,9 +46,16 @@ M.find_files = function(local_opts, opts)
     '--no-follow',
     '--color=never',
     '--hidden',
-    '--exclude=.git/',
   }
-  opts = vim.tbl_deep_extend('force', default_source_opts, opts or {})
+
+  local excludes = local_opts.excludes or { '.git/' }
+
+  -- Add exclude patterns to command
+  for _, exclude in ipairs(excludes) do
+    table.insert(command, '--exclude=' .. exclude)
+  end
+
+  opts = vim.tbl_deep_extend('force', _default_source_opts, opts or {})
   vim.list_extend(command, { '--', local_opts.pattern })
 
   return MiniPick.builtin.cli({ command = command }, opts)
@@ -55,7 +70,7 @@ M.grep = function(local_opts, opts)
     '--color=never',
     '--hidden',
   }
-  opts = vim.tbl_deep_extend('force', default_source_opts, opts or {})
+  opts = vim.tbl_deep_extend('force', _default_source_opts, opts or {})
   vim.list_extend(command, { '--', local_opts.pattern })
 
   return MiniPick.builtin.cli({ command = command }, opts)

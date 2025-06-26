@@ -4,6 +4,12 @@ local Picker = require('core.my-picker')
 
 local nmap = mapper('n')
 
+local _is_mobile_repo = function()
+  local current_dir = vim.fn.getcwd()
+  local eh_mobile_pro_path = env.EH_REPOSITORY_DIR .. '/eh-mobile-pro'
+  return current_dir == eh_mobile_pro_path
+end
+
 return {
   'echasnovski/mini.pick',
   version = false,
@@ -54,7 +60,8 @@ return {
 
     -- Custom pickers
     nmap('<leader>,', function()
-      Picker.find_files({ tool = 'fd' }, { source = { name = ' Files (fd)' } })
+      local excludes = _is_mobile_repo() and { 'ContractPdfPreview/', '*.cjs' } or nil
+      Picker.find_files({ tool = 'fd', excludes = excludes }, { source = { name = ' Files (fd)' } })
     end, { desc = 'Search all files in current working directory (fd)' })
 
     nmap('<leader>m', function()
@@ -64,11 +71,16 @@ return {
     nmap('<leader>pw', function()
       -- current word under cursor in the current buffer
       local word = vim.fn.expand('<cword>')
-      Picker.grep_literal({ pattern = word }, { source = { name = 'Grep (rg): ' .. word } })
+
+      local globs = _is_mobile_repo() and { '!ContractPdfPreview', '!*.cjs' } or nil
+
+      Picker.grep_literal({ pattern = word, globs = globs }, { source = { name = 'Grep (rg): ' .. word } })
     end, { desc = 'Search word under cursor' })
 
     nmap('<leader>cl', function()
-      Picker.grep_literal({ pattern = ':>> ' }, { source = { name = '  Grep console.log (rg)' } })
+      local globs = _is_mobile_repo() and { '!ContractPdfPreview', '!*.cjs' } or nil
+
+      Picker.grep_literal({ pattern = ':>> ', globs = globs }, { source = { name = '  Grep console.log (rg)' } })
     end, { desc = 'Search all console.log' })
 
     nmap('<leader>ps', function()
@@ -79,7 +91,12 @@ return {
         return
       end
 
-      Picker.grep_literal({ pattern = string }, { source = { name = 'Grep literal string (rg)' } })
+      local globs = _is_mobile_repo() and { '!ContractPdfPreview', '!*.cjs' } or nil
+
+      Picker.grep_literal(
+        { pattern = string, globs = globs },
+        { source = { name = 'Grep literal string (rg): ' .. string } }
+      )
     end, { desc = 'Search for a literal string' })
 
     nmap('<leader>fr', function()
