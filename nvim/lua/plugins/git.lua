@@ -2,21 +2,6 @@ local mapper = require('core.utils').mapper_factory
 local nmap = mapper('n')
 local vmap = mapper('v')
 
-vim.api.nvim_create_autocmd('User', {
-  pattern = 'GitConflictDetected',
-  callback = function()
-    vim.notify('Conflict detected in ' .. vim.fn.expand('<afile>'))
-    vim.keymap.set('n', 'cww', function()
-      ---@diagnostic disable-next-line: undefined-global
-      engage.conflict_buster()
-      ---@diagnostic disable-next-line: undefined-global
-      create_buffer_local_mappings()
-    end)
-  end,
-})
-
-nmap('<leader>gr', '<cmd>GitConflictListQf<cr>', { desc = 'Resolve Conflict' })
-
 return {
   {
     'NeogitOrg/neogit',
@@ -133,6 +118,32 @@ return {
   {
     'akinsho/git-conflict.nvim',
     version = '*',
-    opts = {},
+    init = function()
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'GitConflictDetected',
+        callback = function()
+          vim.notify('Git Conflict Detected  ', vim.log.levels.ERROR)
+          vim.keymap.set('n', 'cww', function()
+            ---@diagnostic disable-next-line: undefined-global
+            engage.conflict_buster()
+            ---@diagnostic disable-next-line: undefined-global
+            create_buffer_local_mappings()
+          end)
+        end,
+      })
+
+      vim.api.nvim_set_hl(0, 'GitConflictCurrent', { fg = '#fbf1c7', bg = '#1d3b40' })
+      vim.api.nvim_set_hl(0, 'GitConflictIncoming', { fg = '#fbf1c7', bg = '#1d3450' })
+    end,
+    opts = {
+      default_mappings = {
+        next = 'nc',
+        prev = 'pc',
+      },
+      highlights = {
+        current = 'GitConflictCurrent',
+        incoming = 'GitConflictIncoming',
+      },
+    },
   },
 }
