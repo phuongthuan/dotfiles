@@ -24,7 +24,7 @@ alias dot='cd ~/.dotfiles/ && vi'
 alias c='clear'
 alias e='exit'
 
-# Binding zoxide to j - because I'm the autojump user :)
+# Binding zoxide to j
 alias j='z'
 
 # Homebrew
@@ -39,8 +39,8 @@ alias brd='brew doctor'
 # Tmux
 alias t='tmux'
 alias ta='tmux attach -t'
+alias tc='clear && tmux clear-history'
 
-# How do I ....
 alias how='howdoi'
 
 # Ruby
@@ -49,10 +49,8 @@ alias be='bundle exec'
 alias rub='bundle exec rubocop'
 alias rsp='bundle exec rspec'
 
-# Gitmoji
 alias gj='gitmoji'
 
-# Git ;)
 alias gs='git status -sb'
 alias ga='git add .'
 alias gw='git worktree'
