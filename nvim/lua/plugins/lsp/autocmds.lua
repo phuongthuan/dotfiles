@@ -33,7 +33,7 @@ M.setup = function(event)
   if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
     nmap('<leader>th', function()
       vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
-    end, { desc = '[T]oggle Inlay [H]ints' })
+    end, { desc = 'Toggle Inlay Hints' })
   end
 end
 

@@ -213,8 +213,8 @@ oga() {
   local workflow="$1"
 
   if [ -n "$workflow" ]; then
-    echo "📦 Opening GitHub Actions talent-marketplace-app workflow: $workflow"
-    open "https://github.com/Thinkei/talent-marketplace-app/actions/workflows/$workflow"
+    echo -e "\033[32m📦 Opening GitHub Actions $EH_MOBILE_PRO_REPO workflow: $workflow \033[0m"
+    open "https://github.com/Thinkei/$EH_MOBILE_PRO_REPO/actions/workflows/$workflow"
   else
     echo -e "\033[31mPlease enter workflow name \033[0m"
     return 1

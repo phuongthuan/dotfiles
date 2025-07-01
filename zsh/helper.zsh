@@ -28,11 +28,6 @@ gpt() {
   open "https://chatgpt.com/"
 }
 
-# Open Goggle Gemini (Goggle AI)
-gai() {
-  open "https://gemini.google.com/gem/coding-partner"
-}
-
 so() {
   local file=""$HOME/.config/zsh/"$1.zsh"
 
@@ -72,7 +67,22 @@ bwg() {
 
   # Validate inputs
   if [[ -z "$object" || -z "$id" ]]; then
-    echo -e "\033[31mError: Missing arguments. Usage: bwg <object> <id>\033[0m"
+    echo -e "\n\033[31m Missing arguments. Usage: bwg <object> <id>\033[0m"
+    return 1
+  fi
+
+  echo "\n Retrieving data from Bitwarden... 󰔟"
+
+  # Check if user is logged in
+  if ! bw status &>/dev/null; then
+    echo -e "\n\033[31m Not logged in to Bitwarden. Please try to login first  \033[0m"
+    return 1
+  fi
+
+  # Check if vault is locked
+  local vault_status=$(bw status 2>/dev/null | jq -r '.status' 2>/dev/null)
+  if [[ "$vault_status" == "locked" ]]; then
+    echo -e "\n\033[31m Vault is locked. Please unlock it first  \033[0m"
     return 1
   fi
 
@@ -87,18 +97,18 @@ bwg() {
   fi
 }
 
-# Kill all Chrome
+# Kill all Chrome processes
 kac() {
   killall "Google Chrome"
   killall "Google Chrome Helper (Renderer)"
   killall "Google Chrome Helper (GPU)"
-  echo -e "\033[32mClean Google Chrome! \033[0m"
+  echo -e "\033[32mClean Google Chrome  \033[0m"
 }
 
-# Kill all Slack
+# Kill all Slack processes
 kas() {
   killall "Slack"
   killall "Slack Helper (Renderer)"
   killall "Slack Helper (GPU)"
-  echo -e "\033[32mClean Google Chrome! \033[0m"
+  echo -e "\033[32mClean Slack  \033[0m"
 }

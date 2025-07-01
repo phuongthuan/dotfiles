@@ -58,11 +58,10 @@ return {
 
     vim.ui.select = MiniPick.ui_select
 
-    -- Custom pickers
     nmap('<leader>,', function()
       local excludes = _is_mobile_repo() and { 'ContractPdfPreview/', '*.cjs' } or nil
       Picker.find_files({ tool = 'fd', excludes = excludes }, { source = { name = ' Files (fd)' } })
-    end, { desc = 'Search all files in current working directory (fd)' })
+    end, { desc = 'Current Directory (fd)' })
 
     nmap('<leader>m', function()
       Picker.open_music()
@@ -75,13 +74,13 @@ return {
       local globs = _is_mobile_repo() and { '!ContractPdfPreview', '!*.cjs' } or nil
 
       Picker.grep_literal({ pattern = word, globs = globs }, { source = { name = 'Grep (rg): ' .. word } })
-    end, { desc = 'Search word under cursor' })
+    end, { desc = 'Word Under Cursor' })
 
-    nmap('<leader>cl', function()
+    nmap('<leader>pl', function()
       local globs = _is_mobile_repo() and { '!ContractPdfPreview', '!*.cjs' } or nil
 
       Picker.grep_literal({ pattern = ':>> ', globs = globs }, { source = { name = '  Grep console.log (rg)' } })
-    end, { desc = 'Search all console.log' })
+    end, { desc = 'console.log' })
 
     nmap('<leader>ps', function()
       local string = vim.fn.input('Input String')
@@ -97,110 +96,109 @@ return {
         { pattern = string, globs = globs },
         { source = { name = 'Grep literal string (rg): ' .. string } }
       )
-    end, { desc = 'Search for a literal string' })
+    end, { desc = 'Literal String' })
 
-    nmap('<leader>fr', function()
+    nmap('<leader>fR', function()
       Picker.find_files({ tool = 'fd' }, {
         source = {
           cwd = env.REFERENCES_DIR,
-          name = ' References (fd)',
+          name = 'References (fd)',
         },
       })
-    end, { desc = 'Search all files in references' })
+    end, { desc = 'Files References (fd)' })
 
-    -- MiniPick builtin pickers
     nmap('<leader>fg', function()
       MiniPick.builtin.files({ tool = 'git' }, { source = { name = ' Files (git)' } })
-    end, { desc = 'Search all files in current working directory (git)' })
+    end, { desc = 'Git (git)' })
 
     nmap('<leader>fl', function()
       MiniPick.builtin.files(
         { tool = 'fd' },
         { source = { cwd = env.LOCAL_SHARE_CONFIG_DIR .. 'nvim', name = ' Local share nvim files (fd)' } }
       )
-    end, { desc = 'Search all files in local share nvim' })
+    end, { desc = '~/.local/share/nvim' })
 
     nmap('<leader>fm', function()
-      MiniPick.builtin.files(
-        { tool = 'git' },
-        { source = { cwd = '~/p/eh/worktree/eh-mobile-pro/development', name = ' Files (master)' } }
+      local excludes = _is_mobile_repo() and { 'ContractPdfPreview/', '*.cjs' } or nil
+      Picker.find_files(
+        { tool = 'fd', excludes = excludes },
+        { source = { cwd = '~/p/eh/worktree/eh-mobile-pro/development', name = ' Files (eh-mobile-pro)' } }
       )
-    end, { desc = 'Search files in mobile development branch' })
+    end, { desc = 'eh-mobile-pro (dev)' })
 
     nmap('<leader>;', function()
       MiniPick.builtin.buffers()
-    end, { desc = 'All loaded buffers' })
+    end, { desc = 'Opened Buffers' })
 
     nmap('<leader>rs', function()
       MiniPick.builtin.resume()
-    end, { desc = 'Resume search' })
+    end, { desc = 'Resume Search' })
 
     mapper({ 'n', 'v' })('<leader>sh', function()
-      MiniPick.builtin.help(nil, { source = { name = 'Help 🙌' } })
-    end, { desc = 'Search help' })
+      MiniPick.builtin.help(nil, { source = { name = 'Helps  ' } })
+    end, { desc = 'Search Helps' })
 
-    -- Search for a string in the current opened buffer
-    nmap('<leader>f', function()
+    nmap('<leader>bs', function()
       MiniExtra.pickers.buf_lines({
         scope = 'current',
       }, {
-        source = { name = ' Fuzzy search current buffer' },
+        source = { name = ' Fuzzy Search Current Buffer' },
       })
-    end, { desc = 'Fuzzy search a string in current buffer' })
+    end, { desc = 'Fuzzy Search (current buffer)' })
 
-    -- Search for a string in the all loaded buffers
     nmap('<leader>F', function()
       MiniExtra.pickers.buf_lines()
-    end, { desc = 'Search for a string in all loaded buffers' })
+    end, { desc = 'Grep String (buffers)' })
 
-    -- Search old files
-    nmap('<leader>?', function()
+    nmap('<leader>fo', function()
       MiniExtra.pickers.oldfiles()
-    end, { desc = 'Search old files' })
+    end, { desc = 'Old' })
 
-    -- Search for a string in the current open buffers and get results live as typed
     nmap(';r', function()
       MiniPick.builtin.grep_live({ tool = 'rg' }, { source = { name = 'Grep buffers (rg)' } })
-    end, { desc = 'Search for a string in the current open buffers' })
+    end, { desc = 'Grep Live (buffers)' })
 
-    -- Search all files in env.DOTFILES
     nmap('<leader>fc', function()
-      MiniPick.builtin.files({ tool = 'fd' }, { source = { name = '.dotfiles (fd)', cwd = env.DOTFILES } })
-    end, { desc = 'Search all files in .dotfiles' })
+      Picker.find_files({ tool = 'fd' }, {
+        source = {
+          cwd = env.DOTFILES,
+          name = '.dotfiles (fd)',
+        },
+      })
+    end, { desc = 'Config (.dotfiles)' })
 
-    -- Search for a string in .dotfiles
     nmap('<leader>sd', function()
       MiniPick.builtin.grep_live({ tool = 'rg' }, {
         source = { name = 'Grep .dotfiles (rg)', cwd = env.DOTFILES },
       })
-    end, { desc = 'Search for a string in .dotfiles' })
+    end, { desc = 'Grep Live (.dotfiles)' })
 
     nmap('<leader>fn', function()
       MiniPick.builtin.files({ tool = 'fd' }, {
         source = { name = 'Notes (fd)', cwd = env.PERSONAL_NOTES },
       })
-    end, { desc = ' All notes (fd)' })
+    end, { desc = 'Notes (fd)' })
 
     nmap('<leader>sn', function()
       MiniPick.builtin.grep_live(nil, {
         source = { name = 'Grep Notes', cwd = env.PERSONAL_NOTES },
       })
-    end, { desc = 'Search for a string in Notes' })
+    end, { desc = 'Grep Live Notes' })
 
     nmap('<leader>gbr', function()
       MiniExtra.pickers.git_branches(nil, { source = { name = ' Git branches' } })
-    end, { desc = 'List all git branches' })
+    end, { desc = 'All Branches' })
 
     mapper({ 'n', 'v' })('<leader>sk', function()
       MiniExtra.pickers.keymaps()
-    end, { desc = 'Search keymaps' })
+    end, { desc = 'Search Keymaps' })
 
-    nmap('<leader>sg', function()
+    nmap('<leader>us', function()
       MiniExtra.pickers.spellsuggest({ n_suggestions = 15 })
     end, { desc = 'Spell Suggest Word' })
 
-    nmap('<leader>r', function()
+    nmap('<leader>fr', function()
       MiniExtra.pickers.visit_paths(nil, { source = { name = ' Frecently accessed files' } })
-    end, { desc = 'List Paths' })
+    end, { desc = 'Frecently Accessed' })
   end,
 }

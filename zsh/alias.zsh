@@ -74,7 +74,7 @@ alias gpm='git pull origin master'
 alias gpd='git pull origin development'
 alias gps='git push origin HEAD'
 alias gpsm='git push origin master'
-alias gpsf='git push origin HEAD -f'
+alias gpsf='git push origin HEAD -f --no-verify'
 alias gpsn='git push origin HEAD --no-verify'
 
 alias gcl='git clone'
@@ -119,3 +119,6 @@ alias xcs='xcrun simctl shutdown 6790E0DD-55BB-42CA-97D2-7239DEF37A78'
 alias bwf='bw list items --search'
 alias bwd='bw delete item'
 alias bws='bw sync'
+
+# crypto coin tracker
+alias ratesx='curl rate.sx'

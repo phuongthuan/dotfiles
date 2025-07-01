@@ -14,12 +14,12 @@ M.setup = function(args)
 
   local MiniPick = require('mini.extra').pickers
 
-  nmap('<leader>cr', vim.lsp.buf.rename, opts)
-  nmap('gI', vim.lsp.buf.implementation, opts)
+  nmap('<leader>cr', vim.lsp.buf.rename, { buffer = args.buf, desc = 'Code Rename' })
+  nmap('gI', vim.lsp.buf.implementation, { buffer = args.buf, desc = 'Go To Implementation' })
   nmap('K', vim.lsp.buf.hover, opts)
   nmap('gd', vim.lsp.buf.definition, opts)
   nmap('gD', vim.lsp.buf.declaration, opts)
-  mapper({ 'n', 'v' })('<leader>ca', vim.lsp.buf.code_action, opts)
+  mapper({ 'n', 'v' })('<leader>ca', vim.lsp.buf.code_action, { buffer = args.buf, desc = 'Code Actions' })
   imap('<C-h>', vim.lsp.buf.signature_help, opts)
 
   nmap('gr', function()
@@ -30,16 +30,16 @@ M.setup = function(args)
     MiniPick.lsp({ scope = 'document_symbol' })
   end, opts)
 
-  nmap('<leader>d', function()
+  nmap('<leader>cd', function()
     MiniPick.diagnostic({ scope = 'current' }, { source = { name = '  Diagnostics (current)' } })
-  end, { desc = 'List all diagnostics in current buffer' })
+  end, { desc = 'Diagnostics (current buffer)' })
 
-  nmap('<leader>D', function()
+  nmap('<leader>cD', function()
     MiniPick.diagnostic(nil, { source = { name = '  Diagnostics (all)' } })
-  end, { desc = 'List all diagnostics in loaded buffers' })
+  end, { desc = 'Diagnostics (all)' })
 
   if client.name == 'ts_ls' then
-    nmap('<leader>sa', '<cmd>LspTypescriptSourceAction<cr>', opts)
+    nmap('<leader>cA', '<cmd>LspTypescriptSourceAction<cr>', { buffer = args.buf, desc = 'Code Actions (TS)' })
   end
 end
 

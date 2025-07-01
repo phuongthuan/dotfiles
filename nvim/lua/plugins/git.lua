@@ -2,13 +2,29 @@ local mapper = require('core.utils').mapper_factory
 local nmap = mapper('n')
 local vmap = mapper('v')
 
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'GitConflictDetected',
+  callback = function()
+    vim.notify('Conflict detected in ' .. vim.fn.expand('<afile>'))
+    vim.keymap.set('n', 'cww', function()
+      ---@diagnostic disable-next-line: undefined-global
+      engage.conflict_buster()
+      ---@diagnostic disable-next-line: undefined-global
+      create_buffer_local_mappings()
+    end)
+  end,
+})
+
+nmap('<leader>gr', '<cmd>GitConflictListQf<cr>', { desc = 'Resolve Conflict' })
+
 return {
   {
     'NeogitOrg/neogit',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'echasnovski/mini.pick', -- optional
+      'echasnovski/mini.pick',
     },
+    command = { 'Neogit', 'NeogitCommit', 'NeogitLogCurrent', 'NeogitResetState' },
     opts = {
       disable_hint = true,
       commit_editor = {
@@ -16,15 +32,39 @@ return {
         show_staged_diff = false,
       },
       signs = {
-        item = { '', '󰘖' },
-        section = { '', '󰘖' },
+        item = { '', '󰁌' },
+        section = { '', '󰁌' },
       },
     },
     keys = {
       {
-        '<leader>g',
+        '<leader>gg',
+        '<cmd>Neogit<cr>',
+        desc = 'Neogit',
+        silent = true,
+      },
+      {
+        '<leader>gG',
         '<cmd>Neogit cwd=%:p:h<cr>',
-        desc = 'Open Git',
+        desc = 'Neogit (buffer)',
+        silent = true,
+      },
+      {
+        '<leader>gc',
+        '<cmd>NeogitCommit<cr>',
+        desc = 'Open Commit',
+        silent = true,
+      },
+      {
+        '<leader>gL',
+        '<cmd>NeogitLogCurrent<cr>',
+        desc = 'Open Log (buffer)',
+        silent = true,
+      },
+      {
+        '<leader>grs',
+        '<cmd>NeogitResetState<cr>',
+        desc = 'Reset State',
         silent = true,
       },
     },
@@ -78,16 +118,21 @@ return {
 
         nmap('<leader>hb', function()
           gitsigns.blame_line({ full = true })
-        end)
+        end, { desc = 'Toggle Blame Line' })
 
-        nmap('<leader>hd', gitsigns.diffthis)
+        nmap('<leader>hd', gitsigns.diffthis, { desc = 'Diff This' })
 
         nmap('<leader>hD', function()
           gitsigns.diffthis('~')
-        end)
+        end, { desc = 'Diff This (~)' })
 
         mapper({ 'o', 'x' })('ih', gitsigns.select_hunk, { desc = 'Select Hunk' })
       end,
     },
+  },
+  {
+    'akinsho/git-conflict.nvim',
+    version = '*',
+    opts = {},
   },
 }

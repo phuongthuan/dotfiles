@@ -16,8 +16,6 @@ windows:
       panes:
         - nv
         - nv
-  - ios:
-  - android:
   - config:
       layout: main-vertical
       panes:

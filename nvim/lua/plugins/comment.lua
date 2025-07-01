@@ -36,7 +36,7 @@ return {
         desc = 'Prev Todo Comment',
       },
       {
-        '<leader>T',
+        '<leader>td',
         function()
           ---@diagnostic disable-next-line: undefined-field
           require('snacks').picker.todo_comments()
