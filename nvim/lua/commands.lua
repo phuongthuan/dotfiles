@@ -50,12 +50,12 @@ autocmd({ 'BufRead', 'BufNewFile' }, {
   desc = 'Auto set filetype for .env and .env.* files',
 })
 
-autocmd('BufWritePre', {
-  group = group,
-  pattern = '*',
-  command = [[%s/\s\+$//e]],
-  desc = 'Auto Remove Trailing Spaces On Save',
-})
+-- autocmd('BufWritePre', {
+--   group = group,
+--   pattern = '*',
+--   command = [[%s/\s\+$//e]],
+--   desc = 'Auto Remove Trailing Spaces On Save',
+-- })
 
 -- Enable spellcheck for certain files
 -- autocmd('FileType', {

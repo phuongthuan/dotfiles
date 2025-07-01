@@ -37,4 +37,18 @@ function M.setup()
   nmap('<leader>e', vim.diagnostic.open_float, { desc = 'Show Line Diagnostic' })
 end
 
+nmap('<leader>dd', function()
+  vim.diagnostic.hide(nil, 0)
+  vim.notify('Hidden', vim.log.levels.INFO, { title = 'Diagnostics (buffer)' })
+end, { desc = 'Hide Diagnostics (buffer)' })
+
+nmap('<leader>td', function()
+  vim.diagnostic.enable(vim.diagnostic.enable(not vim.diagnostic.is_enabled()), { bufnr = 0 })
+  vim.notify(
+    vim.diagnostic.is_enabled() == true and 'Enabled' or 'Disabled',
+    vim.log.levels.INFO,
+    { title = 'Diagnostics' }
+  )
+end, { desc = 'Toggle Diagnostics' })
+
 return M

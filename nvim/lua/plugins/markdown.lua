@@ -11,8 +11,7 @@ return {
       'echasnovski/mini.icons',
     },
     ---@module 'render-markdown'
-    ---@diagnostic disable-next-line: missing-fields
-    ft = { 'markdown' },
+    ft = { 'markdown', 'codecompanion', 'copilot-chat' },
     init = function()
       local color1_bg = '#b8bb26'
       local color2_bg = '#8ec07c'
@@ -29,6 +28,7 @@ return {
     end,
     opts = {
       heading = {
+        enabled = false,
         sign = false,
         icons = { '󰎤 ', '󰎧 ', '󰎪 ', '󰎭 ', '󰎱 ', '󰎳 ' },
         backgrounds = {

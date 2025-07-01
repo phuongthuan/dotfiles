@@ -80,13 +80,13 @@ return {
   end,
   keys = {
     {
-      '<leader>cc',
+      '<leader>at',
       '<cmd>CodeCompanionChat Toggle<cr>',
       desc = 'Toggle CodeCompanionChat',
       silent = true,
     },
     {
-      '<leader>cn',
+      '<leader>ac',
       '<cmd>CodeCompanionChat<cr>',
       desc = 'New CodeCompanionChat',
       silent = true,

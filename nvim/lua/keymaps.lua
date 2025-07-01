@@ -9,17 +9,18 @@ local omap = mapper('o')
 
 -- Open today note
 local new_note_file = env.PERSONAL_NOTES .. '/diary/' .. os.date('%Y-%m-%d') .. '.md'
-nmap('<leader>td', ':e ' .. new_note_file .. '<cr>', { noremap = false })
+nmap('<leader>nn', ':e ' .. new_note_file .. '<cr>', { noremap = false, desc = 'New Note' })
 
 -- Source Neovim configuration
 nmap(
   '<leader><leader>1',
-  ':source ' .. env.NVIM_CONFIG_DIR .. '/init.lua' .. '<cr>:echo " Reloaded Neovim config 󱓟 "<cr>'
+  ':source ' .. env.NVIM_CONFIG_DIR .. '/init.lua' .. '<cr>:echo " Reloaded Neovim config 󱓟 "<cr>',
+  { desc = 'Reload Neovim Config' }
 )
 
 -- Open EH configuration
-nmap('<leader>eh', ':e ' .. env.EH_CONFIG_FILE .. '<cr>', { desc = 'Open EH configuration' })
-nmap('<leader>sc', ':e ' .. env.SECRET_ENV_FILE .. '<cr>', { desc = 'Open Secret configuration' })
+nmap('<leader>eh', ':e ' .. env.EH_CONFIG_FILE .. '<cr>', { desc = 'EH ENV' })
+nmap('<leader>sc', ':e ' .. env.SECRET_ENV_FILE .. '<cr>', { desc = 'Secret ENV' })
 
 -- No need to keep holding shift
 nmap(';', ':', { silent = false })
@@ -27,6 +28,9 @@ vmap(';', ':', { silent = false })
 
 -- Running lua code
 nmap(';l', ':lua ', { silent = false })
+
+-- Select all content
+nmap('<leader>va', ':keepjumps normal! ggVG<cr>', { desc = 'Select All Content' })
 
 -- Save current buffer
 nmap('<leader>s', ':w<cr>:echo "Saved current file ✔"<cr>')
@@ -50,7 +54,7 @@ nmap('<S-tab>', ':bn<cr>')
 -- Switch between last two files
 nmap('<BS>', '<C-^>')
 
--- Exit Neovim
+-- Quit
 nmap('<leader>q', ':q<cr>')
 
 -- Keep cursor center when search
@@ -93,20 +97,20 @@ mapper({ 'n', 'x' })('x', '"_x')
 xmap('<leader>p', '"_dP')
 
 -- Replace text
-nmap('<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { silent = false })
+nmap('<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { silent = false, desc = 'Replace Text' })
 
 -- Get current file path
 nmap(
-  '<leader>cp',
+  '<leader>gyp',
   [[:let @+=substitute(expand("%:p"), getcwd() . '/', '', '')<cr>:echo " " . @+ . " copied to clipboard ✔"<cr>]],
-  { desc = 'Copy current file path', noremap = true }
+  { desc = 'Copy Current Path', noremap = true }
 )
 
 -- Copy the content of current file to clipboard
 nmap(
-  '<leader>cP',
+  '<leader>gyP',
   [[:%y+<cr>:echo "Content copied to clipboard ✔"<cr>]],
-  { desc = 'Copy current file content', noremap = true }
+  { desc = 'Copy Current File Content', noremap = true }
 )
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
@@ -135,7 +139,7 @@ nmap('<leader>ts', function()
   if new_state then
     vim.opt_local.spelllang = 'en'
   end
-end, { desc = 'Toggle Spell Checking' })
+end, { desc = 'Toggle Spell Check' })
 
 nmap('<leader>tl', function()
   local new_state = not vim.o.number
@@ -143,7 +147,7 @@ nmap('<leader>tl', function()
   vim.notify(new_state and 'Line number enabled ✔' or 'Line number disabled ✔', vim.log.levels.INFO)
 end, { desc = 'Toggle Line Number' })
 
-nmap('<leader>rt', function()
+nmap('<leader>ut', function()
   local file = vim.api.nvim_buf_get_name(0)
   vim.notify('󰙨 Run test: ' .. file, vim.log.levels.INFO)
   vim.system({
@@ -151,4 +155,4 @@ nmap('<leader>rt', function()
     '-ic',
     string.format("tmux new-window -n test 'yarn test %s; exec zsh'", file),
   })
-end, { desc = 'Run Test For Current File' })
+end, { desc = 'Run Test' })

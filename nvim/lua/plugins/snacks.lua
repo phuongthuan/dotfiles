@@ -32,24 +32,24 @@ return {
       function()
         Snacks.rename.rename_file()
       end,
-      desc = 'Fast rename current file',
+      desc = 'Fast Rename Current File',
     },
     {
       '<leader>z',
       function()
         Snacks.bufdelete.delete()
       end,
-      desc = 'Delete current buffer',
+      desc = 'Delete Buffer',
     },
     {
       '<leader>Z',
       function()
         Snacks.bufdelete.other()
       end,
-      desc = 'Delete all buffers except the current',
+      desc = 'Delete All Buffers Except Current',
     },
     {
-      '<leader>gb',
+      '<leader>gob',
       function()
         vim.ui.input({ prompt = ' Branch' }, function(branch)
           -- User pressed <Esc> (cancel input)
@@ -66,7 +66,7 @@ return {
         end)
       end,
       mode = { 'n', 'v' },
-      desc = 'Open GitHub link for current file or selection',
+      desc = 'Git Browse URL',
     },
   },
 }

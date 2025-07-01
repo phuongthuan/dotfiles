@@ -103,7 +103,7 @@ vim.opt.formatoptions:append({ 'r' })
 
 -- Custom cursor highlighting and appearance
 vim.api.nvim_set_hl(0, 'CursorN', { fg = '#fbf1c7', bg = '#fbf1c7' })
-vim.api.nvim_set_hl(0, 'CursorI', { fg = '#fb4934', bg = '#fb4934' })
+vim.api.nvim_set_hl(0, 'CursorI', { fg = '#8ec07c', bg = '#8ec07c' })
 vim.opt.guicursor = {
   'n:block-CursorN',
   'i:block-CursorI',
