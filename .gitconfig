@@ -40,6 +40,7 @@
 	; Caches the list of untracked files in the working directory to speed up git status in large repositories.
 	; Setting this to true enables this feature.
 	untrackedcache = true
+	excludesfile = /Users/thuan/.gitignore
 [pull]
 	; This determines how git pull behaves when we have local changes that need to be integrated with upstream changes.
 	; If set to false, it merges the changes by default.

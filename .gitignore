@@ -2,6 +2,7 @@ node_modules/
 .git/
 
 .DS_Store
+
 zsh/eh.zsh
 zsh/secret.zsh
 
@@ -9,3 +10,10 @@ plugin/
 
 nvim/lazy-lock.json
 lazyvim/lazy-lock.json
+
+# Gp.nvim
+.gp.md
+
+# General
+log/
+*.log
