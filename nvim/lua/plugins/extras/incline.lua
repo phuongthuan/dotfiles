@@ -1,12 +1,8 @@
 return {
-  -- Adding a filename to the top right corner
   'b0o/incline.nvim',
   event = 'VeryLazy',
-  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  dependencies = { 'echasnovski/mini.icons' },
   config = function()
-    local helpers = require('incline.helpers')
-    local devicons = require('nvim-web-devicons')
-
     require('incline').setup({
       hide = {
         only_win = false,
@@ -29,14 +25,15 @@ return {
           filename = '[No Name]'
         end
 
-        local ft_icon, ft_color = devicons.get_icon_color(filename)
+        local icon = require('mini.icons').get('file', filename)
         local modified = vim.bo[props.buf].modified
         return {
-          ft_icon and { ' ', ft_icon, ' ', guibg = ft_color, guifg = helpers.contrast_color(ft_color) } or '',
+          icon and { ' ', icon } or '',
           ' ',
           { filename, gui = modified and 'bold,italic' or 'regular' },
           ' ',
-          -- guibg = '#282828',
+          guibg = '#3c3836',
+          guifg = '#bdae93',
         }
       end,
     })
