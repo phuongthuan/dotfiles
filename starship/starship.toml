@@ -4,12 +4,8 @@ command_timeout = 1000
 
 add_newline = false
 
-# ➜ \
-# $git_status\
-# $fill\
-# $character
-
 format = """
+$directory\
 $git_branch\
 $nodejs\
 $ruby\
@@ -58,6 +54,6 @@ style = 'bold #cc241d'
 
 [git_branch]
 format = '[$symbol$branch(:$remote_branch)]($style) '
-symbol = '🌱 '
+symbol = ' '
 truncation_symbol = ''
 style = 'bold #d3869b'

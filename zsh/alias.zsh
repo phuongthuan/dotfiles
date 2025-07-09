@@ -39,7 +39,7 @@ alias brd='brew doctor'
 # Tmux
 alias t='tmux'
 alias ta='tmux attach -t'
-alias tc='clear && tmux clear-history'
+alias cc='clear && tmux clear-history'
 
 alias how='howdoi'
 
