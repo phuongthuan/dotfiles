@@ -17,11 +17,11 @@ return {
           opts = { vertical = true },
           desc = 'Open the entry in a vertical split',
         },
-        ['<C-h>'] = {
-          'actions.select',
-          opts = { horizontal = true },
-          desc = 'Open the entry in a horizontal split',
-        },
+        -- ['<C-h>'] = {
+        --   'actions.select',
+        --   opts = { horizontal = true },
+        --   desc = 'Open the entry in a horizontal split',
+        -- },
         ['<C-r>'] = 'actions.refresh',
         ['gd'] = {
           desc = 'Oil - Toggle File Detail View',
@@ -44,6 +44,7 @@ return {
         ['<C-p>'] = false,
         ['<C-s>'] = false,
         ['<C-b>'] = false,
+        ['<C-h>'] = false,
         ['<C-l>'] = false,
         ['gs'] = false,
       },

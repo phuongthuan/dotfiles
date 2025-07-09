@@ -6,18 +6,21 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = {
       keywords = {
-        FIX = {
-          icon = ' ',
-          color = 'error', -- can be a hex color, or a named color (see below)
-          alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE' }, -- a set of other keywords that all map to this FIX keywords
-          -- signs = false, -- configure signs for some keywords individually
-        },
-        TODO = { icon = ' ', color = 'info' },
-        HACK = { icon = ' ', color = 'warning', alt = { 'DON SKIP' } },
-        WARN = { icon = ' ', color = 'warning', alt = { 'WARNING', 'XXX' } },
-        PERF = { icon = ' ', alt = { 'OPTIM', 'PERFORMANCE', 'OPTIMIZE' } },
-        NOTE = { icon = ' ', color = 'hint', alt = { 'INFO', 'READ', 'COLORS' } },
-        TEST = { icon = '⏲ ', color = 'test', alt = { 'TESTING', 'PASSED', 'FAILED' } },
+        -- TODO: todo
+        -- FIX: fix
+        -- HACK: hack
+        -- WARN: warn
+        -- NOTE: note
+        -- TEST: test
+        -- PERF: perf
+
+        FIX = { icon = ' ', color = '#cc241d', alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE' } }, -- FIX: fix
+        TODO = { icon = ' ', color = '#83a598' },
+        HACK = { icon = ' ', color = '#fabd2f', alt = { 'DON SKIP' } },
+        WARN = { icon = ' ', color = '#fabd2f', alt = { 'WARNING', 'XXX' } },
+        PERF = { icon = ' ', alt = { '#83a598', 'PERFORMANCE', 'OPTIMIZE' } },
+        NOTE = { icon = ' ', color = '#8ec07c', alt = { 'INFO', 'READ', 'COLORS' } },
+        TEST = { icon = '⏲ ', color = '#83a598', alt = { 'TESTING', 'PASSED', 'FAILED' } },
       },
     },
     keys = {

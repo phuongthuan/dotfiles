@@ -26,8 +26,6 @@ return {
 
     require('mini.pairs').setup()
 
-    require('mini.tabline').setup()
-
     require('mini.starter').setup({ silent = true })
 
     require('mini.indentscope').setup({

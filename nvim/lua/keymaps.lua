@@ -56,6 +56,7 @@ nmap('<BS>', '<C-^>')
 
 -- Quit
 nmap('<leader>q', ':q<cr>')
+nmap('<leader>Q', ':qa<cr>')
 
 -- Keep cursor center when search
 nmap('n', 'nzzzv')

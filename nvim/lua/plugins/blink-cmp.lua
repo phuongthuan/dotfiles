@@ -52,7 +52,7 @@ return {
 
           -- extra sources
           'lazydev',
-          -- 'copilot',
+          'copilot',
           'emoji',
           'nerdfont',
         },
@@ -87,7 +87,7 @@ return {
             opts = { insert = true },
             should_show_items = function()
               -- Enable nerdfont completion for a set of file-types
-              return vim.tbl_contains({ 'lua', 'zsh' }, vim.o.filetype)
+              return vim.tbl_contains({ 'lua', 'zsh', 'toml' }, vim.o.filetype)
             end,
           },
         },
@@ -98,11 +98,11 @@ return {
       signature = { enabled = false },
 
       -- Disable per file type
-      enabled = function()
-        return not vim.tbl_contains({ 'copilot-chat', 'codecompanion' }, vim.bo.filetype)
-          and vim.bo.buftype ~= 'prompt'
-          and vim.b.completion ~= false
-      end,
+      -- enabled = function()
+      --   return not vim.tbl_contains({ 'copilot-chat' }, vim.bo.filetype)
+      --     and vim.bo.buftype ~= 'prompt'
+      --     and vim.b.completion ~= false
+      -- end,
     },
     opts_extend = { 'sources.default' },
   },

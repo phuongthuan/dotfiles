@@ -6,12 +6,9 @@ return {
   {
     'MeanderingProgrammer/render-markdown.nvim',
     enabled = true,
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-      'echasnovski/mini.icons',
-    },
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
     ---@module 'render-markdown'
-    ft = { 'markdown', 'codecompanion', 'copilot-chat' },
+    ft = { 'markdown' },
     init = function()
       local color1_bg = '#b8bb26'
       local color2_bg = '#8ec07c'
