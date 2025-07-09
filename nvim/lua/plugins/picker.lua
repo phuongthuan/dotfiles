@@ -60,7 +60,12 @@ return {
 
     nmap('<leader>,', function()
       local excludes = _is_mobile_repo() and { 'ContractPdfPreview/', '*.cjs' } or nil
-      Picker.find_files({ tool = 'fd', excludes = excludes }, { source = { name = ' Files (fd)' } })
+      local command_opts = _is_mobile_repo() and {} or { '--no-ignore' }
+
+      Picker.find_files(
+        { tool = 'fd', excludes = excludes, command_opts = command_opts },
+        { source = { name = ' Files (fd)' } }
+      )
     end, { desc = 'Current Directory (fd)' })
 
     nmap('<leader>m', function()
@@ -98,6 +103,15 @@ return {
       )
     end, { desc = 'Literal String' })
 
+    nmap('<leader>fe', function()
+      Picker.find_files({ tool = 'fd' }, {
+        source = {
+          cwd = env.EH_REPOSITORY_DIR,
+          name = 'Files EH (fd)',
+        },
+      })
+    end, { desc = 'Files EH (fd)' })
+
     nmap('<leader>fR', function()
       Picker.find_files({ tool = 'fd' }, {
         source = {
@@ -112,8 +126,17 @@ return {
     end, { desc = 'Git (git)' })
 
     nmap('<leader>fl', function()
-      MiniPick.builtin.files(
-        { tool = 'fd' },
+      local excludes = {
+        'mason/packages/**',
+        '**/tests/screenshots/**',
+        '**/tests/**',
+        '*.node',
+        '*.history',
+        '*.png',
+      }
+
+      Picker.find_files(
+        { tool = 'fd', excludes = excludes },
         { source = { cwd = env.LOCAL_SHARE_CONFIG_DIR .. 'nvim', name = ' Local share nvim files (fd)' } }
       )
     end, { desc = '~/.local/share/nvim' })

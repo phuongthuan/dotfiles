@@ -10,6 +10,13 @@ local _default_source_opts = {
   },
 }
 
+local _default_excludes = {
+  '.DS_Store',
+  '.git/',
+  'node_modules/',
+  '.next/',
+}
+
 -- Picker for searching a literal string instead of regular expression (-F or --fixed-strings)
 M.grep_literal = function(local_opts, opts)
   local command = {
@@ -48,11 +55,17 @@ M.find_files = function(local_opts, opts)
     '--hidden',
   }
 
-  local excludes = local_opts.excludes or { '.git/' }
+  local command_opts = local_opts.command_opts or {}
+  local excludes = local_opts.excludes or _default_excludes
 
-  -- Add exclude patterns to command
-  for _, exclude in ipairs(excludes) do
-    table.insert(command, '--exclude=' .. exclude)
+  -- Add --exclude option
+  for _, ex in ipairs(excludes) do
+    table.insert(command, '--exclude=' .. ex)
+  end
+
+  -- Add other options
+  for _, co in ipairs(command_opts) do
+    table.insert(command, co)
   end
 
   opts = vim.tbl_deep_extend('force', _default_source_opts, opts or {})
