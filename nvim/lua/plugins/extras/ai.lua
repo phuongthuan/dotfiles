@@ -25,6 +25,32 @@ return {
         },
       })
     end,
+    keys = {
+      {
+        '<C-a>',
+        function()
+          require('copilot.suggestion').accept()
+        end,
+        desc = 'Copilot: Accept suggestion',
+        mode = { 'i' },
+      },
+      {
+        '<C-x>',
+        function()
+          require('copilot.suggestion').dismiss()
+        end,
+        desc = 'Copilot: Dismiss suggestion',
+        mode = { 'i' },
+      },
+      {
+        '<C-\\>',
+        function()
+          require('copilot.panel').open()
+        end,
+        desc = 'Copilot: Show panel',
+        mode = { 'n', 'i' },
+      },
+    },
   },
   require('plugins.extras.codecompanion'),
   -- require('plugins.extras.copilotchat-nvim'),
