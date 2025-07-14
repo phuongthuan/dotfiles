@@ -3,6 +3,6 @@ return {
   version = '*',
   opts = {},
   keys = {
-    { '<leader>T', '<cmd>ToggleTerm<cr>', desc = 'Toggle Terminal', silent = true },
+    { '<leader>tt', '<cmd>ToggleTerm<cr>', desc = 'Toggle Terminal', silent = true },
   },
 }

@@ -8,6 +8,7 @@ return {
       'giuxtaposition/blink-cmp-copilot',
       'moyiz/blink-emoji.nvim',
       'MahanRahmati/blink-nerdfont.nvim',
+      'Kaiser-Yang/blink-cmp-dictionary',
     },
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -55,6 +56,8 @@ return {
           'copilot',
           'emoji',
           'nerdfont',
+
+          'dictionary',
         },
         providers = {
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
@@ -90,11 +93,19 @@ return {
               return vim.tbl_contains({ 'lua', 'zsh', 'toml' }, vim.o.filetype)
             end,
           },
+          dictionary = {
+            module = 'blink-cmp-dictionary',
+            name = 'Dict',
+            min_keyword_length = 3,
+            opts = {
+              dictionary_files = { vim.fn.expand('~/Library/dictionary/words_alpha.txt') },
+            },
+          },
         },
       },
 
       cmdline = { enabled = false },
-      -- fuzzy = { implementation = 'prefer_rust_with_warning' },
+      fuzzy = { implementation = 'prefer_rust_with_warning' },
       signature = { enabled = false },
 
       -- Disable per file type

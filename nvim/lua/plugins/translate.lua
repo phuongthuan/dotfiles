@@ -2,10 +2,10 @@ return {
   'uga-rosa/translate.nvim',
   keys = {
     {
-      '<leader>tt',
+      '<leader>tT',
       '<cmd>Translate Vi<cr>',
       mode = { 'n', 'v' },
-      desc = 'Translate Selected Text',
+      desc = 'Translate Text',
       silent = true,
     },
   },

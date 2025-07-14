@@ -39,12 +39,12 @@ return {
         desc = 'Prev Todo Comment',
       },
       {
-        '<leader>ttl',
+        '<leader>tc',
         function()
           ---@diagnostic disable-next-line: undefined-field
           require('snacks').picker.todo_comments()
         end,
-        desc = 'Toggle Todo Lists',
+        desc = 'Toggle Todo Comments',
       },
     },
   },
