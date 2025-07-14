@@ -100,6 +100,9 @@ return {
             opts = {
               dictionary_files = { vim.fn.expand('~/Library/dictionary/words_alpha.txt') },
             },
+            should_show_items = function()
+              return vim.tbl_contains({ 'text', 'markdown', 'gitcommit' }, vim.o.filetype)
+            end,
           },
         },
       },
