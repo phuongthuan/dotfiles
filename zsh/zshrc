@@ -20,6 +20,7 @@ export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
 
 # zoxide
 eval "$(zoxide init zsh)"
+alias j='z'
 
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"

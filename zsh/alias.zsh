@@ -23,8 +23,6 @@ alias dot='cd ~/.dotfiles/ && vi'
 alias c='clear'
 alias e='exit'
 
-# Binding zoxide to j
-alias j='z'
 
 # Homebrew
 alias br='brew'
