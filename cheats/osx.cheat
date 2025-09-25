@@ -1,8 +1,5 @@
 % osx, mac os
 
-# Lock system
-pmset displaysleepnow
-
 # Show hidden files in Finder
 defaults write com.apple.finder AppleShowAllFiles -bool true; \
    killall Finder
@@ -19,7 +16,7 @@ defaults write com.apple.finder CreateDesktop -bool true; \
 defaults write com.apple.finder CreateDesktop -bool false; \
    killall Finder
 
-# Set wallpaper
-osascript -e 'tell application "Finder" to set desktop picture to POSIX file "<image_path>"'
-
-$ image_path: find $HOME -maxdepth 3 -name "*.jpg" -o -name "*.jpeg" -o -name "*.png"
+# Set Key Repeat Rate and Delay Until Repeat for smooth line movement
+defaults write -g KeyRepeat -int 2; \
+defaults write -g InitialKeyRepeat -int 15; \
+   killall SystemUIServer
