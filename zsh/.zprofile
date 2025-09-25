@@ -1,5 +1,14 @@
+export ZSH="$HOME/.oh-my-zsh"
+export EDITOR="nvim"
+export REACT_EDITOR="nvim"
+export NVIM_CONFIG_DIR="$HOME/.config/nvim"
+export DOTFILES="$HOME/.dotfiles"
+
 # Set XDG config home
 export XDG_CONFIG_HOME="$HOME/.config"
+
+# secret env
+export SECRET_ENV_FILE="$HOME/.dotfiles/zsh/secret.zsh"
 
 # Setting PATH for Python 2.7
 # The original version is saved in .zprofile.pysave
@@ -17,23 +26,10 @@ export PATH
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-export ZSH="$HOME/.oh-my-zsh"
-
 export TMUX_CONF="$HOME/.config/tmux/tmux.conf"
 
 # EH herocli
 export PATH=$PATH:$HOME/.local/bin
-
-# secret env
-export SECRET_ENV_FILE="$HOME/.dotfiles/zsh/secret.zsh"
-
-# editor configs
-export EDITOR="nvim"
-export REACT_EDITOR="nvim"
-export NVIM_CONFIG_DIR="$HOME/.config/nvim"
-
-export GITHUB_USERNAME="phuongthuan"
-export DOTFILES="$HOME/.dotfiles"
 
 # Java JDK
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home

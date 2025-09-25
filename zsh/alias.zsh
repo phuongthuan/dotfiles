@@ -1,6 +1,5 @@
 alias vim='/usr/bin/vim'
-alias vi='~/nvim-0.11.2/bin/nvim'
-alias nvim-kickstart='NVIM_APPNAME="nvim-kickstart" vi'
+alias vi='~/nvim-0.11.4/bin/nvim'
 
 alias arm='arch -arm64'
 alias intel='arch -x86_64'

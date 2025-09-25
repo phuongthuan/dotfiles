@@ -1,7 +1,7 @@
-theme = GruvboxDark
+theme = Gruvbox Dark
 
 # Font settings
-font-family = Victor Mono
+font-family = VictorMono Nerd Font
 font-style = Bold
 
 # font-thicken = true

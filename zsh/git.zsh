@@ -1,4 +1,6 @@
-# # GPG TTY
+export GITHUB_USERNAME="phuongthuan"
+
+# GPG TTY
 # https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key
 if ! grep -q "export GPG_TTY=\$(tty)" ~/.zshrc; then
   echo -e '\nexport GPG_TTY=$(tty)' >>~/.zshrc
