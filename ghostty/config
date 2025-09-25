@@ -10,7 +10,7 @@ font-style = Bold
 font-size = 15
 
 # background = #000000
-# background-opacity = 0.6
+background-opacity = 0.6
 background-blur-radius = 30
 
 # window configs
