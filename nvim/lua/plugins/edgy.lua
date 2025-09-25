@@ -11,7 +11,7 @@ return {
       {
         ft = 'codecompanion',
         title = 'Copilot Chat  ',
-        size = { width = 65 },
+        size = { width = 100 },
       },
     },
     bottom = {

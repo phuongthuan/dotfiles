@@ -121,12 +121,12 @@
   },
   "consoleLog": {
     "prefix": "clg",
-    "body": "console.log(${1:object});",
+    "body": "console.log(${1});$0",
     "description": "Displays a message in the console"
   },
   "consoleLogObject": {
     "prefix": "clo",
-    "body": "console.log('${1:object} :>> ', ${1:object});",
+    "body": "console.log('${1} :>> ', ${2});$0",
     "description": "Displays an object in the console with its name"
   },
   "consoleWarn": {

@@ -15,6 +15,7 @@ local _default_excludes = {
   '.git/',
   'node_modules/',
   '.next/',
+  '.yarn/cache'
 }
 
 -- Picker for searching a literal string instead of regular expression (-F or --fixed-strings)
