@@ -5,6 +5,6 @@ name: prac
 root: ~/p/practice
 
 windows:
-  - dotfiles: cd ~/.dotfiles && vi
+  - dotfiles: cd ~/.dotfiles && nvim
   - ex-1: cd ~/.dotfiles
   - ex-2: cd ~/.dotfiles

@@ -1,5 +1,4 @@
 alias vim='/usr/bin/vim'
-alias vi='~/nvim-0.11.4/bin/nvim'
 
 alias arm='arch -arm64'
 alias intel='arch -x86_64'
@@ -12,17 +11,16 @@ alias ni='npm install'
 alias ns='npm start'
 
 # Open iCloud Drive
-alias ic='eval vi $ICLOUD_DRIVE'
+alias ic='eval nvim $ICLOUD_DRIVE'
 
 # Open iCloud Obsidian
-alias obs='eval vi $ICLOUD_DRIVE_OBSIDIAN_DIR'
+alias obs='eval nvim $ICLOUD_DRIVE_OBSIDIAN_DIR'
 
 # Open dotfiles
-alias dot='cd ~/.dotfiles/ && vi'
+alias dot='cd ~/.dotfiles/ && nvim'
 
 alias c='clear'
 alias e='exit'
-
 
 # Homebrew
 alias br='brew'

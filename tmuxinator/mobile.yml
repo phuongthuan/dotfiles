@@ -6,7 +6,7 @@ root: ~/p/eh/eh-mobile-pro
 pre_window: asdf set nodejs 20.11.1
 
 windows:
-  - editor: vi
+  - editor: nvim
   - git:
   - wt-feature: cd ~/p/eh/worktree/eh-mobile-pro/feature
   - wt-test: cd ~/p/eh/worktree/eh-mobile-pro/test
