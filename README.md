@@ -13,7 +13,7 @@
 
 Hi everyone,
 
-I'm a software engineer and this is my configuration development. I'm using Macbook Pro 13' 2020 intel CPU.
+I'm a software engineer and this is my configuration development.
 
 Before we go to the configuration, let's me tell you guys a story:
 
