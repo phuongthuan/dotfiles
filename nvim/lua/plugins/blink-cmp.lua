@@ -44,6 +44,9 @@ return {
       appearance = { nerd_font_variant = 'mono' },
       completion = { documentation = { auto_show = false } },
       sources = {
+        -- per_filetype = {
+        --   codecompanion = { 'codecompanion' },
+        -- },
         default = {
           -- built-in sources
           'lsp',
@@ -90,7 +93,7 @@ return {
             opts = { insert = true },
             should_show_items = function()
               -- Enable nerdfont completion for a set of file-types
-              return vim.tbl_contains({ 'lua', 'zsh', 'toml' }, vim.o.filetype)
+              return vim.tbl_contains({ 'lua', 'zsh', 'toml', 'tmux' }, vim.o.filetype)
             end,
           },
           dictionary = {
@@ -101,7 +104,7 @@ return {
               dictionary_files = { vim.fn.expand('~/Library/dictionary/words_alpha.txt') },
             },
             should_show_items = function()
-              return vim.tbl_contains({ 'text', 'markdown', 'gitcommit' }, vim.o.filetype)
+              return vim.tbl_contains({ 'text', 'markdown', 'gitcommit', 'codecompanion' }, vim.o.filetype)
             end,
           },
         },
