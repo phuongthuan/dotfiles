@@ -37,14 +37,20 @@ ydl() {
 
   echo -e "\n\033[32mExtracting audio from "$URL" ... \033[0m\n"
 
-  yt-dlp \
+  if ! yt-dlp \
     --extract-audio \
     --audio-format mp3 \
+    --embed-thumbnail \
+    --add-metadata \
+    --cookies-from-browser chrome \
     --quiet \
     --no-warnings \
-    --no-progres \
+    --no-progress \
     -o "$OUTPUT" \
-    "$URL"
+    "$URL"; then
+    echo -e "\n\033[31mFailed to extract audio from $URL ❌\033[0m"
+    return 1
+  fi
 
   echo -e "\033[32mDownload $FILENAME.mp3 completed! \033[0m"
 
@@ -87,7 +93,7 @@ mca() {
 }
 
 # Play a song from current playlist or database: playsong <song_name>
-playsong() {
+pls() {
   if [ -z "$1" ]; then
     echo -e "\033[31mPlease provide a song name ❗\033[0m\n"
     return 1
