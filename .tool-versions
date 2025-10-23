@@ -1,3 +1,4 @@
-nodejs 20.18.1
+nodejs 22.20.0
 lua 5.1
 ruby 3.1.4
+global nodejs 22.20.0
