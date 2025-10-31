@@ -40,7 +40,7 @@ so() {
   fi
 }
 
-# Bitwarden unlock vault
+# Bitwarden unlock vault, eg: bwg username github
 bwu() {
   local secret_file="$HOME/.config/zsh/secret.zsh"
   local bw_session=$(bw unlock --raw)
@@ -97,7 +97,14 @@ bwg() {
   fi
 }
 
-# Kill all Chrome processes
+# Kill all Zen browser processes
+kaz() {
+  killall "Zen"
+  killall "ZenCP Isolated Web Content"
+  echo -e "\033[32mClean Zen Browser  \033[0m"
+}
+
+# Kill all Chrome browser processes
 kac() {
   killall "Google Chrome"
   killall "Google Chrome Helper (Renderer)"

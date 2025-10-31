@@ -7,8 +7,7 @@ alias rv='ruby -v'
 alias nv='node -v'
 alias lv='lua -v'
 
-alias ni='npm install'
-alias ns='npm start'
+alias db='defaultbrowser'
 
 # Open iCloud Drive
 alias ic='eval nvim $ICLOUD_DRIVE'
@@ -22,7 +21,7 @@ alias dot='cd ~/.dotfiles/ && nvim'
 alias c='clear'
 alias e='exit'
 
-# Homebrew
+# brew
 alias br='brew'
 alias brup='brew update; brew upgrade; brew cleanup; brew doctor'
 alias bri='brew install'
@@ -31,55 +30,18 @@ alias brsl='brew services list'
 alias brs='brew services'
 alias brd='brew doctor'
 
-# Tmux
+# tmux
 alias t='tmux'
 alias ta='tmux attach -t'
 alias cc='clear && tmux clear-history'
 
-# Ruby
+# ruby
 alias bi='bundle install'
 alias be='bundle exec'
 alias rub='bundle exec rubocop'
 alias rsp='bundle exec rspec'
 
-alias gj='gitmoji'
-
-alias gs='git status -sb'
-alias ga='git add .'
-alias gwt='git worktree'
-alias gbr='git branch'
-alias gc='git commit -m'
-alias gd='git diff'
-alias gdn='git diff --name-only master'
-alias gsw='git switch'
-alias new='git switch -c'
-alias glo='git log --oneline -25'
-alias reflog='git reflog --relative-date'
-alias del='git branch -D'
-alias rsh='git reset --hard'
-alias rss='git reset --soft'
-alias grm='git checkout --'
-
-alias gp='git pull origin $(git rev-parse --abbrev-ref HEAD)'
-alias gpm='git pull origin master'
-alias gpd='git pull origin development'
-alias gps='git push origin HEAD'
-alias gpsm='git push origin master'
-alias gpsf='git push origin HEAD --force-with-lease --no-verify'
-alias gpsn='git push origin HEAD --no-verify'
-
-alias gcl='git clone'
-alias pick='git cherry-pick'
-alias sts='git stash -u'
-alias stl='git stash list'
-alias sts='git stash save'
-alias stp='git stash pop'
-alias gcm='git checkout origin/master'
-alias gfo='git fetch origin'
-alias gcg='git config --global'
-alias gh-create='gh repo create --private --source=. --remote=origin && git push -u --all && gh browse'
-
-# Docker
+# docker
 # alias dps='docker ps -a'
 # alias ds='docker stop'
 # alias drm='docker rm'
@@ -89,7 +51,11 @@ alias gh-create='gh repo create --private --source=. --remote=origin && git push
 # alias drM='docker container prune -f'
 # alias dc='docker-compose'
 
-# Yarn
+# npm
+alias ni='npm install'
+alias ns='npm start'
+
+# yarn
 alias yv='yarn --version'
 alias yd='yarn dev'
 alias ys='yarn start'
