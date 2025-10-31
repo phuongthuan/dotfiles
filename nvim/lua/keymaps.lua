@@ -149,11 +149,13 @@ nmap('<leader>tl', function()
 end, { desc = 'Toggle Line Number' })
 
 nmap('<leader>ut', function()
-  local file = vim.api.nvim_buf_get_name(0)
+  -- local file = vim.api.nvim_buf_get_name(0) -- Absolute path
+  -- Get relative path from current working directory
+  local file = vim.fn.expand('%:.')
   vim.notify('󰙨 Run test: ' .. file, vim.log.levels.INFO)
   vim.system({
     'zsh',
     '-ic',
-    string.format("tmux new-window -n test 'yarn test %s; exec zsh'", file),
+    string.format("tmux new-window -n test 'source ~/.dotfiles/zsh/dev.zsh && ytc %s; exec zsh'", file),
   })
 end, { desc = 'Run Test' })

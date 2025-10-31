@@ -10,6 +10,8 @@ local _is_mobile_repo = function()
   return current_dir == eh_mobile_pro_path
 end
 
+local _mobile_repo_globs = { '!ContractPdfPreview', '!*.cjs', '!coverage/' }
+
 return {
   'echasnovski/mini.pick',
   version = false,
@@ -59,7 +61,7 @@ return {
     vim.ui.select = MiniPick.ui_select
 
     nmap('<leader>,', function()
-      local excludes = _is_mobile_repo() and { 'ContractPdfPreview/', '*.cjs' } or nil
+      local excludes = _is_mobile_repo() and { 'ContractPdfPreview/', '*.cjs', 'coverage/' } or nil
       local command_opts = _is_mobile_repo() and {} or { '--no-ignore' }
 
       Picker.find_files(
@@ -76,13 +78,13 @@ return {
       -- current word under cursor in the current buffer
       local word = vim.fn.expand('<cword>')
 
-      local globs = _is_mobile_repo() and { '!ContractPdfPreview', '!*.cjs' } or nil
+      local globs = _is_mobile_repo() and _mobile_repo_globs or nil
 
       Picker.grep_literal({ pattern = word, globs = globs }, { source = { name = 'Grep (rg): ' .. word } })
     end, { desc = 'Word Under Cursor' })
 
     nmap('<leader>pl', function()
-      local globs = _is_mobile_repo() and { '!ContractPdfPreview', '!*.cjs' } or nil
+      local globs = _is_mobile_repo() and _mobile_repo_globs or nil
 
       Picker.grep_literal({ pattern = ':>> ', globs = globs }, { source = { name = '  Grep console.log (rg)' } })
     end, { desc = 'console.log' })
@@ -95,7 +97,7 @@ return {
         return
       end
 
-      local globs = _is_mobile_repo() and { '!ContractPdfPreview', '!*.cjs' } or nil
+      local globs = _is_mobile_repo() and _mobile_repo_globs or nil
 
       Picker.grep_literal(
         { pattern = string, globs = globs },
