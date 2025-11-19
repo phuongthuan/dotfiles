@@ -1,0 +1,27 @@
+###
+@email = lam.nguyen+hrprswag33@employmenthero.com
+@password = employmenthero123
+
+### GET_SESSIONS
+
+POST {{MAIN_APP_HOST}}/api/v2/sessions
+Accept: application/json
+Content-Type: application/json
+
+{
+  "data": {
+    "attributes": {
+      "email": "{{email}}",
+      "password": "{{password}}",
+      "device_id": "simulator"
+    }
+  }
+}
+
+###
+
+### GET_SESSIONS_INFO
+GET {{MAIN_APP_HOST}}/api/v2/sessions/info
+Session-Token: 2a6936ec139e403a8baca5bc342c740c6e1bbf6b6b465fc1b61ecde42fa8f9cf6874916dbc0e8e4d8dc40f19e5d230c3879761cbc72b32af0f205cfadda476a5
+
+###

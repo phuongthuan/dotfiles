@@ -1,0 +1,102 @@
+## Employee
+
+@email = tung.van+employee@employmenthero.com
+@password = Khoa@10AM
+@memberId = 374180
+@organisationId = 20803
+
+### POST_GET_SESSION_TOKEN
+# @jq { "email": .data.attributes.email, "session_token": .data.attributes.session_token }
+POST {{MAIN_APP_HOST}}/api/v2/sessions
+Accept: application/json
+Content-Type: application/json
+
+{
+  "data": {
+    "attributes": {
+      "email": "{{email}}",
+      "password": "{{password}}",
+      "device_id": "simulator"
+    }
+  }
+}
+
+
+### POST_AUTH
+POST {{MAIN_APP_HOST}}/auth
+Content-Type: application/json
+User-Agent: career-page-backend
+
+{
+  "session_token": "05a29db3d27c093af35e7e02f34746e8b3d2ee4b1482c15a72ea17df6d515b1e60f758657a4ff1a508ee967be319c86af1391c8fd3f423f1b8422fcbfc7cdecd"
+}
+
+###
+
+### POST_TIMESHEET_ENTRIES
+
+# @jq { "id": .data.id, "date": .data.date }
+POST {{MAIN_APP_HOST}}/api/v3/organisations/{{organisationId}}/members/{{memberId}}/timesheet_entries
+Accept: application/json
+Content-Type: application/json; charset=utf-8
+Jwt-Token: {{POST_AUTH.response.body.$.token}}
+
+{
+  "timesheet_entry": {
+    "breaks_attributes": [
+      {
+        "end_hm": "1:00 PM",
+        "start_hm": "12:00 PM"
+      }
+    ],
+    "comment": "Daily work",
+    "date": "23/03/2026",
+    "end_hm": "05:00 PM",
+    "hr_position_id": "7b614e01-a696-4188-84cf-c589ba786d12",
+    "location_id": 42112,
+    "member_id": "{{memberId}}",
+    "shift_condition_ids": [],
+    "start_hm": "08:00 AM",
+    "type": "start_and_end_times_timesheet_entry"
+  }
+}
+
+###
+
+### GET_TIMESHEET_ENTRIES
+# @jq { "total_items": .data.total_items, "items": .data.items, "members": .data.members}
+GET {{MAIN_APP_HOST}}/api/v3/organisations/{{organisationId}}/members/{{memberId}}/timesheet_entries?page_index=1&item_per_page=5
+Accept: application/json
+Content-Type: application/json; charset=utf-8
+Jwt-Token: {{POST_AUTH.response.body.$.token}}
+
+###
+
+### PUT_TIMESHEET_ENTRIES
+DELETE {{MAIN_APP_HOST}}/api/v3/organisations/{{organisationId}}/members/{{memberId}}/timesheet_entries/{{12345}}
+Jwt-Token: {{POST_AUTH.response.body.$.token}}
+
+### TIMESHEET_ENTRIES_APPROVE
+
+### TIMESHEET_ENTRIES_DECLINE
+
+### POST_EXPENSES
+POST https://expenses.staging.ehrocks.com/api/v1/expenses
+Accept: application/json
+Content-Type: application/json
+Jwt-Token: {{POST_AUTH.response.body.$.token}}
+
+{
+  "currency": "USD",
+  "amount": "500.00",
+  "expense_category_id": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+  "location_external_id": "5678",
+  "purchase_date": "02/15/2025",
+  "supplier": "Sample Supplier",
+  "attachments_attributes": [],
+  "tax_amount": "10.00",
+  "tax_rate": 5,
+  "tax_code": null,
+  "tax_code_display": null
+}
+

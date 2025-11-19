@@ -1,0 +1,24 @@
+### POST_AUTH_LOGIN
+
+POST https://dummyjson.com/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "expiresInMins": 30,
+  "password": "emilyspass",
+  "username": "emilys"
+}
+
+
+### GET_AUTH_ME
+
+# @jq { "first_name": .firstName, "last_name": .lastName }
+
+GET https://dummyjson.com/auth/me HTTP/1.1
+Authorization: Bearer {{POST_AUTH_LOGIN.response.body.$.accessToken}}
+
+
+### GET_USER
+
+GET https://jsonplaceholder.typicode.com/users/1 HTTP/1.1
+Content-Type: application/json

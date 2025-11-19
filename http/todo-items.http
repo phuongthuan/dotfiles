@@ -1,0 +1,51 @@
+### 
+
+# # Manager
+# # Acc1: tung.van+manager@employmenthero.com
+# # Acc2: tom.ta+employee3@employmenthero.com
+
+@email = tom.ta+employee3@employmenthero.com
+@memberId = 374180
+@organisationId = 20803
+@password = Khoa@10AM
+
+
+### POST_GET_SESSION_TOKEN
+
+# @jq { "email": .data.attributes.email, "session_token": .data.attributes.session_token }
+
+POST {{MAIN_APP_HOST}}/api/v2/sessions HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+  "data": {
+    "attributes": {
+      "device_id": "simulator",
+      "email": "{{email}}",
+      "password": "{{password}}"
+    }
+  }
+}
+
+
+### POST_AUTH
+
+POST {{MAIN_APP_HOST}}/auth HTTP/1.1
+Content-Type: application/json
+User-Agent: career-page-backend
+
+{
+  "session_token": "f1764a3090e7bbd2a7b6be0323a88e3a9618b25be0e8ca70d6dda2667452bed3f0d2b959117df5421a4cef79db5670374c5d0daeb5163d98cbc2dcf45831f017"
+}
+
+
+### GET_TODO_ITEMS
+
+# GET {{MAIN_APP_HOST}}/api/v3/organisations/{{organisationId}}/todo_items?page_index=1&item_per_page=3&features[]=leave&features[]=timesheet&features[]=expense
+# GET {{MAIN_APP_HOST}}/api/v3/organisations/{{organisationId}}/todo_items/task_widget_data?page_index=1&item_per_page=5&features[]=timesheet&features[]=leave&features[]=expense
+
+GET {{MAIN_APP_HOST}}/api/v3/organisations/{{organisationId}}/todo_items/task_widget_data?page_index=1&item_per_page=5&features[]=timesheet HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Jwt-Token: {{POST_AUTH.response.body.$.token}}
