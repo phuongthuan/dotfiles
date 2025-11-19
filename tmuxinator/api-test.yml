@@ -1,0 +1,9 @@
+# /Users/thuan/.config/tmuxinator/api-test.yml
+
+name: api-test
+root: ~/p/eh/api-test
+
+windows:
+  - editor: nvim
+  - terminal:
+  - logs:

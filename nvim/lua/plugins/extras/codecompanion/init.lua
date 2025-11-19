@@ -1,3 +1,5 @@
+-- https://github.com/olimorris/dotfiles/blob/main/.config/nvim/lua/plugins/coding.lua
+
 local PROMPTS = require('plugins.extras.codecompanion.prompts')
 
 return {
@@ -19,12 +21,6 @@ return {
       'nvim-treesitter/nvim-treesitter',
       'folke/edgy.nvim',
       'ravitemer/codecompanion-history.nvim',
-      {
-        'ravitemer/mcphub.nvim',
-        cmd = 'MCPHub',
-        build = 'npm install -g mcp-hub@latest',
-        config = true,
-      },
     },
     init = function()
       local spinner = require('plugins.extras.codecompanion.spinner')
@@ -32,15 +28,19 @@ return {
     end,
     opts = {
       adapters = {
-        copilot = function()
-          return require('codecompanion.adapters').extend('copilot', {
-            schema = {
-              model = {
-                default = 'claude-sonnet-4',
+        http = {
+          copilot = function()
+            return require('codecompanion.adapters').extend('copilot', {
+              schema = {
+                model = {
+                  -- default = 'gpt-5',
+                  default = 'claude-sonnet-4.5',
+                  -- default = 'gpt-4o',
+                },
               },
-            },
-          })
-        end,
+            })
+          end,
+        },
       },
       strategies = {
         chat = {
@@ -86,10 +86,41 @@ return {
               description = 'Stop Request',
             },
           },
+          slash_commands = {
+            ['buffer'] = {
+              keymaps = {
+                modes = {
+                  i = '<C-b>',
+                },
+              },
+            },
+            ['file'] = {
+              keymaps = {
+                modes = {
+                  i = '<C-f>',
+                },
+              },
+            },
+          },
+        },
+        inline = {
+          adapter = {
+            name = 'copilot',
+            model = 'gpt-4.1',
+          },
+          keymaps = {
+            accept_change = {
+              modes = { n = 'ga' },
+            },
+            reject_change = {
+              modes = { n = 'gr' },
+              opts = { nowait = true },
+            },
+          },
         },
       },
 
-      -- DISPLAY OPTIONS ----------------------------------------------------------
+      -- DISPLAY OPTIONS --
       display = {
         chat = {
           -- Change to true to show the current model
@@ -102,12 +133,12 @@ return {
         inline = { layout = 'buffer' },
       },
 
-      -- EXTENSIONS ------------------------------------------------------
+      -- EXTENSIONS --
       extensions = {
         history = {
           enabled = true,
           opts = {
-            auto_save = true,
+            auto_save = false,
             auto_generate_title = true,
             continue_last_chat = false,
             delete_on_clearing_chat = false,
@@ -116,22 +147,15 @@ return {
             dir_to_save = vim.fn.stdpath('data') .. '/codecompanion-history',
           },
         },
-        mcphub = {
-          callback = 'mcphub.extensions.codecompanion',
-          opts = {
-            show_result_in_chat = true, -- Show mcp tool results in chat
-            make_vars = true, -- Convert resources to #variables
-            make_slash_commands = true, -- Add prompts as /slash commands
-          },
-        },
       },
 
-      -- GENERAL OPTIONS ----------------------------------------------------------
+      -- GENERAL OPTIONS --
       opts = {
         log_level = 'DEBUG',
         system_prompt = PROMPTS.SYSTEM_PROMPT,
       },
 
+      -- PROMPT LIBRARY --
       prompt_library = PROMPTS.PROMPT_LIBRARY,
     },
     keys = {
@@ -142,15 +166,15 @@ return {
         silent = true,
       },
       {
-        '<leader>ac',
-        '<cmd>CodeCompanionChat<cr>',
+        '<leader>av',
+        '<cmd>CodeCompanion<cr>',
         desc = 'New CodeCompanionChat',
         silent = true,
+        mode = { 'n', 'v' },
       },
       {
-        '<leader>ap',
-        '<cmd>CodeCompanionChat Add<cr>',
-        desc = 'Paste Select To CodeCompanionChat',
+        '<leader>ac',
+        '<cmd>CodeCompanionActions<cr>',
         silent = true,
         mode = { 'n', 'v' },
       },
@@ -160,12 +184,19 @@ return {
         desc = 'Open CodeCompanion History',
         silent = true,
       },
-      {
-        '<leader>am',
-        '<cmd>MCPHub<cr>',
-        desc = 'Open MCPHub',
-        silent = true,
-      },
+      -- {
+      --   '<leader>am',
+      --   '<cmd>MCPHub<cr>',
+      --   desc = 'Open MCPHub',
+      --   silent = true,
+      -- },
+      -- {
+      --   '<leader>ap',
+      --   '<cmd>CodeCompanionChat Add<cr>',
+      --   desc = 'Paste Select To CodeCompanionChat',
+      --   silent = true,
+      --   mode = { 'n', 'v' },
+      -- },
     },
   },
 }

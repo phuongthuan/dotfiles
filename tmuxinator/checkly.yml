@@ -1,0 +1,9 @@
+# /Users/thuan/.config/tmuxinator/checkly
+
+name: checkly
+root: ~/p/eh/checkly-payroll
+
+windows:
+  - editor: nvim
+  - git: nv
+  - logs:

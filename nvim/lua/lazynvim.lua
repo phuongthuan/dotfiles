@@ -21,6 +21,7 @@ require('lazy').setup({
   require('plugins.extras.noice'),
   require('plugins.extras.which-key'),
   require('plugins.extras.incline'),
+  require('plugins.extras.kulala'),
 }, {
   checker = { enabled = true, notify = false },
   change_detection = { notify = false },

@@ -11,3 +11,9 @@ plugin/
 
 log/
 *.log
+
+coverage/
+karabiner/automatic_backups/
+
+MY_PULL_REQUEST_TEMPLATE.md
+http-client.private.env.json

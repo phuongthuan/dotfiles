@@ -1,9 +1,0 @@
-# /Users/thuan/.config/tmuxinator/bff.yml
-
-name: bff
-root: ~/p/eh/ebf-bff-mobile
-
-windows:
-  - editor: nvim
-  - terminal:
-  - logs: go version
