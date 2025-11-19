@@ -1,8 +1,8 @@
 -- Recipes https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md
 local slow_format_filetypes = {}
-local ignore_filetypes = { 'sql', 'java' }
+local ignore_filetypes = { 'sql', 'java', 'http' }
 
-local prettierd = { 'prettierd', 'prettier', stop_after_first = true }
+local prettierd = { 'prettierd', stop_after_first = true }
 
 return {
   'stevearc/conform.nvim',
