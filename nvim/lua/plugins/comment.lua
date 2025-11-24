@@ -49,7 +49,7 @@ return {
     },
   },
   {
-    'echasnovski/mini.comment',
+    'nvim-mini/mini.comment',
     version = false,
     dependencies = {
       'JoosepAlviste/nvim-ts-context-commentstring',

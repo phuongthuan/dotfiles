@@ -2,7 +2,7 @@ local icons = require('core.icons')
 
 return {
   'nvim-lualine/lualine.nvim',
-  dependencies = { 'echasnovski/mini.icons' },
+  dependencies = { 'nvim-mini/mini.icons' },
   opts = {
     options = {
       theme = 'gruvbox',

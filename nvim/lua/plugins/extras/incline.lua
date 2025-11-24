@@ -1,7 +1,7 @@
 return {
   'b0o/incline.nvim',
   event = 'VeryLazy',
-  dependencies = { 'echasnovski/mini.icons' },
+  dependencies = { 'nvim-mini/mini.icons' },
   config = function()
     require('incline').setup({
       hide = {

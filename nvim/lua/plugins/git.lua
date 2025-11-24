@@ -7,7 +7,7 @@ return {
     'NeogitOrg/neogit',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'echasnovski/mini.pick',
+      'nvim-mini/mini.pick',
     },
     command = { 'Neogit', 'NeogitCommit', 'NeogitLogCurrent', 'NeogitResetState' },
     opts = {

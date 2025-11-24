@@ -13,7 +13,7 @@ end
 local _mobile_repo_globs = { '!ContractPdfPreview', '!*.cjs', '!coverage/' }
 
 return {
-  'echasnovski/mini.pick',
+  'nvim-mini/mini.pick',
   version = false,
   config = function()
     -- Extra pickers for mini.pick
