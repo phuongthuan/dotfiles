@@ -1,0 +1,36 @@
+### MOBILE_LOGIN
+
+POST {{MAIN_APP_HOST}}/api/v3/omop/authentication/sign_in
+
+{
+  "data": {
+    "attributes": {
+      "email": "{{email}}",
+      "password": "{{password}}",
+      "device_id": "simulator"
+    }
+  }
+}
+
+### POST_GET_SESSION_TOKEN
+
+# @jq { "email": .data.attributes.email, "session_token": .data.attributes.session_token }
+
+POST {{MAIN_APP_HOST}}/api/v2/sessions HTTP/1.1
+
+{
+  "data": {
+    "attributes": {
+      "device_id": "simulator",
+      "email": "{{MANAGER_USERNAME_1}}",
+      "password": "{{MANAGER_PASSWORD_1}}"
+    }
+  }
+}
+
+### GET_SESSIONS_INFO
+
+# @jq { data: .data }
+
+GET {{MAIN_APP_HOST}}/api/v2/sessions/info HTTP/1.1
+Session-Token: {{SESSION_TOKEN}}

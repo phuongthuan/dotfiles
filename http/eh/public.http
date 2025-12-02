@@ -1,0 +1,5 @@
+### GET_MOBILE_PERMISSION_PUBLIC
+
+# @jq { enable_workzone_tasks_widget: .data.enable_workzone_tasks_widget, view_eh_work_layout_v2: .data.view_eh_work_layout_v2 }
+
+GET {{MAIN_APP_HOST}}/api/v3/mobile_permissions/public HTTP/1.1

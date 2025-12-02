@@ -1,15 +1,11 @@
-## Employee
-
-@email = tung.van+employee@employmenthero.com
-@password = Khoa@10AM
 @memberId = 374180
 @organisationId = 20803
 
 ### POST_GET_SESSION_TOKEN
+
 # @jq { "email": .data.attributes.email, "session_token": .data.attributes.session_token }
+
 POST {{MAIN_APP_HOST}}/api/v2/sessions
-Accept: application/json
-Content-Type: application/json
 
 {
   "data": {
@@ -21,24 +17,18 @@ Content-Type: application/json
   }
 }
 
-
 ### POST_AUTH
 POST {{MAIN_APP_HOST}}/auth
-Content-Type: application/json
 User-Agent: career-page-backend
 
 {
-  "session_token": "05a29db3d27c093af35e7e02f34746e8b3d2ee4b1482c15a72ea17df6d515b1e60f758657a4ff1a508ee967be319c86af1391c8fd3f423f1b8422fcbfc7cdecd"
+  "session_token": "{{SESSION_TOKEN}}"
 }
-
-###
 
 ### POST_TIMESHEET_ENTRIES
 
 # @jq { "id": .data.id, "date": .data.date }
 POST {{MAIN_APP_HOST}}/api/v3/organisations/{{organisationId}}/members/{{memberId}}/timesheet_entries
-Accept: application/json
-Content-Type: application/json; charset=utf-8
 Jwt-Token: {{POST_AUTH.response.body.$.token}}
 
 {
@@ -50,7 +40,7 @@ Jwt-Token: {{POST_AUTH.response.body.$.token}}
       }
     ],
     "comment": "Daily work",
-    "date": "23/03/2026",
+    "date": "18/04/2026",
     "end_hm": "05:00 PM",
     "hr_position_id": "7b614e01-a696-4188-84cf-c589ba786d12",
     "location_id": 42112,
@@ -61,18 +51,15 @@ Jwt-Token: {{POST_AUTH.response.body.$.token}}
   }
 }
 
-###
-
 ### GET_TIMESHEET_ENTRIES
+
 # @jq { "total_items": .data.total_items, "items": .data.items, "members": .data.members}
+
 GET {{MAIN_APP_HOST}}/api/v3/organisations/{{organisationId}}/members/{{memberId}}/timesheet_entries?page_index=1&item_per_page=5
-Accept: application/json
-Content-Type: application/json; charset=utf-8
 Jwt-Token: {{POST_AUTH.response.body.$.token}}
 
-###
-
 ### PUT_TIMESHEET_ENTRIES
+
 DELETE {{MAIN_APP_HOST}}/api/v3/organisations/{{organisationId}}/members/{{memberId}}/timesheet_entries/{{12345}}
 Jwt-Token: {{POST_AUTH.response.body.$.token}}
 
@@ -81,9 +68,8 @@ Jwt-Token: {{POST_AUTH.response.body.$.token}}
 ### TIMESHEET_ENTRIES_DECLINE
 
 ### POST_EXPENSES
+
 POST https://expenses.staging.ehrocks.com/api/v1/expenses
-Accept: application/json
-Content-Type: application/json
 Jwt-Token: {{POST_AUTH.response.body.$.token}}
 
 {

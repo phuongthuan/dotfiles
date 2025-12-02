@@ -1,0 +1,19 @@
+### POST_SESSIONS_CAREER_PAGE
+
+# @jq { "data": .data }
+
+POST {{MAIN_APP_HOST}}/api/v2/sessions/career-page HTTP/1.1
+
+{
+  "data": {
+    "attributes": {
+      "device_id": "simulator",
+      "device_info": {
+        "app_version": "0.0.1",
+        "platform": "ios"
+      },
+      "email": "{{JOB_SEEKER_TEST_USERNAME}}",
+      "password": "{{JOB_SEEKER_TEST_PASSWORD}}"
+    }
+  }
+}

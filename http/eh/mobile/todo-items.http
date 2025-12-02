@@ -1,0 +1,15 @@
+@organisationId = 20803
+
+### POST_AUTH
+
+POST {{MAIN_APP_HOST}}/auth HTTP/1.1
+User-Agent: career-page-backend
+
+{
+  "session_token": "{{SESSION_TOKEN}}"
+}
+
+### GET_TODO_ITEMS
+
+GET {{MAIN_APP_HOST}}/api/v3/organisations/{{organisationId}}/todo_items/mobile_task_widget?page_index=1&item_per_page=5&features[]=timesheet HTTP/1.1
+Jwt-Token: {{POST_AUTH.response.body.$.token}}

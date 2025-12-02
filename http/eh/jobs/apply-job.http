@@ -1,0 +1,139 @@
+## @jobId = f59d8934-e68e-4bf8-8e9e-fbd750487586
+@jobId = fd235673-ab86-48ab-a763-f7ea7b370c17
+
+### POST_AUTH
+
+POST {{MAIN_APP_HOST}}/auth HTTP/1.1
+User-Agent: career-page-backend
+
+{
+  "session_token": "{{SESSION_TOKEN}}"
+}
+
+
+### GET_USERS_SELF_PROFILE
+
+GET {{JOB_APP_HOST}}/mainapp/api/v3/users/self_profile HTTP/1.1
+Jwt-Token: {{POST_AUTH.response.body.$.token}}
+
+### GET_USERS_SELF_PROFILE
+
+GET {{MAIN_APP_HOST}}/api/v3/users/self_profile HTTP/1.1
+Jwt-Token: {{POST_AUTH.response.body.$.token}}
+
+### APPLY_JOB
+
+POST {{JOB_APP_HOST}}/ats/api/v1/job_seeker/jobs/{{jobId}}/apply HTTP/1.1
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary{{$timestamp}}
+Jwt-Token: {{POST_AUTH.response.body.$.token}}
+X-Ats-Token: {{MAINAPP_AUTH_TOKEN}}
+
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="first_name"
+
+{{GET_USERS_SELF_PROFILE.response.body.$.data.first_name}}
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="last_name"
+
+{{GET_USERS_SELF_PROFILE.response.body.$.data.last_name}}
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="email"
+
+{{GET_USERS_SELF_PROFILE.response.body.$.data.email}}
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="phone_number"
+
+{{GET_USERS_SELF_PROFILE.response.body.$.data.phone_number}}
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="summary"
+
+{{GET_USERS_SELF_PROFILE.response.body.$.data.summary}}
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="education_histories[][id]"
+
+{{GET_USERS_SELF_PROFILE.response.body.$.data.education_histories[0].id}}
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="education_histories[][school]"
+
+{{GET_USERS_SELF_PROFILE.response.body.$.data.education_histories[0].school}}
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="education_histories[][field_of_study]"
+
+{{GET_USERS_SELF_PROFILE.response.body.$.data.education_histories[0].field_of_study}}
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="education_histories[][end_day]"
+
+{{GET_USERS_SELF_PROFILE.response.body.$.data.education_histories[0].end_day}}
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="education_histories[][end_month]"
+
+{{GET_USERS_SELF_PROFILE.response.body.$.data.education_histories[0].end_month}}
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="education_histories[][end_year]"
+
+{{GET_USERS_SELF_PROFILE.response.body.$.data.education_histories[0].end_year}}
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="work_histories[][id]"
+
+{{GET_USERS_SELF_PROFILE.response.body.$.data.employment_histories[0].id}}
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="work_histories[][company]"
+
+{{GET_USERS_SELF_PROFILE.response.body.$.data.employment_histories[0].company}}
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="work_histories[][title]"
+
+{{GET_USERS_SELF_PROFILE.response.body.$.data.employment_histories[0].job_title}}
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="work_histories[][industry]"
+
+null
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="work_histories[][summary]"
+
+{{GET_USERS_SELF_PROFILE.response.body.$.data.employment_histories[0].summary}}
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="work_histories[][current_job]"
+
+{{GET_USERS_SELF_PROFILE.response.body.$.data.employment_histories[0].current_job}}
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="resumes[id]"
+
+{{GET_USERS_SELF_PROFILE.response.body.$.data.resume[0].id}}
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="resumes[file_extension]"
+
+{{GET_USERS_SELF_PROFILE.response.body.$.data.resume[0].file_extension}}
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="resumes[name]"
+
+{{GET_USERS_SELF_PROFILE.response.body.$.data.resume[0].name}}
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="resumes[file_id]"
+
+{{GET_USERS_SELF_PROFILE.response.body.$.data.resume[0].file_id}}
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="resumes[type]"
+
+{{GET_USERS_SELF_PROFILE.response.body.$.data.resume[0].type}}
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="resumes[created_at]"
+
+{{GET_USERS_SELF_PROFILE.response.body.$.data.resume[0].created_at}}
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="legal_tick_box"
+
+true
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="vendor_location_id"
+
+null
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="vendor_location_name"
+
+{{GET_USERS_SELF_PROFILE.response.body.$.data.vendor_location_name}}
+------WebKitFormBoundary{{$timestamp}}
+Content-Disposition: form-data; name="country_code"
+
+{{GET_USERS_SELF_PROFILE.response.body.$.data.country_code}}
+------WebKitFormBoundary{{$timestamp}}--
