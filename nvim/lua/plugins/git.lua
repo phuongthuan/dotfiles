@@ -24,7 +24,7 @@ return {
     keys = {
       {
         '<leader>gg',
-        '<cmd>Neogit<cr>',
+        '<cmd>Neogit kind=split_below_all<cr>',
         desc = 'Neogit',
         silent = true,
       },
