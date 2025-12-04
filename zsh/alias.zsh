@@ -7,8 +7,6 @@ alias rv='ruby -v'
 alias nv='node -v'
 alias lv='lua -v'
 
-alias db='defaultbrowser'
-
 # Open iCloud Drive
 alias ic='eval nvim $ICLOUD_DRIVE'
 
@@ -20,6 +18,8 @@ alias dot='cd ~/.dotfiles/ && nvim'
 
 alias c='clear'
 alias e='exit'
+alias op='open'
+alias db='defaultbrowser'
 
 # brew
 alias br='brew'
