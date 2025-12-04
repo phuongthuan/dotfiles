@@ -43,7 +43,6 @@ ydl() {
     --embed-thumbnail \
     --add-metadata \
     --cookies-from-browser chrome \
-    --quiet \
     --no-warnings \
     --no-progress \
     -o "$OUTPUT" \
