@@ -263,14 +263,14 @@
     "body": "Intl.formatHTMLMessage({ id: '$1' })$0",
     "description": "redux-intl formatHTMLMessage method"
   },
-  "Typography.Text": {
-    "prefix": "typotx",
-    "body": "<Typography.Text>{Intl.formatMessage({ id: '$1' })}</Typography.Text>$0",
+  "Typography.Body": {
+    "prefix": "typobo",
+    "body": "<Typography.Body>{Intl.formatMessage({ id: '$1' })}</Typography.Body>$0",
     "description": ""
   },
   "Typography.Title": {
     "prefix": "typoti",
-    "body": "<Typography.Title level={1}>{Intl.formatMessage({ id: '$1' })}</Typography.Title>$0",
+    "body": "<Typography.Title level='h1'>{Intl.formatMessage({ id: '$1' })}</Typography.Title>$0",
     "description": ""
   },
   "createSelector": {
