@@ -15,6 +15,7 @@ return {
   },
   {
     'olimorris/codecompanion.nvim',
+    version = '17.33.0',
     cmd = { 'CodeCompanion', 'CodeCompanionChat', 'CodeCompanionActions' },
     dependencies = {
       'nvim-lua/plenary.nvim',
@@ -27,6 +28,7 @@ return {
       spinner:init()
     end,
     opts = {
+      ignore_warnings = true,
       adapters = {
         http = {
           copilot = function()
@@ -44,6 +46,7 @@ return {
       },
       strategies = {
         chat = {
+          enabled = true,
           adapter = 'copilot',
           roles = {
             llm = function(adapter)
@@ -98,6 +101,13 @@ return {
               keymaps = {
                 modes = {
                   i = '<C-f>',
+                },
+              },
+            },
+            ['memory'] = {
+              keymaps = {
+                modes = {
+                  i = '<C-m>',
                 },
               },
             },
@@ -157,6 +167,21 @@ return {
 
       -- PROMPT LIBRARY --
       prompt_library = PROMPTS.PROMPT_LIBRARY,
+
+      -- MEMORY --
+      memory = {
+        default = { is_default = false },
+        ['eh-mobile-pro-unit-test'] = {
+          description = 'Memory files for generating unit test',
+          files = {
+            'app/components/testUtils/createTestStore.js',
+            'app/components/testUtils/renderWithRedux.tsx',
+            'app/components/testUtils/renderHookWithRedux.tsx',
+            '~/Documents/Notes/employmenthero/eh_mobile_pro_unit_test.md',
+            -- 'app/state/createStore.js',
+          },
+        },
+      },
     },
     keys = {
       {

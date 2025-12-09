@@ -113,111 +113,32 @@ local AGENT_PROMPT = string.format(
 ]]
 )
 
-local COPILOT_UNIT_TEST_HOOK = string.format([[ You are an expert React Native and TypeScript developer.
-Your task is to generate unit tests for the selected code [Jest](https://jestjs.io/).
-
-Context:
-- The project uses Redux for state management.
-
-Requirements:
-- Use idiomatic Jest syntax.
-- Use JavaScript instead of TypeScript for the tests.
-- Use it.each for multiple similar test cases.
-- Cover typical hook usage, edge cases, and Redux-related behaviors.
-- Do not include line numbers in code blocks.
-- Do not use let or var; prefer const for variable declarations.
-- Keep tests concise and readable.
-- Briefly explain (1-2 sentences) what the tests cover, unless the user asks for only code.
-
-Step-by-step:
-1. Examine the hook's functionality and Redux usage.
-2. Plan test cases including initial state and actions.
-3. Output the test code.
-
-If no hook code is provided, ask the user to supply it.
-]])
-
 local PROMPT_LIBRARY = {
-  ['Test Context'] = {
+  ['Unit Test'] = {
     strategy = 'chat',
-    description = 'Add some context',
+    description = 'Generating unit test',
     opts = {
       index = 11,
       is_default = true,
       is_slash_cmd = true,
-      short_name = 'ref',
+      short_name = 'ut',
       auto_submit = false,
-    },
-    context = {
-      {
-        type = 'file',
-        path = {
-          'app/components/testUtils/renderHookWithRedux.tsx',
-          'app/components/swag/SearchBar/hooks/__tests__/useGetSettingsSearchPhrases.spec.js',
-        },
-      },
+      default_memory = 'eh-mobile-pro-unit-test',
     },
     prompts = {
       {
-        role = 'system',
-        content = COPILOT_UNIT_TEST_HOOK,
-        opts = {
-          visible = false,
-        },
-      },
-      {
         role = 'user',
-        content = function(context)
-          local code = require('codecompanion.helpers.actions').get_code(context.start_line, context.end_line)
+        content = function()
+          vim.g.codecompanion_yolo_mode = true
 
-          return 'Here is the custom hook code:\n\n```typescript\n'
-            .. code
-            .. '\n```\n\nPlease generate unit tests for this custom hook, following to the context above.'
+          return [[
+You are required to write unit test for this #{buffer}.
+You must follow all rules and conventions in the given contexts above.
+Use @{files} tool to insert, edit, and search for relevant codes in current repo.
+            ]]
         end,
         opts = {
           contains_code = false,
-        },
-      },
-    },
-  },
-  ['Unit Tests - Custom Hooks'] = {
-    strategy = 'chat',
-    description = 'Generate Unit Tests - Custom Hooks',
-    opts = {
-      modes = { 'v' },
-      short_name = 'unit-test-hook',
-      auto_submit = false,
-      -- user_prompt = false,
-      stop_context_insertion = true,
-    },
-    context = {
-      {
-        type = 'file',
-        path = {
-          'app/components/testUtils/renderHookWithRedux.tsx',
-          '~/p/personal/ts-template/useTestHook.spec.js',
-        },
-      },
-    },
-    prompts = {
-      {
-        role = 'system',
-        content = COPILOT_UNIT_TEST_HOOK,
-        opts = {
-          visible = false,
-        },
-      },
-      {
-        role = 'user',
-        content = function(context)
-          local code = require('codecompanion.helpers.actions').get_code(context.start_line, context.end_line)
-
-          return 'Here is the custom hook code:\n\n```typescript\n'
-            .. code
-            .. '\n```\n\nPlease generate unit tests for this custom hook, following to the context above.'
-        end,
-        opts = {
-          contains_code = true,
         },
       },
     },
