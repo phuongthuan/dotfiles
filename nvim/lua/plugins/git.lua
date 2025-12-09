@@ -30,7 +30,7 @@ return {
       },
       {
         '<leader>gG',
-        '<cmd>Neogit cwd=%:p:h<cr>',
+        '<cmd>Neogit kind=split_below_all cwd=%:p:h<cr>',
         desc = 'Neogit (buffer)',
         silent = true,
       },
@@ -41,15 +41,9 @@ return {
         silent = true,
       },
       {
-        '<leader>gL',
+        '<leader>gl',
         '<cmd>NeogitLogCurrent<cr>',
         desc = 'Open Log (buffer)',
-        silent = true,
-      },
-      {
-        '<leader>grs',
-        '<cmd>NeogitResetState<cr>',
-        desc = 'Reset State',
         silent = true,
       },
     },
