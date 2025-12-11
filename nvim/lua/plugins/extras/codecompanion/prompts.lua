@@ -129,12 +129,11 @@ local PROMPT_LIBRARY = {
       {
         role = 'user',
         content = function()
-          vim.g.codecompanion_yolo_mode = true
-
           return [[
-You are required to write unit test for this #{buffer}.
-You must follow all rules and conventions in the given contexts above.
-Use @{files} tool to insert, edit, and search for relevant codes in current repo.
+You must follow all rules and conventions that were declared in the given contexts above.
+Use @{files} tool to insert, edit, and search for relevant code in current repo.
+
+Write or update tests for this #{buffer}.
             ]]
         end,
         opts = {

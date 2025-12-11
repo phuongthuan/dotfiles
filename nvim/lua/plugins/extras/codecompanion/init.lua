@@ -24,6 +24,9 @@ return {
       'ravitemer/codecompanion-history.nvim',
     },
     init = function()
+      -- https://codecompanion.olimorris.dev/usage/chat-buffer/tools#yolo-mode
+      vim.g.codecompanion_yolo_mode = true
+
       local spinner = require('plugins.extras.codecompanion.spinner')
       spinner:init()
     end,
@@ -170,14 +173,19 @@ return {
 
       -- MEMORY --
       memory = {
+        -- opts = {
+        --   chat = {
+        --     enabled = true,
+        --   },
+        -- },
         default = { is_default = false },
         ['eh-mobile-pro-unit-test'] = {
           description = 'Memory files for generating unit test',
           files = {
-            'app/components/testUtils/createTestStore.js',
-            'app/components/testUtils/renderWithRedux.tsx',
-            'app/components/testUtils/renderHookWithRedux.tsx',
             '~/Documents/Notes/employmenthero/eh_mobile_pro_unit_test.md',
+            -- 'app/components/testUtils/createTestStore.js',
+            -- 'app/components/testUtils/renderWithRedux.tsx',
+            -- 'app/components/testUtils/renderHookWithRedux.tsx',
             -- 'app/state/createStore.js',
           },
         },
