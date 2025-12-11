@@ -138,9 +138,6 @@ return {
       html = prettierd,
     },
     formatters = {
-      prettier = {
-        prepend_args = { '--prose-wrap', 'always' },
-      },
       shfmt = {
         prepend_args = { '-i', '2' },
       },
