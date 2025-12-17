@@ -6,6 +6,11 @@ return {
   version = false,
   config = function()
     require('mini.ai').setup({ n_lines = 500 })
+    require('mini.pairs').setup()
+    require('mini.starter').setup({ silent = true })
+    require('mini.indentscope').setup({
+      symbol = '┆', -- alternative styles: ┆ ┊ ╎
+    })
 
     require('mini.icons').setup({
       file = {
@@ -22,16 +27,6 @@ return {
       filetype = {
         dotenv = { glyph = '', hl = 'MiniIconsYellow' },
       },
-    })
-
-    require('mini.pairs').setup()
-
-    require('mini.starter').setup({ silent = true })
-
-    require('mini.indentscope').setup({
-      -- Which character to use for drawing scope indicator
-      -- alternative styles: ┆ ┊ ╎
-      symbol = '┆',
     })
 
     require('mini.jump2d').setup({
@@ -60,22 +55,22 @@ return {
     end
 
     -- Files
-    local files = require('mini.files')
-    files.setup({
-      mappings = {
-        go_in = '<CR>',
-        go_in_plus = 'L',
-        go_out = '-',
-        go_out_plus = 'H',
-      },
-    })
-
-    nmap('<leader>ee', function()
-      files.open()
-    end, { desc = 'MiniFiles - Toggle Files Explorer' })
-
-    nmap('<leader>ef', function()
-      files.open(vim.api.nvim_buf_get_name(0), false)
-    end, { desc = 'MiniFiles - Toggle Current Opened File' })
+    -- local files = require('mini.files')
+    -- files.setup({
+    --   mappings = {
+    --     go_in = '<CR>',
+    --     go_in_plus = 'L',
+    --     go_out = '-',
+    --     go_out_plus = 'H',
+    --   },
+    -- })
+    --
+    -- nmap('<leader>ee', function()
+    --   files.open()
+    -- end, { desc = 'MiniFiles - Toggle Files Explorer' })
+    --
+    -- nmap('<leader>ef', function()
+    --   files.open(vim.api.nvim_buf_get_name(0), false)
+    -- end, { desc = 'MiniFiles - Toggle Current Opened File' })
   end,
 }

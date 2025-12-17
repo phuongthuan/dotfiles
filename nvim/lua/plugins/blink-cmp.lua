@@ -44,9 +44,9 @@ return {
       appearance = { nerd_font_variant = 'mono' },
       completion = { documentation = { auto_show = false } },
       sources = {
-        -- per_filetype = {
-        --   codecompanion = { 'codecompanion' },
-        -- },
+        per_filetype = {
+          codecompanion = { 'codecompanion' },
+        },
         default = {
           -- built-in sources
           'lsp',
@@ -83,7 +83,7 @@ return {
             },
             should_show_items = function()
               -- Enable emoji completion for a set of file-types
-              return vim.tbl_contains({ 'gitcommit', 'markdown' }, vim.o.filetype)
+              return vim.tbl_contains({ 'gitcommit', 'markdown', 'yml', 'yaml' }, vim.o.filetype)
             end,
           },
           nerdfont = {
