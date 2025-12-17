@@ -15,13 +15,19 @@ return {
   },
   {
     'olimorris/codecompanion.nvim',
-    version = '17.33.0',
+    version = '18.0.0',
     cmd = { 'CodeCompanion', 'CodeCompanionChat', 'CodeCompanionActions' },
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-treesitter/nvim-treesitter',
       'folke/edgy.nvim',
       'ravitemer/codecompanion-history.nvim',
+      {
+        'ravitemer/mcphub.nvim',
+        cmd = 'MCPHub',
+        build = 'npm install -g mcp-hub@latest',
+        config = true,
+      },
     },
     init = function()
       -- https://codecompanion.olimorris.dev/usage/chat-buffer/tools#yolo-mode
@@ -38,7 +44,6 @@ return {
             return require('codecompanion.adapters').extend('copilot', {
               schema = {
                 model = {
-                  -- default = 'gpt-5',
                   default = 'claude-sonnet-4.5',
                   -- default = 'gpt-4o',
                 },
@@ -47,7 +52,7 @@ return {
           end,
         },
       },
-      strategies = {
+      interactions = {
         chat = {
           enabled = true,
           adapter = 'copilot',
@@ -61,9 +66,10 @@ return {
                 end
                 model_name = ' (' .. model .. ')'
               end
-              return '  [' .. adapter.formatted_name .. ']' .. model_name
+              -- return '  [' .. adapter.formatted_name .. ']' .. model_name
+              return '  [AI]' .. model_name
             end,
-            user = '  [thuan]',
+            user = '  [thuan]',
           },
           keymaps = {
             send = {
@@ -107,10 +113,10 @@ return {
                 },
               },
             },
-            ['memory'] = {
+            ['rules'] = {
               keymaps = {
                 modes = {
-                  i = '<C-m>',
+                  i = '<C-r>',
                 },
               },
             },
@@ -148,6 +154,14 @@ return {
 
       -- EXTENSIONS --
       extensions = {
+        mcphub = {
+          callback = 'mcphub.extensions.codecompanion',
+          opts = {
+            make_vars = true,
+            make_slash_commands = true,
+            show_result_in_chat = true,
+          },
+        },
         history = {
           enabled = true,
           opts = {
@@ -172,12 +186,12 @@ return {
       prompt_library = PROMPTS.PROMPT_LIBRARY,
 
       -- MEMORY --
-      memory = {
-        -- opts = {
-        --   chat = {
-        --     enabled = true,
-        --   },
-        -- },
+      rules = {
+        opts = {
+          chat = {
+            enabled = true,
+          },
+        },
         default = { is_default = false },
         ['eh-mobile-pro-unit-test'] = {
           description = 'Memory files for generating unit test',
@@ -217,12 +231,12 @@ return {
         desc = 'Open CodeCompanion History',
         silent = true,
       },
-      -- {
-      --   '<leader>am',
-      --   '<cmd>MCPHub<cr>',
-      --   desc = 'Open MCPHub',
-      --   silent = true,
-      -- },
+      {
+        '<leader>am',
+        '<cmd>MCPHub<cr>',
+        desc = 'Open MCPHub',
+        silent = true,
+      },
       -- {
       --   '<leader>ap',
       --   '<cmd>CodeCompanionChat Add<cr>',

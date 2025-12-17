@@ -10,7 +10,7 @@ return {
     left = {
       {
         ft = 'codecompanion',
-        title = 'Copilot Chat  ',
+        title = 'AI Chat 󰭻 ',
         size = { width = 100 },
       },
     },

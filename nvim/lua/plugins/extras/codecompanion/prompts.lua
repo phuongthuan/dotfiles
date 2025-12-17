@@ -123,7 +123,7 @@ local PROMPT_LIBRARY = {
       is_slash_cmd = true,
       short_name = 'ut',
       auto_submit = false,
-      default_memory = 'eh-mobile-pro-unit-test',
+      autoload = 'eh-mobile-pro-unit-test',
     },
     prompts = {
       {
