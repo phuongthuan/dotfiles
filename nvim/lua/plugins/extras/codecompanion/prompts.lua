@@ -121,27 +121,17 @@ local PROMPT_LIBRARY = {
       index = 11,
       is_default = true,
       is_slash_cmd = true,
-      alias = 'e2e',
+      short_name = 'e2e',
       auto_submit = false,
-    },
-    context = {
-      {
-        type = 'file',
-        path = {
-          'maestro/common/authenticate.yml',
-          'maestro/common/launch_app.yml',
-          'maestro/common/restart_app.yml',
-          'maestro/common/clear_state.yml',
-        },
-      },
+      default_memory = 'eh_mobile_pro_maestro_e2e_test',
     },
     prompts = {
       {
         role = 'user',
         content = function()
           return [[
-Use @{files} tool to insert, edit, and search for relevant codes in current repo.
-Migrate Detox manager_timesheets.spec.js file to Maestro based on edit_certification.yml file.
+You must follow all rules and conventions that were declared in the given contexts above.
+Use @{files} tool to insert, edit, and search for relevant code in current repo.
             ]]
         end,
         opts = {
@@ -157,9 +147,9 @@ Migrate Detox manager_timesheets.spec.js file to Maestro based on edit_certifica
       index = 11,
       is_default = true,
       is_slash_cmd = true,
-      alias = 'ut',
+      short_name = 'ut',
       auto_submit = false,
-      autoload = 'eh-mobile-pro-unit-test',
+      default_memory = 'eh_mobile_pro_unit_test',
     },
     prompts = {
       {
@@ -168,8 +158,6 @@ Migrate Detox manager_timesheets.spec.js file to Maestro based on edit_certifica
           return [[
 You must follow all rules and conventions that were declared in the given contexts above.
 Use @{files} tool to insert, edit, and search for relevant code in current repo.
-
-Write or update tests for this #{buffer}.
             ]]
         end,
         opts = {
@@ -184,7 +172,7 @@ Write or update tests for this #{buffer}.
     opts = {
       default_prompt = true,
       modes = { 'v' },
-      alias = 'explain',
+      short_name = 'explain',
       auto_submit = true,
       user_prompt = false,
       stop_context_insertion = true,
@@ -219,7 +207,7 @@ Write or update tests for this #{buffer}.
     strategy = 'chat',
     description = 'Explain how code works',
     opts = {
-      alias = 'explain-code',
+      short_name = 'explain-code',
       auto_submit = false,
       is_slash_cmd = true,
     },
@@ -242,7 +230,7 @@ Write or update tests for this #{buffer}.
     strategy = 'chat',
     description = 'Generate a commit message for staged change',
     opts = {
-      alias = 'staged-commit',
+      short_name = 'staged-commit',
       auto_submit = true,
       is_slash_cmd = true,
     },
@@ -266,7 +254,7 @@ Write or update tests for this #{buffer}.
     description = 'Add documentation for code.',
     opts = {
       modes = { 'v' },
-      alias = 'inline-doc',
+      short_name = 'inline-doc',
       auto_submit = true,
       user_prompt = false,
       stop_context_insertion = true,
@@ -294,7 +282,7 @@ Write or update tests for this #{buffer}.
     description = 'Write documentation for code.',
     opts = {
       modes = { 'v' },
-      alias = 'doc',
+      short_name = 'doc',
       auto_submit = true,
       user_prompt = false,
       stop_context_insertion = true,
@@ -322,7 +310,7 @@ Write or update tests for this #{buffer}.
     description = 'Review the provided code snippet.',
     opts = {
       modes = { 'v' },
-      alias = 'review',
+      short_name = 'review',
       auto_submit = true,
       user_prompt = false,
       stop_context_insertion = true,
@@ -356,7 +344,7 @@ Write or update tests for this #{buffer}.
     strategy = 'chat',
     description = 'Review code and provide suggestions for improvement.',
     opts = {
-      alias = 'review-code',
+      short_name = 'review-code',
       auto_submit = false,
       is_slash_cmd = true,
     },
@@ -379,7 +367,7 @@ Write or update tests for this #{buffer}.
     description = 'Refactor the provided code snippet.',
     opts = {
       modes = { 'v' },
-      alias = 'refactor',
+      short_name = 'refactor',
       auto_submit = true,
       user_prompt = false,
       stop_context_insertion = true,
@@ -413,7 +401,7 @@ Write or update tests for this #{buffer}.
     strategy = 'chat',
     description = 'Refactor the provided code snippet.',
     opts = {
-      alias = 'refactor-code',
+      short_name = 'refactor-code',
       auto_submit = false,
       is_slash_cmd = true,
     },
@@ -436,7 +424,7 @@ Write or update tests for this #{buffer}.
     description = 'Give betting naming for the provided code snippet.',
     opts = {
       modes = { 'v' },
-      alias = 'naming',
+      short_name = 'naming',
       auto_submit = true,
       user_prompt = false,
       stop_context_insertion = true,
@@ -463,7 +451,7 @@ Write or update tests for this #{buffer}.
     strategy = 'chat',
     description = 'Give betting naming for the provided code snippet.',
     opts = {
-      alias = 'better-naming',
+      short_name = 'better-naming',
       auto_submit = false,
       is_slash_cmd = true,
     },
@@ -478,7 +466,7 @@ Write or update tests for this #{buffer}.
     strategy = 'chat',
     description = 'Review English writing for spelling, grammar, and phrasing improvements.',
     opts = {
-      alias = 'english',
+      short_name = 'english',
       auto_submit = true,
       ignore_system_prompt = true,
     },

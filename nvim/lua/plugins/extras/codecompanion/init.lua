@@ -15,18 +15,22 @@ return {
   },
   {
     'olimorris/codecompanion.nvim',
-    version = '^18.0.0',
+    version = '17.33.0',
     cmd = { 'CodeCompanion', 'CodeCompanionChat', 'CodeCompanionActions' },
     dependencies = {
       { 'nvim-lua/plenary.nvim', branch = 'master' },
       'nvim-treesitter/nvim-treesitter',
       'folke/edgy.nvim',
-      'ravitemer/codecompanion-history.nvim',
+      {
+        'ravitemer/codecompanion-history.nvim',
+        commit = 'eb99d256352144cf3b6a1c45608ec25544a0813d',
+      },
       {
         'ravitemer/mcphub.nvim',
         cmd = 'MCPHub',
         build = 'npm install -g mcp-hub@latest',
         config = true,
+        commit = '8ff40b5edc649959bb7e89d25ae18e055554859a',
       },
     },
     init = function()
@@ -52,8 +56,15 @@ return {
           end,
         },
       },
-      interactions = {
+      strategies = {
         chat = {
+          -- tools = {
+          --   opts = {
+          --     default_tools = {
+          --       'files',
+          --     },
+          --   },
+          -- },
           enabled = true,
           adapter = 'copilot',
           roles = {
@@ -113,10 +124,10 @@ return {
                 },
               },
             },
-            ['rules'] = {
+            ['memory'] = {
               keymaps = {
                 modes = {
-                  i = '<C-r>',
+                  i = '<C-m>',
                 },
               },
             },
@@ -178,7 +189,7 @@ return {
 
       -- GENERAL OPTIONS --
       opts = {
-        log_level = 'ERROR', -- 'DEBUG',
+        log_level = 'DEBUG',
         system_prompt = PROMPTS.SYSTEM_PROMPT,
       },
 
@@ -186,21 +197,20 @@ return {
       prompt_library = PROMPTS.PROMPT_LIBRARY,
 
       -- MEMORY --
-      rules = {
+      memory = {
         opts = {
           chat = {
-            enabled = false,
-            autoload = { 'maestro_e2e_test', 'eh-mobile-pro-unit-test' },
+            enabled = true,
           },
         },
-        ['eh-mobile-pro-unit-test'] = {
+        eh_mobile_pro_unit_test = {
           description = 'Contexts for generating unit test',
           files = {
             '~/Documents/Notes/employmenthero/eh_mobile_pro_unit_test.md',
           },
         },
-        maestro_e2e_test = {
-          description = 'Memory files for working with Maestro E2E tests',
+        eh_mobile_pro_maestro_e2e_test = {
+          description = 'Contexts for working with Maestro E2E test',
           files = {
             'maestro/common/authenticate.yml',
             'maestro/common/launch_app.yml',
@@ -232,6 +242,13 @@ return {
         mode = { 'n', 'v' },
       },
       {
+        '<leader>ap',
+        '<cmd>CodeCompanionChat Add<cr>',
+        desc = 'Paste Selected Code To Chat',
+        silent = true,
+        mode = { 'n', 'v' },
+      },
+      {
         '<leader>ah',
         '<cmd>CodeCompanionHistory<cr>',
         desc = 'Open CodeCompanion History',
@@ -243,15 +260,6 @@ return {
         desc = 'Open MCPHub',
         silent = true,
       },
-      {
-        '<leader>ap',
-        '<cmd>CodeCompanionChat Add<cr>',
-        desc = 'Paste Selected Code To Chat',
-        silent = true,
-        mode = { 'n', 'v' },
-      },
     },
   },
 }
-
--- Use @{files} to migrate manager_timesheets.spec.js Detox e2e test cases to Maestro e2e test cases. Following the current convention of other file like edit_certification.yml
