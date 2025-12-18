@@ -15,10 +15,10 @@ return {
   },
   {
     'olimorris/codecompanion.nvim',
-    version = '18.0.0',
+    version = '^18.0.0',
     cmd = { 'CodeCompanion', 'CodeCompanionChat', 'CodeCompanionActions' },
     dependencies = {
-      'nvim-lua/plenary.nvim',
+      { 'nvim-lua/plenary.nvim', branch = 'master' },
       'nvim-treesitter/nvim-treesitter',
       'folke/edgy.nvim',
       'ravitemer/codecompanion-history.nvim',
@@ -37,7 +37,7 @@ return {
       spinner:init()
     end,
     opts = {
-      ignore_warnings = true,
+      -- ignore_warnings = true,
       adapters = {
         http = {
           copilot = function()
@@ -178,7 +178,7 @@ return {
 
       -- GENERAL OPTIONS --
       opts = {
-        log_level = 'DEBUG',
+        log_level = 'ERROR', -- 'DEBUG',
         system_prompt = PROMPTS.SYSTEM_PROMPT,
       },
 
@@ -189,18 +189,23 @@ return {
       rules = {
         opts = {
           chat = {
-            enabled = true,
+            enabled = false,
+            autoload = { 'maestro_e2e_test', 'eh-mobile-pro-unit-test' },
           },
         },
-        default = { is_default = false },
         ['eh-mobile-pro-unit-test'] = {
-          description = 'Memory files for generating unit test',
+          description = 'Contexts for generating unit test',
           files = {
             '~/Documents/Notes/employmenthero/eh_mobile_pro_unit_test.md',
-            -- 'app/components/testUtils/createTestStore.js',
-            -- 'app/components/testUtils/renderWithRedux.tsx',
-            -- 'app/components/testUtils/renderHookWithRedux.tsx',
-            -- 'app/state/createStore.js',
+          },
+        },
+        maestro_e2e_test = {
+          description = 'Memory files for working with Maestro E2E tests',
+          files = {
+            'maestro/common/authenticate.yml',
+            'maestro/common/launch_app.yml',
+            'maestro/common/restart_app.yml',
+            'maestro/common/clear_state.yml',
           },
         },
       },
@@ -222,6 +227,7 @@ return {
       {
         '<leader>ac',
         '<cmd>CodeCompanionActions<cr>',
+        desc = 'List All CodeCompanion Actions',
         silent = true,
         mode = { 'n', 'v' },
       },
@@ -237,13 +243,15 @@ return {
         desc = 'Open MCPHub',
         silent = true,
       },
-      -- {
-      --   '<leader>ap',
-      --   '<cmd>CodeCompanionChat Add<cr>',
-      --   desc = 'Paste Select To CodeCompanionChat',
-      --   silent = true,
-      --   mode = { 'n', 'v' },
-      -- },
+      {
+        '<leader>ap',
+        '<cmd>CodeCompanionChat Add<cr>',
+        desc = 'Paste Selected Code To Chat',
+        silent = true,
+        mode = { 'n', 'v' },
+      },
     },
   },
 }
+
+-- Use @{files} to migrate manager_timesheets.spec.js Detox e2e test cases to Maestro e2e test cases. Following the current convention of other file like edit_certification.yml
