@@ -134,7 +134,9 @@ pls() {
   fi
 }
 
-rename_last_recording_video() {
+
+# Rename last recoding video
+rlv() {
   # Get the latest recording video
   latest=$(ls -t ~/Pictures/screenshots/*.mov | head -n 1)
 
@@ -147,7 +149,8 @@ rename_last_recording_video() {
   fi
 }
 
-rename_last_screenshot() {
+# Rename last screenshot
+rls() {
   # Get the latest recording video
   latest=$(ls -t ~/Pictures/screenshots/*.png | head -n 1)
 

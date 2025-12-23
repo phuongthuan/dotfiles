@@ -255,8 +255,8 @@ oga() {
     echo -e "\033[32m📦 Opening GitHub Actions $EH_MOBILE_PRO_REPO workflow: $workflow \033[0m"
     open "https://github.com/Thinkei/$EH_MOBILE_PRO_REPO/actions/workflows/$workflow"
   else
-    echo -e "\033[31mPlease enter workflow name \033[0m"
-    return 1
+    echo -e "\033[32m📦 Opening GitHub Actions for user: $GITHUB_USERNAME \033[0m"
+    open "https://github.com/Thinkei/$EH_MOBILE_PRO_REPO/actions?query=actor%3A$GITHUB_USERNAME"
   fi
 }
 
