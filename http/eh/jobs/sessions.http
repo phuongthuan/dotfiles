@@ -1,8 +1,8 @@
 ### POST_SESSIONS_CAREER_PAGE
 
 # @jq { "data": .data }
-
 POST {{MAIN_APP_HOST}}/api/v2/sessions/career-page HTTP/1.1
+Content-Type: application/json
 
 {
   "data": {

@@ -1,34 +1,38 @@
 @memberId = 374180
 @organisationId = 20803
 
+
 ### POST_GET_SESSION_TOKEN
 
-# @jq { "email": .data.attributes.email, "session_token": .data.attributes.session_token }
-
-POST {{MAIN_APP_HOST}}/api/v2/sessions
+# @jq { "data": .data }
+POST {{MAIN_APP_HOST}}/api/v2/sessions HTTP/1.1
+Content-Type: application/json
 
 {
   "data": {
     "attributes": {
-      "email": "{{email}}",
-      "password": "{{password}}",
+      "email": "{{MANAGER_USERNAME_1}}",
+      "password": "{{MANAGER_PASSWORD_1}}",
       "device_id": "simulator"
     }
   }
 }
 
 ### POST_AUTH
-POST {{MAIN_APP_HOST}}/auth
+
+POST {{MAIN_APP_HOST}}/auth HTTP/1.1
+Content-Type: application/json
 User-Agent: career-page-backend
 
 {
-  "session_token": "{{SESSION_TOKEN}}"
+  "session_token": "{{MANAGER_USERNAME_1_SESSION_TOKEN}}"
 }
 
 ### POST_TIMESHEET_ENTRIES
 
 # @jq { "id": .data.id, "date": .data.date }
-POST {{MAIN_APP_HOST}}/api/v3/organisations/{{organisationId}}/members/{{memberId}}/timesheet_entries
+POST {{MAIN_APP_HOST}}/api/v3/organisations/{{organisationId}}/members/{{memberId}}/timesheet_entries HTTP/1.1
+Content-Type: application/json
 Jwt-Token: {{POST_AUTH.response.body.$.token}}
 
 {
@@ -40,7 +44,7 @@ Jwt-Token: {{POST_AUTH.response.body.$.token}}
       }
     ],
     "comment": "Daily work",
-    "date": "18/04/2026",
+    "date": "07/06/2026",
     "end_hm": "05:00 PM",
     "hr_position_id": "7b614e01-a696-4188-84cf-c589ba786d12",
     "location_id": 42112,
@@ -54,22 +58,19 @@ Jwt-Token: {{POST_AUTH.response.body.$.token}}
 ### GET_TIMESHEET_ENTRIES
 
 # @jq { "total_items": .data.total_items, "items": .data.items, "members": .data.members}
-
-GET {{MAIN_APP_HOST}}/api/v3/organisations/{{organisationId}}/members/{{memberId}}/timesheet_entries?page_index=1&item_per_page=5
+GET {{MAIN_APP_HOST}}/api/v3/organisations/{{organisationId}}/members/{{memberId}}/timesheet_entries?page_index=1
+  &item_per_page=5 HTTP/1.1
 Jwt-Token: {{POST_AUTH.response.body.$.token}}
 
 ### PUT_TIMESHEET_ENTRIES
 
-DELETE {{MAIN_APP_HOST}}/api/v3/organisations/{{organisationId}}/members/{{memberId}}/timesheet_entries/{{12345}}
+DELETE {{MAIN_APP_HOST}}/api/v3/organisations/{{organisationId}}/members/{{memberId}}/timesheet_entries/{{12345}} HTTP/1.1
 Jwt-Token: {{POST_AUTH.response.body.$.token}}
-
-### TIMESHEET_ENTRIES_APPROVE
-
-### TIMESHEET_ENTRIES_DECLINE
 
 ### POST_EXPENSES
 
-POST https://expenses.staging.ehrocks.com/api/v1/expenses
+POST https://expenses.staging.ehrocks.com/api/v1/expenses HTTP/1.1
+Content-Type: application/json
 Jwt-Token: {{POST_AUTH.response.body.$.token}}
 
 {
@@ -86,3 +87,26 @@ Jwt-Token: {{POST_AUTH.response.body.$.token}}
   "tax_code_display": null
 }
 
+### POST_RECOGNITIONS
+
+POST {{NOMINATION_HOST}}/api/v1/recognitions HTTP/1.1
+Content-Type: application/json
+Jwt-Token: {{POST_AUTH.response.body.$.token}}
+
+{
+  "recognition": {
+    "company_value_id": "a618cf71-5738-4f40-afcd-fdf59b595f5b",
+    "nominee_id": "e098d071-3ad0-4204-910c-b44b9fc53b0f",
+    "message_type": "slate_0.58",
+    "message": [
+      {
+        "type": "paragraph",
+        "children": [
+          {
+            "text": "We recognise that it will take all of us, working together at 100% to achieve our vision. We know that the strongest teams foster diverse personalities, talents and skills and we believe in using our experience to help others achieve their best."
+          }
+        ]
+      }
+    ]
+  }
+}

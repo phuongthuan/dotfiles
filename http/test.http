@@ -9,13 +9,12 @@ Content-Type: application/json
   "username": "emilys"
 }
 
-
 ### GET_AUTH_ME
 
 # @jq { "first_name": .firstName, "last_name": .lastName }
-
 GET https://dummyjson.com/auth/me HTTP/1.1
 Authorization: Bearer {{POST_AUTH_LOGIN.response.body.$.accessToken}}
+
 
 
 ### GET_USER

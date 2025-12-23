@@ -1,0 +1,55 @@
+@memberId = 2687847
+@organisationId = 148227
+
+
+### POST_SESSIONS_CAREER_PAGE
+
+# @jq { "email": .data.attributes.email, "session_token": .data.attributes.session_token, "org_id": .data.relationships.organisations.data[0].id, "member_id": .data.relationships.members.data[0].id }
+POST {{MAIN_APP_HOST}}/api/v2/sessions/career-page HTTP/1.1
+Content-Type: application/json
+
+{
+  "data": {
+    "attributes": {
+      "email": "{{EMPLOYEE_USERNAME_1}}",
+      "password": "{{EMPLOYEE_PASSWORD_1}}"
+    }
+  }
+}
+
+### POST_AUTH
+
+POST {{MAIN_APP_HOST}}/auth HTTP/1.1
+Content-Type: application/json
+User-Agent: career-page-backend
+
+{
+  "session_token": "{{EMPLOYEE_USERNAME_1_SESSION_TOKEN}}"
+}
+
+### POST_TIMESHEET_ENTRIES
+
+# @jq { "id": .data.id, "date": .data.date }
+POST {{MAIN_APP_HOST}}/api/v3/organisations/{{organisationId}}/members/{{memberId}}/timesheet_entries HTTP/1.1
+Content-Type: application/json
+Jwt-Token: {{POST_AUTH.response.body.$.token}}
+
+{
+  "timesheet_entry": {
+    "type": "start_and_end_times_timesheet_entry",
+    "date": "07/01/2026",
+    "member_id": "{{memberId}}",
+    "shift_condition_ids": [],
+    "location_id": 360510,
+    "comment": "Daily work",
+    "start_hm": "08:00 AM",
+    "end_hm": "05:00 PM",
+    "hr_position_id": "ed3b9e23-77f1-4655-9f1b-609ea0cee5ba",
+    "breaks_attributes": [
+      {
+        "start_hm": "11:45 AM",
+        "end_hm": "12:30 PM"
+      }
+    ]
+  }
+}

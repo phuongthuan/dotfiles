@@ -1,6 +1,6 @@
 -- Recipes https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md
 local slow_format_filetypes = {}
-local ignore_filetypes = { 'sql', 'java', 'http' }
+local ignore_filetypes = { 'sql', 'java' }
 
 local prettierd = { 'prettierd', stop_after_first = true }
 
@@ -126,6 +126,8 @@ return {
       lua = { 'stylua' },
       zsh = { 'shfmt' },
       ruby = { 'rubocop' },
+      http = { 'kulala' },
+      rest = { 'kulala' },
       javascript = prettierd,
       typescript = prettierd,
       typescriptreact = prettierd,
@@ -140,6 +142,10 @@ return {
     formatters = {
       shfmt = {
         prepend_args = { '-i', '2' },
+      },
+      kulala = {
+        command = 'kulala-fmt',
+        args = { 'format', '--stdin' },
       },
     },
   },

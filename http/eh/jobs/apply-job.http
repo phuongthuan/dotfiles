@@ -1,9 +1,11 @@
 ## @jobId = f59d8934-e68e-4bf8-8e9e-fbd750487586
 @jobId = fd235673-ab86-48ab-a763-f7ea7b370c17
 
+
 ### POST_AUTH
 
 POST {{MAIN_APP_HOST}}/auth HTTP/1.1
+Content-Type: application/json
 User-Agent: career-page-backend
 
 {

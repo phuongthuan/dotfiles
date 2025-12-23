@@ -1,0 +1,29 @@
+@memberId = 2518798
+@organisationId = 148227
+
+
+### POST_GET_SESSION_TOKEN
+
+# @jq { "data": .data }
+POST {{MAIN_APP_HOST}}/api/v2/sessions HTTP/1.1
+Content-Type: application/json
+
+{
+  "data": {
+    "attributes": {
+      "email": "{{EMPLOYEE_USERNAME_1}}",
+      "password": "{{EMPLOYEE_PASSWORD_1}}",
+      "device_id": "simulator"
+    }
+  }
+}
+
+### POST_AUTH
+
+POST {{MAIN_APP_HOST}}/auth HTTP/1.1
+Content-Type: application/json
+User-Agent: career-page-backend
+
+{
+  "session_token": "{{EMPLOYEE_USERNAME_1_SESSION_TOKEN}}"
+}
