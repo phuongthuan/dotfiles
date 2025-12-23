@@ -4,10 +4,17 @@ local Picker = require('core.my-picker')
 
 local nmap = mapper('n')
 
+-- Check if current working directory is the eh-mobile-pro repository
+-- Returns true for:
+--   - Main repo: ~/p/eh/eh-mobile-pro
+--   - Any worktree: ~/p/eh/worktree/eh-mobile-pro/*
 local _is_mobile_repo = function()
   local current_dir = vim.fn.getcwd()
   local eh_mobile_pro_path = env.EH_REPOSITORY_DIR .. '/eh-mobile-pro'
-  return current_dir == eh_mobile_pro_path
+  local worktree_base = env.EH_REPOSITORY_DIR .. '/worktree/eh-mobile-pro'
+
+  -- Check main repo or any path under worktree/eh-mobile-pro/
+  return current_dir == eh_mobile_pro_path or current_dir:find(worktree_base, 1, true) == 1
 end
 
 local _mobile_repo_globs = { '!ContractPdfPreview', '!*.cjs', '!coverage/' }
@@ -61,7 +68,8 @@ return {
     vim.ui.select = MiniPick.ui_select
 
     nmap('<leader>,', function()
-      local excludes = _is_mobile_repo() and { 'ContractPdfPreview/', '*.cjs', 'coverage/' } or nil
+      local excludes = _is_mobile_repo() and { 'ContractPdfPreview/', '*.cjs', 'coverage/', 'android/', 'fastlane/' }
+        or nil
       local command_opts = _is_mobile_repo() and {} or { '--no-ignore' }
 
       Picker.find_files(

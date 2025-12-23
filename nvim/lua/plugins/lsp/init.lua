@@ -60,13 +60,14 @@ return {
           'lua_ls',
           'ts_ls',
           'bashls',
-          -- 'yamlls',
+          'yamlls',
           -- 'pyright',
         },
         automatic_enable = {
           'lua_ls',
           'ts_ls',
           'bashls',
+          'yamlls',
         },
         handlers = {
           function(server_name)

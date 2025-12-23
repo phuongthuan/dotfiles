@@ -138,6 +138,7 @@ return {
       css = prettierd,
       scss = prettierd,
       html = prettierd,
+      yaml = prettierd,
     },
     formatters = {
       shfmt = {

@@ -44,9 +44,6 @@ return {
       appearance = { nerd_font_variant = 'mono' },
       completion = { documentation = { auto_show = false } },
       sources = {
-        per_filetype = {
-          codecompanion = { 'codecompanion' },
-        },
         default = {
           -- built-in sources
           'lsp',
