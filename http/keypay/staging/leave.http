@@ -1,0 +1,45 @@
+@businessId = 49067
+@employeeId = 5545065
+@leaveCategoryId = 307387
+@status = Pending
+
+
+### GET_LEAVE_REQUESTS
+
+## @jq [.[] | select(.employeeId == {{employeeId}}) | {id, employeeId, status, fromDate, toDate, notes}]
+GET {{WORKZONE_HOST}}/api/v2/business/{{businessId}}/leaverequest?filter.employeeId={{employeeId}}
+  &filter.status={{status}} HTTP/1.1
+Accept: application/json
+Authorization: Basic {{KEYPAY_STAGING_API_KEY}}
+Cache-Control: no-store
+
+### GET_LEAVE_HOURS
+
+GET {{WORKZONE_HOST}}/api/v2/business/{{businessId}}/employee/{{employeeId}}/leaverequest/estimate?fromDate=2026-01-12
+  &toDate=2026-01-15
+  &leaveCategoryId={{leaveCategoryId}} HTTP/1.1
+Authorization: Basic {{KEYPAY_STAGING_API_KEY}}
+Cache-Control: no-store
+Content-Type: application/json
+
+### DELETE_LEAVE_REQUEST_BY_ID
+
+DELETE {{WORKZONE_HOST}}/api/v2/business/{{businessId}}/employee/{{employeeId}}/leaverequest/11463028 HTTP/1.1
+Accept: application/json
+Authorization: Basic {{KEYPAY_STAGING_API_KEY}}
+Cache-Control: no-store
+
+### CREATE_LEAVE_REQUEST
+
+POST {{WORKZONE_HOST}}/api/v2/business/{{businessId}}/employee/{{employeeId}}/leaverequest HTTP/1.1
+Authorization: Basic {{KEYPAY_STAGING_API_KEY}}
+Cache-Control: no-store
+Content-Type: application/json
+
+{
+  "fromDate": "2025-12-25",
+  "toDate": "2025-12-25",
+  "notes": "Test LR",
+  "hours": 8,
+  "leaveCategoryId": "{{leaveCategoryId}}"
+}

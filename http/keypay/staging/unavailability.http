@@ -1,0 +1,25 @@
+@businessId = 49067
+@employeeId = 5545065
+
+
+### GET_UNAVAILABILITY
+
+GET {{WORKZONE_HOST}}/api/v2/business/{{businessId}}/unavailability?filter.employeeId={{employeeId}} HTTP/1.1
+Accept: application/json
+Authorization: Basic {{KEYPAY_STAGING_API_KEY}}
+Cache-Control: no-store
+
+### CREATE_AN_UNAVAILABILITY
+
+POST {{WORKZONE_HOST}}/api/v2/business/{{businessId}}/unavailability HTTP/1.1
+Authorization: Basic {{KEYPAY_STAGING_API_KEY}}
+Cache-Control: no-store
+Content-Type: application/json
+
+{
+  "employeeId": "{{employeeId}}",
+  "fromDate": "2025-12-31:00:00",
+  "endDate": "2025-12-31:00:00",
+  "reason": "Driver Licence",
+  "toDate": "2025-12-31:00:00"
+}
