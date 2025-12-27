@@ -35,22 +35,40 @@ return {
     },
     init = function()
       -- https://codecompanion.olimorris.dev/usage/chat-buffer/tools#yolo-mode
-      vim.g.codecompanion_yolo_mode = true
+      -- vim.g.codecompanion_yolo_mode = true
 
       local spinner = require('plugins.extras.codecompanion.spinner')
       spinner:init()
     end,
     opts = {
-      -- ignore_warnings = true,
+      ignore_warnings = true,
       adapters = {
         http = {
+          opts = {
+            show_defaults = false,
+          },
           copilot = function()
             return require('codecompanion.adapters').extend('copilot', {
               schema = {
                 model = {
-                  default = 'claude-sonnet-4.5',
-                  -- default = 'gpt-4o',
+                  default = 'claude-opus-4.5',
                 },
+              },
+            })
+          end,
+        },
+        acp = {
+          opts = {
+            show_defaults = false,
+          },
+          gemini_cli = function()
+            return require('codecompanion.adapters').extend('gemini_cli', {
+              defaults = {
+                auth_method = 'gemini-api-key',
+                timeout = 20000,
+              },
+              env = {
+                GEMINI_API_KEY = 'GEMINI_API_KEY',
               },
             })
           end,
@@ -58,13 +76,13 @@ return {
       },
       strategies = {
         chat = {
-          -- tools = {
-          --   opts = {
-          --     default_tools = {
-          --       'files',
-          --     },
-          --   },
-          -- },
+          tools = {
+            opts = {
+              default_tools = {
+                'files',
+              },
+            },
+          },
           enabled = true,
           adapter = 'copilot',
           roles = {
@@ -180,7 +198,7 @@ return {
             auto_generate_title = true,
             continue_last_chat = false,
             delete_on_clearing_chat = false,
-            picker = 'snacks',
+            picker = 'snacks', -- mini.pick
             enable_logging = false,
             dir_to_save = vim.fn.stdpath('data') .. '/codecompanion-history',
           },

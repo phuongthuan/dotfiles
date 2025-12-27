@@ -5,7 +5,7 @@ return {
     event = 'InsertEnter',
     config = function()
       require('copilot').setup({
-        copilot_node_command = vim.fn.expand("$HOME") .. "/.asdf/installs/nodejs/22.20.0/bin/node",
+        copilot_node_command = vim.fn.expand('$HOME') .. '/.asdf/installs/nodejs/22.20.0/bin/node',
         suggestion = { enabled = false, auto_trigger = true },
         panel = { enabled = false },
         filetypes = {
@@ -55,5 +55,4 @@ return {
     },
   },
   require('plugins.extras.codecompanion'),
-  -- require('plugins.extras.copilotchat-nvim'),
 }
