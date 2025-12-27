@@ -2,6 +2,7 @@ local icons = require('core.icons')
 
 return {
   'nvim-lualine/lualine.nvim',
+  enabled = false,
   dependencies = { 'echasnovski/mini.icons' },
   opts = {
     options = {

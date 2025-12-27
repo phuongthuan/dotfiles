@@ -54,5 +54,5 @@ return {
       },
     },
   },
-  require('plugins.extras.codecompanion'),
+  require('plugins.ai.codecompanion'),
 }

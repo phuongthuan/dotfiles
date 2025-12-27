@@ -1,6 +1,6 @@
 -- https://github.com/olimorris/dotfiles/blob/main/.config/nvim/lua/plugins/coding.lua
 
-local PROMPTS = require('plugins.extras.codecompanion.prompts')
+local PROMPTS = require('plugins.ai.codecompanion.prompts')
 
 return {
   {
@@ -37,7 +37,7 @@ return {
       -- https://codecompanion.olimorris.dev/usage/chat-buffer/tools#yolo-mode
       -- vim.g.codecompanion_yolo_mode = true
 
-      local spinner = require('plugins.extras.codecompanion.spinner')
+      local spinner = require('plugins.ai.codecompanion.spinner')
       spinner:init()
     end,
     opts = {
@@ -176,7 +176,7 @@ return {
           window = {
             layout = 'vertical', -- float|vertical|horizontal|buffer
           },
-          intro_message = 'Welcome to Copilot Chat ✨! Press ? for options',
+          intro_message = 'Welcome to CodeCompanion ✨!',
         },
         inline = { layout = 'buffer' },
       },

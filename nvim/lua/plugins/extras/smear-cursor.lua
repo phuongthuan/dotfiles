@@ -7,6 +7,7 @@ end, { desc = 'Toggle Smear Cursor' })
 
 return {
   'sphamba/smear-cursor.nvim',
+  enabled = false,
   opts = {
     smear_between_buffers = false,
     smear_insert_mode = false,

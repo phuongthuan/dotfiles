@@ -6,6 +6,7 @@ local nmap = require('core.utils').mapper_factory('n')
 
 return {
   'nvim-telescope/telescope.nvim',
+  enabled = false,
   event = 'VimEnter',
   branch = '0.1.x',
   dependencies = {
