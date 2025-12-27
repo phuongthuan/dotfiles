@@ -78,6 +78,11 @@ return {
       )
     end, { desc = 'Current Directory (fd)' })
 
+    nmap('<leader>fA', function()
+      local command_opts = _is_mobile_repo() and {} or { '--no-ignore' }
+      Picker.find_files({ tool = 'fd', command_opts = command_opts }, { source = { name = ' Files (fd)' } })
+    end, { desc = 'Current Directory (fd) without excludes' })
+
     nmap('<leader>m', function()
       Picker.open_music()
     end, { desc = 'Open MPC' })
