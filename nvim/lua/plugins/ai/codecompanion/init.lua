@@ -1,7 +1,5 @@
 -- https://github.com/olimorris/dotfiles/blob/main/.config/nvim/lua/plugins/coding.lua
 
-local PROMPTS = require('plugins.ai.codecompanion.prompts')
-
 return {
   {
     'MeanderingProgrammer/render-markdown.nvim',
@@ -15,7 +13,7 @@ return {
   },
   {
     'olimorris/codecompanion.nvim',
-    version = '17.33.0',
+    version = '^18.0.0',
     cmd = { 'CodeCompanion', 'CodeCompanionChat', 'CodeCompanionActions' },
     dependencies = {
       { 'nvim-lua/plenary.nvim', branch = 'master' },
@@ -23,14 +21,14 @@ return {
       'folke/edgy.nvim',
       {
         'ravitemer/codecompanion-history.nvim',
-        commit = 'eb99d256352144cf3b6a1c45608ec25544a0813d',
+        commit = '8c6ca9f998aeef89f3543343070f8562bf911fb4',
       },
       {
         'ravitemer/mcphub.nvim',
         cmd = 'MCPHub',
         build = 'npm install -g mcp-hub@latest',
         config = true,
-        commit = '8ff40b5edc649959bb7e89d25ae18e055554859a',
+        commit = '5193329d510a68f1f5bf189960642c925c177a3a',
       },
     },
     init = function()
@@ -45,21 +43,12 @@ return {
       adapters = {
         http = {
           opts = {
-            show_defaults = false,
+            show_presets = false,
           },
-          copilot = function()
-            return require('codecompanion.adapters').extend('copilot', {
-              schema = {
-                model = {
-                  default = 'claude-opus-4.5',
-                },
-              },
-            })
-          end,
         },
         acp = {
           opts = {
-            show_defaults = false,
+            show_presets = false,
           },
           gemini_cli = function()
             return require('codecompanion.adapters').extend('gemini_cli', {
@@ -74,8 +63,13 @@ return {
           end,
         },
       },
-      strategies = {
+      interactions = {
         chat = {
+          enabled = true,
+          adapter = {
+            name = 'copilot',
+            model = 'claude-opus-4.5',
+          },
           tools = {
             opts = {
               default_tools = {
@@ -83,8 +77,6 @@ return {
               },
             },
           },
-          enabled = true,
-          adapter = 'copilot',
           roles = {
             llm = function(adapter)
               local model_name = ''
@@ -142,10 +134,10 @@ return {
                 },
               },
             },
-            ['memory'] = {
+            ['rules'] = {
               keymaps = {
                 modes = {
-                  i = '<C-m>',
+                  i = '<C-r>',
                 },
               },
             },
@@ -164,6 +156,20 @@ return {
               modes = { n = 'gr' },
               opts = { nowait = true },
             },
+          },
+        },
+      },
+
+      -- GENERAL OPTIONS --
+      opts = {
+        log_level = 'DEBUG',
+      },
+
+      -- RULES --
+      rules = {
+        opts = {
+          chat = {
+            enabled = true,
           },
         },
       },
@@ -205,35 +211,12 @@ return {
         },
       },
 
-      -- GENERAL OPTIONS --
-      opts = {
-        log_level = 'DEBUG',
-        system_prompt = PROMPTS.SYSTEM_PROMPT,
-      },
-
       -- PROMPT LIBRARY --
-      prompt_library = PROMPTS.PROMPT_LIBRARY,
-
-      -- MEMORY --
-      memory = {
-        opts = {
-          chat = {
-            enabled = true,
-          },
-        },
-        eh_mobile_pro_unit_test = {
-          description = 'Contexts for generating unit test',
-          files = {
-            '~/Documents/Notes/employmenthero/eh_mobile_pro_unit_test.md',
-          },
-        },
-        eh_mobile_pro_maestro_e2e_test = {
-          description = 'Contexts for working with Maestro E2E test',
-          files = {
-            'maestro/common/authenticate.yml',
-            'maestro/common/launch_app.yml',
-            'maestro/common/restart_app.yml',
-            'maestro/common/clear_state.yml',
+      prompt_library = {
+        markdown = {
+          dirs = {
+            vim.fn.getcwd() .. '/.prompts',
+            '~/.dotfiles/nvim/lua/plugins/ai/codecompanion/prompts',
           },
         },
       },

@@ -1,50 +1,6 @@
--- This is custom system prompt for Copilot adapter
--- Base on https://github.com/olimorris/codecompanion.nvim/blob/e7d931ae027f9fdca2bd7c53aa0a8d3f8d620256/lua/codecompanion/config.lua#L639 and https://github.com/CopilotC-Nvim/CopilotChat.nvim/blob/d43fab67c328946fbf8e24fdcadfdb5410517e1f/lua/CopilotChat/prompts.lua#L5
-local SYSTEM_PROMPT = string.format(
-  [[You are an AI programming assistant named "CodeCompanion".
-You are currently plugged in to the Neovim text editor on a user's machine.
-
-Your tasks include:
-- Answering general programming questions.
-- Explaining how the code in a Neovim buffer works.
-- Reviewing the selected code in a Neovim buffer.
-- Generating unit tests for the selected code.
-- Proposing fixes for problems in the selected code.
-- Scaffolding code for a new workspace.
-- Finding relevant code to the user's query.
-- Proposing fixes for test failures.
-- Answering questions about Neovim.
-- Ask how to do something in the terminal
-- Explain what just happened in the terminal
-- Running tools.
-
-You must:
-- Follow the user's requirements carefully and to the letter.
-- Keep your answers short and impersonal, especially if the user responds with context outside of your tasks.
-- Minimize other prose.
-- Use Markdown formatting in your answers.
-- Include the programming language name at the start of the Markdown code blocks.
-- Avoid line numbers in code blocks.
-- Avoid wrapping the whole response in triple backticks.
-- Avoid using H1, H2 or H3 headers in your responses as these are reserved for the user.
-- Only return code that's relevant to the task at hand. You may not need to return all of the code that the user has shared.
-- Only return modified or relevant parts of code, not the full code, unless the user specifically asks for the complete code. Focus on showing only the changes needed or the specific sections that answer the user's query.
-- The user works in an IDE called Neovim which has a concept for editors with open files, integrated unit test support, an output pane that shows the output of running the code as well as an integrated terminal.
-- The user is working on a %s machine. Please respond with system specific commands if applicable.
-
-When given a task:
-1. Think step-by-step and describe your plan for what to build in pseudocode, written out in great detail, unless asked not to do so.
-2. Output the code in a single code block.
-3. You should always generate short suggestions for the next user turns that are relevant to the conversation.
-4. You can only give one reply for each conversation turn.
-5. The active document is the source code the user is looking at right now.
-]],
-  vim.loop.os_uname().sysname
-)
-
 local COPILOT_EXPLAIN = string.format(
   [[You are a world-class coding tutor. Your code explanations perfectly balance high-level concepts and granular details. Your approach ensures that students not only understand how to write code, but also grasp the underlying principles that guide effective programming.
-When asked for your name, you must respond with "GitHub Copilot".
+When asked for your name, you must respond with "CodeCompanion".
 Follow the user's requirements carefully & to the letter.
 Your expertise is strictly limited to software development topics.
 Follow Microsoft content policies.
@@ -108,71 +64,14 @@ Identify any issues related to:
 ]]
 )
 
-local AGENT_PROMPT = string.format(
-  [[You are an agent, please keep going until the user's query is completely resolved, before ending your turn and yielding back to the user. Only terminate your turn when you are sure that the problem is solved. If you are not sure about file content or codebase structure pertaining to the user's request, use your tools to read files and gather the relevant information: do NOT guess or make up an answer. You MUST plan extensively before each function call, and reflect extensively on the outcomes of the previous function calls. DO NOT do this entire process by making function calls only, as this can impair your ability to solve the problem and think insightfully.
-]]
-)
-
 local PROMPT_LIBRARY = {
-  ['Maestro E2E Test'] = {
-    strategy = 'chat',
-    description = 'Maestro E2E Test',
-    opts = {
-      index = 11,
-      is_default = true,
-      is_slash_cmd = true,
-      short_name = 'e2e',
-      auto_submit = false,
-      default_memory = 'eh_mobile_pro_maestro_e2e_test',
-    },
-    prompts = {
-      {
-        role = 'user',
-        content = function()
-          return [[
-You must follow all rules and conventions that were declared in the given contexts above.
-Use @{files} tool to insert, edit, and search for relevant code in current repo.
-            ]]
-        end,
-        opts = {
-          contains_code = false,
-        },
-      },
-    },
-  },
-  ['Unit Test'] = {
-    strategy = 'chat',
-    description = 'Generating unit test',
-    opts = {
-      index = 11,
-      is_default = true,
-      is_slash_cmd = true,
-      short_name = 'ut',
-      auto_submit = false,
-      default_memory = 'eh_mobile_pro_unit_test',
-    },
-    prompts = {
-      {
-        role = 'user',
-        content = function()
-          return [[
-You must follow all rules and conventions that were declared in the given contexts above.
-Use @{files} tool to insert, edit, and search for relevant code in current repo.
-            ]]
-        end,
-        opts = {
-          contains_code = false,
-        },
-      },
-    },
-  },
   ['Explain'] = {
     strategy = 'chat',
     description = 'Explain how code in a buffer works',
     opts = {
       default_prompt = true,
       modes = { 'v' },
-      short_name = 'explain',
+      alias = 'explain',
       auto_submit = true,
       user_prompt = false,
       stop_context_insertion = true,
@@ -207,7 +106,7 @@ Use @{files} tool to insert, edit, and search for relevant code in current repo.
     strategy = 'chat',
     description = 'Explain how code works',
     opts = {
-      short_name = 'explain-code',
+      alias = 'explain-code',
       auto_submit = false,
       is_slash_cmd = true,
     },
@@ -230,7 +129,7 @@ Use @{files} tool to insert, edit, and search for relevant code in current repo.
     strategy = 'chat',
     description = 'Generate a commit message for staged change',
     opts = {
-      short_name = 'staged-commit',
+      alias = 'staged-commit',
       auto_submit = true,
       is_slash_cmd = true,
     },
@@ -254,7 +153,7 @@ Use @{files} tool to insert, edit, and search for relevant code in current repo.
     description = 'Add documentation for code.',
     opts = {
       modes = { 'v' },
-      short_name = 'inline-doc',
+      alias = 'inline-doc',
       auto_submit = true,
       user_prompt = false,
       stop_context_insertion = true,
@@ -282,7 +181,7 @@ Use @{files} tool to insert, edit, and search for relevant code in current repo.
     description = 'Write documentation for code.',
     opts = {
       modes = { 'v' },
-      short_name = 'doc',
+      alias = 'doc',
       auto_submit = true,
       user_prompt = false,
       stop_context_insertion = true,
@@ -310,7 +209,7 @@ Use @{files} tool to insert, edit, and search for relevant code in current repo.
     description = 'Review the provided code snippet.',
     opts = {
       modes = { 'v' },
-      short_name = 'review',
+      alias = 'review',
       auto_submit = true,
       user_prompt = false,
       stop_context_insertion = true,
@@ -344,7 +243,7 @@ Use @{files} tool to insert, edit, and search for relevant code in current repo.
     strategy = 'chat',
     description = 'Review code and provide suggestions for improvement.',
     opts = {
-      short_name = 'review-code',
+      alias = 'review-code',
       auto_submit = false,
       is_slash_cmd = true,
     },
@@ -367,7 +266,7 @@ Use @{files} tool to insert, edit, and search for relevant code in current repo.
     description = 'Refactor the provided code snippet.',
     opts = {
       modes = { 'v' },
-      short_name = 'refactor',
+      alias = 'refactor',
       auto_submit = true,
       user_prompt = false,
       stop_context_insertion = true,
@@ -401,7 +300,7 @@ Use @{files} tool to insert, edit, and search for relevant code in current repo.
     strategy = 'chat',
     description = 'Refactor the provided code snippet.',
     opts = {
-      short_name = 'refactor-code',
+      alias = 'refactor-code',
       auto_submit = false,
       is_slash_cmd = true,
     },
@@ -424,7 +323,7 @@ Use @{files} tool to insert, edit, and search for relevant code in current repo.
     description = 'Give betting naming for the provided code snippet.',
     opts = {
       modes = { 'v' },
-      short_name = 'naming',
+      alias = 'naming',
       auto_submit = true,
       user_prompt = false,
       stop_context_insertion = true,
@@ -451,7 +350,7 @@ Use @{files} tool to insert, edit, and search for relevant code in current repo.
     strategy = 'chat',
     description = 'Give betting naming for the provided code snippet.',
     opts = {
-      short_name = 'better-naming',
+      alias = 'better-naming',
       auto_submit = false,
       is_slash_cmd = true,
     },
@@ -466,7 +365,7 @@ Use @{files} tool to insert, edit, and search for relevant code in current repo.
     strategy = 'chat',
     description = 'Review English writing for spelling, grammar, and phrasing improvements.',
     opts = {
-      short_name = 'english',
+      alias = 'english',
       auto_submit = true,
       ignore_system_prompt = true,
     },
@@ -521,7 +420,5 @@ If no issues are found, simply respond: "No writing issues detected."
 }
 
 return {
-  SYSTEM_PROMPT = SYSTEM_PROMPT,
   PROMPT_LIBRARY = PROMPT_LIBRARY,
-  AGENT_PROMPT = AGENT_PROMPT,
 }
