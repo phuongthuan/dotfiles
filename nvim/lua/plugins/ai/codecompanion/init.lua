@@ -1,4 +1,4 @@
--- https://github.com/olimorris/dotfiles/blob/main/.config/nvim/lua/plugins/coding.lua
+-- https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/config.lua
 
 return {
   {
@@ -18,7 +18,7 @@ return {
     dependencies = {
       { 'nvim-lua/plenary.nvim', branch = 'master' },
       'nvim-treesitter/nvim-treesitter',
-      'folke/edgy.nvim',
+      -- 'folke/edgy.nvim',
       {
         'ravitemer/codecompanion-history.nvim',
         commit = '8c6ca9f998aeef89f3543343070f8562bf911fb4',
@@ -26,49 +26,59 @@ return {
       {
         'ravitemer/mcphub.nvim',
         cmd = 'MCPHub',
-        build = 'npm install -g mcp-hub@latest',
+        -- build = 'npm install -g mcp-hub@latest',
         config = true,
         commit = '5193329d510a68f1f5bf189960642c925c177a3a',
       },
     },
     init = function()
       -- https://codecompanion.olimorris.dev/usage/chat-buffer/tools#yolo-mode
-      -- vim.g.codecompanion_yolo_mode = true
+      vim.g.codecompanion_yolo_mode = true
 
       local spinner = require('plugins.ai.codecompanion.spinner')
       spinner:init()
     end,
     opts = {
-      ignore_warnings = true,
-      adapters = {
-        http = {
-          opts = {
-            show_presets = false,
+      -- RULES --
+      rules = {
+        -- https://github.com/olimorris/codecompanion.nvim/blob/5807e0457111f0de267fc9a6543b41fae0f5c2b1/lua/codecompanion/config.lua#L1167-L1179
+        opts = {
+          chat = {
+            enabled = true,
+            default_rules = 'default', -- The rule groups to load
           },
         },
-        acp = {
-          opts = {
-            show_presets = false,
+        eh_unit_tests = {
+          description = 'Rules for React Unit testing',
+          files = {
+            '~/.dotfiles/.github/instructions/react-unit-test.instructions.md',
           },
-          gemini_cli = function()
-            return require('codecompanion.adapters').extend('gemini_cli', {
-              defaults = {
-                auth_method = 'gemini-api-key',
-                timeout = 20000,
-              },
-              env = {
-                GEMINI_API_KEY = 'GEMINI_API_KEY',
-              },
-            })
-          end,
+        },
+        custom_instructions = {
+          description = 'Custom Instructions File Guidelines',
+          files = {
+            '~/p/references/awesome-copilot/instructions/instructions.instructions.md',
+          },
+        },
+        maestro_e2e_tests = {
+          description = 'Rules for Maestro E2E testing',
+          files = {
+            '~/.dotfiles/.github/instructions/maestro.instructions.md',
+          },
         },
       },
+
+      -- INTERACTIONS --
       interactions = {
         chat = {
           enabled = true,
+          -- adapter = 'gemini_cli',
           adapter = {
             name = 'copilot',
-            model = 'claude-opus-4.5',
+            -- model = 'claude-opus-4.5',
+            -- model = 'claude-sonnet-4.5',
+            model = 'claude-haiku-4.5',
+            -- model = 'gemini-3-flash',
           },
           tools = {
             opts = {
@@ -134,10 +144,30 @@ return {
                 },
               },
             },
+            ['fetch'] = {
+              keymaps = {
+                modes = {
+                  i = '<C-e>',
+                },
+              },
+            },
             ['rules'] = {
               keymaps = {
                 modes = {
                   i = '<C-r>',
+                },
+              },
+            },
+            ['image'] = {
+              opts = {
+                dirs = {
+                  '~/Pictures/Screenshots/',
+                  '~/Downloads/',
+                },
+              },
+              keymaps = {
+                modes = {
+                  i = '<C-i>',
                 },
               },
             },
@@ -158,19 +188,37 @@ return {
             },
           },
         },
-      },
-
-      -- GENERAL OPTIONS --
-      opts = {
-        log_level = 'DEBUG',
-      },
-
-      -- RULES --
-      rules = {
-        opts = {
+        background = {
           chat = {
-            enabled = true,
+            opts = {
+              enabled = true,
+            },
           },
+        },
+      },
+
+      -- ADAPTERS --
+      adapters = {
+        http = {
+          opts = {
+            show_presets = false,
+          },
+        },
+        acp = {
+          opts = {
+            show_presets = false,
+          },
+          gemini_cli = function()
+            return require('codecompanion.adapters').extend('gemini_cli', {
+              defaults = {
+                auth_method = 'gemini-api-key',
+                timeout = 20000,
+              },
+              env = {
+                GEMINI_API_KEY = 'GEMINI_API_KEY',
+              },
+            })
+          end,
         },
       },
 
@@ -179,12 +227,21 @@ return {
         chat = {
           -- Change to true to show the current model
           show_settings = false,
+          show_reasoning = false,
           window = {
             layout = 'vertical', -- float|vertical|horizontal|buffer
           },
           intro_message = 'Welcome to CodeCompanion ✨!',
+          icons = {
+            tool_success = '󰸞 ',
+            tool_failure = ' ',
+            tool_in_progress = '󰔟 ',
+          },
+          fold_context = true,
         },
-        inline = { layout = 'buffer' },
+        inline = {
+          layout = 'buffer',
+        },
       },
 
       -- EXTENSIONS --
@@ -220,6 +277,12 @@ return {
           },
         },
       },
+
+      -- GENERAL OPTIONS --
+      opts = { log_level = 'DEBUG' },
+
+      -- IGNORE WARNING --
+      ignore_warnings = true,
     },
     keys = {
       {
