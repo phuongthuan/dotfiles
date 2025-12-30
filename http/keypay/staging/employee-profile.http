@@ -1,0 +1,11 @@
+@businessId = 49067
+@employeeId = 5545065
+
+
+## GET http:///api/v2/business/{businessId}/employee/{employeeId}/details
+### GET_BASIC_DETAIL
+
+GET {{WORKZONE_HOST}}/api/v2/business/{{businessId}}/employee/{{employeeId}}/details HTTP/1.1
+Accept: application/json
+Authorization: Basic {{KEYPAY_STAGING_API_KEY}}
+Cache-Control: no-store

@@ -2,30 +2,31 @@
 @employeeId = 5545065
 
 
-### GET_UNAVAILABILITY
+### GET_ROSTER_SHIFT
 
 GET {{WORKZONE_HOST}}/api/v2/business/{{businessId}}/unavailability?filter.employeeId={{employeeId}} HTTP/1.1
 Accept: application/json
 Authorization: Basic {{KEYPAY_STAGING_API_KEY}}
 Cache-Control: no-store
 
-### CREATE_AN_UNAVAILABILITY
 
-POST {{WORKZONE_HOST}}/api/v2/business/{{businessId}}/unavailability HTTP/1.1
+### CREATE_AN_UNAVAILABILITY_FOR_EMPLOYEE
+
+POST {{WORKZONE_HOST}}/api/v2/business/{{businessId}}/manager/{{employeeId}}/rostershift/unavailability HTTP/1.1
 Authorization: Basic {{KEYPAY_STAGING_API_KEY}}
 Cache-Control: no-store
 Content-Type: application/json
 
 {
-  "employeeId": "{{employeeId}}",
-  "reason": "Driver Lisence",
   "fromDate": "2026-01-05T15:00:34",
+  "toDate": "2026-01-05T17:00:34",
+  "reason": "Out of office",
+  "recurring": false,
   "toDate": "2026-01-05T17:00:34"
 }
 
-### DELETE_AN_UNAVAILABILITY
+### DELETE_AN_UNAVAILABILITY_FOR_EMPLOYEE
 
-DELETE {{WORKZONE_HOST}}/api/v2/business/{{businessId}}/unavailability/2363011 HTTP/1.1
+DELETE {{WORKZONE_HOST}}/api/v2/business/{{businessId}}/manager/{{employeeId}}/rostershift/unavailability/2372988 HTTP/1.1
 Authorization: Basic {{KEYPAY_STAGING_API_KEY}}
 Cache-Control: no-store
-Content-Type: application/json
