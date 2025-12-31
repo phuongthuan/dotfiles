@@ -158,4 +158,17 @@ nmap('<leader>ut', function()
     '-ic',
     string.format("tmux new-window -n test 'source ~/.dotfiles/zsh/dev.zsh && ytc %s; exec zsh'", file),
   })
-end, { desc = 'Run Test' })
+end, { desc = 'Run Unit Tests' })
+
+-- Run Maestro E2E test
+nmap('<leader>mt', function()
+  -- local file = vim.api.nvim_buf_get_name(0) -- Absolute path
+  -- Get relative path from current working directory
+  local file = vim.fn.expand('%:.')
+  vim.notify('󰙨 Run Maestro E2E test: ' .. file, vim.log.levels.INFO)
+  vim.system({
+    'zsh',
+    '-ic',
+    string.format("tmux new-window -n test 'source ~/.dotfiles/zsh/dev.zsh && mte %s; exec zsh'", file),
+  })
+end, { desc = 'Run Maestro E2E Tests' })
