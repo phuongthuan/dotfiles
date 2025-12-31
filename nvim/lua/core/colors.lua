@@ -1,0 +1,15 @@
+return {
+  bright_bg = '#3c3836',
+  bright_fg = '#fbf1c7',
+  red = '#cc241d',
+  dark_red = '#9d0006',
+  green = '#b8bb26',
+  blue = '#458588',
+  light_blue = '#83a598',
+  purple = '#d3869b',
+  orange = '#fe8019',
+  yellow = '#fabd2f',
+  aqua = '#8ec07c',
+  gray = '#a89984',
+  black = '#282828',
+}
