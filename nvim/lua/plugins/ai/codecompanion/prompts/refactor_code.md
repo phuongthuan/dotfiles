@@ -1,11 +1,14 @@
 ---
-name: Refactor Code
-interaction: chat
+name: Refactor
+interaction: inline
 description: Refactor the provided code snippet.
 opts:
-  alias: refactor-code
-  auto_submit: false
-  is_slash_cmd: true
+  alias: refactor
+  auto_submit: true
+  user_prompt: false
+  modes:
+    - v
+  stop_context_insertion: true
 ---
 
 ## system
@@ -22,4 +25,8 @@ Identify any issues related to:
 
 ## user
 
-Please refactor the following code to improve its clarity and readability.
+Please refactor the following code to improve its clarity and readability:
+
+```${context.filetype}
+${context.code}
+```

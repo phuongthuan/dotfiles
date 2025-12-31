@@ -5,6 +5,7 @@ description: Generate unit tests for eh-mobile-pro
 opts:
   alias: ut
   auto_submit: false
+  autoload: eh_unit_tests
   modes:
     - n
   adapter:

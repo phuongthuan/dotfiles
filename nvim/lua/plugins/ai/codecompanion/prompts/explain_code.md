@@ -1,11 +1,14 @@
 ---
-name: Explain Code
+name: Explain
 interaction: chat
-description: Explain how code works
+description: Explain how code in a buffer works
 opts:
-  alias: explain-code
-  auto_submit: false
-  is_slash_cmd: true
+  alias: explain
+  auto_submit: true
+  user_prompt: false
+  modes:
+    - v
+  stop_context_insertion: true
 ---
 
 ## system
@@ -40,4 +43,8 @@ Provide clear and relevant examples aligned with any provided context.
 
 ## user
 
-Please explain how the following code works.
+Please explain how the following code works:
+
+```${context.filetype}
+${context.code}
+```

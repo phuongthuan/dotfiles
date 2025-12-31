@@ -1,11 +1,14 @@
 ---
-name: Review Code
+name: Review
 interaction: chat
-description: Review code and provide suggestions for improvement.
+description: Review the provided code snippet.
 opts:
-  alias: review-code
-  auto_submit: false
-  is_slash_cmd: true
+  alias: review
+  auto_submit: true
+  user_prompt: false
+  modes:
+    - v
+  stop_context_insertion: true
 ---
 
 ## system
@@ -32,4 +35,8 @@ If the code snippet has no readability issues, simply confirm that the code is c
 
 ## user
 
-Please review the following code and provide suggestions for improvement then refactor the following code to improve its clarity and readability.
+Please review the following code and provide suggestions for improvement then refactor the following code to improve its clarity and readability:
+
+```${context.filetype}
+${context.code}
+```
