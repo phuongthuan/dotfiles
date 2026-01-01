@@ -1,6 +1,7 @@
 -- https://github.com/folke/noice.nvim/wiki/Configuration-Recipes
 return {
   'folke/noice.nvim',
+  enabled = false,
   event = 'VeryLazy',
   dependencies = { 'MunifTanjim/nui.nvim' },
   opts = {
