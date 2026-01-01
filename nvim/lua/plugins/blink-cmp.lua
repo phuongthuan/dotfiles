@@ -107,7 +107,7 @@ return {
         },
       },
 
-      cmdline = { enabled = false },
+      cmdline = { sources = { 'cmdline' } },
       fuzzy = { implementation = 'prefer_rust_with_warning' },
       signature = { enabled = false },
 
