@@ -4,6 +4,10 @@ local conditions = require('heirline.conditions')
 
 local Spacer = { provider = ' ' }
 
+local IsCodeCompanion = function()
+  return vim.bo.filetype == 'codecompanion'
+end
+
 local ViMode = {
   static = {
     mode_names = {
@@ -40,7 +44,7 @@ local ViMode = {
       rm = 'M',
       ['r?'] = '?',
       ['!'] = '!',
-      t = '',
+      t = '  ',
     },
     mode_colors = {
       n = colors.aqua,
@@ -55,7 +59,7 @@ local ViMode = {
       R = colors.red,
       r = colors.red,
       ['!'] = colors.red,
-      t = colors.red,
+      t = colors.dark_red,
     },
   },
   init = function(self)
@@ -183,6 +187,11 @@ local Diagnostics = {
 }
 
 local FileName = {
+  conditifn = function(self)
+    return not conditions.buffer_matches({
+      filetype = self.filetypes,
+    }) and not IsCodeCompanion() and not vim.bo.filetype == 'minifiles'
+  end,
   provider = function()
     local filename = vim.fn.expand('%:t')
     if filename == '' then

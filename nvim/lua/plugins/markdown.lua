@@ -1,3 +1,5 @@
+local colors = require('core.colors')
+
 return {
   {
     'nvim-treesitter/nvim-treesitter',
@@ -10,10 +12,10 @@ return {
     ---@module 'render-markdown'
     ft = { 'markdown' },
     init = function()
-      local color1_bg = '#b8bb26'
-      local color2_bg = '#8ec07c'
-      local color3_bg = '#83a598'
-      local color_fg = '#282828'
+      local color1_bg = colors.green
+      local color2_bg = colors.aqua
+      local color3_bg = colors.light_blue
+      local color_fg = colors.black
 
       vim.opt_local.spell = false
       vim.opt_local.spelllang = 'en'
@@ -47,6 +49,26 @@ return {
       bullet = { enabled = true },
       checkbox = { enabled = true },
       latex = { enabled = false },
+      completions = { blink = { enabled = true } },
+      overrides = {
+        filetype = {
+          codecompanion = {
+            html = {
+              tag = {
+                buf = { icon = ' ', highlight = 'CodeCompanionChatIcon' },
+                file = { icon = ' ', highlight = 'CodeCompanionChatIcon' },
+                group = { icon = ' ', highlight = 'CodeCompanionChatIcon' },
+                help = { icon = '󰘥 ', highlight = 'CodeCompanionChatIcon' },
+                image = { icon = ' ', highlight = 'CodeCompanionChatIcon' },
+                rules = { icon = '󰧑 ', highlight = 'CodeCompanionChatIcon' },
+                symbols = { icon = ' ', highlight = 'CodeCompanionChatIcon' },
+                tool = { icon = '󰯠 ', highlight = 'CodeCompanionChatIcon' },
+                url = { icon = '󰌹 ', highlight = 'CodeCompanionChatIcon' },
+              },
+            },
+          },
+        },
+      },
     },
     keys = {
       { '<leader>tm', '<cmd>RenderMarkdown toggle<cr>', desc = 'Toggle Render Markdown', silent = true },

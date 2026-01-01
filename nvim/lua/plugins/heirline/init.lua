@@ -18,7 +18,7 @@ return {
 
           return conditions.buffer_matches({
             buftype = { 'nofile', 'prompt', 'help', 'quickfix' },
-            filetype = { '^git.*', 'oil', 'lspinfo' },
+            filetype = { '^git.*', 'oil', 'lspinfo', 'minifiles' },
           }, args.buf)
         end,
       },

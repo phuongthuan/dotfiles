@@ -1,7 +1,6 @@
 -- To use env in Neovim, create a env variable in ~/.zshrc => source
 -- vim.env only works in neovim
 return {
-  NVIM_USE_TSSERVER = vim.env.NVIM_USE_TSSERVER and true or false,
   DOTFILES = vim.env.DOTFILES or '~/.dotfiles',
   NVIM_CONFIG_DIR = vim.env.NVIM_CONFIG_DIR or '~/.config/nvim',
   EH_CONFIG_DIR = vim.env.EH_CONFIG_DIR or '~/.config/eh',

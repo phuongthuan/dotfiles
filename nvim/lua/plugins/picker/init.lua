@@ -1,6 +1,6 @@
 local env = require('core.env')
 local mapper = require('core.utils').mapper_factory
-local Picker = require('core.my-picker')
+local Picker = require('plugins.picker.custom')
 
 local nmap = mapper('n')
 
@@ -20,10 +20,9 @@ end
 local _mobile_repo_globs = { '!ContractPdfPreview', '!*.cjs', '!coverage/' }
 
 return {
-  'echasnovski/mini.pick',
+  'nvim-mini/mini.pick',
   version = false,
   config = function()
-    -- Extra pickers for mini.pick
     require('mini.extra').setup()
     require('mini.visits').setup()
 
@@ -103,7 +102,7 @@ return {
     end, { desc = 'console.log' })
 
     nmap('<leader>ps', function()
-      local string = vim.fn.input('Input String')
+      local string = vim.fn.input('Grep String: ')
 
       -- If input is empty, hide the input prompt instead of showing empty window
       if string == '' then

@@ -31,7 +31,6 @@ autocmd('FileType', {
     'lspinfo',
     'query',
     'startuptime',
-    'fugitive',
   },
   callback = function(e)
     -- Map q to exit in non-filetype buffers

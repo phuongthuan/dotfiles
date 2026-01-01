@@ -12,6 +12,7 @@ return {
       javascript = { 'eslint_d' },
       typescriptreact = { 'eslint_d' },
       javascriptreact = { 'eslint_d' },
+      yaml = { 'yamllint' },
       -- markdown = { 'markdownlint' },
       -- json = { 'jsonlint' },
       -- text = { 'vale' },
@@ -26,8 +27,6 @@ return {
         return vim.api.nvim_buf_get_name(0)
       end,
     }
-
-    lint.linters_by_ft['markdown'] = nil
 
     local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
 

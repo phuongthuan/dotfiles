@@ -5,9 +5,9 @@ return {
     version = '1.*',
     dependencies = {
       'folke/lazydev.nvim',
-      'giuxtaposition/blink-cmp-copilot',
       'moyiz/blink-emoji.nvim',
       'MahanRahmati/blink-nerdfont.nvim',
+      'giuxtaposition/blink-cmp-copilot',
       'Kaiser-Yang/blink-cmp-dictionary',
     },
     ---@module 'blink.cmp'
@@ -54,9 +54,9 @@ return {
           -- extra sources
           'lazydev',
           'copilot',
+
           'emoji',
           'nerdfont',
-
           'dictionary',
         },
         providers = {
@@ -69,7 +69,7 @@ return {
           },
           emoji = {
             module = 'blink-emoji',
-            name = 'Emoji',
+            name = 'emoji',
             score_offset = 15,
             opts = {
               insert = true,
@@ -113,7 +113,7 @@ return {
 
       -- Disable per file type
       -- enabled = function()
-      --   return not vim.tbl_contains({ 'copilot-chat' }, vim.bo.filetype)
+      --   return not vim.tbl_contains({ 'codecompanion' }, vim.bo.filetype)
       --     and vim.bo.buftype ~= 'prompt'
       --     and vim.b.completion ~= false
       -- end,

@@ -16,9 +16,8 @@ return {
     version = '^18.0.0',
     cmd = { 'CodeCompanion', 'CodeCompanionChat', 'CodeCompanionActions' },
     dependencies = {
-      { 'nvim-lua/plenary.nvim', branch = 'master' },
+      { 'nvim-lua/plenary.nvim' },
       'nvim-treesitter/nvim-treesitter',
-      -- 'folke/edgy.nvim',
       {
         'ravitemer/codecompanion-history.nvim',
         commit = '8c6ca9f998aeef89f3543343070f8562bf911fb4',
@@ -26,7 +25,7 @@ return {
       {
         'ravitemer/mcphub.nvim',
         cmd = 'MCPHub',
-        -- build = 'npm install -g mcp-hub@latest',
+        build = 'npm install -g mcp-hub@latest',
         config = true,
         commit = '5193329d510a68f1f5bf189960642c925c177a3a',
       },
@@ -41,11 +40,10 @@ return {
     opts = {
       -- RULES --
       rules = {
-        -- https://github.com/olimorris/codecompanion.nvim/blob/5807e0457111f0de267fc9a6543b41fae0f5c2b1/lua/codecompanion/config.lua#L1167-L1179
         opts = {
           chat = {
             enabled = true,
-            default_rules = 'default', -- The rule groups to load
+            default_rules = 'default',
           },
         },
         eh_unit_tests = {
@@ -75,10 +73,10 @@ return {
           -- adapter = 'gemini_cli',
           adapter = {
             name = 'copilot',
+            model = 'gpt-4.1',
+            -- model = 'claude-haiku-4.5',
             -- model = 'claude-opus-4.5',
             -- model = 'claude-sonnet-4.5',
-            model = 'claude-haiku-4.5',
-            -- model = 'gemini-3-flash',
           },
           tools = {
             opts = {
@@ -199,20 +197,11 @@ return {
 
       -- ADAPTERS --
       adapters = {
-        http = {
-          opts = {
-            show_presets = false,
-          },
-        },
         acp = {
-          opts = {
-            show_presets = false,
-          },
           gemini_cli = function()
             return require('codecompanion.adapters').extend('gemini_cli', {
               defaults = {
                 auth_method = 'gemini-api-key',
-                timeout = 20000,
               },
               env = {
                 GEMINI_API_KEY = 'GEMINI_API_KEY',
@@ -224,20 +213,17 @@ return {
 
       -- DISPLAY OPTIONS --
       display = {
+        action_palette = {
+          provider = 'default',
+        },
         chat = {
-          -- Change to true to show the current model
-          show_settings = false,
-          show_reasoning = false,
-          window = {
-            layout = 'vertical', -- float|vertical|horizontal|buffer
-          },
-          intro_message = 'Welcome to CodeCompanion ✨!',
           icons = {
             tool_success = '󰸞 ',
-            tool_failure = ' ',
-            tool_in_progress = '󰔟 ',
+            tool_failure = '',
+            tool_in_progress = '󰔟',
           },
-          fold_context = true,
+          -- show_settings = true,
+          show_reasoning = false,
         },
         inline = {
           layout = 'buffer',
@@ -258,7 +244,7 @@ return {
           enabled = true,
           opts = {
             auto_save = false,
-            auto_generate_title = true,
+            -- auto_generate_title = true,
             continue_last_chat = false,
             delete_on_clearing_chat = false,
             picker = 'snacks', -- mini.pick
@@ -279,10 +265,9 @@ return {
       },
 
       -- GENERAL OPTIONS --
-      opts = { log_level = 'DEBUG' },
-
-      -- IGNORE WARNING --
-      ignore_warnings = true,
+      opts = {
+        log_level = 'DEBUG',
+      },
     },
     keys = {
       {

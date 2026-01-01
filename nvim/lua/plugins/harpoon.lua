@@ -1,5 +1,4 @@
-local mapper = require('core.utils').mapper_factory
-local nmap = mapper('n')
+local nmap = require('core.utils').mapper_factory('n')
 
 return {
   'ThePrimeagen/harpoon',
