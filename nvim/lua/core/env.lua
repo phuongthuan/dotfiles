@@ -2,6 +2,7 @@
 -- vim.env only works in neovim
 return {
   DOTFILES = vim.env.DOTFILES or '~/.dotfiles',
+  GITHUB_USERNAME = vim.env.GITHUB_USERNAME or 'phuongthuan',
   NVIM_CONFIG_DIR = vim.env.NVIM_CONFIG_DIR or '~/.config/nvim',
   EH_CONFIG_DIR = vim.env.EH_CONFIG_DIR or '~/.config/eh',
   REFERENCES_DIR = vim.env.REFERENCES_DIR or '~/p/references',

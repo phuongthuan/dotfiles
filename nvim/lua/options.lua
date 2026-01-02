@@ -57,7 +57,7 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 vim.o.inccommand = 'split'
 
 -- General
-vim.o.mouse = 'v' -- enable mouse middle click paste
+-- vim.o.mouse = 'v' -- enable mouse middle click paste
 vim.o.swapfile = false
 vim.o.fileencoding = 'utf-8'
 vim.o.scrolloff = 8
@@ -71,12 +71,6 @@ vim.o.syntax = 'enable' -- enable syntax highlighting
 vim.o.number = false -- line number
 -- vim.o.relativenumber = true -- relative line numbers, to help with jumping.
 vim.o.showmatch = true -- highlight matching parenthesis
-
--- Folding (nvim-ufo.lua)
-vim.o.foldenable = true -- Enable folding by default
-vim.o.foldmethod = 'manual' -- Default fold method (change as needed)
-vim.o.foldlevel = 99 -- Open most folds by default
-vim.o.foldcolumn = '0'
 
 vim.o.splitright = true -- vertical split to the right
 vim.o.splitbelow = true -- horizontal split to the bottom

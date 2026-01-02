@@ -1,5 +1,11 @@
 return {
-  'nvim-mini/mini.pairs',
+  {
+    'nvim-mini/mini.pairs',
+    opts = {
+      -- Create pairs not only in Insert, but also in Command line mode
+      modes = { command = true },
+    },
+  },
   {
     'nvim-mini/mini.jump2d',
     opts = {
