@@ -25,6 +25,9 @@ export TMUX_CONF="$HOME/.config/tmux/tmux.conf"
 # EH herocli
 export PATH=$PATH:$HOME/.local/bin
 
+# opencode
+export PATH=/Users/thuan/.opencode/bin:$PATH
+
 # Java JDK
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home"
 

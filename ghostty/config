@@ -42,6 +42,7 @@ keybind = super+b>,=toggle_quick_terminal
 keybind = super+b>\=new_split:right
 keybind = super+b>-=new_split:down
 
+# Enable cursor smear
 # https://github.com/hackrmomo/ghostty-shaders
 custom-shader = shaders/cursor_smear.glsl
 custom-shader = shaders/cursor_blaze_no_trail.glsl
