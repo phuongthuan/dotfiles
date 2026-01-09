@@ -110,4 +110,44 @@ return {
       })
     end,
   },
+  {
+    'uga-rosa/translate.nvim',
+    keys = {
+      {
+        '<leader>tT',
+        '<cmd>Translate Vi<cr>',
+        mode = { 'n', 'v' },
+        desc = 'Translate Text',
+        silent = true,
+      },
+    },
+  },
+  {
+    'akinsho/toggleterm.nvim',
+    version = '*',
+    opts = {},
+    keys = {
+      { '<leader>tt', '<cmd>ToggleTerm<cr>', desc = 'Toggle Terminal', silent = true },
+    },
+  },
+  {
+    'uga-rosa/translate.nvim',
+    keys = {
+      {
+        '<leader>tT',
+        '<cmd>Translate Vi<cr>',
+        mode = { 'n', 'v' },
+        desc = 'Translate Text',
+        silent = true,
+      },
+    },
+  },
+  {
+    'akinsho/toggleterm.nvim',
+    version = '*',
+    opts = {},
+    keys = {
+      { '<leader>tt', '<cmd>ToggleTerm<cr>', desc = 'Toggle Terminal', silent = true },
+    },
+  },
 }
