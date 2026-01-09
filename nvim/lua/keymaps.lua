@@ -133,8 +133,6 @@ nmap('<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 nmap('<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 nmap('<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
-nmap('<leader>om', '<cmd>messages<cr>', { desc = 'Open Messages' })
-
 nmap('<leader>ts', function()
   ---@diagnostic disable-next-line: undefined-field
   local new_state = not vim.opt_local.spell:get()

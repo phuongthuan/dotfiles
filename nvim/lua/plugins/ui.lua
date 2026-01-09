@@ -3,6 +3,29 @@ local colors = require('core.colors')
 return {
   { 'nvim-mini/mini.starter', opts = { silent = true } },
   {
+    'nvim-mini/mini.notify',
+    lazy = false,
+    opts = {
+      window = {
+        config = function()
+          local has_statusline = vim.o.laststatus > 0
+          local pad = vim.o.cmdheight + (has_statusline and 1 or 0)
+          return { anchor = 'SE', col = vim.o.columns, row = vim.o.lines - pad }
+        end,
+      },
+    },
+    keys = {
+      {
+        '<leader>om',
+        function()
+          ---@diagnostic disable-next-line: undefined-global
+          MiniNotify.show_history()
+        end,
+        desc = 'Open Messages',
+      },
+    },
+  },
+  {
     'nvim-mini/mini.indentscope',
     opts = {
       symbol = '┆', -- alternative styles: ┆ ┊ ╎
