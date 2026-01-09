@@ -1,11 +1,13 @@
 ---
-description: 'Maestro E2E testing guidelines for EH Mobile Pro React Native application'
+description:
+  'Maestro E2E testing guidelines for EH Mobile Pro React Native application'
 applyTo: 'maestro/**/*.yml, maestro/**/*.js'
 ---
 
 # Maestro E2E Testing Instructions
 
-Guidelines for writing end-to-end tests using Maestro for the EH Mobile Pro React Native application.
+Guidelines for writing end-to-end tests using Maestro for the EH Mobile Pro
+React Native application.
 
 ## Project Structure
 
@@ -21,8 +23,8 @@ maestro/
 │   ├── launch_app.yml            # Platform-specific app launch
 │   ├── pin_input.yml             # PIN entry flow
 │   ├── restart_app.yml           # App restart flow
-│   ├── set_date_picker_native.yml    # iOS native date picker
-│   ├── set_hour_minute_am_pm_native.yml  # iOS native time picker
+│   ├── set_ios_date_picker_native.yml    # iOS native date picker
+│   ├── set_ios_hour_minute_am_pm_native.yml  # iOS native time picker
 │   └── go_to_*.yml               # Navigation helpers
 ├── workzone/                     # Workzone domain tests
 │   ├── setup/shared_utils.js     # Workzone shared utilities
@@ -37,33 +39,33 @@ maestro/
 
 ### App IDs
 
-| Platform | App ID |
-|----------|--------|
-| Android | `com.ehlife.preview` |
-| iOS | `com.employmentheropro.mobile.staging` |
+| Platform | App ID                                 |
+| -------- | -------------------------------------- |
+| Android  | `com.ehlife.preview`                   |
+| iOS      | `com.employmentheropro.mobile.staging` |
 
 ### Environment Variables
 
 All environment variables must use the `MAESTRO_` prefix.
 
-| Variable | Domain | Description |
-|----------|--------|-------------|
-| `MAESTRO_PREPAYROLL_EMAIL` | prepayroll | Test user email |
-| `MAESTRO_PREPAYROLL_PASSWORD` | prepayroll | Test user password |
-| `MAESTRO_PREPAYROLL_ADMIN_EMAIL` | prepayroll | Admin user email |
-| `MAESTRO_E2E_WORKZONE_TEST_USERNAME_1` | workzone | Workzone test user email |
-| `MAESTRO_E2E_WORKZONE_TEST_PASSWORD_1` | workzone | Workzone test user password |
-| `MAESTRO_KP_API_KEY` | workzone | KeyPay API key for workzone tests |
+| Variable                               | Domain     | Description                       |
+| -------------------------------------- | ---------- | --------------------------------- |
+| `MAESTRO_PREPAYROLL_EMAIL`             | prepayroll | Test user email                   |
+| `MAESTRO_PREPAYROLL_PASSWORD`          | prepayroll | Test user password                |
+| `MAESTRO_PREPAYROLL_ADMIN_EMAIL`       | prepayroll | Admin user email                  |
+| `MAESTRO_E2E_WORKZONE_TEST_USERNAME_1` | workzone   | Workzone test user email          |
+| `MAESTRO_E2E_WORKZONE_TEST_PASSWORD_1` | workzone   | Workzone test user password       |
+| `MAESTRO_KP_API_KEY`                   | workzone   | KeyPay API key for workzone tests |
 
 ## Test Domains
 
 The project has three independent test domains:
 
-| Domain | Directory | Status | Description |
-|--------|-----------|--------|-------------|
-| workzone | `maestro/workzone/` | ✅ Active | Workzone employee features (leave, timesheets, unavailability) |
-| prepayroll | `maestro/prepayroll/` | 🚧 Planned | Prepayroll HR features |
-| swag | `maestro/swag/` | 🚧 Planned | Swag/benefits features |
+| Domain     | Directory             | Status     | Description                                           |
+| ---------- | --------------------- | ---------- | ----------------------------------------------------- |
+| workzone   | `maestro/workzone/`   | ✅ Active  | Workzone features (leave, timesheets, unavailability) |
+| swag       | `maestro/swag/`       | ✅ Active  | Swag/benefits features                                |
+| prepayroll | `maestro/prepayroll/` | 🚧 Planned | Prepayroll HR features                                |
 
 ## Code Style
 
@@ -71,7 +73,7 @@ The project has three independent test domains:
 
 Always use inline format for simple commands:
 
-````yaml
+```yaml
 # ✅ GOOD - Inline format
 - tapOn: 'Submit'
 - assertVisible: 'Welcome'
@@ -82,11 +84,11 @@ Always use inline format for simple commands:
     text: 'Submit'
 - assertVisible:
     text: 'Welcome'
-````
+```
 
 Use expanded format only when additional properties are needed:
 
-````yaml
+```yaml
 # ✅ GOOD - Expanded format when properties are required
 - tapOn:
     id: 'submit-button'
@@ -100,7 +102,7 @@ Use expanded format only when additional properties are needed:
     visible:
       id: 'dashboard-screen'
     timeout: 30000
-````
+```
 
 ## Test Flow Patterns
 
@@ -108,7 +110,7 @@ Use expanded format only when additional properties are needed:
 
 Every test flow should follow this template:
 
-````yaml
+```yaml
 appId: com.ehlife.preview
 jsEngine: graaljs
 onFlowStart:
@@ -134,36 +136,36 @@ tags:
   - <feature>
 ---
 # Test steps below
-````
+```
 
 ### Authentication Flows
 
 #### Prepayroll Authentication
 
-````yaml
+```yaml
 - runFlow:
     file: ../common/authenticate.yml
     env:
       EMAIL: ${MAESTRO_PREPAYROLL_EMAIL}
       PASSWORD: ${MAESTRO_PREPAYROLL_PASSWORD}
       SWITCH_ENV: payroll
-````
+```
 
 #### Workzone Authentication
 
-````yaml
+```yaml
 - runFlow:
     file: ../../common/authenticate.yml
     env:
       EMAIL: ${MAESTRO_E2E_WORKZONE_TEST_USERNAME_1}
       PASSWORD: ${MAESTRO_E2E_WORKZONE_TEST_PASSWORD_1}
-````
+```
 
 ### Cross-Platform Handling
 
 Handle platform differences explicitly:
 
-````yaml
+```yaml
 # Platform-specific app launch
 - runFlow:
     when:
@@ -196,13 +198,13 @@ Handle platform differences explicitly:
       - scrollUntilVisible:
           element:
             text: 'Target Element'
-````
+```
 
 ## Element Selection
 
 ### Best Practices
 
-````yaml
+```yaml
 # ✅ PREFERRED - Use testID/accessibilityId
 - tapOn:
     id: 'request-leave-button'
@@ -219,11 +221,11 @@ Handle platform differences explicitly:
 - tapOn:
     id: 'selected-date-cell'
     index: 0
-````
+```
 
 ## Waiting and Timing
 
-````yaml
+```yaml
 # ✅ PREFERRED - Wait for specific element
 - extendedWaitUntil:
     visible:
@@ -243,13 +245,13 @@ Handle platform differences explicitly:
     id: 'text-input-email_input'
     repeat: 2
     delay: 1000
-````
+```
 
 ## JavaScript Utilities Pattern
 
 ### Shared Configuration (shared_utils.js)
 
-````javascript
+```javascript
 /**
  * Shared configuration for KeyPay API requests
  */
@@ -266,7 +268,7 @@ const KP_SHARED_CONFIG = {
 };
 
 const KpDateUtils = {
-  formatDateForAPI: date => {
+  formatDateForAPI: (date) => {
     const dateObj = new Date(date);
     const year = dateObj.getFullYear();
     const month = String(dateObj.getMonth() + 1).padStart(2, '0');
@@ -281,11 +283,11 @@ output.shared = {
   KpDateUtils,
   KP_SHARED_CONFIG,
 };
-````
+```
 
 ### Feature Utilities (leave_utils.js)
 
-````javascript
+```javascript
 const { KP_SHARED_CONFIG } = output.shared;
 
 const KP_LEAVE_CONFIG = {
@@ -317,9 +319,9 @@ const KpLeaveApiUtils = {
     return response.ok;
   },
 
-  cancelAllLeaveRequests: token => {
+  cancelAllLeaveRequests: (token) => {
     const pendingLeaveRequests = KpLeaveApiUtils.getLeaveRequests(token);
-    pendingLeaveRequests.forEach(request => {
+    pendingLeaveRequests.forEach((request) => {
       KpLeaveApiUtils.deleteLeaveRequest(token, request.id);
     });
   },
@@ -330,78 +332,89 @@ output.leave = {
   KpLeaveApiUtils,
   KP_LEAVE_CONFIG,
 };
-````
+```
 
 ### Cleanup Script (clear_all.js)
 
-````javascript
+```javascript
 const { KpLeaveApiUtils } = output.leave;
 
 KpLeaveApiUtils.cancelAllLeaveRequests(MAESTRO_KP_API_KEY);
-````
+```
 
 ### Setup Script (create_leave_request.js)
 
-````javascript
+```javascript
 const { KpDateUtils } = output.shared;
 const { KP_LEAVE_CONFIG, KpLeaveApiUtils } = output.leave;
 
 const token = MAESTRO_KP_API_KEY;
 const dateRange = KpDateUtils.generateDateRange(12, 15);
-const leaveHours = KpLeaveApiUtils.getLeaveHours(token, dateRange.apiStartDate, dateRange.apiEndDate);
+const leaveHours = KpLeaveApiUtils.getLeaveHours(
+  token,
+  dateRange.apiStartDate,
+  dateRange.apiEndDate,
+);
 
 // Export expected values for assertions in test flow
 output.leave.expectedLeaveHours = leaveHours;
-output.leave.expectedSelectStartMonthYear = KpDateUtils.formatMonthYear(dateRange.startDate);
-````
+output.leave.expectedSelectStartMonthYear = KpDateUtils.formatMonthYear(
+  dateRange.startDate,
+);
+```
 
 ## iOS-Specific Patterns
 
 ### Native Date Picker (iOS)
 
-Use the shared flow `maestro/common/set_date_picker_native.yml` for iOS scroll wheel date pickers:
+Use the shared flow `maestro/common/set_ios_date_picker_native.yml` for iOS
+scroll wheel date pickers:
 
-````yaml
+```yaml
 - runFlow:
     when:
       platform: iOS
-    file: ../../common/set_date_picker_native.yml
+    file: ../../common/set_ios_date_picker_native.yml
     env:
       DAY: '15'
       MONTH: 'January'
       YEAR: '2026'
-````
+```
 
 Parameters:
+
 - `DAY`: Day of month (e.g., "15")
 - `MONTH`: Full month name (e.g., "January")
 - `YEAR`: Four-digit year (e.g., "2026")
 
 ### Native Time Picker (iOS)
 
-Use the shared flow `maestro/common/set_hour_minute_am_pm_native.yml` for iOS time pickers:
+Use the shared flow `maestro/common/set_ios_hour_minute_am_pm_native.yml` for
+iOS time pickers:
 
-````yaml
+```yaml
 - runFlow:
     when:
       platform: iOS
-    file: ../../common/set_hour_minute_am_pm_native.yml
+    file: ../../common/set_ios_hour_minute_am_pm_native.yml
     env:
       HOUR: '8'
       MINUTES: '20'
       AM_PM: 'AM'
-````
+```
 
 Parameters:
+
 - `HOUR`: Hour value (e.g., "8")
 - `MINUTES`: Minutes value (e.g., "20")
 - `AM_PM`: "AM" or "PM"
 
 ### Flaky hideKeyboard on iOS
 
-The `hideKeyboard` command can be flaky on iOS. Use this pattern to handle it reliably:
+The `hideKeyboard` command can be flaky on iOS. Use this pattern to handle it
+reliably:
 
-````yaml
+```yaml
 - runFlow:
     when:
       platform: iOS
@@ -413,9 +426,10 @@ The `hideKeyboard` command can be flaky on iOS. Use this pattern to handle it re
           label: 'Keyboard hidden successfully on iOS'
     label: 'Handle flaky hide keyboard for iOS'
 - waitForAnimationToEnd
-````
+```
 
 Key points:
+
 - Tap on another element after `hideKeyboard` to ensure focus changes
 - Assert a previously hidden element is visible to verify keyboard is dismissed
 - Always add `waitForAnimationToEnd` after the flow
@@ -424,7 +438,7 @@ Key points:
 
 ### Date Picker Navigation
 
-````yaml
+```yaml
 - evalScript: ${output.navigationAttempts = 0}
 - repeat:
     while:
@@ -445,11 +459,11 @@ Key points:
 - tapOn:
     text: '15'
     label: 'Select date 15'
-````
+```
 
 ### Retry Mechanism
 
-````yaml
+```yaml
 - retry:
     maxRetries: 3
     commands:
@@ -461,11 +475,11 @@ Key points:
       - waitForAnimationToEnd
       - assertVisible:
           id: 'success-screen'
-````
+```
 
 ### Conditional Flows
 
-````yaml
+```yaml
 - runFlow:
     when:
       visible: 'Accept risk'
@@ -473,20 +487,20 @@ Key points:
     commands:
       - tapOn: 'Accept risk'
       - waitForAnimationToEnd
-````
+```
 
 ## Test Tagging Strategy
 
 Use tags for test organization and selective execution:
 
-| Tag | Description |
-|-----|-------------|
+| Tag          | Description              |
+| ------------ | ------------------------ |
 | `smoke-test` | Core functionality tests |
-| `workzone` | Workzone domain tests |
-| `prepayroll` | Prepayroll domain tests |
-| `swag` | Swag domain tests |
-| `leave` | Leave feature tests |
-| `timesheets` | Timesheet feature tests |
+| `workzone`   | Workzone domain tests    |
+| `prepayroll` | Prepayroll domain tests  |
+| `swag`       | Swag domain tests        |
+| `leave`      | Leave feature tests      |
+| `timesheets` | Timesheet feature tests  |
 
 ## Best Practices
 

@@ -1,5 +1,4 @@
 -- https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/config.lua
-
 return {
   {
     'MeanderingProgrammer/render-markdown.nvim',
@@ -73,8 +72,8 @@ return {
           -- adapter = 'gemini_cli',
           adapter = {
             name = 'copilot',
-            model = 'gpt-4.1',
-            -- model = 'claude-haiku-4.5',
+            -- model = 'gpt-4.1',
+            model = 'claude-haiku-4.5',
             -- model = 'claude-opus-4.5',
             -- model = 'claude-sonnet-4.5',
           },
