@@ -1,3 +1,4 @@
+local colors = require('core.colors')
 local mapper = require('core.utils').mapper_factory
 local nmap = mapper('n')
 local vmap = mapper('v')
@@ -7,7 +8,7 @@ return {
     'NeogitOrg/neogit',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'echasnovski/mini.pick',
+      'nvim-mini/mini.pick',
     },
     command = { 'Neogit', 'NeogitCommit', 'NeogitLogCurrent', 'NeogitResetState' },
     opts = {
@@ -110,26 +111,14 @@ return {
     },
   },
   {
-    'akinsho/git-conflict.nvim',
-    version = '*',
+    'phuongthuan/git-conflict.nvim',
+    -- TODO: revert when all issues in https://github.com/akinsho/git-conflict.nvim/issues are fixed
     init = function()
-      vim.api.nvim_create_autocmd('User', {
-        pattern = 'GitConflictDetected',
-        callback = function()
-          vim.notify('Git Conflict Detected  ', vim.log.levels.ERROR)
-          vim.keymap.set('n', 'cww', function()
-            ---@diagnostic disable-next-line: undefined-global
-            engage.conflict_buster()
-            ---@diagnostic disable-next-line: undefined-global
-            create_buffer_local_mappings()
-          end)
-        end,
-      })
-
-      vim.api.nvim_set_hl(0, 'GitConflictCurrent', { fg = '#fbf1c7', bg = '#1d3b40' })
-      vim.api.nvim_set_hl(0, 'GitConflictIncoming', { fg = '#fbf1c7', bg = '#1d3450' })
+      vim.api.nvim_set_hl(0, 'GitConflictCurrent', { fg = colors.bright_fg, bg = '#1d3b40' })
+      vim.api.nvim_set_hl(0, 'GitConflictIncoming', { fg = colors.bright_fg, bg = '#1d3450' })
     end,
     opts = {
+      disable_diagnostics = true,
       default_mappings = {
         next = 'nc',
         prev = 'pc',

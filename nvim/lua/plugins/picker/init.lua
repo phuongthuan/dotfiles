@@ -49,7 +49,7 @@ return {
     config = function()
       require('mini.pick').setup({
         mappings = {
-          choose_in_split = '<C-h>',
+          choose_in_split = '<C-s>',
           move_down = '<C-j>',
           move_up = '<C-k>',
           scroll_down = '<C-d>',
@@ -58,15 +58,30 @@ return {
           scroll_up = '<C-u>',
           delete_left = '<C-dl>',
         },
-        window = { config = window_config, prompt_prefix = '  ' },
-        options = { content_from_bottom = true },
+        window = {
+          prompt_prefix = '  ',
+          config = {
+            border = 'rounded',
+          },
+        },
+        -- options = { content_from_bottom = true },
       })
 
       vim.ui.select = MiniPick.ui_select
 
       nmap('<leader>,', function()
-        local excludes = _is_mobile_repo() and { 'ContractPdfPreview/', '*.cjs', 'coverage/', 'android/', 'fastlane/' }
+        local excludes = _is_mobile_repo()
+            and {
+              'ContractPdfPreview/',
+              '*.cjs',
+              'coverage/',
+              'android/',
+              'fastlane/',
+              'ios/**/Contents.json',
+              'ios/**/*.ttf',
+            }
           or nil
+
         local command_opts = _is_mobile_repo() and {} or { '--no-ignore' }
 
         Picker.find_files(
@@ -124,7 +139,7 @@ return {
         })
       end, { desc = 'Files EH (fd)' })
 
-      nmap('<leader>fR', function()
+      nmap('<leader>fr', function()
         Picker.find_files({ tool = 'fd' }, {
           source = {
             cwd = env.REFERENCES_DIR,
@@ -142,6 +157,8 @@ return {
           'mason/packages/**',
           'harpoon/**',
           'karabiner/automatic_backups/**',
+          'codecompanion/**/*.json',
+          'codecompanion-history/**/*.json',
           '**/tests/screenshots/**',
           '**/tests/**',
           '**/spec/**',
@@ -199,14 +216,14 @@ return {
         MiniPick.builtin.grep_live({ tool = 'rg' }, { source = { name = 'Grep buffers (rg)' } })
       end, { desc = 'Grep Live (buffers)' })
 
-      nmap('<leader>fc', function()
+      nmap('<leader>fd', function()
         Picker.find_files({ tool = 'fd' }, {
           source = {
             cwd = env.DOTFILES,
             name = '.dotfiles (fd)',
           },
         })
-      end, { desc = 'Config (.dotfiles)' })
+      end, { desc = '.dotfiles' })
 
       nmap('<leader>sd', function()
         MiniPick.builtin.grep_live({ tool = 'rg' }, {
@@ -238,7 +255,7 @@ return {
         MiniExtra.pickers.spellsuggest({ n_suggestions = 15 })
       end, { desc = 'Spell Suggest Word' })
 
-      nmap('<leader>fr', function()
+      nmap('<leader>ff', function()
         MiniExtra.pickers.visit_paths(nil, { source = { name = ' Frecently accessed files' } })
       end, { desc = 'Frecently Accessed' })
     end,

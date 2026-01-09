@@ -3,7 +3,8 @@ local detail = false
 return {
   {
     'stevearc/oil.nvim',
-    enabled = false,
+    dependencies = { 'nvim-mini/mini.icons', opts = {} },
+    lazy = false,
     config = function()
       local oil = require('oil')
 
@@ -17,14 +18,11 @@ return {
           ['<C-v>'] = {
             'actions.select',
             opts = { vertical = true },
-            desc = 'Open the entry in a vertical split',
           },
-          -- ['<C-h>'] = {
-          --   'actions.select',
-          --   opts = { horizontal = true },
-          --   desc = 'Open the entry in a horizontal split',
-          -- },
-          ['<C-r>'] = 'actions.refresh',
+          ['<C-s>'] = {
+            'actions.select',
+            opts = { horizontal = true },
+          },
           ['gd'] = {
             desc = 'Oil - Toggle File Detail View',
             callback = function()
@@ -41,10 +39,14 @@ return {
               end
             end,
           },
+          ['<C-r>'] = 'actions.refresh',
+          ['<C-y>'] = 'actions.copy_entry_path',
+          ['>'] = 'actions.toggle_hidden',
+
           -- Disabled keymaps
-          ['<C-t>'] = false,
+          ['<C-c>'] = false,
           ['<C-p>'] = false,
-          ['<C-s>'] = false,
+          ['<C-t>'] = false,
           ['<C-b>'] = false,
           ['<C-h>'] = false,
           ['<C-l>'] = false,
@@ -63,6 +65,7 @@ return {
   },
   {
     'nvim-mini/mini.files',
+    enabled = false,
     config = function()
       local files = require('mini.files')
 

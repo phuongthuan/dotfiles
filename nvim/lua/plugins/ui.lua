@@ -114,7 +114,7 @@ return {
       {
         '<leader>gob',
         function()
-          vim.ui.input({ prompt = ' Branch' }, function(branch)
+          vim.ui.input({ prompt = ' Branch: ' }, function(branch)
             -- User pressed <Esc> (cancel input)
             if branch == nil then
               return
@@ -147,19 +147,20 @@ return {
         -- TEST: test
         -- PERF: perf
 
-        FIX = { icon = ' ', color = colors.red, alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE' } }, -- FIX: fix
+        FIX = { icon = ' ', color = colors.red, alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE' } },
         TODO = { icon = ' ', color = colors.light_blue },
         HACK = { icon = ' ', color = colors.yellow, alt = { 'DON SKIP' } },
         WARN = { icon = ' ', color = colors.yellow, alt = { 'WARNING', 'XXX' } },
         PERF = { icon = ' ', alt = { colors.light_blue, 'PERFORMANCE', 'OPTIMIZE' } },
-        NOTE = { icon = ' ', color = colors.aqua, alt = { 'INFO', 'READ', 'COLORS' } },
-        TEST = { icon = '⏲ ', color = colors.light_blue, alt = { 'TESTING', 'PASSED', 'FAILED' } },
+        NOTE = { icon = ' ', color = colors.aqua, alt = { 'INFO', 'READ', 'COLORS' } },
+        TEST = { icon = '󰙨 ', color = colors.light_blue, alt = { 'TESTING', 'PASSED', 'FAILED' } },
       },
     },
     keys = {
       {
         ']t',
         function()
+          ---@diagnostic disable-next-line: undefined-global
           todo_comments.jump_next()
         end,
         desc = 'Next Todo Comment',
@@ -167,6 +168,7 @@ return {
       {
         '[t',
         function()
+          ---@diagnostic disable-next-line: undefined-global
           todo_comments.jump_prev()
         end,
         desc = 'Prev Todo Comment',
