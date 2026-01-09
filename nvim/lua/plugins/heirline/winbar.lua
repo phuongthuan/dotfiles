@@ -1,22 +1,37 @@
+local env = require('core.env')
 local colors = require('core.colors')
-local utils = require('heirline.utils')
 local conditions = require('heirline.conditions')
-
-local Spacer = { provider = ' ' }
+local common = require('plugins.heirline.common')
 
 local VimLogo = { provider = ' ', hl = 'VimLogo' }
 
-local FileNameBlock = {
-  init = function(self)
-    self.filename = vim.api.nvim_buf_get_name(0)
+local GitHubActionWorkflowIcon = {
+  condition = common.IsGitHubActionWorkflow,
+  provider = function()
+    return ' '
   end,
+  hl = { fg = colors.purple, bold = true },
+  on_click = {
+    callback = function()
+      local repo = 'eh-mobile-pro'
+      local user = env.GITHUB_USERNAME
+      local workflow = vim.fn.expand('%:t')
+
+      -- Build the URL (no workflow specified)
+      local url =
+        string.format('https://github.com/Thinkei/%s/actions/workflows/%s?query=actor%%3A%s', repo, workflow, user)
+
+      vim.fn.system({ 'open', url })
+
+      vim.notify('📦 Opening GitHub Actions: ' .. url, vim.log.levels.INFO)
+    end,
+    name = 'wb_gha_workflow_click',
+  },
 }
 
 local FileIcon = {
   init = function(self)
-    local filename = self.filename
-    local extension = vim.fn.fnamemodify(filename, ':e')
-    self.icon, self.icon_color = require('nvim-web-devicons').get_icon_color(filename, extension, { default = true })
+    self.icon, self.icon_color = common.GetFileIcons()
   end,
   provider = function(self)
     return self.icon and (self.icon .. ' ')
@@ -30,26 +45,63 @@ local FileType = {
   condition = function()
     return vim.bo.filetype ~= ''
   end,
-  FileIcon,
+  init = function(self)
+    self.is_gha_workflow = common.IsGitHubActionWorkflow()
+    self.icon, self.icon_color = common.GetFileIcons()
+  end,
+  provider = function(self)
+    if self.is_gha_workflow then
+      return GitHubActionWorkflowIcon.provider()
+    else
+      return FileIcon.provider(self)
+    end
+  end,
+  hl = function(self)
+    if self.is_gha_workflow then
+      return GitHubActionWorkflowIcon.hl
+    else
+      return FileIcon.hl(self)
+    end
+  end,
+  on_click = {
+    callback = function(self)
+      if self.is_gha_workflow then
+        GitHubActionWorkflowIcon.on_click.callback()
+      end
+    end,
+    name = 'wb_filetype_click',
+  },
 }
 
 local FileName = {
-  provider = function(self)
-    -- first, trim the pattern relative to the current directory. For other
-    -- options, see :h filename-modifers
-    local filename = vim.fn.fnamemodify(self.filename, ':.')
+  provider = function()
+    local filename
+
+    if package.loaded.oil then
+      filename = require('oil').get_current_dir()
+    end
+
+    if not filename then
+      filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':.')
+    end
+
     if filename == '' then
       return '[No Name]'
     end
-    -- now, if the filename would occupy more than 1/4th of the available
-    -- space, we trim the file path to its initials
-    -- See Flexible Components section below for dynamic truncation
-    if not conditions.width_percent_below(#filename, 0.25) then
+
+    if not conditions.width_percent_below(#filename, 0.90) then
       filename = vim.fn.pathshorten(filename)
     end
+
     return filename
   end,
-  hl = { fg = colors.bright_fg },
+  hl = function()
+    if vim.bo.modified then
+      return { fg = colors.aqua, bold = true, force = true }
+    else
+      return { fg = colors.bright_fg }
+    end
+  end,
 }
 
 local FileFlags = {
@@ -69,14 +121,6 @@ local FileFlags = {
   },
 }
 
-local FileNameModifer = {
-  hl = function()
-    if vim.bo.modified then
-      return { fg = colors.aqua, bold = true, force = true }
-    end
-  end,
-}
-
 local FileSize = {
   provider = function()
     -- stackoverflow, compute human readable file size
@@ -92,12 +136,11 @@ local FileSize = {
   hl = { fg = colors.purple },
 }
 
-return utils.insert(
-  FileNameBlock,
+return {
   FileType,
-  utils.insert(FileNameModifer, FileName),
+  FileName,
   FileSize,
   FileFlags,
   { provider = '%=' },
-  VimLogo
-)
+  VimLogo,
+}

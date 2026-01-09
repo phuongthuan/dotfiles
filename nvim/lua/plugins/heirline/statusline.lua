@@ -1,12 +1,18 @@
+local env = require('core.env')
 local colors = require('core.colors')
 local icons = require('core.icons')
 local conditions = require('heirline.conditions')
+local common = require('plugins.heirline.common')
+local Overseer = require('plugins.heirline.overseer')
+local CodeCompanionChatBuffer = require('plugins.heirline.codecompanion')
+
+local disabled_filetypes = function(self)
+  return not conditions.buffer_matches({
+    filetype = self.filetypes,
+  }) and not common.IsCodeCompanion()
+end
 
 local Spacer = { provider = ' ' }
-
-local IsCodeCompanion = function()
-  return vim.bo.filetype == 'codecompanion'
-end
 
 local ViMode = {
   static = {
@@ -85,51 +91,117 @@ local ViMode = {
   },
 }
 
+local GitIcon = {
+  provider = function()
+    return '  '
+  end,
+  hl = { fg = colors.purple },
+  on_click = {
+    callback = function(self)
+      local branch = self.status_dict.head
+      if branch then
+        vim.fn.setreg('+', branch)
+        vim.notify('Copied branch  "' .. branch .. '" to clipboard ✔', vim.log.levels.INFO)
+      else
+        vim.notify('Could not determine branch name', vim.log.levels.WARN)
+      end
+    end,
+    name = 'sl_git_branch_icon_click',
+  },
+}
+
+local GitHubActionsIcon = {
+  condition = function(self)
+    return conditions.is_git_repo() and not conditions.buffer_matches({
+      filetype = self.filetypes,
+    })
+  end,
+  provider = function()
+    return '  '
+  end,
+  hl = { fg = colors.bright_fg, bold = true },
+  on_click = {
+    callback = function()
+      local repo = 'eh-mobile-pro'
+      local user = env.GITHUB_USERNAME
+
+      -- Build the URL (no workflow specified)
+      local url = string.format('https://github.com/Thinkei/%s/actions?query=actor%%3A%s', repo, user)
+
+      vim.fn.system({ 'open', url })
+
+      vim.notify(' Opening GitHub Actions: ' .. url, vim.log.levels.INFO)
+    end,
+    name = 'sl_gha_click',
+  },
+}
+
 local Git = {
-  condition = conditions.is_git_repo,
+  condition = function(self)
+    return conditions.is_git_repo() and not conditions.buffer_matches({
+      filetype = self.filetypes,
+    })
+  end,
   init = function(self)
     self.status_dict = vim.b.gitsigns_status_dict
-    self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
+    self.added_count = self.status_dict.added or 0
+    self.removed_count = self.status_dict.removed or 0
+    self.changed_count = self.status_dict.changed or 0
   end,
   hl = { fg = colors.orange },
-  Spacer,
+  GitIcon,
   {
     provider = function(self)
-      return ' ' .. self.status_dict.head
+      return self.status_dict.head
     end,
+    on_click = {
+      callback = function(self)
+        -- Get PR URL using gh CLI
+        local branch = self.status_dict.head
+        local pr_url_id = vim.trim(vim.fn.system({ 'gh', 'pr', 'view', branch, '--json', 'url', '--jq', '.url' }))
+
+        if pr_url_id ~= '' then
+          vim.fn.system({ 'open', pr_url_id })
+          vim.notify(' Opening PR: ' .. pr_url_id, vim.log.levels.INFO)
+        else
+          vim.notify('No PR found !', vim.log.levels.WARN)
+        end
+      end,
+      name = 'sl_git_branch_name_click',
+    },
   },
   {
     condition = function(self)
-      return self.has_changes
+      return self.added_count > 0 or self.removed_count > 0 or self.changed_count > 0
     end,
-    provider = '[',
+    provider = '(',
   },
   {
     provider = function(self)
-      local count = self.status_dict.added or 0
+      local count = self.added_count
       return count > 0 and ('+' .. count)
     end,
     hl = { fg = colors.green },
   },
   {
     provider = function(self)
-      local count = self.status_dict.removed or 0
+      local count = self.removed_count
       return count > 0 and ('-' .. count)
     end,
     hl = { fg = colors.red },
   },
   {
     provider = function(self)
-      local count = self.status_dict.changed or 0
+      local count = self.changed_count
       return count > 0 and ('~' .. count)
     end,
     hl = { fg = colors.yellow },
   },
   {
     condition = function(self)
-      return self.has_changes
+      return self.added_count > 0 or self.removed_count > 0 or self.changed_count > 0
     end,
-    provider = ']',
+    provider = ')',
   },
 }
 
@@ -187,19 +259,55 @@ local Diagnostics = {
 }
 
 local FileName = {
-  conditifn = function(self)
-    return not conditions.buffer_matches({
-      filetype = self.filetypes,
-    }) and not IsCodeCompanion() and not vim.bo.filetype == 'minifiles'
-  end,
+  condition = disabled_filetypes,
   provider = function()
     local filename = vim.fn.expand('%:t')
+
     if filename == '' then
-      return ' [No Name] '
+      return '[No Name]'
     end
+
     return ' ' .. filename .. ' '
   end,
   hl = { fg = colors.bright_fg, bold = true },
+  on_click = {
+    callback = function()
+      require('aerial').toggle()
+    end,
+    name = 'wb_filename_click',
+  },
+}
+
+local Filepath = {
+  condition = disabled_filetypes,
+  provider = function()
+    local filename
+
+    if package.loaded.oil then
+      filename = require('oil').get_current_dir()
+    end
+
+    if not filename then
+      filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':.')
+    end
+
+    if filename == '' then
+      return '[No Name]'
+    end
+
+    if not conditions.width_percent_below(#filename, 0.90) then
+      filename = vim.fn.pathshorten(filename)
+    end
+
+    return ' ' .. filename .. ' '
+  end,
+  hl = { fg = colors.bright_fg, bold = true },
+  on_click = {
+    callback = function()
+      require('aerial').toggle()
+    end,
+    name = 'wb_filename_click',
+  },
 }
 
 local FileIcon = {
@@ -219,22 +327,11 @@ local FileIcon = {
   end,
 }
 
--- FILETYPE --
 local FileType = {
   provider = function()
     return ' ' .. vim.bo.filetype .. ' '
   end,
   hl = { fg = colors.purple },
-}
-
--- LINE & COLUMN --
-local LineCol = {
-  provider = function()
-    local line = vim.fn.line('.')
-    local col = vim.fn.col('.')
-    return string.format(' L%d:C%d ', line, col)
-  end,
-  hl = { fg = colors.black, bg = colors.bright_fg },
 }
 
 local FileEncoding = {
@@ -253,25 +350,33 @@ local LSP = {
     for i, server in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
       table.insert(names, server.name)
     end
-    return ' 󰿘 [' .. table.concat(names, ' ') .. ']'
+    -- return ' 󰿘 [' .. table.concat(names, ' ') .. ']'
+    return '  [' .. table.concat(names, ' ') .. ']'
   end,
   hl = { fg = colors.yellow, bold = true },
+  on_click = {
+    callback = function()
+      vim.defer_fn(function()
+        vim.cmd('LspInfo')
+      end, 100)
+    end,
+    name = 'sl_lsp_click',
+  },
 }
 
--- I take no credits for this! 🦁
 local ScrollBar = {
   static = {
-    sbar = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' },
-    -- Another variant, because the more choice the better.
-    -- sbar = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' }
+    -- sbar = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' },
+    sbar = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' },
   },
+  condition = disabled_filetypes,
   provider = function(self)
     local curr_line = vim.api.nvim_win_get_cursor(0)[1]
     local lines = vim.api.nvim_buf_line_count(0)
     local i = math.floor((curr_line - 1) / lines * #self.sbar) + 1
     return string.rep(self.sbar[i], 2)
   end,
-  hl = { fg = colors.blue, bg = colors.bright_bg },
+  hl = { fg = colors.purple },
 }
 
 local Ruler = {
@@ -292,29 +397,53 @@ local Ruler = {
       fg = colors.bright_bg,
       bg = colors.bright_fg,
     },
+    on_click = {
+      callback = function()
+        local line = vim.api.nvim_win_get_cursor(0)[1]
+        local total_lines = vim.api.nvim_buf_line_count(0)
+
+        if math.floor((line / total_lines)) > 0.5 then
+          vim.cmd('normal! gg')
+        else
+          vim.cmd('normal! G')
+        end
+      end,
+      name = 'sl_ruler_click',
+    },
   },
 }
 
 return {
   static = {
-    left_pad = Spacer,
-    right_pad = Spacer,
+    filetypes = {
+      '^git.*',
+      '^minifiles$',
+      '^toggleterm$',
+      '^Neogit',
+      '^health',
+      'oil',
+    },
+    force_inactive_filetypes = {
+      '^netrw$',
+    },
   },
-  hl = function()
-    if conditions.is_active() then
-      return { bg = colors.bright_bg, fg = colors.bright_fg }
-    else
-      return { bg = colors.black, fg = colors.gray }
-    end
+  condition = function(self)
+    return not conditions.buffer_matches({
+      filetype = self.force_inactive_filetypes,
+    })
   end,
-  ViMode,
-  Git,
-  FileName,
-  Diagnostics,
-  { provider = '%=' },
-  LSP,
-  FileType,
-  -- FileEncoding,
-  -- ScrollBar,
-  Ruler,
+  {
+    ViMode,
+    ScrollBar,
+    Git,
+    GitHubActionsIcon,
+    FileName,
+    Diagnostics,
+    CodeCompanionChatBuffer,
+    { provider = '%=' },
+    Overseer,
+    LSP,
+    FileType,
+    Ruler,
+  },
 }

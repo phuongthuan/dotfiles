@@ -17,8 +17,8 @@ return {
           local conditions = require('heirline.conditions')
 
           return conditions.buffer_matches({
-            buftype = { 'nofile', 'prompt', 'help', 'quickfix' },
-            filetype = { '^git.*', 'oil', 'lspinfo', 'minifiles' },
+            buftype = { 'nofile', 'prompt', 'help', 'quickfix', 'terminal' },
+            filetype = { '^git.*', 'lspinfo', 'minifiles', 'codecompanion', 'toggleterm' },
           }, args.buf)
         end,
       },
