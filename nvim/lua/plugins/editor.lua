@@ -3,6 +3,20 @@ local nmap = require('core.utils').mapper_factory('n')
 return {
   { 'mg979/vim-visual-multi', branch = 'master' },
   {
+    'stevearc/overseer.nvim',
+    opts = {
+      templates = {
+        'builtin',
+        'vscode',
+      },
+    },
+    keys = {
+      { '<leader>oo', '<cmd>OverseerToggle!<cr>', desc = 'Overseer: Open' },
+      { '<leader>or', '<cmd>OverseerRun<cr>', desc = 'Overseer: Run' },
+      { '<leader>ot', '<cmd>OverseerTaskAction<cr>', desc = 'Overseer: Task Action' },
+    },
+  },
+  {
     'kylechui/nvim-surround',
     event = { 'BufReadPost', 'BufNewFile' },
     opts = {},
