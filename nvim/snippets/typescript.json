@@ -464,6 +464,17 @@
     ],
     "description": "useApi POST method"
   },
+  "Array.from mock data": {
+    "prefix": "arrmock",
+    "body": [
+      "const ${1:mockData} = Array.from({ length: ${2:10} }, (_, index) => ({",
+      "  id: `${3:item}-\\${index + 1}`,",
+      "  name: `${4:Item}-\\${index + 1}`,",
+      "  createdAt: new Date().toISOString(),",
+      "}));$0"
+    ],
+    "description": "Generate mock array data using Array.from with incrementing values"
+  },
   "makeFetchAction GET": {
     "prefix": "ehmfa",
     "body": [
