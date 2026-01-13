@@ -102,14 +102,14 @@ nmap('<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { sil
 
 -- Get current file path
 nmap(
-  '<leader>gyp',
+  '<C-p>',
   [[:let @+=substitute(expand("%:p"), getcwd() . '/', '', '')<cr>:echo " " . @+ . " copied to clipboard ✔"<cr>]],
   { desc = 'Copy Current Path', noremap = true }
 )
 
 -- Copy the content of current file to clipboard
 nmap(
-  '<leader>gyP',
+  '<C-y>',
   [[:%y+<cr>:echo "Content copied to clipboard ✔"<cr>]],
   { desc = 'Copy Current File Content', noremap = true }
 )
