@@ -7,6 +7,9 @@ alias rv='ruby -v'
 alias nv='node -v'
 alias lv='lua -v'
 
+# opencode
+alias oc='opencode'
+
 # Open iCloud Drive
 alias ic='eval nvim $ICLOUD_DRIVE'
 

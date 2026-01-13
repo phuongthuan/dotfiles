@@ -13,6 +13,16 @@ ol() {
   fi
 }
 
+# Open Jira with given card id
+ojr() {
+  local card_id="$1"
+  if [ -z "$card_id" ]; then
+    open "https://employmenthero.atlassian.net/jira/software/projects/SGF/boards/455/backlog"
+  else
+    open "https://employmenthero.atlassian.net/browse/${card_id}"
+  fi
+}
+
 # Open Google Translation
 otl() {
   if [ -z "$1" ]; then
@@ -21,11 +31,6 @@ otl() {
     text="$1"
     open "https://translate.google.com/?sl=en&tl=vi&text=$text"
   fi
-}
-
-# Open ChatGPT
-gpt() {
-  open "https://chatgpt.com/"
 }
 
 so() {
