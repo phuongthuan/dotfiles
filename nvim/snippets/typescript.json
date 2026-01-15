@@ -616,5 +616,60 @@
       "export default ${1};",
       "$0"
     ]
+  },
+  "Jest mock export selector": {
+    "prefix": "jmocks",
+    "body": [
+      "jest.mock('${1:../../selectors}', () => {",
+      "  return {",
+      "    ...jest.requireActual('${1:../../selectors}'),",
+      "    ${2:userSelector}: jest.fn(),",
+      "  };",
+      "});$0"
+    ],
+    "description": "Jest mock module while preserving actual exports"
+  },
+  "Jest mock export default component": {
+    "prefix": "jmockedc",
+    "body": [
+      "jest.mock('${1:../components/TestComponent}', () => {",
+      "  const { Text } = require('react-native');",
+      "  return {",
+      "    __esModule: true,",
+      "    default: () => <Text>${2:Mock Test Component}</Text>,",
+      "  };",
+      "}));$0"
+    ],
+    "description": "Jest mock default exported component"
+  },
+  "Jest mock export component": {
+    "prefix": "jmockec",
+    "body": [
+      "jest.mock('${1:@ehrocks/rn-swag-ui}', () => {",
+      "  const { Text } = require('react-native');",
+      "  return {",
+      "    ...jest.requireActual('${1:@ehrocks/rn-swag-ui}'),",
+      "    ${2:CollapsibleHeaderView}: {",
+      "      ${3:FlatList}: () => <Text>${4:Mock CollapsibleHeaderView.FlatList}</Text>,",
+      "    },",
+      "  };",
+      "});$0"
+    ],
+    "description": "Jest mock named exported component"
+  },
+  "Jest mock export hook": {
+    "prefix": "jmockedh",
+    "body": [
+      "jest.mock('${1:../../../useApprove}', () => {",
+      "  return {",
+      "    __esModule: true,",
+      "    default: jest.fn(() => ({",
+      "      ${2:mutate}: jest.fn(),",
+      "      ${3:isLoading}: false,",
+      "    })),",
+      "  };",
+      "});$0"
+    ],
+    "description": "Jest mock default exported useMutation hook"
   }
 }
