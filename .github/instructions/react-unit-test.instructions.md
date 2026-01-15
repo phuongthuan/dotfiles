@@ -2,7 +2,7 @@
 description:
   'React Native unit testing guidelines for eh-mobile-pro using Jest and
   @testing-library/react-native'
-applyTo: 'app/**/*.spec.js, app/**/__tests__/**/*.js'
+applyTo: '**/*.spec.js, **/__tests__/**/*.js, **/__test__/**/*.js'
 ---
 
 # React Native Unit Testing Instructions
@@ -20,7 +20,8 @@ Guidelines for writing unit tests in `eh-mobile-pro` using Jest and
 
 ## Test File Location
 
-Test files are located in `__tests__` directories adjacent to the source files.
+Test files have a type `*.spec.js` and located in `__tests__` or `__test__`
+directories adjacent to the source files.
 
 | Source File                              | Test File                                              |
 | ---------------------------------------- | ------------------------------------------------------ |
@@ -28,6 +29,7 @@ Test files are located in `__tests__` directories adjacent to the source files.
 | `app/components/testComponent/index.tsx` | `app/components/testComponent/__tests__/index.spec.js` |
 | `app/hooks/useGetData.tsx`               | `app/hooks/__tests__/useGetData.spec.js`               |
 | `app/utils/getUserInfo.ts`               | `app/utils/__tests__/getUserInfo.spec.js`              |
+| `app/component/TestComponentB.ts`        | `app/components/__test__/TestComponentB.spec.js`       |
 
 ## Render Utilities
 
@@ -151,6 +153,7 @@ import { featureFlagSelector } from '../../../../loginV2/state';
 import MyComponent from '../MyComponent';
 
 jest.mock('../../../../loginV2/state', () => ({
+  // when mocking specific exports, preserve others
   ...jest.requireActual('../../../../loginV2/state'),
   featureFlagSelector: jest.fn(),
 }));
@@ -169,14 +172,29 @@ describe('MyComponent', () => {
 });
 ```
 
-### Mock Default Export Component
+### Mock Exported Component
+
+```javascript
+jest.mock('@ehrocks/rn-swag-ui', () => {
+  const { Text } = require('react-native');
+  return {
+    // when mocking specific exports, preserve others
+    ...jest.requireActual('@ehrocks/rn-swag-ui'),
+    CollapsibleHeaderView: {
+      FlatList: () => <Text>Mock Component</Text>,
+    },
+  };
+});
+```
+
+### Mock Default Exported Component
 
 ```javascript
 jest.mock('../components/ChildComponent', () => {
   const { Text } = require('react-native');
   return {
     __esModule: true,
-    default: () => <Text>Mocked Child</Text>,
+    default: () => <Text>Mock Component</Text>,
   };
 });
 ```
