@@ -15,26 +15,20 @@ return {
     version = '^18.0.0',
     cmd = { 'CodeCompanion', 'CodeCompanionChat', 'CodeCompanionActions' },
     dependencies = {
-      { 'nvim-lua/plenary.nvim' },
+      'nvim-lua/plenary.nvim',
       'nvim-treesitter/nvim-treesitter',
-      {
-        'ravitemer/codecompanion-history.nvim',
-        commit = '8c6ca9f998aeef89f3543343070f8562bf911fb4',
-      },
-      {
-        'ravitemer/mcphub.nvim',
-        cmd = 'MCPHub',
-        build = 'npm install -g mcp-hub@latest',
-        config = true,
-        commit = '5193329d510a68f1f5bf189960642c925c177a3a',
-      },
+      'ravitemer/codecompanion-history.nvim',
+      'franco-ruggeri/codecompanion-spinner.nvim',
+      -- {
+      --   'ravitemer/mcphub.nvim',
+      --   cmd = 'MCPHub',
+      --   build = 'npm install -g mcp-hub@latest',
+      --   config = true,
+      -- },
     },
     init = function()
       -- https://codecompanion.olimorris.dev/usage/chat-buffer/tools#yolo-mode
       vim.g.codecompanion_yolo_mode = true
-
-      local spinner = require('plugins.ai.codecompanion.spinner')
-      spinner:init()
     end,
     opts = {
       -- RULES --
@@ -63,6 +57,18 @@ return {
             '~/.dotfiles/.github/instructions/maestro.instructions.md',
           },
         },
+        dotfiles = {
+          description = 'Rules for .dotfiles',
+          files = {
+            '~/.dotfiles/.github/copilot-instructions.md',
+          },
+        },
+        neovim = {
+          description = 'Rules for Neovim config',
+          files = {
+            '~/.dotfiles/.github/instructions/neovim.instructions.md',
+          },
+        },
       },
 
       -- INTERACTIONS --
@@ -73,9 +79,9 @@ return {
           adapter = {
             name = 'copilot',
             -- model = 'gpt-4.1',
-            model = 'claude-haiku-4.5',
+            -- model = 'claude-haiku-4.5',
             -- model = 'claude-opus-4.5',
-            -- model = 'claude-sonnet-4.5',
+            model = 'claude-sonnet-4.5',
           },
           tools = {
             opts = {
@@ -231,14 +237,14 @@ return {
 
       -- EXTENSIONS --
       extensions = {
-        mcphub = {
-          callback = 'mcphub.extensions.codecompanion',
-          opts = {
-            make_vars = true,
-            make_slash_commands = true,
-            show_result_in_chat = true,
-          },
-        },
+        -- mcphub = {
+        --   callback = 'mcphub.extensions.codecompanion',
+        --   opts = {
+        --     make_vars = true,
+        --     make_slash_commands = true,
+        --     show_result_in_chat = true,
+        --   },
+        -- },
         history = {
           enabled = true,
           opts = {
@@ -251,6 +257,7 @@ return {
             dir_to_save = vim.fn.stdpath('data') .. '/codecompanion-history',
           },
         },
+        spinner = {},
       },
 
       -- PROMPT LIBRARY --
@@ -302,12 +309,12 @@ return {
         desc = 'Open CodeCompanion History',
         silent = true,
       },
-      {
-        '<leader>am',
-        '<cmd>MCPHub<cr>',
-        desc = 'Open MCPHub',
-        silent = true,
-      },
+      -- {
+      --   '<leader>am',
+      --   '<cmd>MCPHub<cr>',
+      --   desc = 'Open MCPHub',
+      --   silent = true,
+      -- },
     },
   },
 }
