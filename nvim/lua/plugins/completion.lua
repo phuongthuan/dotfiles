@@ -61,6 +61,11 @@ return {
         },
         providers = {
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+          snippets = {
+            opts = {
+              search_paths = { '~/.dotfiles/snippets' },
+            },
+          },
           copilot = {
             name = 'copilot',
             module = 'blink-cmp-copilot',
