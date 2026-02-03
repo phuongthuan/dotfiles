@@ -72,3 +72,29 @@ mte() {
 
   return $EXIT_CODE
 }
+
+test_changed_files() {
+  local CHANGED_TESTS
+  local BASE_BRANCH=${1:-development}
+
+  # Get added/modified test files only
+  CHANGED_TESTS=$(git diff --name-only --diff-filter=AM $BASE_BRANCH...HEAD | grep -E '\.(spec|test)\.(ts|tsx|js|jsx)$')
+
+  if [ -z "$CHANGED_TESTS" ]; then
+    echo "No test files changed"
+    exit 0
+  fi
+
+  echo "Running changed tests:"
+  echo "$CHANGED_TESTS"
+
+  # Pass files as arguments with -- to indicate end of options
+  # Use arrays to handle spaces/special chars properly
+  local -a test_files
+  while IFS= read -r file; do
+    test_files+=("$file")
+  done <<<"$CHANGED_TESTS"
+
+  # Run Jest with explicit testPathPattern or pass files directly
+  yarn test --testPathPattern="($(printf '%s|' "${test_files[@]}" | sed 's/|$//'))" --no-coverage
+}

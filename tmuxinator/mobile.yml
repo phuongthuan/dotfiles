@@ -3,12 +3,12 @@
 name: mobile
 root: ~/p/eh/eh-mobile-pro
 
-pre_window: asdf set nodejs 20.11.1
+# pre_window: asdf set nodejs 20.11.1
 
 windows:
   - editor: nvim
   - git:
-  - wt-feature: cd ~/p/eh/worktree/eh-mobile-pro/feature
+  - wt-feature: cd ~/p/eh/worktree/eh-mobile-pro/feat
   - wt-test: cd ~/p/eh/worktree/eh-mobile-pro/test
   - wt-dev: cd ~/p/eh/worktree/eh-mobile-pro/dev
   - metro:
@@ -20,4 +20,3 @@ windows:
       layout: main-vertical
       panes:
         - cd ~/.dotfiles
-        - whoami
