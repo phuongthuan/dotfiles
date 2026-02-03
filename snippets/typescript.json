@@ -235,11 +235,15 @@
   },
   "expect await findByText": {
     "prefix": "tefbt",
-    "body": ["expect(await screen.findByText(\"$1\")).toBeInTheDocument();$0"]
+    "body": ["expect(await screen.findByText(\"$1\")).toBeVisible();$0"]
   },
   "expect queryByText": {
     "prefix": "teqbt",
-    "body": ["expect(screen.queryByText(\"$1\")).not.toBeInTheDocument();$0"]
+    "body": ["expect(screen.queryByText(\"$1\")).not.toBeVisible();$0"]
+  },
+  "expect queryByTestId": {
+    "prefix": "teqbi",
+    "body": ["expect(screen.queryByTestId(\"$1\")).not.toBeVisible();$0"]
   },
   "expect getByRole": {
     "prefix": "tegbr",
