@@ -36,10 +36,10 @@ local Overseer = {
   end,
   static = {
     symbols = {
-      ['CANCELED'] = '󰜺 ',
-      ['FAILURE'] = ' ',
-      ['SUCCESS'] = '󰄴 ',
-      ['RUNNING'] = '󰑮 ',
+      ['CANCELED'] = ' 󰜺 ',
+      ['FAILURE'] = '  ',
+      ['SUCCESS'] = ' 󰄴 ',
+      ['RUNNING'] = ' 󰑮 ',
     },
   },
 

@@ -18,4 +18,5 @@ vim.g.maplocalleader = ' '
 require('options')
 require('keymaps')
 require('commands')
+require('autocmds')
 require('lazynvim')

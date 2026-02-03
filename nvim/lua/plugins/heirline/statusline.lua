@@ -1,4 +1,5 @@
 local env = require('core.env')
+local functions = require('core.functions')
 local colors = require('core.colors')
 local icons = require('core.icons')
 local conditions = require('heirline.conditions')
@@ -121,17 +122,7 @@ local GitHubActionsIcon = {
   end,
   hl = { fg = colors.bright_fg, bold = true },
   on_click = {
-    callback = function()
-      local repo = 'eh-mobile-pro'
-      local user = env.GITHUB_USERNAME
-
-      -- Build the URL (no workflow specified)
-      local url = string.format('https://github.com/Thinkei/%s/actions?query=actor%%3A%s', repo, user)
-
-      vim.fn.system({ 'open', url })
-
-      vim.notify(' Opening GitHub Actions: ' .. url, vim.log.levels.INFO)
-    end,
+    callback = functions.open_github_workflow,
     name = 'sl_gha_click',
   },
 }
@@ -420,6 +411,7 @@ return {
       '^minifiles$',
       '^toggleterm$',
       '^Neogit',
+      'OverseerOutput',
       '^health',
       'oil',
     },
@@ -439,9 +431,9 @@ return {
     GitHubActionsIcon,
     FileName,
     Diagnostics,
+    Overseer,
     CodeCompanionChatBuffer,
     { provider = '%=' },
-    Overseer,
     LSP,
     FileType,
     Ruler,

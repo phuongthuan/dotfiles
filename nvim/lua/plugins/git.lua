@@ -13,6 +13,7 @@ return {
     command = { 'Neogit', 'NeogitCommit', 'NeogitLogCurrent', 'NeogitResetState' },
     opts = {
       disable_hint = true,
+      process_spinner = true,
       commit_editor = {
         spell_check = false,
         show_staged_diff = false,

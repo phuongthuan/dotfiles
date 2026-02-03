@@ -19,21 +19,38 @@ end
 
 local _mobile_repo_globs = { '!ContractPdfPreview', '!*.cjs', '!coverage/' }
 
+local _mobile_repo_excludes = {
+  'ContractPdfPreview/',
+  '*.cjs',
+  'coverage/',
+  'android/',
+  'fastlane/',
+  'ios/**/Contents.json',
+  'ios/**/*.ttf',
+  'ios/**/*.xcassets*/*',
+}
+
 -- Centered on screen
+-- Adaptive width based on screen size:
+--   - Small monitors (<=200 cols): Use full width
+--   - Large monitors (>200 cols): Use 55% width for better focus
 local window_config = function()
-  local height = math.floor(0.65 * vim.o.lines)
-  -- local width = math.floor(0.95 * vim.o.columns) -- 95% of full width
-  local full_width = vim.o.columns
+  local height = math.floor(0.55 * vim.o.lines)
+  local columns = vim.o.columns
+  local width_threshold = 200 -- Threshold to distinguish small vs large monitors
+
+  -- Use full width for small monitors, 55% for large monitors
+  local width = columns <= width_threshold and columns or math.floor(0.45 * columns)
 
   return {
     anchor = 'NW',
     height = height,
-    width = full_width,
+    width = width,
 
     -- row = math.floor(0.5 * (vim.o.lines - height)),
     -- positions the window 0 row down from the top of the editor.
     row = 0,
-    col = math.floor(0.5 * (vim.o.columns - full_width)),
+    col = math.floor(0.5 * (columns - width)),
     border = 'rounded',
   }
 end
@@ -60,27 +77,15 @@ return {
         },
         window = {
           prompt_prefix = '  ',
-          config = {
-            border = 'rounded',
-          },
+          config = window_config,
         },
-        -- options = { content_from_bottom = true },
+        options = { content_from_bottom = true },
       })
 
       vim.ui.select = MiniPick.ui_select
 
       nmap('<leader>,', function()
-        local excludes = _is_mobile_repo()
-            and {
-              'ContractPdfPreview/',
-              '*.cjs',
-              'coverage/',
-              'android/',
-              'fastlane/',
-              'ios/**/Contents.json',
-              'ios/**/*.ttf',
-            }
-          or nil
+        local excludes = _is_mobile_repo() and _mobile_repo_excludes or nil
 
         local command_opts = _is_mobile_repo() and {} or { '--no-ignore' }
 
@@ -95,7 +100,7 @@ return {
         Picker.find_files({ tool = 'fd', command_opts = command_opts }, { source = { name = ' Files (fd)' } })
       end, { desc = 'Current Directory (fd) without excludes' })
 
-      nmap('<leader>m', function()
+      nmap('<leader>om', function()
         Picker.open_music()
       end, { desc = 'Open MPC' })
 
@@ -131,7 +136,7 @@ return {
       end, { desc = 'Literal String' })
 
       nmap('<leader>fe', function()
-        Picker.find_files({ tool = 'fd' }, {
+        Picker.find_files({ tool = 'fd', excludes = _mobile_repo_excludes }, {
           source = {
             cwd = env.EH_REPOSITORY_DIR,
             name = 'Files EH (fd)',
@@ -176,20 +181,45 @@ return {
         )
       end, { desc = '~/.local/share/nvim' })
 
-      nmap('<leader>fm', function()
-        local excludes = _is_mobile_repo() and { 'ContractPdfPreview/', '*.cjs' } or nil
+      nmap('<leader>fmd', function()
+        local excludes = _is_mobile_repo() and _mobile_repo_excludes or nil
         Picker.find_files(
           { tool = 'fd', excludes = excludes },
-          { source = { cwd = '~/p/eh/worktree/eh-mobile-pro/development', name = ' Files (eh-mobile-pro)' } }
+          { source = { cwd = '~/p/eh/worktree/eh-mobile-pro/dev', name = ' Files (eh-mobile-pro)' } }
         )
-      end, { desc = 'eh-mobile-pro (dev)' })
+      end, { desc = 'eh-mobile-pro (development)' })
+
+      nmap('<leader>fmm', function()
+        local excludes = _is_mobile_repo() and _mobile_repo_excludes or nil
+        Picker.find_files(
+          { tool = 'fd', excludes = excludes },
+          { source = { cwd = '~/p/eh/worktree/eh-mobile-pro/master', name = ' Files (eh-mobile-pro)' } }
+        )
+      end, { desc = 'eh-mobile-pro (master)' })
+
+      nmap('<leader>pm', function()
+        local string = vim.fn.input('Grep eh-mobile-pro(development): ')
+
+        -- If input is empty, hide the input prompt instead of showing empty window
+        if string == '' then
+          return
+        end
+
+        Picker.grep_literal(
+          { pattern = string, globs = _mobile_repo_globs },
+          { source = { name = 'Grep literal string (rg): ' .. string } }
+        )
+      end, { desc = 'Literal String (eh-mobile-pro)' })
 
       nmap('<leader>;', function()
         MiniPick.builtin.buffers()
       end, { desc = 'Opened Buffers' })
 
       nmap('<leader>rs', function()
-        MiniPick.builtin.resume()
+        local ok = pcall(MiniPick.builtin.resume)
+        if not ok then
+          vim.notify('No picker to resume  ', vim.log.levels.WARN)
+        end
       end, { desc = 'Resume Search' })
 
       mapper({ 'n', 'v' })('<leader>sh', function()
@@ -209,8 +239,11 @@ return {
       end, { desc = 'Grep String (buffers)' })
 
       nmap('<leader>fo', function()
-        MiniExtra.pickers.oldfiles()
-      end, { desc = 'Old' })
+        local ok = pcall(MiniExtra.pickers.oldfiles)
+        if not ok then
+          vim.notify('No old files found  ', vim.log.levels.WARN)
+        end
+      end, { desc = 'Old files' })
 
       nmap(';r', function()
         MiniPick.builtin.grep_live({ tool = 'rg' }, { source = { name = 'Grep buffers (rg)' } })

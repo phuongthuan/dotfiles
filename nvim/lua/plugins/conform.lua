@@ -35,7 +35,7 @@ return {
   },
   init = function()
     -- Disable auto format by default
-    vim.g.disable_autoformat = true
+    vim.g.disable_autoformat = false
 
     -- If you want the formatexpr, here is the place to set it
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
@@ -134,7 +134,7 @@ return {
       javascriptreact = prettierd,
       json = prettierd,
       jsonc = prettierd,
-      markdown = prettierd,
+      -- markdown = prettierd,
       css = prettierd,
       scss = prettierd,
       html = prettierd,

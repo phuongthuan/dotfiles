@@ -16,7 +16,7 @@ return {
     },
     keys = {
       {
-        '<leader>om',
+        '<leader>m',
         function()
           ---@diagnostic disable-next-line: undefined-global
           MiniNotify.show_history()

@@ -45,7 +45,7 @@ end, { desc = 'Hide Diagnostics (buffer)' })
 nmap('<leader>td', function()
   vim.diagnostic.enable(vim.diagnostic.enable(not vim.diagnostic.is_enabled()), { bufnr = 0 })
   vim.notify(
-    vim.diagnostic.is_enabled() == true and 'Enabled' or 'Disabled',
+    vim.diagnostic.is_enabled() == true and 'Diagnostics enabled' or 'Diagnostics disabled',
     vim.log.levels.INFO,
     { title = 'Diagnostics' }
   )
