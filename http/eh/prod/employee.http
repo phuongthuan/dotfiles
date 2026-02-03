@@ -2,6 +2,13 @@
 @organisationId = 148227
 
 
+###
+
+# "email": "michelle.ser+cassie@employmenthero.com"
+# "org_id": "148227"
+# "member_id": "2687847"
+ 
+
 ### POST_SESSIONS_CAREER_PAGE
 
 # @jq { "email": .data.attributes.email, "session_token": .data.attributes.session_token, "org_id": .data.relationships.organisations.data[0].id, "member_id": .data.relationships.members.data[0].id }
@@ -37,7 +44,7 @@ Jwt-Token: {{POST_AUTH.response.body.$.token}}
 {
   "timesheet_entry": {
     "type": "start_and_end_times_timesheet_entry",
-    "date": "07/01/2026",
+    "date": "06/03/2026",
     "member_id": "{{memberId}}",
     "shift_condition_ids": [],
     "location_id": 360510,

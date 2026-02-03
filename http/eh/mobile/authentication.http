@@ -33,4 +33,4 @@ Content-Type: application/json
 
 # @jq { data: .data }
 GET {{MAIN_APP_HOST}}/api/v2/sessions/info HTTP/1.1
-Session-Token: {{SESSION_TOKEN}}
+Session-Token: {{MANAGER_USERNAME_1_SESSION_TOKEN}}

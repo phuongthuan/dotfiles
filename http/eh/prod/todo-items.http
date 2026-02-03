@@ -1,7 +1,7 @@
 @organisationId = 148227
 
 
-### POST_SESSIONS_CAREER_PAGE
+### GET_EH_SESSION_TOKEN
 
 # @jq { "email": .data.attributes.email, "session_token": .data.attributes.session_token, "org_id": .data.relationships.organisations.data[0].id, "member_id": .data.relationships.members.data[0].id }
 POST {{MAIN_APP_HOST}}/api/v2/sessions/career-page HTTP/1.1
@@ -16,7 +16,7 @@ Content-Type: application/json
   }
 }
 
-### POST_AUTH
+### GET_EH_JWT_TOKEN
 
 POST {{MAIN_APP_HOST}}/auth HTTP/1.1
 Content-Type: application/json
@@ -29,9 +29,22 @@ User-Agent: career-page-backend
 ### GET_TODO_ITEMS
 
 # @jq { "data": .data }
-GET {{MAIN_APP_HOST}}/api/v3/organisations/{{organisationId}}/todo_items/mobile_task_widget?page_index=1 
-  &item_per_page=5 
-  &features[]=timesheet 
-  &features[]=leave 
-  &features[]=expense HTTP/1.1
-Jwt-Token: {{POST_AUTH.response.body.$.token}}
+GET {{MAIN_APP_HOST}}/api/v3/organisations/{{organisationId}}/todo_items/mobile_task_widget?page_index=1
+  &item_per_page=5
+  &features%5B%5D=leave
+  &features%5B%5D=expense
+  &features%5B%5D=timesheet
+  &features%5B%5D=recognition HTTP/1.1
+Content-Type: application/json
+Jwt-Token: {{GET_EH_JWT_TOKEN.response.body.$.token}}
+
+### GET_GROUP_TODO_ITEMS
+
+# @jq { "data": .data }
+GET {{MAIN_APP_HOST}}/api/v3/organisations/{{organisationId}}/todo_items/mobile_group_items?features%5B%5D=leave
+  &features%5B%5D=expense
+  &features%5B%5D=timesheet
+  &features%5B%5D=recognition
+  &min_item_type_count=10 HTTP/1.1
+Content-Type: application/json
+Jwt-Token: {{GET_EH_JWT_TOKEN.response.body.$.token}}

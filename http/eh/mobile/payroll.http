@@ -44,7 +44,7 @@ Jwt-Token: {{POST_AUTH.response.body.$.token}}
       }
     ],
     "comment": "Daily work",
-    "date": "07/06/2026",
+    "date": "03/07/2026",
     "end_hm": "05:00 PM",
     "hr_position_id": "7b614e01-a696-4188-84cf-c589ba786d12",
     "location_id": 42112,
