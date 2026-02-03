@@ -1,4 +1,5 @@
 alias vim='/usr/bin/vim'
+alias nn='NVIM_APPNAME="nvim-new" nvimv exec nightly'
 
 alias arm='arch -arm64'
 alias intel='arch -x86_64'

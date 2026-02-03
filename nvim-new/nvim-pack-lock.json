@@ -1,0 +1,170 @@
+{
+  "plugins": {
+    "blink-nerdfont.nvim": {
+      "rev": "e5034457a0a3f3444c0a48af8f5d7db0ad02a204",
+      "src": "https://github.com/MahanRahmati/blink-nerdfont.nvim"
+    },
+    "blink.cmp": {
+      "rev": "b19413d214068f316c78978b08264ed1c41830ec",
+      "src": "https://github.com/saghen/blink.cmp",
+      "version": "1.0.0 - 2.0.0"
+    },
+    "codecompanion-history.nvim": {
+      "rev": "8c6ca9f998aeef89f3543343070f8562bf911fb4",
+      "src": "https://www.github.com/ravitemer/codecompanion-history.nvim"
+    },
+    "codecompanion-spinner.nvim": {
+      "rev": "bfb31ca124bd1a2e032faea09844c8609154bdb5",
+      "src": "https://www.github.com/franco-ruggeri/codecompanion-spinner.nvim"
+    },
+    "codecompanion.nvim": {
+      "rev": "c609f04870d32bf59720ea8e62315235a57de697",
+      "src": "https://www.github.com/olimorris/codecompanion.nvim",
+      "version": "18.0.0 - 19.0.0"
+    },
+    "conform.nvim": {
+      "rev": "238f542a118984a88124fc915d5b981680418707",
+      "src": "https://github.com/stevearc/conform.nvim"
+    },
+    "copilot.lua": {
+      "rev": "0ab400d547814b04b39a069208ff7b40ab22dfb5",
+      "src": "https://www.github.com/zbirenbaum/copilot.lua"
+    },
+    "fidget.nvim": {
+      "rev": "7fa433a83118a70fe24c1ce88d5f0bd3453c0970",
+      "src": "https://github.com/j-hui/fidget.nvim"
+    },
+    "git-conflict.nvim": {
+      "rev": "d59a781d8ad029f014c0e0364bb2267ed06cb6ef",
+      "src": "https://github.com/phuongthuan/git-conflict.nvim"
+    },
+    "gitsigns.nvim": {
+      "rev": "42d6aed4e94e0f0bbced16bbdcc42f57673bd75e",
+      "src": "https://github.com/lewis6991/gitsigns.nvim"
+    },
+    "gruvbox.nvim": {
+      "rev": "a472496e1a4465a2dd574389dcf6cdb29af9bf1b",
+      "src": "https://github.com/ellisonleao/gruvbox.nvim"
+    },
+    "heirline.nvim": {
+      "rev": "fae936abb5e0345b85c3a03ecf38525b0828b992",
+      "src": "https://github.com/rebelot/heirline.nvim"
+    },
+    "kulala.nvim": {
+      "rev": "ad51fbcfd674efb95a90d3b5f21271859416ea76",
+      "src": "https://github.com/mistweaverco/kulala.nvim"
+    },
+    "mason.nvim": {
+      "rev": "44d1e90e1f66e077268191e3ee9d2ac97cc18e65",
+      "src": "https://github.com/mason-org/mason.nvim"
+    },
+    "mini.extra": {
+      "rev": "8bb48fadc6e31d8b3550f587661ded15d4396451",
+      "src": "https://github.com/nvim-mini/mini.extra"
+    },
+    "mini.hipatterns": {
+      "rev": "add8d8abad602787377ec5d81f6b248605828e0f",
+      "src": "https://github.com/nvim-mini/mini.hipatterns"
+    },
+    "mini.icons": {
+      "rev": "efc85e42262cd0c9e1fdbf806c25cb0be6de115c",
+      "src": "https://github.com/nvim-mini/mini.icons"
+    },
+    "mini.notify": {
+      "rev": "29ec27f60bf4b63e447c851d9061c434d80795a6",
+      "src": "https://github.com/nvim-mini/mini.notify"
+    },
+    "mini.pairs": {
+      "rev": "d5a29b6254dad07757832db505ea5aeab9aad43a",
+      "src": "https://github.com/nvim-mini/mini.pairs"
+    },
+    "mini.pick": {
+      "rev": "aa242acc17683515d8f749552aebe061bced9132",
+      "src": "https://github.com/nvim-mini/mini.pick"
+    },
+    "mini.starter": {
+      "rev": "8ee6ce6a4c9be47682516908557cc062c4d595a2",
+      "src": "https://github.com/nvim-mini/mini.starter"
+    },
+    "mini.visits": {
+      "rev": "f6b86565acc690aa111627433906be3d38e2ba81",
+      "src": "https://github.com/nvim-mini/mini.visits"
+    },
+    "neogit": {
+      "rev": "d8bf9102692250193b855acd9025a826f1af2729",
+      "src": "https://github.com/NeogitOrg/neogit"
+    },
+    "nvim-spectre": {
+      "rev": "72f56f7585903cd7bf92c665351aa585e150af0f",
+      "src": "https://github.com/nvim-pack/nvim-spectre"
+    },
+    "nvim-surround": {
+      "rev": "1098d7b3c34adcfa7feb3289ee434529abd4afd1",
+      "src": "https://github.com/kylechui/nvim-surround"
+    },
+    "nvim-tmux-navigation": {
+      "rev": "4898c98702954439233fdaf764c39636681e2861",
+      "src": "https://github.com/phuongthuan/nvim-tmux-navigation"
+    },
+    "nvim-treesitter": {
+      "rev": "15b3416cc1f557c4932468e512a0bd45871167bc",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter",
+      "version": "'main'"
+    },
+    "nvim-treesitter-endwise": {
+      "rev": "68313c47f6db3e5cfc76779b92620ae40985620f",
+      "src": "https://github.com/ixti/nvim-treesitter-endwise",
+      "version": "'main'"
+    },
+    "nvim-treesitter-textobjects": {
+      "rev": "baa6b4ec28c8be5e4a96f9b1b6ae9db85ec422f8",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
+      "version": "'main'"
+    },
+    "nvim-ts-autotag": {
+      "rev": "c4ca798ab95b316a768d51eaaaee48f64a4a46bc",
+      "src": "https://github.com/windwp/nvim-ts-autotag"
+    },
+    "nvim-ufo": {
+      "rev": "ab3eb124062422d276fae49e0dd63b3ad1062cfc",
+      "src": "https://github.com/kevinhwang91/nvim-ufo"
+    },
+    "oil.nvim": {
+      "rev": "6b59a6cf623fa2245c7454ddb458df5bdb6615d3",
+      "src": "https://github.com/stevearc/oil.nvim"
+    },
+    "overseer.nvim": {
+      "rev": "5828bdbd86677497613033c142f0a8624489216f",
+      "src": "https://github.com/stevearc/overseer.nvim"
+    },
+    "plenary.nvim": {
+      "rev": "b9fd5226c2f76c951fc8ed5923d85e4de065e509",
+      "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
+    "promise-async": {
+      "rev": "119e8961014c9bfaf1487bf3c2a393d254f337e2",
+      "src": "https://github.com/kevinhwang91/promise-async"
+    },
+    "render-markdown.nvim": {
+      "rev": "ae89236e2389836cf1c3787b2b80d5d8685cc13f",
+      "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
+    },
+    "todo-comments.nvim": {
+      "rev": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668",
+      "src": "https://github.com/folke/todo-comments.nvim"
+    },
+    "toggleterm.nvim": {
+      "rev": "9a88eae817ef395952e08650b3283726786fb5fb",
+      "src": "https://github.com/akinsho/toggleterm.nvim"
+    },
+    "translate.nvim": {
+      "rev": "1a841e56407ba02e919ed9af573dbe531404aebb",
+      "src": "https://github.com/uga-rosa/translate.nvim"
+    },
+    "vim-visual-multi": {
+      "rev": "a6975e7c1ee157615bbc80fc25e4392f71c344d4",
+      "src": "https://github.com/mg979/vim-visual-multi",
+      "version": "'master'"
+    }
+  }
+}
