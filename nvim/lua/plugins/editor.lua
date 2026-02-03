@@ -3,6 +3,57 @@ local nmap = require('core.utils').mapper_factory('n')
 return {
   { 'mg979/vim-visual-multi', branch = 'master' },
   {
+    'stevearc/aerial.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    lazy = false,
+    opts = {
+      layout = {
+        min_width = 30,
+        default_direction = 'prefer_right',
+      },
+      icons = {
+        File = '󰈙 ',
+        Module = ' ',
+        Namespace = '󰌗 ',
+        Package = ' ',
+        Class = '󰌗 ',
+        Method = '󰆧 ',
+        Property = ' ',
+        Field = ' ',
+        Constructor = ' ',
+        Enum = '󰕘',
+        Interface = '󰕘',
+        Function = '󰊕 ',
+        Variable = '󰆧 ',
+        Constant = '󰏿 ',
+        String = '󰀬 ',
+        Number = '󰎠 ',
+        Boolean = '◩ ',
+        Array = '󰅪 ',
+        Object = '󰅩 ',
+        Key = '󰌋 ',
+        Null = '󰟢 ',
+        EnumMember = ' ',
+        Struct = '󰌗 ',
+        Event = ' ',
+        Operator = '󰆕 ',
+        TypeParameter = '󰊄 ',
+      },
+      on_attach = function(bufnr)
+        nmap('{', '<cmd>AerialPrev<CR>', { buffer = bufnr })
+        nmap('}', '<cmd>AerialNext<CR>', { buffer = bufnr })
+      end,
+    },
+    keys = {
+      {
+        '<leader>ae',
+        '<cmd>AerialToggle!<cr>',
+        desc = 'Toggle Aerial',
+        silent = true,
+      },
+    },
+  },
+  {
     'stevearc/overseer.nvim',
     opts = {
       templates = {
@@ -80,6 +131,7 @@ return {
   },
   {
     'HakonHarnes/img-clip.nvim',
+    enabled = false,
     event = 'VeryLazy',
     opts = {},
     keys = {
@@ -123,26 +175,6 @@ return {
         end,
       })
     end,
-  },
-  {
-    'uga-rosa/translate.nvim',
-    keys = {
-      {
-        '<leader>tT',
-        '<cmd>Translate Vi<cr>',
-        mode = { 'n', 'v' },
-        desc = 'Translate Text',
-        silent = true,
-      },
-    },
-  },
-  {
-    'akinsho/toggleterm.nvim',
-    version = '*',
-    opts = {},
-    keys = {
-      { '<leader>tt', '<cmd>ToggleTerm<cr>', desc = 'Toggle Terminal', silent = true },
-    },
   },
   {
     'uga-rosa/translate.nvim',
