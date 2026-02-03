@@ -1,21 +1,10 @@
 local env = require('core.env')
+local functions = require('core.functions')
+
 local mapper = require('core.utils').mapper_factory
 local Picker = require('plugins.picker.custom')
 
 local nmap = mapper('n')
-
--- Check if current working directory is the eh-mobile-pro repository
--- Returns true for:
---   - Main repo: ~/p/eh/eh-mobile-pro
---   - Any worktree: ~/p/eh/worktree/eh-mobile-pro/*
-local _is_mobile_repo = function()
-  local current_dir = vim.fn.getcwd()
-  local eh_mobile_pro_path = env.EH_REPOSITORY_DIR .. '/eh-mobile-pro'
-  local worktree_base = env.EH_REPOSITORY_DIR .. '/worktree/eh-mobile-pro'
-
-  -- Check main repo or any path under worktree/eh-mobile-pro/
-  return current_dir == eh_mobile_pro_path or current_dir:find(worktree_base, 1, true) == 1
-end
 
 local _mobile_repo_globs = { '!ContractPdfPreview', '!*.cjs', '!coverage/' }
 
@@ -85,9 +74,9 @@ return {
       vim.ui.select = MiniPick.ui_select
 
       nmap('<leader>,', function()
-        local excludes = _is_mobile_repo() and _mobile_repo_excludes or nil
+        local excludes = functions.is_eh_mobile_pro_repo() and _mobile_repo_excludes or nil
 
-        local command_opts = _is_mobile_repo() and {} or { '--no-ignore' }
+        local command_opts = functions.is_eh_mobile_pro_repo() and {} or { '--no-ignore' }
 
         Picker.find_files(
           { tool = 'fd', excludes = excludes, command_opts = command_opts },
@@ -96,7 +85,7 @@ return {
       end, { desc = 'Current Directory (fd)' })
 
       nmap('<leader>fA', function()
-        local command_opts = _is_mobile_repo() and {} or { '--no-ignore' }
+        local command_opts = functions.is_eh_mobile_pro_repo() and {} or { '--no-ignore' }
         Picker.find_files({ tool = 'fd', command_opts = command_opts }, { source = { name = ' Files (fd)' } })
       end, { desc = 'Current Directory (fd) without excludes' })
 
@@ -108,13 +97,13 @@ return {
         -- current word under cursor in the current buffer
         local word = vim.fn.expand('<cword>')
 
-        local globs = _is_mobile_repo() and _mobile_repo_globs or nil
+        local globs = functions.is_eh_mobile_pro_repo() and _mobile_repo_globs or nil
 
         Picker.grep_literal({ pattern = word, globs = globs }, { source = { name = 'Grep (rg): ' .. word } })
       end, { desc = 'Word Under Cursor' })
 
       nmap('<leader>pl', function()
-        local globs = _is_mobile_repo() and _mobile_repo_globs or nil
+        local globs = functions.is_eh_mobile_pro_repo() and _mobile_repo_globs or nil
 
         Picker.grep_literal({ pattern = ':>> ', globs = globs }, { source = { name = '  Grep console.log (rg)' } })
       end, { desc = 'console.log' })
@@ -127,7 +116,7 @@ return {
           return
         end
 
-        local globs = _is_mobile_repo() and _mobile_repo_globs or nil
+        local globs = functions.is_eh_mobile_pro_repo() and _mobile_repo_globs or nil
 
         Picker.grep_literal(
           { pattern = string, globs = globs },
@@ -182,7 +171,7 @@ return {
       end, { desc = '~/.local/share/nvim' })
 
       nmap('<leader>fmd', function()
-        local excludes = _is_mobile_repo() and _mobile_repo_excludes or nil
+        local excludes = functions.is_eh_mobile_pro_repo() and _mobile_repo_excludes or nil
         Picker.find_files(
           { tool = 'fd', excludes = excludes },
           { source = { cwd = '~/p/eh/worktree/eh-mobile-pro/dev', name = ' Files (eh-mobile-pro)' } }
@@ -190,7 +179,7 @@ return {
       end, { desc = 'eh-mobile-pro (development)' })
 
       nmap('<leader>fmm', function()
-        local excludes = _is_mobile_repo() and _mobile_repo_excludes or nil
+        local excludes = functions.is_eh_mobile_pro_repo() and _mobile_repo_excludes or nil
         Picker.find_files(
           { tool = 'fd', excludes = excludes },
           { source = { cwd = '~/p/eh/worktree/eh-mobile-pro/master', name = ' Files (eh-mobile-pro)' } }

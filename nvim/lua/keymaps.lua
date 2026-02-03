@@ -1,4 +1,5 @@
 local env = require('core.env')
+local functions = require('core.functions')
 local mapper = require('core.utils').mapper_factory
 
 local nmap = mapper('n')
@@ -33,13 +34,13 @@ nmap(';l', ':lua ', { silent = false })
 nmap('<leader>va', ':keepjumps normal! ggVG<cr>', { desc = 'Select All Content' })
 
 -- Save current buffer
-nmap('<leader>s', ':w<cr>:echo "Saved current file ✔"<cr>')
+nmap('<leader>s', ':w<cr>:echo "Saved current file 󰸞 "<cr>')
 
 -- Save all loaded buffers
-nmap('<leader>S', ':wa<cr>:echo "Saved all files ✔"<cr>')
+nmap('<leader>S', ':wa<cr>:echo "Saved all files 󰸞 "<cr>')
 
 -- :wq
-nmap('<leader>w', ':wq<cr>:echo "Git commit created ✔"<cr>')
+nmap('<leader>w', ':wq<cr>:echo "Git commit created 󰸞 "<cr>')
 
 -- Map Esc to jk
 imap('jk', '<Esc>', { noremap = true })
@@ -170,3 +171,15 @@ nmap('<leader>mt', function()
     string.format("tmux new-window -n test 'source ~/.dotfiles/zsh/dev.zsh && mte %s; exec zsh'", file),
   })
 end, { desc = 'Run Maestro E2E Tests' })
+
+nmap('<leader>op', function()
+  functions.open_github_pr()
+end, { desc = 'GitHub: Open PR' })
+
+nmap('<leader>ow', function()
+  functions.open_github_workflows()
+end, { desc = 'GitHub: Open Workflows' })
+
+nmap('<leader>i', function()
+  functions.toggle_react_test_file()
+end, { desc = 'Toggle React Test File' })
