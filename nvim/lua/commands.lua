@@ -1,72 +1,9 @@
-local autocmd = vim.api.nvim_create_autocmd
-local nmap = require('core.utils').mapper_factory('n')
+local functions = require('core.functions')
 
-local group = vim.api.nvim_create_augroup('UserConfig', { clear = true })
+local command = vim.api.nvim_create_user_command
 
-autocmd('TextYankPost', {
-  group = group,
-  pattern = '*',
-  callback = function()
-    vim.hl.on_yank({ higroup = 'IncSearch', timeout = 40 })
-  end,
-  desc = 'Highlight Text On Yank',
-})
-
-autocmd('WinEnter', {
-  group = group,
-  pattern = '*',
-  callback = function()
-    vim.wo.cursorline = true
-  end,
-  desc = 'Highlight Cursorline On Active Window',
-})
-
-autocmd('FileType', {
-  group = group,
-  pattern = {
-    'vim',
-    'man',
-    'help',
-    'checkhealth',
-    'lspinfo',
-    'query',
-    'startuptime',
-  },
-  callback = function(e)
-    -- Map q to exit in non-filetype buffers
-    vim.bo[e.buf].buflisted = false
-    nmap('q', ':q<CR>', { buffer = e.buf })
-  end,
-  desc = 'Maps q to exit on non-filetypes',
-})
-
-autocmd({ 'BufRead', 'BufNewFile' }, {
-  group = group,
-  pattern = { '*.env', '.env.*' },
-  callback = function()
-    vim.opt_local.filetype = 'sh'
-  end,
-  desc = 'Auto set filetype for .env and .env.* files',
-})
-
--- autocmd('BufWritePre', {
---   group = group,
---   pattern = '*',
---   command = [[%s/\s\+$//e]],
---   desc = 'Auto Remove Trailing Spaces On Save',
--- })
-
--- Enable spellcheck for certain files
--- autocmd('FileType', {
---   group = autocmds_group,
---   pattern = {
---     'gitcommit',
---     'markdown',
---     'txt',
---   },
---   callback = function()
---     vim.opt_local.spell = true
---     vim.opt_local.spelllang = 'en'
---   end,
---   desc = 'Enable spellcheck for certain files',
--- })
+command('GHBuildExpo', functions.trigger_expo_build, { desc = 'Build eh-mobile-pro with Expo' })
+command('GHOpen', functions.open_my_github, { desc = 'Open GitHub' })
+command('GHOpenPR', functions.open_github_pr, { desc = 'Open GitHub PR' })
+command('GHOpenWorkflows', functions.open_github_workflows, { desc = 'Open GitHub Workflows' })
+command('GHPRNumber', functions.get_pr_number, { desc = 'Get GitHub PR Number' })
