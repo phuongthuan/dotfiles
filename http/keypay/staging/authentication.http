@@ -1,0 +1,42 @@
+@email = 49067
+@password = 5545065
+
+
+### MOBILE_LOGIN
+
+POST {{MAIN_APP_HOST}}/api/v3/omop/authentication/sign_in HTTP/1.1
+Content-Type: application/json
+
+{
+  "data": {
+    "attributes": {
+      "email": "{{EMPLOYEE_E2E_USERNAME}}",
+      "password": "{{EMPLOYEE_E2E_PASSWORD}}",
+      "device_id": "simulator"
+    }
+  }
+}
+
+### REQUEST_RECAPTCHA
+
+GET {{MAIN_APP_HOST}}/api/v2/request_recaptcha?email={{EMPLOYEE_E2E_USERNAME}} HTTP/1.1
+Content-Type: application/json
+
+### REQUEST_RECAPTCHA_SIGN_IN_SWAG
+
+GET {{MAIN_APP_HOST}}/api/v2/request_recaptcha?email={{EMPLOYEE_E2E_USERNAME}}
+  &sign_in_swag=true HTTP/1.1
+Content-Type: application/json
+
+### TWO_FACTOR_GRANT
+
+POST {{WORKZONE_HOST}}/api/v2/twofactor/grant HTTP/1.1
+Content-Type: application/json
+
+{
+  "ClientId": "H3t5s7qPU4D6jsFfjWjTAxtk",
+  "Username": "hoa.nguyen+e2e_employee@employmenthero.com",
+  "Password": "employmenthero123",
+  "DeviceId": "CA215415-E5D1-4138-98A6-F8FC92D2D3E1",
+  "EhToken": "mzm5/wirkp+o98Ow8YMiPJ30bO7xchgMuUOz21/uiEPD4IC4G0TwAl1rERWjSFNCRvu5x7E=--ukDmhR2O9/65xyNW--Buc7wLrFlIaNRaIKefh0Fw=="
+}

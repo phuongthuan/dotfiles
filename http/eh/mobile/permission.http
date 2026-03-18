@@ -1,0 +1,44 @@
+@memberID = 550263
+@orgID = 44076
+
+
+###
+
+## tung.van+manager@employmenthero.com
+ 
+
+### POST_GET_SESSION_TOKEN
+
+# @jq { "email": .data.attributes.email, "session_token": .data.attributes.session_token }
+POST {{MAIN_APP_HOST}}/api/v2/sessions HTTP/1.1
+Content-Type: application/json
+
+{
+  "data": {
+    "attributes": {
+      "email": "{{EMPLOYEE_USERNAME_1}}",
+      "password": "{{EMPLOYEE_PASSWORD_1}}",
+      "device_id": "simulator"
+    }
+  }
+}
+
+### POST_AUTH
+
+POST {{MAIN_APP_HOST}}/auth HTTP/1.1
+Content-Type: application/json
+User-Agent: career-page-backend
+
+{
+  "session_token": "5e8f29b8865de810614e99feec08796ee74884955a3081eb4852916afe29ddabd786fef27137ae42c621993d6b05fb2053f86b5e9bc1ce009614f28430fcbb90"
+}
+
+### GET_MOBILE_PERMISSION_PUBLIC
+
+GET {{MAIN_APP_HOST}}/api/v3/mobile_permissions/public HTTP/1.1
+
+### GET_MOBILE_MEMBER_PERMISSION
+
+# @jq { "eh_work_default_to_home_dashboard": .eh_work_default_to_home_dashboard, "eh_work_app_hr_pr_tasks_widget": .eh_work_app_hr_pr_tasks_widget, hr_pr_swag: .hr_pr_swag, clocking_timer: .clocking_timer }
+GET {{MAIN_APP_HOST}}/api/v2/organisations/{{orgID}}/members/{{memberID}}/permission HTTP/1.1
+Jwt-Token: {{POST_AUTH.response.body.$.token}}

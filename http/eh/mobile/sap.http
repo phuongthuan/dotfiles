@@ -1,0 +1,41 @@
+### POST_GET_SESSION_TOKEN
+
+# @jq { "email": .data.attributes.email, "session_token": .data.attributes.session_token }
+POST {{MAIN_APP_HOST}}/api/v2/sessions HTTP/1.1
+Content-Type: application/json
+
+{
+  "data": {
+    "attributes": {
+      "email": "{{SAP_USERNAME}}",
+      "password": "{{SAP_PASSWORD}}",
+      "device_id": "simulator"
+    }
+  }
+}
+
+### POST_AUTH
+
+POST {{MAIN_APP_HOST}}/auth HTTP/1.1
+Content-Type: application/json
+User-Agent: career-page-backend
+
+{
+  "session_token": "{{SAP_USERNAME_SESSION_TOKEN}}"
+}
+
+### GET_SESSIONS_INFO
+
+# @jq { data: .data }
+GET {{MAIN_APP_HOST}}/api/v2/sessions/info HTTP/1.1
+Session-Token: {{MANAGER_USERNAME_1_SESSION_TOKEN}}
+
+### GET_MOBILE_PERMISSION_PUBLIC
+
+GET {{MAIN_APP_HOST}}/api/v3/mobile_permissions/public HTTP/1.1
+
+### GET_MOBILE_MEMBER_PERMISSION
+
+# @jq { "eh_work_app_hr_pr_tasks_widget": .eh_work_app_hr_pr_tasks_widget, hr_pr_swag: .hr_pr_swag,  }
+GET {{MAIN_APP_HOST}}/api/v2/organisations/{{orgID}}/members/{{memberID}}/permission HTTP/1.1
+Jwt-Token: {{POST_AUTH.response.body.$.token}}
