@@ -11,7 +11,8 @@ windows:
   - wt-feature: cd ~/p/eh/worktree/eh-mobile-pro/feat
   - wt-test: cd ~/p/eh/worktree/eh-mobile-pro/test
   - wt-dev: cd ~/p/eh/worktree/eh-mobile-pro/dev
-  - metro:
+  - wt-master: cd ~/p/eh/worktree/eh-mobile-pro/master
+  - logs:
       layout: main-vertical
       panes:
         - nv

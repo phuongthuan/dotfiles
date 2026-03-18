@@ -5,10 +5,11 @@ root: ~/p/eh/employment-hero
 
 windows:
   - editor: nvim
-  - server: rms
+  - git:
+  - server:
   - logs:
-      - bundle install
-      - rma # alias to run main-app -> Check alias.zsh for more information.
+      # - bundle install
+      # - rma # alias to run main-app -> Check alias.zsh for more information.
   - auth|grpc:
       layout: b7a8,239x61,0,0[239x47,0,0,0,239x13,0,48,4]
       panes:
