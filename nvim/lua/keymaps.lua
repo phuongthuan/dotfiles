@@ -177,7 +177,7 @@ nmap('<leader>op', function()
 end, { desc = 'GitHub: Open PR' })
 
 nmap('<leader>ow', function()
-  functions.open_github_workflows()
+  functions.open_github_workflow()
 end, { desc = 'GitHub: Open Workflows' })
 
 nmap('<leader>i', function()

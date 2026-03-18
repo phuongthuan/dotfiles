@@ -280,9 +280,9 @@ function M.check_pending_deployments()
 end
 
 function M.setup()
-  vim.api.nvim_create_user_command('GHAutoApproveStart', function(opts)
-    M.start(opts.args ~= '' and opts.args or nil)
-  end, { nargs = '?', desc = 'Start auto-approval monitoring' })
+  -- vim.api.nvim_create_user_command('GHAutoApproveStart', function(opts)
+  --   M.start(opts.args ~= '' and opts.args or nil)
+  -- end, { nargs = '?', desc = 'Start auto-approval monitoring' })
 
   -- vim.api.nvim_create_user_command('GHAutoApproveStop', M.stop, { desc = 'Stop auto-approval monitoring' })
 
@@ -312,14 +312,20 @@ function M.setup()
         return
       end
 
-      print('Auto checking and approving will start in 4 minutes 󰔟')
-      vim.defer_fn(function()
-        local pr_number = get_pr_number()
-        if pr_number then
-          vim.notify('Auto checking and approving deployment 󰔟', vim.log.levels.INFO)
-          check_and_approve()
-        end
-      end, 240000) -- 4 minutes
+      local choice = vim.fn.confirm('Auto-approve deployment in 4 minutes?', '&Yes\n&No', 1)
+
+      if choice == 1 then
+        print('Auto checking and approving will start in 4 minutes 󰔟')
+        vim.defer_fn(function()
+          print('Auto checking and approving deployment 󰔟')
+          local pr_number = get_pr_number()
+          if pr_number then
+            check_and_approve()
+          end
+        end, 240000) -- 4 minutes
+      else
+        return
+      end
     end,
     desc = 'Auto approving deployment after pushed',
   })
