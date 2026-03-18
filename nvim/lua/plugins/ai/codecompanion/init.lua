@@ -19,12 +19,13 @@ return {
       'nvim-treesitter/nvim-treesitter',
       'ravitemer/codecompanion-history.nvim',
       'franco-ruggeri/codecompanion-spinner.nvim',
-      -- {
-      --   'ravitemer/mcphub.nvim',
-      --   cmd = 'MCPHub',
-      --   build = 'npm install -g mcp-hub@latest',
-      --   config = true,
-      -- },
+      'cairijun/codecompanion-agentskills.nvim',
+      {
+        'ravitemer/mcphub.nvim',
+        cmd = 'MCPHub',
+        build = 'npm install -g mcp-hub@latest',
+        config = true,
+      },
     },
     init = function()
       -- https://codecompanion.olimorris.dev/usage/chat-buffer/tools#yolo-mode
@@ -80,13 +81,14 @@ return {
             name = 'copilot',
             -- model = 'gpt-4.1',
             -- model = 'claude-haiku-4.5',
-            -- model = 'claude-opus-4.5',
-            model = 'claude-sonnet-4.5',
+            model = 'claude-opus-4.6',
+            -- model = 'claude-sonnet-4.5',
           },
           tools = {
             opts = {
               default_tools = {
-                'files',
+                'full_stack_dev',
+                'agent_skills',
               },
             },
           },
@@ -237,14 +239,14 @@ return {
 
       -- EXTENSIONS --
       extensions = {
-        -- mcphub = {
-        --   callback = 'mcphub.extensions.codecompanion',
-        --   opts = {
-        --     make_vars = true,
-        --     make_slash_commands = true,
-        --     show_result_in_chat = true,
-        --   },
-        -- },
+        mcphub = {
+          callback = 'mcphub.extensions.codecompanion',
+          opts = {
+            make_vars = true,
+            make_slash_commands = true,
+            show_result_in_chat = true,
+          },
+        },
         history = {
           enabled = true,
           opts = {
@@ -258,14 +260,21 @@ return {
           },
         },
         spinner = {},
+        agentskills = {
+          opts = {
+            paths = {
+              { '~/.dotfiles/skills' },
+              { '~/p/eh/worktree/eh-mobile-pro/dev/.claude/skills', recursive = true },
+            },
+          },
+        },
       },
 
       -- PROMPT LIBRARY --
       prompt_library = {
         markdown = {
           dirs = {
-            vim.fn.getcwd() .. '/.prompts',
-            '~/.dotfiles/nvim/lua/plugins/ai/codecompanion/prompts',
+            '~/.dotfiles/.prompts',
           },
         },
       },
@@ -309,12 +318,12 @@ return {
         desc = 'Open CodeCompanion History',
         silent = true,
       },
-      -- {
-      --   '<leader>am',
-      --   '<cmd>MCPHub<cr>',
-      --   desc = 'Open MCPHub',
-      --   silent = true,
-      -- },
+      {
+        '<leader>am',
+        '<cmd>MCPHub<cr>',
+        desc = 'Open MCPHub',
+        silent = true,
+      },
     },
   },
 }
