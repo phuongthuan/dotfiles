@@ -13,14 +13,15 @@ return {
     source_file = source_file .. '.{ts,tsx,js}'
 
     return {
-      cmd = { 'yarn', 'test' },
+      cmd = { 'yarn', 'jest-ci' },
       args = { file, '--coverage', '--collectCoverageFrom=' .. source_file },
-      components = { { 'open_output', direction = 'vertical', on_complete = 'failure' }, 'default' },
-      -- cmd = { 'sh', '-c', 'node --expose-gc $(yarn bin jest) --runInBand "$@"', '--', file },
-      -- components = {
-      --   { 'open_output', direction = 'vertical', on_complete = 'failure' },
-      --   'default',
-      -- },
+      -- see :help overseer-components for a list of all components.
+      -- components = { { 'open_output', direction = 'vertical', on_complete = 'failure' }, 'default' },
+      components = {
+        { 'on_output_quickfix', set_diagnostics = true },
+        'on_result_diagnostics',
+        'default',
+      },
     }
   end,
   condition = {
