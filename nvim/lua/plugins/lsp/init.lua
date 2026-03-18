@@ -67,7 +67,7 @@ return {
           'lua_ls',
           'ts_ls',
           'bashls',
-          'yamlls',
+          -- 'yamlls',
         },
         handlers = {
           function(server_name)

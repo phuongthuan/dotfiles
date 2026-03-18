@@ -43,11 +43,16 @@ autocmd('FileType', {
     'checkhealth',
     'lspinfo',
     'lsp.log',
+    'qf',
+    'oil',
+    'gitsigns-blame',
+    'git',
     'query',
     'toggleterm',
     'mininotify-history',
     'spectre_panel',
     'OverseerOutput',
+    'lsp.log',
   },
   callback = function(e)
     -- Map q to exit in non-filetype buffers

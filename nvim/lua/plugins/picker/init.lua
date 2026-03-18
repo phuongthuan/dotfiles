@@ -7,6 +7,7 @@ local Picker = require('plugins.picker.custom')
 local nmap = mapper('n')
 
 local _mobile_repo_globs = { '!ContractPdfPreview', '!*.cjs', '!coverage/' }
+local _excluded_glob_test_files = { '!*.spec.js', '!*.test.js' }
 
 local _mobile_repo_excludes = {
   'ContractPdfPreview/',
@@ -19,6 +20,12 @@ local _mobile_repo_excludes = {
   'ios/**/*.xcassets*/*',
 }
 
+local _excluded_fd_test_files = {
+  '*.spec.ts*',
+  '*.spec.js*',
+  '*.test.js*',
+}
+
 -- Centered on screen
 -- Adaptive width based on screen size:
 --   - Small monitors (<=200 cols): Use full width
@@ -26,7 +33,7 @@ local _mobile_repo_excludes = {
 local window_config = function()
   local height = math.floor(0.55 * vim.o.lines)
   local columns = vim.o.columns
-  local width_threshold = 200 -- Threshold to distinguish small vs large monitors
+  local width_threshold = 220 -- Threshold to distinguish small vs large monitors
 
   -- Use full width for small monitors, 55% for large monitors
   local width = columns <= width_threshold and columns or math.floor(0.45 * columns)
@@ -74,15 +81,32 @@ return {
       vim.ui.select = MiniPick.ui_select
 
       nmap('<leader>,', function()
-        local excludes = functions.is_eh_mobile_pro_repo() and _mobile_repo_excludes or nil
-
+        local excludes = nil
         local command_opts = functions.is_eh_mobile_pro_repo() and {} or { '--no-ignore' }
+
+        if functions.is_eh_mobile_pro_repo() then
+          excludes = vim.list_extend(vim.list_extend({}, _mobile_repo_excludes), _excluded_fd_test_files)
+        end
 
         Picker.find_files(
           { tool = 'fd', excludes = excludes, command_opts = command_opts },
           { source = { name = ' Files (fd)' } }
         )
       end, { desc = 'Current Directory (fd)' })
+
+      nmap('<leader>ft', function()
+        local excludes = nil
+        local command_opts = functions.is_eh_mobile_pro_repo() and {} or { '--no-ignore' }
+
+        if functions.is_eh_mobile_pro_repo() then
+          excludes = vim.list_extend({}, _mobile_repo_excludes)
+        end
+
+        Picker.find_files(
+          { tool = 'fd', excludes = excludes, command_opts = command_opts, pattern = '\\.(spec|test)\\.(js|ts)x?$' },
+          { source = { name = ' Test Files (fd)' } }
+        )
+      end, { desc = 'Test Files (fd)' })
 
       nmap('<leader>fA', function()
         local command_opts = functions.is_eh_mobile_pro_repo() and {} or { '--no-ignore' }
@@ -93,11 +117,22 @@ return {
         Picker.open_music()
       end, { desc = 'Open MPC' })
 
-      nmap('<leader>pw', function()
+      mapper({ 'n', 'v' })('<leader>pw', function()
         -- current word under cursor in the current buffer
         local word = vim.fn.expand('<cword>')
 
-        local globs = functions.is_eh_mobile_pro_repo() and _mobile_repo_globs or nil
+        local globs = nil
+
+        if functions.is_eh_mobile_pro_repo() then
+          local choice = vim.fn.confirm('Ignore test files?', '&Yes\n&No', 1)
+          if choice == 1 then
+            -- Yes - use globs with test file exclusions
+            globs = vim.list_extend(vim.list_extend({}, _mobile_repo_globs), _excluded_glob_test_files)
+          else
+            -- No - use base globs without test file exclusions
+            globs = _mobile_repo_globs
+          end
+        end
 
         Picker.grep_literal({ pattern = word, globs = globs }, { source = { name = 'Grep (rg): ' .. word } })
       end, { desc = 'Word Under Cursor' })
@@ -116,7 +151,18 @@ return {
           return
         end
 
-        local globs = functions.is_eh_mobile_pro_repo() and _mobile_repo_globs or nil
+        local globs = nil
+
+        if functions.is_eh_mobile_pro_repo() then
+          local choice = vim.fn.confirm('Ignore test files?', '&Yes\n&No', 1)
+          if choice == 1 then
+            -- Yes - use globs with test file exclusions
+            globs = vim.list_extend(vim.list_extend({}, _mobile_repo_globs), _excluded_glob_test_files)
+          else
+            -- No - use base globs without test file exclusions
+            globs = _mobile_repo_globs
+          end
+        end
 
         Picker.grep_literal(
           { pattern = string, globs = globs },
@@ -132,6 +178,31 @@ return {
           },
         })
       end, { desc = 'Files EH (fd)' })
+
+      nmap('<leader>fh', function()
+        Picker.find_files({ tool = 'fd' }, {
+          source = {
+            cwd = env.DOTFILES .. '/http',
+            name = 'Files HTTP (fd)',
+          },
+        })
+      end, { desc = 'Files HTTP (fd)' })
+
+      nmap('<leader>pe', function()
+        local string = vim.fn.input('Grep EH workspaces: ')
+
+        -- If input is empty, hide the input prompt instead of showing empty window
+        if string == '' then
+          return
+        end
+
+        Picker.grep_literal({ pattern = string, globs = _mobile_repo_globs }, {
+          source = {
+            cwd = env.EH_REPOSITORY_DIR,
+            name = 'Grep literal string (rg): ' .. string,
+          },
+        })
+      end, { desc = 'Literal String EH workspaces' })
 
       nmap('<leader>fr', function()
         Picker.find_files({ tool = 'fd' }, {

@@ -1,6 +1,6 @@
 return {
   'nvim-lua/plenary.nvim',
-  'NMAC427/guess-indent.nvim',
+  { 'NMAC427/guess-indent.nvim', opts = {} },
   { 'windwp/nvim-ts-autotag', opts = {} },
   { 'isak102/ghostty.nvim', ft = 'conf', opts = {} },
   {

@@ -98,6 +98,10 @@ return {
         nmap('<leader>pv', gitsigns.preview_hunk_inline, { desc = 'Preview Hunk Inline' })
 
         nmap('<leader>hb', function()
+          gitsigns.blame()
+        end, { desc = 'Toggle Blame' })
+
+        nmap('<leader>hl', function()
           gitsigns.blame_line({ full = true })
         end, { desc = 'Toggle Blame Line' })
 
