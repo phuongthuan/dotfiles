@@ -108,6 +108,13 @@ nmap(
   { desc = 'Copy Current Path', noremap = true }
 )
 
+-- Get current full file path
+nmap(
+  '<leader>cp',
+  [[:let @+=expand("%:p")<cr>:echo " " . @+ . " copied to clipboard ✔"<cr>]],
+  { desc = 'Copy Absolute Path', noremap = true }
+)
+
 -- Copy the content of current file to clipboard
 nmap(
   '<C-y>',

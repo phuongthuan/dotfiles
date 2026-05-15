@@ -1,7 +1,7 @@
 vim.g.have_nerd_font = true
 
 -- Node.js provider configs
-vim.g.node_host_prog = '/Users/thuan/.asdf/installs/nodejs/20.11.1/lib/node_modules/neovim/bin/cli.js'
+vim.g.node_host_prog = '/Users/thuan/.asdf/installs/nodejs/20.19.4/lib/node_modules/neovim/bin/cli.js'
 
 -- Add the custom yarn wrapper path at the front of PATH
 vim.env.PATH = os.getenv('HOME') .. '/.local/bin:' .. vim.env.PATH
