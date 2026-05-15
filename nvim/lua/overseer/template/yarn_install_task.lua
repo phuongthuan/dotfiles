@@ -1,5 +1,5 @@
 return {
-  name = 'yarn install',
+  name = '(Overseer) yarn install',
   builder = function()
     return {
       cmd = { 'yarn', 'install' },
