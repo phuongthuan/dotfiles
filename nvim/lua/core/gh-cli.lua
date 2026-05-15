@@ -4,7 +4,6 @@ local functions = require('core.functions')
 
 M.timer = nil
 M.enabled = false
-M.check_interval = 240000 -- 4 minutes in milliseconds
 M.repo = 'Thinkei/eh-mobile-pro'
 M.current_pr = nil
 M.pr_template_path = vim.fn.expand('~/p/eh/MY_EH_MOBILE_PRO_PULL_REQUEST_TEMPLATE.md')
@@ -184,79 +183,6 @@ local function check_and_approve()
   end
 end
 
--- Start auto-checking
--- function M.start(pr_number)
---   if M.timer and M.enabled then
---     vim.notify('Auto-approval already running', vim.log.levels.WARN)
---     return
---   end
---
---   M.current_pr = pr_number or get_pr_number()
---
---   if not M.current_pr then
---     vim.notify('No PR number found  ', vim.log.levels.ERROR)
---     return
---   end
---
---   M.enabled = true
---   M.timer = vim.loop.new_timer()
---
---   -- Check immediately
---   check_and_approve()
---
---   -- Then check every minute
---   M.timer:start(
---     M.check_interval,
---     M.check_interval,
---     vim.schedule_wrap(function()
---       if M.enabled then
---         check_and_approve()
---       end
---     end)
---   )
---
---   vim.notify(
---     string.format('Started auto-approval for PR #%s (every %ds)', M.current_pr, M.check_interval / 1000),
---     vim.log.levels.INFO
---   )
--- end
-
--- Create PR with custom template
-function M.create_pr_with_custom_template()
-  -- Check if PR already exists
-  if is_pr_exists() then
-    functions.open_github_pr()
-    return
-  end
-
-  -- Check if template file exists
-  if vim.fn.filereadable(M.pr_template_path) == 0 then
-    vim.notify('PR template not found: ' .. M.pr_template_path, vim.log.levels.ERROR)
-    return
-  end
-
-  local title = get_last_commit_message() or 'Draft PR'
-
-  local cmd = {
-    'gh',
-    'pr',
-    'create',
-    '--body-file',
-    M.pr_template_path,
-    '--title',
-    title,
-    '--draft',
-  }
-
-  local result = vim.trim(vim.fn.system(cmd))
-
-  if vim.v.shell_error == 0 and result ~= '' then
-    vim.fn.system({ 'open', result })
-  else
-    vim.notify('Failed to create PR: ' .. result, vim.log.levels.ERROR)
-  end
-end
-
 -- Stop auto-checking
 function M.stop()
   if M.timer then
@@ -269,43 +195,62 @@ function M.stop()
   M.current_pr = nil
 end
 
-function M.check_and_approve_deployment()
-  print('Checking and approving pending deployment 󰔟')
-  check_and_approve()
-end
-
-function M.check_pending_deployments()
-  print('Checking pending deployments 󰔟')
-  check_pending_deployments()
-end
-
 function M.setup()
-  -- vim.api.nvim_create_user_command('GHAutoApproveStart', function(opts)
-  --   M.start(opts.args ~= '' and opts.args or nil)
-  -- end, { nargs = '?', desc = 'Start auto-approval monitoring' })
+  -- Create augroup to prevent duplicate autocmds
+  local augroup = vim.api.nvim_create_augroup('GHCLIAutoCommands', { clear = true })
 
-  -- vim.api.nvim_create_user_command('GHAutoApproveStop', M.stop, { desc = 'Stop auto-approval monitoring' })
+  vim.api.nvim_create_user_command('GHCheckAndApproveDeployment', function()
+    print('Checking and approving pending deployment 󰔟')
+    check_and_approve()
+  end, { desc = 'Check and approve pending deployment' })
 
-  vim.api.nvim_create_user_command(
-    'GHCheckAndApproveDeployment',
-    M.check_and_approve_deployment,
-    { desc = 'Check and approve pending deployment' }
-  )
+  vim.api.nvim_create_user_command('GHCheckDeployment', function()
+    print('Checking pending deployments 󰔟')
+    check_pending_deployments()
+  end, { desc = 'Check for pending deployments' })
 
-  vim.api.nvim_create_user_command(
-    'GHCheckDeployment',
-    M.check_pending_deployments,
-    { desc = 'Check for pending deployments' }
-  )
+  vim.api.nvim_create_user_command('GHCreatePR', function()
+    -- Check if PR already exists
+    if is_pr_exists() then
+      functions.open_github_pr()
+      return
+    end
 
-  vim.api.nvim_create_user_command(
-    'GHCreatePR',
-    M.create_pr_with_custom_template,
-    { desc = 'Create PR with custom template' }
-  )
+    -- Check if template file exists
+    if vim.fn.filereadable(M.pr_template_path) == 0 then
+      vim.notify('PR template not found: ' .. M.pr_template_path, vim.log.levels.ERROR)
+      return
+    end
+
+    local title = get_last_commit_message() or 'Draft PR'
+
+    local cmd = {
+      'gh',
+      'pr',
+      'create',
+      '--body-file',
+      M.pr_template_path,
+      '--title',
+      title,
+      '--draft',
+    }
+
+    local result = vim.trim(vim.fn.system(cmd))
+
+    if vim.v.shell_error == 0 and result ~= '' then
+      vim.fn.system({ 'open', result })
+    else
+      vim.notify('Failed to create PR: ' .. result, vim.log.levels.ERROR)
+    end
+  end, { desc = 'Create PR with custom template' })
+
+  vim.api.nvim_create_user_command('GHCheckoutFromBranch', function()
+    functions.checkout_from_branch()
+  end, { desc = 'Checkout File From A Branch' })
 
   -- Neogit: Auto checking and approve deployment after pushed
   vim.api.nvim_create_autocmd('User', {
+    group = augroup,
     pattern = 'NeogitPushComplete',
     callback = function()
       if not functions.is_eh_mobile_pro_repo() then
@@ -323,8 +268,6 @@ function M.setup()
             check_and_approve()
           end
         end, 240000) -- 4 minutes
-      else
-        return
       end
     end,
     desc = 'Auto approving deployment after pushed',
@@ -332,19 +275,52 @@ function M.setup()
 
   -- Neogit: Auto create PR with custom template after pushed
   vim.api.nvim_create_autocmd('User', {
+    group = augroup,
     pattern = 'NeogitPushComplete',
     callback = function()
       if not functions.is_eh_mobile_pro_repo() then
         return
       end
 
-      M.create_pr_with_custom_template()
+      -- Check if PR already exists
+      if is_pr_exists() then
+        functions.open_github_pr()
+        return
+      end
+
+      -- Check if template file exists
+      if vim.fn.filereadable(M.pr_template_path) == 0 then
+        vim.notify('PR template not found: ' .. M.pr_template_path, vim.log.levels.ERROR)
+        return
+      end
+
+      local title = get_last_commit_message() or 'Draft PR'
+
+      local cmd = {
+        'gh',
+        'pr',
+        'create',
+        '--body-file',
+        M.pr_template_path,
+        '--title',
+        title,
+        '--draft',
+      }
+
+      local result = vim.trim(vim.fn.system(cmd))
+
+      if vim.v.shell_error == 0 and result ~= '' then
+        vim.fn.system({ 'open', result })
+      else
+        vim.notify('Failed to create PR: ' .. result, vim.log.levels.ERROR)
+      end
     end,
     desc = 'Auto create PR with custom template after pushed',
   })
 
   -- Cleanup on exit
   vim.api.nvim_create_autocmd('VimLeavePre', {
+    group = augroup,
     callback = M.stop,
     desc = 'Stop GH auto-approval monitoring on exit',
   })

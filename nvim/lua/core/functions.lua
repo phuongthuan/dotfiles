@@ -160,7 +160,7 @@ function M.trigger_run_maestro_e2e_test(platform)
   }
 
   return function()
-    local branch = get_current_branch()
+    local current_branch = get_current_branch()
     local workflow_file = workflow_files[platform]
 
     if vim.v.shell_error ~= 0 then
@@ -169,9 +169,10 @@ function M.trigger_run_maestro_e2e_test(platform)
     end
 
     -- Prompt for maestro branch
-    local branch_choice = vim.fn.confirm('Select branch to run:', '1 development\n2 current', 1)
-    local branch_map = { 'development', branch }
-    local build_branch = branch_map[branch_choice]
+    local selected_build_branch =
+      vim.fn.confirm('Download latest build from branch:', '1 development\n2 current\n3 master', 1)
+    local branch_map = { 'development', current_branch, 'master' }
+    local build_branch = branch_map[selected_build_branch]
 
     local cmd = {
       'gh',
@@ -179,16 +180,13 @@ function M.trigger_run_maestro_e2e_test(platform)
       'run',
       workflow_file,
       '--ref',
-      branch,
+      current_branch,
       '--field',
       'maestro_build_branch=' .. build_branch,
     }
 
-    print(string.format('󰔟 Triggering run Maestro E2E %s for branch=%s', platform:upper(), build_branch))
-
     local result = vim.fn.system(cmd)
     if vim.v.shell_error == 0 then
-      vim.notify('Workflow triggered successfully 󰸞 ', vim.log.levels.INFO)
       M.open_github_workflow(workflow_file)
     else
       vim.notify('Failed to trigger workflow: ' .. result, vim.log.levels.ERROR)
@@ -315,6 +313,42 @@ function M.toggle_react_test_file()
   end
 end
 
+--- Checkout current buffer from a specific branch
+--- Useful for discarding local changes and getting a clean version from another branch
+---@param branch string|nil Branch name (if nil, prompts user to select)
+function M.checkout_from_branch(branch)
+  local filepath = get_relative_path_current_buffer()
+
+  if filepath == '' then
+    vim.notify('No file in current buffer', vim.log.levels.WARN)
+    return
+  end
+
+  -- If no branch provided, prompt user to select
+  if not branch then
+    local branches = { 'development', 'master', 'main' }
+    vim.ui.select(branches, {
+      prompt = 'Select branch to checkout from:',
+    }, function(selected_branch)
+      if not selected_branch then
+        return
+      end
+
+      M.checkout_from_branch(selected_branch)
+    end)
+    return
+  end
+
+  local cmd = { 'git', 'checkout', branch, '--', filepath }
+  local result = vim.fn.system(cmd)
+
+  if vim.v.shell_error == 0 then
+    vim.cmd('edit!') -- Reload buffer
+  else
+    vim.notify('Failed to checkout from ' .. branch .. ': ' .. result, vim.log.levels.ERROR)
+  end
+end
+
 -- Check if current working directory is the eh-mobile-pro repository
 -- Returns true for:
 --   - Main repo: ~/p/eh/eh-mobile-pro
@@ -326,6 +360,19 @@ function M.is_eh_mobile_pro_repo()
 
   -- Check main repo or any path under worktree/eh-mobile-pro/
   return current_dir == eh_mobile_pro_path or current_dir:find(worktree_base, 1, true) == 1
+end
+
+-- Check if current working directory is the frontend-core repository
+-- Returns true for:
+--   - Main repo: ~/p/eh/frontend-core
+--   - Any worktree: ~/p/eh/worktree/frontend-core/*
+function M.is_eh_frontend_core_repo()
+  local current_dir = vim.fn.getcwd()
+  local frontend_core_path = os.getenv('EH_REPOSITORY_DIR') .. '/frontend-core'
+  local worktree_base = os.getenv('EH_REPOSITORY_DIR') .. '/worktree/frontend-core'
+
+  -- Check main repo or any path under worktree/frontend-core/
+  return current_dir == frontend_core_path or current_dir:find(worktree_base, 1, true) == 1
 end
 
 return M
