@@ -20,6 +20,14 @@ local _mobile_repo_excludes = {
   'ios/**/*.xcassets*/*',
 }
 
+local _frontend_core_repo_excludes = {
+  '**/lib/bs/src/**',
+  'node_modules/',
+  'dist/',
+  'build/',
+  '**/__mockData__/**',
+}
+
 local _excluded_fd_test_files = {
   '*.spec.ts*',
   '*.spec.js*',
@@ -82,10 +90,13 @@ return {
 
       nmap('<leader>,', function()
         local excludes = nil
-        local command_opts = functions.is_eh_mobile_pro_repo() and {} or { '--no-ignore' }
+        local command_opts = (functions.is_eh_mobile_pro_repo() or functions.is_eh_frontend_core_repo()) and {}
+          or { '--no-ignore' }
 
         if functions.is_eh_mobile_pro_repo() then
           excludes = vim.list_extend(vim.list_extend({}, _mobile_repo_excludes), _excluded_fd_test_files)
+        elseif functions.is_eh_frontend_core_repo() then
+          excludes = vim.list_extend(vim.list_extend({}, _frontend_core_repo_excludes), _excluded_fd_test_files)
         end
 
         Picker.find_files(
@@ -96,10 +107,13 @@ return {
 
       nmap('<leader>ft', function()
         local excludes = nil
-        local command_opts = functions.is_eh_mobile_pro_repo() and {} or { '--no-ignore' }
+        local command_opts = (functions.is_eh_mobile_pro_repo() or functions.is_eh_frontend_core_repo()) and {}
+          or { '--no-ignore' }
 
         if functions.is_eh_mobile_pro_repo() then
           excludes = vim.list_extend({}, _mobile_repo_excludes)
+        elseif functions.is_eh_frontend_core_repo() then
+          excludes = vim.list_extend({}, _frontend_core_repo_excludes)
         end
 
         Picker.find_files(
@@ -109,8 +123,9 @@ return {
       end, { desc = 'Test Files (fd)' })
 
       nmap('<leader>fA', function()
-        local command_opts = functions.is_eh_mobile_pro_repo() and {} or { '--no-ignore' }
-        Picker.find_files({ tool = 'fd', command_opts = command_opts }, { source = { name = ' Files (fd)' } })
+        local command_opts = (functions.is_eh_mobile_pro_repo() or functions.is_eh_frontend_core_repo()) and {}
+          or { '--no-ignore' }
+        Picker.find_files({ tool = 'fd', command_opts = command_opts }, { source = { name = ' Files (fd)' } })
       end, { desc = 'Current Directory (fd) without excludes' })
 
       nmap('<leader>om', function()
@@ -271,6 +286,22 @@ return {
         )
       end, { desc = 'Literal String (eh-mobile-pro)' })
 
+      nmap('<leader>pd', function()
+        local string = vim.fn.input('Grep .dotfiles: ')
+
+        -- If input is empty, hide the input prompt instead of showing empty window
+        if string == '' then
+          return
+        end
+
+        Picker.grep_literal({ pattern = string }, {
+          source = {
+            cwd = env.DOTFILES,
+            name = 'Grep literal string (rg): ' .. string,
+          },
+        })
+      end, { desc = 'Literal String (.dotfiles)' })
+
       nmap('<leader>;', function()
         MiniPick.builtin.buffers()
       end, { desc = 'Opened Buffers' })
@@ -318,6 +349,24 @@ return {
         })
       end, { desc = '.dotfiles' })
 
+      nmap('<leader>fdl', function()
+        Picker.find_files({ tool = 'fd' }, {
+          source = {
+            cwd = env.DOWNLOADS,
+            name = 'Downloads (fd)',
+          },
+        })
+      end, { desc = 'Downloads' })
+
+      nmap('<leader>fde', function()
+        Picker.find_files({ tool = 'fd' }, {
+          source = {
+            cwd = env.DESKTOP,
+            name = 'Desktop (fd)',
+          },
+        })
+      end, { desc = 'Desktop' })
+
       nmap('<leader>sd', function()
         MiniPick.builtin.grep_live({ tool = 'rg' }, {
           source = { name = 'Grep .dotfiles (rg)', cwd = env.DOTFILES },
@@ -330,11 +379,29 @@ return {
         })
       end, { desc = 'Notes (fd)' })
 
+      nmap('<leader>fS', function()
+        MiniPick.builtin.files({ tool = 'fd' }, {
+          source = { name = 'Agent Skills (fd)', cwd = env.AGENT_SKILLS },
+        })
+      end, { desc = 'Agent Skills (fd)' })
+
       nmap('<leader>sn', function()
         MiniPick.builtin.grep_live(nil, {
           source = { name = 'Grep Notes', cwd = env.PERSONAL_NOTES },
         })
       end, { desc = 'Grep Live Notes' })
+
+      nmap('<leader>fp', function()
+        MiniPick.builtin.files({ tool = 'fd' }, {
+          source = { name = 'Pictures (fd)', cwd = env.PICTURES },
+        })
+      end, { desc = 'Pictures (fd)' })
+
+      nmap('<leader>fo', function()
+        MiniPick.builtin.files({ tool = 'fd' }, {
+          source = { name = 'Screenshots (fd)', cwd = env.SCREENSHOTS },
+        })
+      end, { desc = 'Screenshots (fd)' })
 
       nmap('<leader>gbr', function()
         MiniExtra.pickers.git_branches(nil, { source = { name = ' Git branches' } })

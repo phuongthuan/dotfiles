@@ -17,6 +17,14 @@ local _default_excludes = {
   '.next/',
   '.yarn/cache',
   'coverage/',
+
+  -- Python - heroai
+  '.mypy_cache/',
+  '.ruff_cache',
+  '**/__pycache__/**',
+  '.pytest_cache',
+  '*.pyc',
+  '.venv/',
 }
 
 -- Picker for searching a literal string instead of regular expression (-F or --fixed-strings)
