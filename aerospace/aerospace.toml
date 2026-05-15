@@ -48,6 +48,14 @@ if.app-name-regex-substring = 'Simulator'
 run = 'layout tiling'
 
 [[on-window-detected]]
+if.app-name-regex-substring = 'Slack'
+run = 'layout tiling'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'qemu-system-aarch64'
+run = 'layout tiling'
+
+[[on-window-detected]]
 if.app-name-regex-substring = 'IINA'
 run = 'layout floating'
 
