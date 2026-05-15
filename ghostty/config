@@ -1,3 +1,4 @@
+# Reload Ghostty config: command + b + r
 theme = Gruvbox Dark
 
 # Font settings
@@ -10,7 +11,7 @@ font-style = Bold
 font-size = 13
 
 # background = #000000
-background-opacity = 0.6
+background-opacity = 0.8
 background-blur-radius = 30
 
 # window configs
