@@ -3,8 +3,6 @@
 name: fe-core
 root: ~/p/eh/frontend-core
 
-# pre_window: asdf set nodejs 20.18.1
-
 windows:
   - ide: nvim
   - git:
