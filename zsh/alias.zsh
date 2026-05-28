@@ -8,9 +8,6 @@ alias rv='ruby -v'
 alias nv='node -v'
 alias lv='lua -v'
 
-# opencode
-alias oc='opencode'
-
 # Open iCloud Drive
 alias ic='eval nvim $ICLOUD_DRIVE'
 
@@ -82,3 +79,9 @@ alias bws='bw sync'
 
 # crypto coin tracker
 alias btc='curl rate.sx'
+
+# Android emulator
+alias start_emulator='~/scripts/start-android-emulator.sh'
+
+# Kill port
+alias kill_port='~/scripts/kill-port.sh'

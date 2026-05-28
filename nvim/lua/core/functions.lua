@@ -117,8 +117,8 @@ end
 ---@return function
 function M.trigger_build_maestro_e2e_test(platform)
   local workflow_files = {
-    ios = 'build_maestro_ios_e2e.yml',
-    android = 'build_maestro_e2e.yml',
+    ios = 'build_and_run_ios_e2e.yml',
+    android = 'build_and_run_android_e2e.yml',
   }
 
   return function()

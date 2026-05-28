@@ -197,7 +197,7 @@ return {
       nmap('<leader>fh', function()
         Picker.find_files({ tool = 'fd' }, {
           source = {
-            cwd = env.DOTFILES .. '/http',
+            cwd = env.HTTP_DIR,
             name = 'Files HTTP (fd)',
           },
         })

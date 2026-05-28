@@ -10,6 +10,7 @@ return {
   NVIM_CONFIG_DIR = vim.env.NVIM_CONFIG_DIR or '~/.config/nvim',
   EH_CONFIG_DIR = vim.env.EH_CONFIG_DIR or '~/.config/eh',
   REFERENCES_DIR = vim.env.REFERENCES_DIR or '~/p/references',
+  HTTP_DIR = vim.env.HTTP_DIR or '~/p/http',
   PERSONAL_NOTES = vim.env.PERSONAL_NOTES or '~/Documents/Notes',
   AGENT_SKILLS = vim.env.AGENT_SKILLS or '~/p/claude/skills',
   SECRET_ENV_FILE = vim.env.SECRET_ENV_FILE or '~/.dotfiles/zsh/secret.zsh',

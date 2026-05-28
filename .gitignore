@@ -5,12 +5,15 @@
 zsh/eh.zsh
 zsh/secret.zsh
 
-plugin/
-
 log/
 *.log
 
 coverage/
 karabiner/
 
-http-client.private.env.json
+# Claude Code
+.claude/settings.local.json
+**/.serena/
+**/.serena/cache/
+**/.serena/memories/
+**/.eh-claude-code/

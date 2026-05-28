@@ -39,12 +39,6 @@ alias gcg='git config --global'
 # GitHub CLI
 alias gh-create='gh repo create --private --source=. --remote=origin && git push -u --all && gh browse'
 
-# GPG TTY
-# https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key
-if ! grep -q "export GPG_TTY=\$(tty)" ~/.zshrc; then
-  echo -e '\nexport GPG_TTY=$(tty)' >>~/.zshrc
-fi
-
 get_current_branch() {
   local branch_name="${1:-$(git branch --show-current)}"
 

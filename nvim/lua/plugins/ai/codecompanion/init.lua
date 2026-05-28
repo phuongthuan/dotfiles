@@ -81,8 +81,8 @@ return {
             name = 'copilot',
             -- model = 'gpt-4.1',
             -- model = 'claude-haiku-4.5',
-            model = 'claude-opus-4.6',
-            -- model = 'claude-sonnet-4.5',
+            -- model = 'claude-opus-4.6',
+            model = 'claude-sonnet-4.5',
           },
           tools = {
             opts = {
