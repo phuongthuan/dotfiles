@@ -5,24 +5,19 @@ local command = vim.api.nvim_create_user_command
 command('GHBuildExpo', functions.trigger_expo_build, { desc = 'Build eh-mobile-pro with Expo' })
 
 command(
-  'GHBuildE2EIOS',
-  functions.trigger_build_maestro_e2e_test('ios'),
-  { desc = 'Build eh-mobile-pro Maestro E2E iOS' }
+  'GHBuildAndRunE2EIOS',
+  functions.trigger_build_and_run_e2e_test('ios'),
+  { desc = 'Build and run eh-mobile-pro E2E iOS' }
 )
 command(
-  'GHBuildE2EAndroid',
-  functions.trigger_build_maestro_e2e_test('android'),
-  { desc = 'Build eh-mobile-pro Maestro E2E Android' }
+  'GHBuildAndRunE2EAndroid',
+  functions.trigger_build_and_run_e2e_test('android'),
+  { desc = 'Build and run eh-mobile-pro E2E Android' }
 )
-command('GHRunE2EIOS', functions.trigger_run_maestro_e2e_test('ios'), { desc = 'Run eh-mobile-pro Maestro E2E iOS' })
-command(
-  'GHRunE2EAndroid',
-  functions.trigger_run_maestro_e2e_test('android'),
-  { desc = 'Run eh-mobile-pro Maestro E2E Android' }
-)
+command('GHRunE2EIOS', functions.trigger_run_e2e_test('ios'), { desc = 'Run eh-mobile-pro E2E iOS' })
+command('GHRunE2EAndroid', functions.trigger_run_e2e_test('android'), { desc = 'Run eh-mobile-pro E2E Android' })
 
 command('GHOpen', functions.open_my_github, { desc = 'Open GitHub' })
-
 command('GHOpenPR', functions.open_github_pr, { desc = 'Open GitHub PR' })
 
 command('GHOpenPRList', function(opts)
