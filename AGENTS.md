@@ -2,11 +2,12 @@
 
 ## Project Overview
 
-Personal dotfiles repository for macOS development environment. Contains configuration files for terminal tools, Neovim, window management, and productivity applications.
+Personal dotfiles repository for macOS development environment. Contains
+configuration files for terminal tools, Neovim, window management, and
+productivity applications.
 
-**Author:** phuongthuan
-**Target OS:** macOS (Darwin)
-**Package Manager:** Homebrew (via Brewfile)
+**Author:** phuongthuan **Target OS:** macOS (Darwin) **Package Manager:**
+Homebrew (via Brewfile)
 
 ## Version Requirements
 
@@ -42,9 +43,11 @@ Personal dotfiles repository for macOS development environment. Contains configu
 
 ## Build/Lint/Test Commands
 
-This is a dotfiles repository with no traditional build process. However, there are specific tools and commands:
+This is a dotfiles repository with no traditional build process. However, there
+are specific tools and commands:
 
 ### Neovim Lua Formatting
+
 ```bash
 # Format Lua files with StyLua
 stylua nvim/lua/**/*.lua
@@ -54,6 +57,7 @@ stylua --check nvim/lua/**/*.lua
 ```
 
 ### Shell Testing
+
 ```bash
 # Source zsh configuration
 source ~/.dotfiles/zsh/zshrc
@@ -63,6 +67,7 @@ tmux source-file ~/.dotfiles/tmux/tmux.conf
 ```
 
 ### Homebrew Package Management
+
 ```bash
 # Install all packages from Brewfile
 brew bundle
@@ -72,6 +77,7 @@ brew bundle --force cleanup
 ```
 
 ### Running Tests (from Neovim keymaps)
+
 ```bash
 # Run unit tests (triggered from Neovim with <leader>ut)
 ytc <path/to/test.spec.js>
@@ -85,6 +91,7 @@ mte <path/to/test.yaml>
 ### Neovim Lua Configuration
 
 #### Formatting (StyLua)
+
 - 2 spaces indentation
 - 120 character line width
 - Unix line endings
@@ -93,6 +100,7 @@ mte <path/to/test.yaml>
 - No trailing whitespace
 
 #### Import/Require Patterns
+
 ```lua
 -- Local requires at top of file
 local mapper = require('core.utils').mapper_factory
@@ -105,6 +113,7 @@ local imap = mapper('i')
 ```
 
 #### Naming Conventions
+
 - Module tables: `M` (e.g., `local M = {}`)
 - Mode mappers: `nmap`, `vmap`, `imap`, `xmap`, `omap`
 - Constants: `UPPER_SNAKE_CASE` (e.g., `NVIM_CONFIG_DIR`)
@@ -112,9 +121,11 @@ local imap = mapper('i')
 - Private functions: prefix with underscore `_function_name`
 
 #### Plugin Structure
+
 - Core plugins: `nvim/lua/plugins/*.lua` (always loaded)
 - Optional plugins: `nvim/lua/plugins/extras/*.lua` (toggle with `enabled`)
 - Plugin spec format:
+
 ```lua
 return {
   'author/plugin-name',
@@ -126,7 +137,9 @@ return {
 ```
 
 #### Keymap Utilities
+
 Use `mapper_factory` from `core.utils`:
+
 ```lua
 local mapper = require('core.utils').mapper_factory
 local nmap = mapper('n')
@@ -141,18 +154,22 @@ mapper({ 'n', 'x' })('x', '"_x')
 Alternative: `vim.keymap.set` is also acceptable.
 
 #### API Preferences
+
 - Use `vim.keymap.set` instead of `vim.api.nvim_set_keymap`
 - Use `vim.o` / `vim.opt` for options
 - Use `vim.api.nvim_create_autocmd` for autocommands
 - Use `require('core.utils')` for shared utilities
 
 #### Error Handling
+
 - Use `pcall` for operations that might fail
 - Provide descriptive error messages with context
 - Use `vim.notify` for user-facing messages
 
 #### Comments and Documentation
+
 - Use LuaLS annotations for functions:
+
 ```lua
 ---@param mode string|table
 ---@return fun(lhs: string, rhs: string|function, opts: table|nil)
@@ -197,6 +214,7 @@ yellow:     #fabd2f
 ## Important Conventions
 
 ### DO
+
 - Use spaces, never tabs (2-width)
 - Keep cursor centered when searching (mapped in keymaps.lua)
 - Use relative paths with `$HOME` or `~`
@@ -205,6 +223,7 @@ yellow:     #fabd2f
 - Symlink configs to `~/.config/` directories
 
 ### DO NOT
+
 - Add line numbers in Neovim (disabled intentionally)
 - Use Python/Perl providers (disabled in options.lua)
 - Use tabs for indentation
@@ -214,11 +233,13 @@ yellow:     #fabd2f
 ## Common Patterns
 
 ### Tmux Configuration
+
 - Prefix key: `` ` `` (backtick)
 - Use Gruvbox color variables: `#{@aqua}`, `#{@purple}`
 - Window/pane navigation: integrated with Neovim (C-h/j/k/l)
 
 ### Neovim Options
+
 - No line numbers by default (`vim.o.number = false`)
 - Cursor line highlighting enabled
 - Smart case-insensitive search
@@ -226,6 +247,7 @@ yellow:     #fabd2f
 - Sign column always visible
 
 ### Autocommands
+
 - Group all autocmds under 'UserConfig' group
 - Highlight on yank (40ms timeout)
 - Map 'q' to quit in help/man/lspinfo buffers

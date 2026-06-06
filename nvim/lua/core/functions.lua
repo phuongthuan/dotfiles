@@ -59,6 +59,7 @@ function M.open_github_author_pr_list(project, author)
     'application-infrastructure',
     'frontend-core',
     'ebf-swag-personal',
+    'heroai',
   }
 
   -- If called without arguments, show interactive pickers

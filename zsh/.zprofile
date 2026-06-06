@@ -42,6 +42,9 @@ export PATH="$ANDROID_SDK_ROOT/emulator:$ANDROID_SDK_ROOT/platform-tools:$PATH"
 # postgresql@16
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/thuan/.lmstudio/bin"
+
 # ===================================================
 # asdf shims must be last so they prepend to the front of PATH,
 # Explaination
