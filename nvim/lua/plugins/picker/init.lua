@@ -90,12 +90,12 @@ return {
 
       nmap('<leader>,', function()
         local excludes = nil
-        local command_opts = (functions.is_eh_mobile_pro_repo() or functions.is_eh_frontend_core_repo()) and {}
+        local command_opts = (functions.is_mobile_repo() or functions.is_frontend_core_repo()) and {}
           or { '--no-ignore' }
 
-        if functions.is_eh_mobile_pro_repo() then
+        if functions.is_mobile_repo() then
           excludes = vim.list_extend(vim.list_extend({}, _mobile_repo_excludes), _excluded_fd_test_files)
-        elseif functions.is_eh_frontend_core_repo() then
+        elseif functions.is_frontend_core_repo() then
           excludes = vim.list_extend(vim.list_extend({}, _frontend_core_repo_excludes), _excluded_fd_test_files)
         end
 
@@ -107,12 +107,12 @@ return {
 
       nmap('<leader>ft', function()
         local excludes = nil
-        local command_opts = (functions.is_eh_mobile_pro_repo() or functions.is_eh_frontend_core_repo()) and {}
+        local command_opts = (functions.is_mobile_repo() or functions.is_frontend_core_repo()) and {}
           or { '--no-ignore' }
 
-        if functions.is_eh_mobile_pro_repo() then
+        if functions.is_mobile_repo() then
           excludes = vim.list_extend({}, _mobile_repo_excludes)
-        elseif functions.is_eh_frontend_core_repo() then
+        elseif functions.is_frontend_core_repo() then
           excludes = vim.list_extend({}, _frontend_core_repo_excludes)
         end
 
@@ -123,7 +123,7 @@ return {
       end, { desc = 'Test Files (fd)' })
 
       nmap('<leader>fA', function()
-        local command_opts = (functions.is_eh_mobile_pro_repo() or functions.is_eh_frontend_core_repo()) and {}
+        local command_opts = (functions.is_mobile_repo() or functions.is_frontend_core_repo()) and {}
           or { '--no-ignore' }
         Picker.find_files({ tool = 'fd', command_opts = command_opts }, { source = { name = ' Files (fd)' } })
       end, { desc = 'Current Directory (fd) without excludes' })
@@ -138,7 +138,7 @@ return {
 
         local globs = nil
 
-        if functions.is_eh_mobile_pro_repo() then
+        if functions.is_mobile_repo() then
           local choice = vim.fn.confirm('Ignore test files?', '&Yes\n&No', 1)
           if choice == 1 then
             -- Yes - use globs with test file exclusions
@@ -153,7 +153,7 @@ return {
       end, { desc = 'Word Under Cursor' })
 
       nmap('<leader>pl', function()
-        local globs = functions.is_eh_mobile_pro_repo() and _mobile_repo_globs or nil
+        local globs = functions.is_mobile_repo() and _mobile_repo_globs or nil
 
         Picker.grep_literal({ pattern = ':>> ', globs = globs }, { source = { name = '  Grep console.log (rg)' } })
       end, { desc = 'console.log' })
@@ -168,7 +168,7 @@ return {
 
         local globs = nil
 
-        if functions.is_eh_mobile_pro_repo() then
+        if functions.is_mobile_repo() then
           local choice = vim.fn.confirm('Ignore test files?', '&Yes\n&No', 1)
           if choice == 1 then
             -- Yes - use globs with test file exclusions
@@ -257,7 +257,7 @@ return {
       end, { desc = '~/.local/share/nvim' })
 
       nmap('<leader>fmd', function()
-        local excludes = functions.is_eh_mobile_pro_repo() and _mobile_repo_excludes or nil
+        local excludes = functions.is_mobile_repo() and _mobile_repo_excludes or nil
         Picker.find_files(
           { tool = 'fd', excludes = excludes },
           { source = { cwd = '~/p/eh/worktree/eh-mobile-pro/dev', name = ' Files (eh-mobile-pro)' } }
@@ -265,7 +265,7 @@ return {
       end, { desc = 'eh-mobile-pro (development)' })
 
       nmap('<leader>fmm', function()
-        local excludes = functions.is_eh_mobile_pro_repo() and _mobile_repo_excludes or nil
+        local excludes = functions.is_mobile_repo() and _mobile_repo_excludes or nil
         Picker.find_files(
           { tool = 'fd', excludes = excludes },
           { source = { cwd = '~/p/eh/worktree/eh-mobile-pro/master', name = ' Files (eh-mobile-pro)' } }

@@ -10,13 +10,11 @@ return {
       {
         mode = 'n',
         { '<leader>a', group = ' 󱚝 ' },
-        { '<leader>ag', group = ' Prompt 󱚝 ' },
         { '<leader>b', group = ' Buffers' },
         { '<leader>c', group = ' Coding' },
         { '<leader>f', group = ' Files' },
         { '<leader>p', group = ' Search' },
         { '<leader>go', group = ' Open URL' },
-        { '<leader>gy', group = ' Copy URL' },
         { '<leader>u', group = ' Options' },
         { '<leader>g', group = ' Git  ' },
         { '<leader>h', group = ' Git  ' },

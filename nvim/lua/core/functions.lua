@@ -378,7 +378,7 @@ end
 -- Returns true for:
 --   - Main repo: ~/p/eh/eh-mobile-pro
 --   - Any worktree: ~/p/eh/worktree/eh-mobile-pro/*
-function M.is_eh_mobile_pro_repo()
+function M.is_mobile_repo()
   local current_dir = vim.fn.getcwd()
   local eh_mobile_pro_path = os.getenv('EH_REPOSITORY_DIR') .. '/eh-mobile-pro'
   local worktree_base = os.getenv('EH_REPOSITORY_DIR') .. '/worktree/eh-mobile-pro'
@@ -391,7 +391,7 @@ end
 -- Returns true for:
 --   - Main repo: ~/p/eh/frontend-core
 --   - Any worktree: ~/p/eh/worktree/frontend-core/*
-function M.is_eh_frontend_core_repo()
+function M.is_frontend_core_repo()
   local current_dir = vim.fn.getcwd()
   local frontend_core_path = os.getenv('EH_REPOSITORY_DIR') .. '/frontend-core'
   local worktree_base = os.getenv('EH_REPOSITORY_DIR') .. '/worktree/frontend-core'

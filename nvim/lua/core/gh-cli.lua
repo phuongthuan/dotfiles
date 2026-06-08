@@ -253,7 +253,7 @@ function M.setup()
     group = augroup,
     pattern = 'NeogitPushComplete',
     callback = function()
-      if not functions.is_eh_mobile_pro_repo() then
+      if not functions.is_mobile_repo() then
         return
       end
 
@@ -278,7 +278,7 @@ function M.setup()
     group = augroup,
     pattern = 'NeogitPushComplete',
     callback = function()
-      if not functions.is_eh_mobile_pro_repo() then
+      if not functions.is_mobile_repo() then
         return
       end
 
