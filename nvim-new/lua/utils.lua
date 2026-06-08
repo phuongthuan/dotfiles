@@ -11,9 +11,15 @@ end
 
 M.env = {
   DOTFILES = os.getenv('DOTFILES'),
+  DESKTOP = '~/Desktop',
+  DOWNLOADS = '~/Downloads',
+  PICTURES = '~/Pictures/',
+  SCREENSHOTS = '~/Pictures/screenshots',
   GITHUB_USERNAME = os.getenv('GITHUB_USERNAME'),
   NVIM_CONFIG_DIR = os.getenv('NVIM_CONFIG_DIR'),
-  REFERENCES_DIR = os.getenv('REFERENCES_DIR') or '~/p/references',
+  REFERENCES_DIR = '~/p/references',
+  AGENT_SKILLS = '~/p/claude/skills',
+  HTTP_DIR = '~/p/http',
   NOTES_DIR = os.getenv('PERSONAL_NOTES'),
   SECRET_ENV_FILE = os.getenv('SECRET_ENV_FILE'),
   LOCAL_SHARE_DIR = '~/.local/share/',

@@ -9,6 +9,7 @@ local MiniExtra = require('mini.extra')
 local MiniVisits = require('mini.visits')
 
 local env = require('utils').env
+local f = require('functions')
 local nmap = require('utils').nmap
 local mapper = require('utils').mapper
 
@@ -28,6 +29,14 @@ local _default_excludes = {
   '.next/',
   '.yarn/cache',
   'coverage/',
+
+  -- Python - heroai
+  '.mypy_cache/',
+  '.ruff_cache',
+  '**/__pycache__/**',
+  '.pytest_cache',
+  '*.pyc',
+  '.venv/',
 }
 
 -- Picker for searching a literal string instead of regular expression (-F or --fixed-strings)
@@ -171,7 +180,43 @@ local _is_mobile_repo = function()
   return current_dir == eh_mobile_pro_path or current_dir:find(worktree_base, 1, true) == 1
 end
 
+-- Check if current working directory is the frontend-core repository
+-- Returns true for:
+--   - Main repo: ~/p/eh/frontend-core
+--   - Any worktree: ~/p/eh/worktree/frontend-core/*
+local _is_frontend_core_repo = function()
+  local current_dir = vim.fn.getcwd()
+  local frontend_core_path = os.getenv('EH_REPOSITORY_DIR') .. '/frontend-core'
+  local worktree_base = os.getenv('EH_REPOSITORY_DIR') .. '/worktree/frontend-core'
+
+  -- Check main repo or any path under worktree/frontend-core/
+  return current_dir == frontend_core_path or current_dir:find(worktree_base, 1, true) == 1
+end
+
 local _mobile_repo_globs = { '!ContractPdfPreview', '!*.cjs', '!coverage/' }
+local _excluded_glob_test_files = { '!*.spec.js', '!*.test.js' }
+local _mobile_repo_excludes = {
+  'ContractPdfPreview/',
+  '*.cjs',
+  'coverage/',
+  'android/',
+  'fastlane/',
+  'ios/**/Contents.json',
+  'ios/**/*.ttf',
+  'ios/**/*.xcassets*/*',
+}
+local _frontend_core_repo_excludes = {
+  '**/lib/bs/src/**',
+  'node_modules/',
+  'dist/',
+  'build/',
+  '**/__mockData__/**',
+}
+local _excluded_fd_test_files = {
+  '*.spec.ts*',
+  '*.spec.js*',
+  '*.test.js*',
+}
 
 -- Centered on screen
 -- Adaptive width based on screen size:
@@ -222,30 +267,25 @@ vim.ui.select = MiniPick.ui_select
 
 local nvim_excludes = {
   'karabiner/automatic_backups/',
-  'nvim-pack-lock.json',
+  -- 'nvim-pack-lock.json',
   'lazy-lock.json',
 }
 
 local nvim_globs = {
   '!karabiner/automatic_backups/',
-  '!nvim-pack-lock.json',
+  -- '!nvim-pack-lock.json',
   '!lazy-lock.json',
 }
 
 nmap('<leader>,', function()
-  local excludes = _is_mobile_repo()
-      and {
-        'ContractPdfPreview/',
-        '*.cjs',
-        'coverage/',
-        'android/',
-        'fastlane/',
-        'ios/**/Contents.json',
-        'ios/**/*.ttf',
-      }
-    or nvim_excludes
+  local excludes = nil
+  local command_opts = (_is_mobile_repo() or _is_frontend_core_repo()) and {} or { '--no-ignore' }
 
-  local command_opts = _is_mobile_repo() and {} or { '--no-ignore' }
+  if _is_mobile_repo() then
+    excludes = vim.list_extend(vim.list_extend({}, _mobile_repo_excludes), _excluded_fd_test_files)
+  elseif _is_frontend_core_repo() then
+    excludes = vim.list_extend(vim.list_extend({}, _frontend_core_repo_excludes), _excluded_fd_test_files)
+  end
 
   find_files(
     { tool = 'fd', excludes = excludes, command_opts = command_opts },
@@ -253,24 +293,54 @@ nmap('<leader>,', function()
   )
 end, { desc = 'Current Directory (fd)' })
 
+nmap('<leader>ft', function()
+  local excludes = nil
+  local command_opts = (f.is_mobile_repo() or f.is_frontend_core_repo()) and {} or { '--no-ignore' }
+
+  if f.is_mobile_repo() then
+    excludes = vim.list_extend({}, _mobile_repo_excludes)
+  elseif f.is_frontend_core_repo() then
+    excludes = vim.list_extend({}, _frontend_core_repo_excludes)
+  end
+
+  find_files(
+    { tool = 'fd', excludes = excludes, command_opts = command_opts, pattern = '\\.(spec|test)\\.(js|ts)x?$' },
+    { source = { name = ' Test Files (fd)' } }
+  )
+end, { desc = 'Test Files (fd)' })
+
 nmap('<leader>fA', function()
-  local command_opts = _is_mobile_repo() and {} or { '--no-ignore' }
-  find_files({ tool = 'fd', command_opts = command_opts }, { source = { name = ' Files (fd)' } })
+  local command_opts = (f.is_mobile_repo() or f.is_frontend_core_repo()) and {} or { '--no-ignore' }
+  find_files({ tool = 'fd', command_opts = command_opts }, { source = { name = ' Files (fd)' } })
 end, { desc = 'Current Directory (fd) without excludes' })
 
-nmap('<leader>m', function()
+nmap('<leader>om', function()
   open_music()
 end, { desc = 'Open MPC' })
 
-nmap('<leader>pw', function()
+mapper({ 'n', 'v' })('<leader>pw', function()
   -- current word under cursor in the current buffer
   local word = vim.fn.expand('<cword>')
-  local globs = _is_mobile_repo() and _mobile_repo_globs or nil
+
+  local globs = nil
+
+  if f.is_mobile_repo() then
+    local choice = vim.fn.confirm('Ignore test files?', '&Yes\n&No', 1)
+    if choice == 1 then
+      -- Yes - use globs with test file exclusions
+      globs = vim.list_extend(vim.list_extend({}, _mobile_repo_globs), _excluded_glob_test_files)
+    else
+      -- No - use base globs without test file exclusions
+      globs = _mobile_repo_globs
+    end
+  end
+
   grep_literal({ pattern = word, globs = globs }, { source = { name = 'Grep (rg): ' .. word } })
 end, { desc = 'Word Under Cursor' })
 
 nmap('<leader>pl', function()
-  local globs = _is_mobile_repo() and _mobile_repo_globs or nil
+  local globs = f.is_mobile_repo() and _mobile_repo_globs or nil
+
   grep_literal({ pattern = ':>> ', globs = globs }, { source = { name = '  Grep console.log (rg)' } })
 end, { desc = 'console.log' })
 
@@ -282,19 +352,55 @@ nmap('<leader>ps', function()
     return
   end
 
-  local globs = _is_mobile_repo() and _mobile_repo_globs or nvim_globs
+  local globs = nil
+
+  if f.is_mobile_repo() then
+    local choice = vim.fn.confirm('Ignore test files?', '&Yes\n&No', 1)
+    if choice == 1 then
+      -- Yes - use globs with test file exclusions
+      globs = vim.list_extend(vim.list_extend({}, _mobile_repo_globs), _excluded_glob_test_files)
+    else
+      -- No - use base globs without test file exclusions
+      globs = _mobile_repo_globs
+    end
+  end
 
   grep_literal({ pattern = string, globs = globs }, { source = { name = 'Grep literal string (rg): ' .. string } })
 end, { desc = 'Literal String' })
 
 nmap('<leader>fe', function()
-  find_files({ tool = 'fd' }, {
+  find_files({ tool = 'fd', excludes = _mobile_repo_excludes }, {
     source = {
-      cwd = env.EH_REPOSITORY_DIR,
+      cwd = env.COMPANY_REPO_DIR,
       name = 'Files EH (fd)',
     },
   })
 end, { desc = 'Files EH (fd)' })
+
+nmap('<leader>fh', function()
+  find_files({ tool = 'fd' }, {
+    source = {
+      cwd = env.HTTP_DIR,
+      name = 'Files HTTP (fd)',
+    },
+  })
+end, { desc = 'Files HTTP (fd)' })
+
+nmap('<leader>pe', function()
+  local string = vim.fn.input('Grep EH workspaces: ')
+
+  -- If input is empty, hide the input prompt instead of showing empty window
+  if string == '' then
+    return
+  end
+
+  grep_literal({ pattern = string, globs = _mobile_repo_globs }, {
+    source = {
+      cwd = env.COMPANY_REPO_DIR,
+      name = 'Grep literal string (rg): ' .. string,
+    },
+  })
+end, { desc = 'Literal String EH workspaces' })
 
 nmap('<leader>fr', function()
   find_files({ tool = 'fd' }, {
@@ -329,24 +435,65 @@ nmap('<leader>fl', function()
 
   find_files(
     { tool = 'fd', excludes = excludes },
-    { source = { cwd = env.LOCAL_SHARE_CONFIG_DIR .. 'nvim', name = ' Local share nvim files (fd)' } }
+    { source = { cwd = env.LOCAL_SHARE_DIR .. 'nvim', name = ' Local share nvim files (fd)' } }
   )
 end, { desc = '~/.local/share/nvim' })
 
-nmap('<leader>fm', function()
-  local excludes = _is_mobile_repo() and { 'ContractPdfPreview/', '*.cjs' } or nil
+nmap('<leader>fmd', function()
+  local excludes = f.is_mobile_repo() and _mobile_repo_excludes or nil
   find_files(
     { tool = 'fd', excludes = excludes },
-    { source = { cwd = '~/p/eh/worktree/eh-mobile-pro/development', name = ' Files (eh-mobile-pro)' } }
+    { source = { cwd = '~/p/eh/worktree/eh-mobile-pro/dev', name = ' Files (eh-mobile-pro)' } }
   )
-end, { desc = 'eh-mobile-pro (dev)' })
+end, { desc = 'eh-mobile-pro (development)' })
+
+nmap('<leader>fmm', function()
+  local excludes = f.is_mobile_repo() and _mobile_repo_excludes or nil
+  find_files(
+    { tool = 'fd', excludes = excludes },
+    { source = { cwd = '~/p/eh/worktree/eh-mobile-pro/master', name = ' Files (eh-mobile-pro)' } }
+  )
+end, { desc = 'eh-mobile-pro (master)' })
+
+nmap('<leader>pm', function()
+  local string = vim.fn.input('Grep eh-mobile-pro(development): ')
+
+  -- If input is empty, hide the input prompt instead of showing empty window
+  if string == '' then
+    return
+  end
+
+  grep_literal(
+    { pattern = string, globs = _mobile_repo_globs },
+    { source = { name = 'Grep literal string (rg): ' .. string } }
+  )
+end, { desc = 'Literal String (eh-mobile-pro)' })
+
+nmap('<leader>pd', function()
+  local string = vim.fn.input('Grep .dotfiles: ')
+
+  -- If input is empty, hide the input prompt instead of showing empty window
+  if string == '' then
+    return
+  end
+
+  grep_literal({ pattern = string }, {
+    source = {
+      cwd = env.DOTFILES,
+      name = 'Grep literal string (rg): ' .. string,
+    },
+  })
+end, { desc = 'Literal String (.dotfiles)' })
 
 nmap('<leader>;', function()
   MiniPick.builtin.buffers()
 end, { desc = 'Opened Buffers' })
 
 nmap('<leader>rs', function()
-  MiniPick.builtin.resume()
+  local ok = pcall(MiniPick.builtin.resume)
+  if not ok then
+    vim.notify('No picker to resume  ', vim.log.levels.WARN)
+  end
 end, { desc = 'Resume Search' })
 
 mapper({ 'n', 'v' })('<leader>sh', function()
@@ -366,8 +513,11 @@ nmap('<leader>F', function()
 end, { desc = 'Grep String (buffers)' })
 
 nmap('<leader>fo', function()
-  MiniExtra.pickers.oldfiles()
-end, { desc = 'Old' })
+  local ok = pcall(MiniExtra.pickers.oldfiles)
+  if not ok then
+    vim.notify('No old files found  ', vim.log.levels.WARN)
+  end
+end, { desc = 'Old files' })
 
 nmap(';r', function()
   MiniPick.builtin.grep_live({ tool = 'rg' }, { source = { name = 'Grep buffers (rg)' } })
@@ -382,6 +532,24 @@ nmap('<leader>fd', function()
   })
 end, { desc = '.dotfiles' })
 
+nmap('<leader>fdl', function()
+  find_files({ tool = 'fd' }, {
+    source = {
+      cwd = env.DOWNLOADS,
+      name = 'Downloads (fd)',
+    },
+  })
+end, { desc = 'Downloads' })
+
+nmap('<leader>fde', function()
+  find_files({ tool = 'fd' }, {
+    source = {
+      cwd = env.DESKTOP,
+      name = 'Desktop (fd)',
+    },
+  })
+end, { desc = 'Desktop' })
+
 nmap('<leader>sd', function()
   MiniPick.builtin.grep_live({ tool = 'rg' }, {
     source = { name = 'Grep .dotfiles (rg)', cwd = env.DOTFILES },
@@ -390,15 +558,33 @@ end, { desc = 'Grep Live (.dotfiles)' })
 
 nmap('<leader>fn', function()
   MiniPick.builtin.files({ tool = 'fd' }, {
-    source = { name = 'Notes (fd)', cwd = env.PERSONAL_NOTES },
+    source = { name = 'Notes (fd)', cwd = env.NOTES_DIR },
   })
 end, { desc = 'Notes (fd)' })
 
+nmap('<leader>fS', function()
+  MiniPick.builtin.files({ tool = 'fd' }, {
+    source = { name = 'Agent Skills (fd)', cwd = env.AGENT_SKILLS },
+  })
+end, { desc = 'Agent Skills (fd)' })
+
 nmap('<leader>sn', function()
   MiniPick.builtin.grep_live(nil, {
-    source = { name = 'Grep Notes', cwd = env.PERSONAL_NOTES },
+    source = { name = 'Grep Notes', cwd = env.NOTES_DIR },
   })
 end, { desc = 'Grep Live Notes' })
+
+nmap('<leader>fp', function()
+  MiniPick.builtin.files({ tool = 'fd' }, {
+    source = { name = 'Pictures (fd)', cwd = env.PICTURES },
+  })
+end, { desc = 'Pictures (fd)' })
+
+nmap('<leader>fo', function()
+  MiniPick.builtin.files({ tool = 'fd' }, {
+    source = { name = 'Screenshots (fd)', cwd = env.SCREENSHOTS },
+  })
+end, { desc = 'Screenshots (fd)' })
 
 nmap('<leader>gbr', function()
   MiniExtra.pickers.git_branches(nil, { source = { name = ' Git branches' } })

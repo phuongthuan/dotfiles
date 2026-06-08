@@ -3,6 +3,7 @@ vim.pack.add({
   'https://github.com/nvim-mini/mini.icons',
 })
 
+local f = require('functions')
 local utils = require('heirline.utils')
 local conditions = require('heirline.conditions')
 
@@ -21,7 +22,7 @@ end
 local function disabled_filetypes(self)
   return not conditions.buffer_matches({
     filetype = self.filetypes,
-  }) and not t.IsCodeCompanion()
+  }) and not f.is_codecompanion()
 end
 
 ---Winbar configuration for heirline.nvim
@@ -30,7 +31,7 @@ local function winbar()
   local VimLogo = { provider = ' ', hl = 'VimLogo' }
 
   local GitHubActionWorkflowIcon = {
-    condition = t.IsGitHubActionWorkflow,
+    condition = f.is_github_action_workflow(),
     provider = function()
       return ' '
     end,
@@ -70,7 +71,7 @@ local function winbar()
       return vim.bo.filetype ~= ''
     end,
     init = function(self)
-      self.is_gha_workflow = t.IsGitHubActionWorkflow()
+      self.is_gha_workflow = f.is_github_action_workflow()
       self.icon, self.icon_color = GetFileIcons()
     end,
     provider = function(self)
@@ -233,7 +234,7 @@ local function statusline()
       self.mode = vim.fn.mode(1)
     end,
     provider = function(self)
-      return '%2(' .. self.mode_names[self.mode] .. '%) '
+      return '%2(' .. (self.mode_names[self.mode] or self.mode) .. '%) '
     end,
     hl = function(self)
       local mode = self.mode
@@ -330,21 +331,21 @@ local function statusline()
     {
       provider = function(self)
         local count = self.added_count
-        return count > 0 and ('+' .. count)
+        return count > 0 and ('+' .. count) or nil
       end,
       hl = { fg = colors.green },
     },
     {
       provider = function(self)
         local count = self.removed_count
-        return count > 0 and ('-' .. count)
+        return count > 0 and ('-' .. count) or nil
       end,
       hl = { fg = colors.red },
     },
     {
       provider = function(self)
         local count = self.changed_count
-        return count > 0 and ('~' .. count)
+        return count > 0 and ('~' .. count) or nil
       end,
       hl = { fg = colors.yellow },
     },
@@ -488,7 +489,7 @@ local function statusline()
   local FileEncoding = {
     provider = function()
       local enc = (vim.bo.fenc ~= '' and vim.bo.fenc) or vim.o.enc
-      return enc ~= 'utf-8' and enc:upper()
+      return enc ~= 'utf-8' and enc:upper() or nil
     end,
     hl = { fg = colors.gray },
   }

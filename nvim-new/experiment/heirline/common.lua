@@ -1,9 +1,5 @@
 local M = {}
 
-M.IsCodeCompanion = function()
-  return package.loaded.codecompanion and vim.bo.filetype == 'codecompanion'
-end
-
 M.IsGitHubActionWorkflow = function()
   local filepath = vim.api.nvim_buf_get_name(0)
   local is_yml_yaml = filepath:match('%.ya?ml$')

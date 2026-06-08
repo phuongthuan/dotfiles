@@ -1,5 +1,5 @@
 return {
-  name = '(Overseer) Jest: Run Test',
+  name = '(Overseer) Jest: Run Test Watch',
   builder = function()
     local file = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':.')
     -- Convert test file path to source file path
@@ -13,15 +13,9 @@ return {
     source_file = source_file .. '.{ts,tsx,js}'
 
     return {
-      cmd = { 'yarn', 'workspace', 'EHLife', 'jest-ci' },
+      cmd = { 'yarn', 'workspace', 'EHLife', 'test' },
       args = { file, '--coverage', '--collectCoverageFrom=' .. source_file },
-      -- see :help overseer-components for a list of all components.
-      -- components = { { 'open_output', direction = 'vertical', on_complete = 'failure' }, 'default' },
-      components = {
-        { 'on_output_quickfix', set_diagnostics = true },
-        'on_result_diagnostics',
-        'default',
-      },
+      components = { { 'open_output', direction = 'vertical', on_complete = 'failure' }, 'default' },
     }
   end,
   condition = {

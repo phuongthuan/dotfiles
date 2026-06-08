@@ -1,8 +1,8 @@
 return {
-  name = '(Overseer) Expo: Start with Debugger',
+  name = '(Overseer) yarn type-check',
   builder = function()
     return {
-      cmd = { 'yarn', 'workspace', 'EHLife', 'start' },
+      cmd = { 'yarn', 'workspace', 'EHLife', 'type-check' },
       components = { { 'open_output', direction = 'dock', focus = true }, 'default' },
     }
   end,

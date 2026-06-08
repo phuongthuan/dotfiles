@@ -3,7 +3,7 @@ vim.pack.add({
   'https://www.github.com/zbirenbaum/copilot.lua',
   'https://github.com/nvim-treesitter/nvim-treesitter',
   { src = 'https://www.github.com/olimorris/codecompanion.nvim', version = vim.version.range('^18.0.0') },
-  'https://www.github.com/MeanderingProgrammer/render-markdown.nvim',
+  'https://github.com/MeanderingProgrammer/render-markdown.nvim',
   'https://www.github.com/ravitemer/codecompanion-history.nvim',
   'https://www.github.com/franco-ruggeri/codecompanion-spinner.nvim',
 })

@@ -1,47 +1,44 @@
-local api = vim.api
-local autocmd = api.nvim_create_autocmd --[[@type function]]
+local autocmd = vim.api.nvim_create_autocmd --[[@type function]]
+local nmap = require('utils').nmap
 
 ---Helper to create augroups
 ---@param name string
 local function augroup(name)
-  return api.nvim_create_augroup('user' .. name, { clear = true })
+  return vim.api.nvim_create_augroup('user' .. name, { clear = true })
 end
-
-autocmd('PackChanged', {
-  callback = function(ev)
-    local name, kind = ev.data.spec.name, ev.data.kind
-    if name == 'nvim-treesitter' and (kind == 'install' or kind == 'update') then
-      vim.cmd('TSUpdate')
-    end
-  end,
-})
 
 autocmd('FileType', {
   group = augroup('close_with_q'),
   pattern = {
-    'checkhealth',
+    'vim',
+    'man',
     'help',
+    'checkhealth',
     'lspinfo',
-    'gitsigns-blame',
-    'netrw',
+    'lsp.log',
     'qf',
-    'spectre_panel',
+    'oil',
+    'gitsigns-blame',
+    'git',
+    'query',
     'toggleterm',
-    -- 'mininotify-history',
+    'mininotify-history',
+    'spectre_panel',
+    'OverseerOutput',
+    'lsp.log',
   },
-  callback = function(event)
-    vim.bo[event.buf].buflisted = false
-    vim.schedule(function()
-      vim.keymap.set('n', 'q', function()
-        vim.cmd('close')
-        pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
-      end, {
-        buffer = event.buf,
-        silent = true,
-        desc = 'Close and delete buffer',
-      })
-    end)
+  callback = function(e)
+    -- Map q to exit in non-filetype buffers
+    vim.bo[e.buf].buflisted = false
+    nmap('q', function()
+      -- Try to close window, fallback to buffer delete if it fails
+      local ok = pcall(vim.cmd, 'close')
+      if not ok then
+        vim.cmd('bd')
+      end
+    end, { buffer = e.buf })
   end,
+  desc = 'Maps q to exit on non-filetypes',
 })
 
 autocmd('TermOpen', {
@@ -70,4 +67,22 @@ autocmd('TextYankPost', {
   callback = function()
     vim.hl.on_yank()
   end,
+})
+
+autocmd('WinEnter', {
+  group = augroup('highlight_cursorline_in_active_window'),
+  pattern = '*',
+  callback = function()
+    vim.wo.cursorline = true
+  end,
+  desc = 'Highlight Cursorline On Active Window',
+})
+
+autocmd({ 'BufRead', 'BufNewFile' }, {
+  group = augroup('set_filetype_for_env_files'),
+  pattern = { '*.env', '.env.*' },
+  callback = function()
+    vim.opt_local.filetype = 'sh'
+  end,
+  desc = 'Auto set filetype for .env and .env.* files',
 })

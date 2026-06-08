@@ -1,5 +1,5 @@
 return {
-  name = 'Maestro: Run Test File',
+  name = '(Overseer) Run Maestro Test',
   builder = function()
     local file = vim.fn.expand('%:p')
     return {

@@ -1,8 +1,8 @@
+local f = require('functions')
 local colors = require('utils').colors.gruvbox_dark
-local common = require('plugin.heirline.common')
 
 local CodeCompanionChatBuffer = {
-  condition = common.IsCodeCompanion,
+  condition = f.is_codecompanion(),
   static = {
     chat_metadata = {},
   },

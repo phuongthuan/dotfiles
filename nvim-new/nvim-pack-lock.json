@@ -30,10 +30,6 @@
       "rev": "0ab400d547814b04b39a069208ff7b40ab22dfb5",
       "src": "https://www.github.com/zbirenbaum/copilot.lua"
     },
-    "fidget.nvim": {
-      "rev": "7fa433a83118a70fe24c1ce88d5f0bd3453c0970",
-      "src": "https://github.com/j-hui/fidget.nvim"
-    },
     "git-conflict.nvim": {
       "rev": "d59a781d8ad029f014c0e0364bb2267ed06cb6ef",
       "src": "https://github.com/phuongthuan/git-conflict.nvim"
@@ -45,6 +41,11 @@
     "gruvbox.nvim": {
       "rev": "a472496e1a4465a2dd574389dcf6cdb29af9bf1b",
       "src": "https://github.com/ellisonleao/gruvbox.nvim"
+    },
+    "harpoon": {
+      "rev": "87b1a3506211538f460786c23f98ec63ad9af4e5",
+      "src": "https://github.com/ThePrimeagen/harpoon",
+      "version": "'harpoon2'"
     },
     "heirline.nvim": {
       "rev": "fae936abb5e0345b85c3a03ecf38525b0828b992",
@@ -109,16 +110,6 @@
     "nvim-treesitter": {
       "rev": "15b3416cc1f557c4932468e512a0bd45871167bc",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
-      "version": "'main'"
-    },
-    "nvim-treesitter-endwise": {
-      "rev": "68313c47f6db3e5cfc76779b92620ae40985620f",
-      "src": "https://github.com/ixti/nvim-treesitter-endwise",
-      "version": "'main'"
-    },
-    "nvim-treesitter-textobjects": {
-      "rev": "baa6b4ec28c8be5e4a96f9b1b6ae9db85ec422f8",
-      "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
       "version": "'main'"
     },
     "nvim-ts-autotag": {
