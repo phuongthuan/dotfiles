@@ -3,7 +3,6 @@ vim.pack.add({
 })
 
 local nmap = require('utils').nmap
-local mapper = require('utils').mapper
 
 -- Recipes https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md
 local slow_format_filetypes = {}
@@ -99,6 +98,7 @@ require('conform').setup({
   end,
   formatters_by_ft = {
     lua = { 'stylua' },
+    python = { 'ruff_format', 'ruff' },
     zsh = { 'shfmt' },
     ruby = { 'rubocop' },
     http = { 'kulala' },

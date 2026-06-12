@@ -144,6 +144,8 @@ nmap('<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 -- Delete current buffer
 nmap('<leader>z', ':bdelete<cr>')
 
+nmap('<leader>od', ':e ~/p/draft.md<cr>', { desc = 'Open Draft File' })
+
 nmap('<leader>ts', function()
   ---@diagnostic disable-next-line: undefined-field
   local new_state = not vim.opt_local.spell:get()
@@ -158,27 +160,6 @@ nmap('<leader>tl', function()
   vim.o.number = new_state
   vim.notify(new_state and 'Line number enabled ✔' or 'Line number disabled ✔', vim.log.levels.INFO)
 end, { desc = 'Toggle Line Number' })
-
-nmap('<leader>ut', function()
-  -- local file = vim.api.nvim_buf_get_name(0) -- Absolute path
-  -- Get relative path from current working directory
-  local file = vim.fn.expand('%:.')
-  vim.system({
-    'zsh',
-    '-ic',
-    string.format("tmux new-window -n test 'source ~/.dotfiles/zsh/dev.zsh && ytc %s; exec zsh'", file),
-  })
-end, { desc = 'Run Unit Tests' })
-
--- LSP
-nmap('gq', function()
-  require('conform').format({ async = true, lsp_format = 'fallback' })
-end, { desc = 'Format' })
-
--- Oil
-nmap('<C-f>', function()
-  require('oil').open()
-end, { desc = 'Oil - Open Current Opened File' })
 
 nmap('<leader>op', function()
   f.open_github_pr()

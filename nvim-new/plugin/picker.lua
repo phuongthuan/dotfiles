@@ -218,6 +218,10 @@ local _excluded_fd_test_files = {
   '*.test.js*',
 }
 
+local _heroai_repo_excludes = {
+  'tests/',
+}
+
 -- Centered on screen
 -- Adaptive width based on screen size:
 --   - Small monitors (<=200 cols): Use full width
@@ -561,6 +565,12 @@ nmap('<leader>fn', function()
     source = { name = 'Notes (fd)', cwd = env.NOTES_DIR },
   })
 end, { desc = 'Notes (fd)' })
+
+nmap('<leader>fai', function()
+  MiniPick.builtin.files({ tool = 'fd' }, {
+    source = { name = '~/p/ai (fd)', cwd = '~/p/ai/' },
+  })
+end, { desc = '~/p/ai (fd)' })
 
 nmap('<leader>fS', function()
   MiniPick.builtin.files({ tool = 'fd' }, {

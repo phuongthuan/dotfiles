@@ -10,8 +10,10 @@ vim.pack.add({
 local colors = require('utils').colors.gruvbox_dark
 local nmap = require('utils').nmap
 
+-- mini.starter
 require('mini.starter').setup()
 
+-- mini.icons
 require('mini.icons').setup({
   file = {
     ['.eslintrc.js'] = { glyph = '󰱺', hl = 'MiniIconsYellow' },
@@ -29,6 +31,7 @@ require('mini.icons').setup({
   },
 })
 
+-- mini.hipatterns
 local hipatterns = require('mini.hipatterns')
 hipatterns.setup({
   highlighters = {
@@ -37,6 +40,7 @@ hipatterns.setup({
   },
 })
 
+-- mini.notify
 local notify = require('mini.notify')
 notify.setup({
   window = {

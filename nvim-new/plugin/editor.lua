@@ -1,4 +1,6 @@
 vim.pack.add({
+  'https://github.com/nvim-lua/plenary.nvim',
+  'https://github.com/stevearc/aerial.nvim',
   'https://github.com/stevearc/oil.nvim',
   'https://github.com/stevearc/overseer.nvim',
   'https://github.com/kylechui/nvim-surround',
@@ -12,6 +14,48 @@ vim.pack.add({
 
 local nmap = require('utils').nmap
 local mapper = require('utils').mapper
+
+-- aerial.nvim
+require('aerial').setup({
+  layout = {
+    min_width = 30,
+    default_direction = 'prefer_right',
+  },
+  icons = {
+    File = '󰈙 ',
+    Module = ' ',
+    Namespace = '󰌗 ',
+    Package = ' ',
+    Class = '󰌗 ',
+    Method = '󰆧 ',
+    Property = ' ',
+    Field = ' ',
+    Constructor = ' ',
+    Enum = '󰕘',
+    Interface = '󰕘',
+    Function = '󰊕 ',
+    Variable = '󰆧 ',
+    Constant = '󰏿 ',
+    String = '󰀬 ',
+    Number = '󰎠 ',
+    Boolean = '◩ ',
+    Array = '󰅪 ',
+    Object = '󰅩 ',
+    Key = '󰌋 ',
+    Null = '󰟢 ',
+    EnumMember = ' ',
+    Struct = '󰌗 ',
+    Event = ' ',
+    Operator = '󰆕 ',
+    TypeParameter = '󰊄 ',
+  },
+  on_attach = function(bufnr)
+    nmap('{', '<cmd>AerialPrev<CR>', { buffer = bufnr })
+    nmap('}', '<cmd>AerialNext<CR>', { buffer = bufnr })
+  end,
+})
+
+nmap('<leader>ae', '<cmd>AerialToggle!<cr>', { desc = 'Toggle Aerial', silent = true })
 
 -- nvim-surround
 require('nvim-surround').setup()
@@ -69,6 +113,9 @@ require('oil').setup({
     ['gs'] = false,
   },
 })
+nmap('<C-f>', function()
+  require('oil').open()
+end, { desc = 'Oil - Open Current Opened File' })
 
 -- vim-visual-multi
 require('nvim-tmux-navigation').setup({

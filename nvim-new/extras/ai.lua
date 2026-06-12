@@ -11,6 +11,13 @@ vim.pack.add({
 local nmap = require('utils').nmap
 local mapper = require('utils').mapper
 
+require('render-markdown').setup({
+  render_modes = true,
+  sign = {
+    enabled = false,
+  },
+})
+
 require('copilot').setup({
   copilot_node_command = vim.fn.expand('$HOME') .. '/.asdf/installs/nodejs/22.20.0/bin/node',
   suggestion = { enabled = false, auto_trigger = true },
@@ -34,13 +41,6 @@ require('copilot').setup({
     end,
     -- Disable all other file types
     ['*'] = false,
-  },
-})
-
-require('render-markdown').setup({
-  render_modes = true,
-  sign = {
-    enabled = false,
   },
 })
 
