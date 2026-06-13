@@ -1,6 +1,5 @@
 vim.pack.add({
   'https://github.com/rebelot/heirline.nvim',
-  'https://github.com/nvim-mini/mini.icons',
 })
 
 local f = require('functions')
@@ -10,8 +9,6 @@ local conditions = require('heirline.conditions')
 local env = require('utils').env
 local icons = require('utils').icons
 local colors = require('utils').colors.gruvbox_dark
-
-require('mini.icons').mock_nvim_web_devicons()
 
 local function GetFileIcons()
   local filename = vim.api.nvim_buf_get_name(0)

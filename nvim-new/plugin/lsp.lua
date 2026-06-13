@@ -5,6 +5,7 @@ vim.pack.add({
 local nmap = require('utils').nmap
 local imap = require('utils').imap
 local mapper = require('utils').mapper
+local icons = require('utils').icons
 
 require('mason').setup()
 nmap('<leader>ms', '<cmd>Mason<cr>', { desc = 'Open Mason' })
@@ -92,6 +93,48 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
   end,
 })
+
+-- Diagnostics
+
+vim.diagnostic.config({
+  severity_sort = true,
+  float = { border = 'rounded', source = true },
+  underline = { severity = vim.diagnostic.severity.ERROR },
+  signs = vim.g.have_nerd_font and {
+    text = {
+      [vim.diagnostic.severity.ERROR] = icons.diagnostics.error,
+      [vim.diagnostic.severity.WARN] = icons.diagnostics.warn,
+      [vim.diagnostic.severity.HINT] = icons.diagnostics.hint,
+      [vim.diagnostic.severity.INFO] = icons.diagnostics.info,
+    },
+  } or {},
+
+  virtual_text = {
+    source = true,
+    spacing = 2,
+    format = function(diagnostic)
+      local diagnostic_message = {
+        [vim.diagnostic.severity.ERROR] = diagnostic.message,
+        [vim.diagnostic.severity.WARN] = diagnostic.message,
+        [vim.diagnostic.severity.INFO] = diagnostic.message,
+        [vim.diagnostic.severity.HINT] = diagnostic.message,
+      }
+      return diagnostic_message[diagnostic.severity]
+    end,
+  },
+
+  -- Auto open the float, so you can easily read the errors when jumping with `[d` and `]d`
+  jump = {
+    on_jump = function(_, bufnr)
+      vim.diagnostic.open_float({
+        bufnr = bufnr,
+        scope = 'cursor',
+        focus = false,
+      })
+    end,
+  },
+})
+nmap('<leader>e', vim.diagnostic.open_float, { desc = 'Show Line Diagnostic' })
 
 vim.lsp.enable({
   'lua_ls',

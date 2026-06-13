@@ -1,8 +1,8 @@
 vim.pack.add({
-  'https://github.com/nvim-mini/mini.hipatterns',
   'https://github.com/nvim-mini/mini.starter',
   'https://github.com/nvim-mini/mini.icons',
   'https://github.com/nvim-mini/mini.notify',
+  'https://github.com/nvim-mini/mini.hipatterns',
   'https://github.com/MeanderingProgrammer/render-markdown.nvim',
   'https://github.com/folke/todo-comments.nvim',
 })
@@ -30,6 +30,7 @@ require('mini.icons').setup({
     dotenv = { glyph = '', hl = 'MiniIconsYellow' },
   },
 })
+MiniIcons.mock_nvim_web_devicons()
 
 -- mini.hipatterns
 local hipatterns = require('mini.hipatterns')
@@ -93,24 +94,24 @@ require('render-markdown').setup({
   checkbox = { enabled = true },
   latex = { enabled = false },
   completions = { blink = { enabled = true } },
-  overrides = {
-    filetype = {
-      codecompanion = {
-        html = {
-          tag = {
-            buf = { icon = ' ', highlight = 'CodeCompanionChatIcon' },
-            file = { icon = ' ', highlight = 'CodeCompanionChatIcon' },
-            group = { icon = ' ', highlight = 'CodeCompanionChatIcon' },
-            help = { icon = '󰘥 ', highlight = 'CodeCompanionChatIcon' },
-            image = { icon = ' ', highlight = 'CodeCompanionChatIcon' },
-            rules = { icon = '󰧑 ', highlight = 'CodeCompanionChatIcon' },
-            symbols = { icon = ' ', highlight = 'CodeCompanionChatIcon' },
-            tool = { icon = '󰯠 ', highlight = 'CodeCompanionChatIcon' },
-            url = { icon = '󰌹 ', highlight = 'CodeCompanionChatIcon' },
-          },
-        },
-      },
-    },
-  },
+  -- overrides = {
+  --   filetype = {
+  --     codecompanion = {
+  --       html = {
+  --         tag = {
+  --           buf = { icon = ' ', highlight = 'CodeCompanionChatIcon' },
+  --           file = { icon = ' ', highlight = 'CodeCompanionChatIcon' },
+  --           group = { icon = ' ', highlight = 'CodeCompanionChatIcon' },
+  --           help = { icon = '󰘥 ', highlight = 'CodeCompanionChatIcon' },
+  --           image = { icon = ' ', highlight = 'CodeCompanionChatIcon' },
+  --           rules = { icon = '󰧑 ', highlight = 'CodeCompanionChatIcon' },
+  --           symbols = { icon = ' ', highlight = 'CodeCompanionChatIcon' },
+  --           tool = { icon = '󰯠 ', highlight = 'CodeCompanionChatIcon' },
+  --           url = { icon = '󰌹 ', highlight = 'CodeCompanionChatIcon' },
+  --         },
+  --       },
+  --     },
+  --   },
+  -- },
 })
 nmap('<leader>tm', '<cmd>RenderMarkdown toggle<cr>', { desc = 'Toggle Render Markdown' })
