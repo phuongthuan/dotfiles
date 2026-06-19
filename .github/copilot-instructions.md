@@ -6,9 +6,8 @@ This is a personal **dotfiles repository** for macOS development environment. It
 contains configuration files for terminal tools, [Neovim](https://neovim.io/),
 window management, and productivity applications.
 
-**Author:** phuongthuan  
-**Target OS:** macOS (Darwin)  
-**Package Manager:** [Homebrew](https://brew.sh/) (via `Brewfile`)
+**Author:** phuongthuan **Target OS:** macOS (Darwin) **Package Manager:**
+[Homebrew](https://brew.sh/) (via `Brewfile`)
 
 ## Tech Stack & Tools
 
@@ -91,18 +90,9 @@ window management, and productivity applications.
 
 Use these colors consistently across all configs:
 
-hard-black: #282828
-black:      #3c3836
-white:      #fbf1c7
-gray:       #a89984
-orange:     #fe8019
-purple:     #d3869b
-blue:       #458588
-light-blue: #83a598
-green:      #b8bb26
-aqua:       #8ec07c
-red:        #cc241d
-yellow:     #fabd2f
+hard-black: #282828 black: #3c3836 white: #fbf1c7 gray: #a89984 orange: #fe8019
+purple: #d3869b blue: #458588 light-blue: #83a598 green: #b8bb26 aqua: #8ec07c
+red: #cc241d yellow: #fabd2f
 
 ## Version Requirements
 
