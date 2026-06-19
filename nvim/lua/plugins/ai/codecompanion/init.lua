@@ -12,6 +12,7 @@ return {
   },
   {
     'olimorris/codecompanion.nvim',
+    enabled = false,
     version = '^18.0.0',
     cmd = { 'CodeCompanion', 'CodeCompanionChat', 'CodeCompanionActions' },
     dependencies = {
