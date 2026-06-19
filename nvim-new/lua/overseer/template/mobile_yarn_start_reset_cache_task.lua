@@ -1,5 +1,5 @@
 return {
-  name = '(Overseer) yarn start --reset-cache',
+  name = '(Overseer) Mobile: yarn start --reset-cache',
   builder = function()
     return {
       cmd = { 'yarn', 'start', '--reset-cache' },

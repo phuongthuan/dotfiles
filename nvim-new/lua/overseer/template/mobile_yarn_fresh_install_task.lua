@@ -1,5 +1,5 @@
 return {
-  name = '(Overseer) yarn fresh install',
+  name = '(Overseer) Mobile: yarn fresh install',
   builder = function()
     return {
       cmd = { 'bash', '-c', 'rm -rf node_modules && yarn cache clean && yarn install' },

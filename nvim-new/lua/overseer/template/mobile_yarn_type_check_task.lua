@@ -1,5 +1,5 @@
 return {
-  name = '(Overseer) yarn type-check',
+  name = '(Overseer) Mobile: yarn type-check',
   builder = function()
     return {
       cmd = { 'yarn', 'workspace', 'EHLife', 'type-check' },
