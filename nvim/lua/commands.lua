@@ -1,73 +1,37 @@
-local autocmd = vim.api.nvim_create_autocmd
-local nmap = require('core.utils').mapper_factory('n')
+local functions = require('core.functions')
 
-local group = vim.api.nvim_create_augroup('UserConfig', { clear = true })
+local command = vim.api.nvim_create_user_command
 
-autocmd('TextYankPost', {
-  group = group,
-  pattern = '*',
-  callback = function()
-    vim.hl.on_yank({ higroup = 'IncSearch', timeout = 40 })
-  end,
-  desc = 'Highlight Text On Yank',
-})
+command('GHBuildExpo', functions.trigger_expo_build, { desc = 'Build eh-mobile-pro with Expo' })
 
-autocmd('WinEnter', {
-  group = group,
-  pattern = '*',
-  callback = function()
-    vim.wo.cursorline = true
-  end,
-  desc = 'Highlight Cursorline On Active Window',
-})
+command(
+  'GHBuildAndRunE2EIOS',
+  functions.trigger_build_and_run_e2e_test('ios'),
+  { desc = 'Build and run eh-mobile-pro E2E iOS' }
+)
+command(
+  'GHBuildAndRunE2EAndroid',
+  functions.trigger_build_and_run_e2e_test('android'),
+  { desc = 'Build and run eh-mobile-pro E2E Android' }
+)
+command('GHRunE2EIOS', functions.trigger_run_e2e_test('ios'), { desc = 'Run eh-mobile-pro E2E iOS' })
+command('GHRunE2EAndroid', functions.trigger_run_e2e_test('android'), { desc = 'Run eh-mobile-pro E2E Android' })
 
-autocmd('FileType', {
-  group = group,
-  pattern = {
-    'vim',
-    'man',
-    'help',
-    'checkhealth',
-    'lspinfo',
-    'query',
-    'startuptime',
-    'fugitive',
-  },
-  callback = function(e)
-    -- Map q to exit in non-filetype buffers
-    vim.bo[e.buf].buflisted = false
-    nmap('q', ':q<CR>', { buffer = e.buf })
-  end,
-  desc = 'Maps q to exit on non-filetypes',
-})
+command('GHOpen', functions.open_my_github, { desc = 'Open GitHub' })
+command('GHOpenPR', functions.open_github_pr, { desc = 'Open GitHub PR' })
 
-autocmd({ 'BufRead', 'BufNewFile' }, {
-  group = group,
-  pattern = { '*.env', '.env.*' },
-  callback = function()
-    vim.opt_local.filetype = 'sh'
-  end,
-  desc = 'Auto set filetype for .env and .env.* files',
-})
+command('GHOpenPRList', function(opts)
+  -- Only parse args if provided
+  if opts.args and opts.args ~= '' then
+    local args = vim.split(opts.args, '%s+')
+    local project = args[1]
+    local author = args[2]
+    functions.open_github_author_pr_list(project, author)
+  else
+    -- No args: trigger interactive pickers
+    functions.open_github_author_pr_list()
+  end
+end, { nargs = '*', desc = 'Open GitHub PR List (interactive or with args)' })
 
--- autocmd('BufWritePre', {
---   group = group,
---   pattern = '*',
---   command = [[%s/\s\+$//e]],
---   desc = 'Auto Remove Trailing Spaces On Save',
--- })
-
--- Enable spellcheck for certain files
--- autocmd('FileType', {
---   group = autocmds_group,
---   pattern = {
---     'gitcommit',
---     'markdown',
---     'txt',
---   },
---   callback = function()
---     vim.opt_local.spell = true
---     vim.opt_local.spelllang = 'en'
---   end,
---   desc = 'Enable spellcheck for certain files',
--- })
+command('GHOpenWorkflows', functions.open_github_workflow, { desc = 'Open GitHub Workflows' })
+command('GHPRNumber', functions.get_pr_number, { desc = 'Get GitHub PR Number' })

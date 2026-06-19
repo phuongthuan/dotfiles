@@ -16,12 +16,7 @@ rtp:prepend(lazypath)
 
 require('lazy').setup({
   { import = 'plugins' },
-
-  require('plugins.extras.ai'),
-  require('plugins.extras.noice'),
-  require('plugins.extras.which-key'),
-  require('plugins.extras.incline'),
-  require('plugins.extras.kulala'),
+  { import = 'plugins.extras' },
 }, {
   checker = { enabled = true, notify = false },
   change_detection = { notify = false },

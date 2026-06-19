@@ -45,3 +45,56 @@ ytc() {
 }
 # Running Test File: /Users/thuan/p/eh/eh-mobile-pro/app/components/employeeStatus/__test__/utils.spec.js
 #  Collecting Coverage From: /Users/thuan/p/eh/eh-mobile-pro/app/components/employeeStatus/utils.{ts,tsx,js}
+
+# Run maestro test with debug output
+mte() {
+  if [ -z "$1" ]; then
+    echo "Error: Please provide the path to the maestro test file."
+    echo "Usage: mte <path/to/your/flow.yaml>"
+    return 1
+  fi
+
+  local TEST_FILE="$1"
+
+  # echo -e "\n\033[32mCleaning Maestro recordings and output... \033[0m"
+  # sudo rm -rf maestro_recordings/* maestro_output/*
+
+  echo -e "\033[32mRunning Maestro E2E tests ... \033[0m\n"
+  maestro test "$TEST_FILE" --debug-output=maestro_output
+
+  local EXIT_CODE=$?
+
+  if [ $EXIT_CODE -eq 0 ]; then
+    echo -e "\n\033[32m ✓ Maestro test completed successfully \033[0m\n"
+  else
+    echo -e "\n\033[31m ✗ Maestro test failed (exit code: $EXIT_CODE) \033[0m\n"
+  fi
+
+  return $EXIT_CODE
+}
+
+test_changed_files() {
+  local CHANGED_TESTS
+  local BASE_BRANCH=${1:-development}
+
+  # Get added/modified test files only
+  CHANGED_TESTS=$(git diff --name-only --diff-filter=AM $BASE_BRANCH...HEAD | grep -E '\.(spec|test)\.(ts|tsx|js|jsx)$')
+
+  if [ -z "$CHANGED_TESTS" ]; then
+    echo "No test files changed"
+    exit 0
+  fi
+
+  echo "Running changed tests:"
+  echo "$CHANGED_TESTS"
+
+  # Pass files as arguments with -- to indicate end of options
+  # Use arrays to handle spaces/special chars properly
+  local -a test_files
+  while IFS= read -r file; do
+    test_files+=("$file")
+  done <<<"$CHANGED_TESTS"
+
+  # Run Jest with explicit testPathPattern or pass files directly
+  yarn test --testPathPattern="($(printf '%s|' "${test_files[@]}" | sed 's/|$//'))" --no-coverage
+}

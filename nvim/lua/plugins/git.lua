@@ -1,3 +1,4 @@
+local colors = require('core.colors')
 local mapper = require('core.utils').mapper_factory
 local nmap = mapper('n')
 local vmap = mapper('v')
@@ -12,6 +13,7 @@ return {
     command = { 'Neogit', 'NeogitCommit', 'NeogitLogCurrent', 'NeogitResetState' },
     opts = {
       disable_hint = true,
+      process_spinner = true,
       commit_editor = {
         spell_check = false,
         show_staged_diff = false,
@@ -24,13 +26,13 @@ return {
     keys = {
       {
         '<leader>gg',
-        '<cmd>Neogit<cr>',
+        '<cmd>Neogit kind=split_below_all<cr>',
         desc = 'Neogit',
         silent = true,
       },
       {
         '<leader>gG',
-        '<cmd>Neogit cwd=%:p:h<cr>',
+        '<cmd>Neogit kind=split_below_all cwd=%:p:h<cr>',
         desc = 'Neogit (buffer)',
         silent = true,
       },
@@ -41,15 +43,9 @@ return {
         silent = true,
       },
       {
-        '<leader>gL',
+        '<leader>gl',
         '<cmd>NeogitLogCurrent<cr>',
         desc = 'Open Log (buffer)',
-        silent = true,
-      },
-      {
-        '<leader>grs',
-        '<cmd>NeogitResetState<cr>',
-        desc = 'Reset State',
         silent = true,
       },
     },
@@ -102,6 +98,10 @@ return {
         nmap('<leader>pv', gitsigns.preview_hunk_inline, { desc = 'Preview Hunk Inline' })
 
         nmap('<leader>hb', function()
+          gitsigns.blame()
+        end, { desc = 'Toggle Blame' })
+
+        nmap('<leader>hl', function()
           gitsigns.blame_line({ full = true })
         end, { desc = 'Toggle Blame Line' })
 
@@ -116,26 +116,14 @@ return {
     },
   },
   {
-    'akinsho/git-conflict.nvim',
-    version = '*',
+    'phuongthuan/git-conflict.nvim',
+    -- TODO: revert when all issues in https://github.com/akinsho/git-conflict.nvim/issues are fixed
     init = function()
-      vim.api.nvim_create_autocmd('User', {
-        pattern = 'GitConflictDetected',
-        callback = function()
-          vim.notify('Git Conflict Detected  ', vim.log.levels.ERROR)
-          vim.keymap.set('n', 'cww', function()
-            ---@diagnostic disable-next-line: undefined-global
-            engage.conflict_buster()
-            ---@diagnostic disable-next-line: undefined-global
-            create_buffer_local_mappings()
-          end)
-        end,
-      })
-
-      vim.api.nvim_set_hl(0, 'GitConflictCurrent', { fg = '#fbf1c7', bg = '#1d3b40' })
-      vim.api.nvim_set_hl(0, 'GitConflictIncoming', { fg = '#fbf1c7', bg = '#1d3450' })
+      vim.api.nvim_set_hl(0, 'GitConflictCurrent', { fg = colors.bright_fg, bg = '#1d3b40' })
+      vim.api.nvim_set_hl(0, 'GitConflictIncoming', { fg = colors.bright_fg, bg = '#1d3450' })
     end,
     opts = {
+      disable_diagnostics = true,
       default_mappings = {
         next = 'nc',
         prev = 'pc',

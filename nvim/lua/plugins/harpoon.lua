@@ -1,5 +1,4 @@
-local mapper = require('core.utils').mapper_factory
-local nmap = mapper('n')
+local nmap = require('core.utils').mapper_factory('n')
 
 return {
   'ThePrimeagen/harpoon',
@@ -33,7 +32,7 @@ return {
       function()
         local harpoon = require('harpoon')
         harpoon:list():add()
-        vim.notify('Added a file to bookmarks ✔', vim.log.levels.INFO, { title = 'Harpoon' })
+        print('Added a file to bookmarks ✔')
       end,
       desc = 'Harpoon - Add file to bookmarks',
       silent = true,

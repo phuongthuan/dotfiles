@@ -1,6 +1,6 @@
 -- Recipes https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md
 local slow_format_filetypes = {}
-local ignore_filetypes = { 'sql', 'java', 'http' }
+local ignore_filetypes = { 'sql', 'java', 'yaml' }
 
 local prettierd = { 'prettierd', stop_after_first = true }
 
@@ -35,7 +35,7 @@ return {
   },
   init = function()
     -- Disable auto format by default
-    vim.g.disable_autoformat = true
+    vim.g.disable_autoformat = false
 
     -- If you want the formatexpr, here is the place to set it
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
@@ -126,6 +126,8 @@ return {
       lua = { 'stylua' },
       zsh = { 'shfmt' },
       ruby = { 'rubocop' },
+      http = { 'kulala' },
+      rest = { 'kulala' },
       javascript = prettierd,
       typescript = prettierd,
       typescriptreact = prettierd,
@@ -136,13 +138,15 @@ return {
       css = prettierd,
       scss = prettierd,
       html = prettierd,
+      yaml = prettierd,
     },
     formatters = {
-      prettier = {
-        prepend_args = { '--prose-wrap', 'always' },
-      },
       shfmt = {
         prepend_args = { '-i', '2' },
+      },
+      kulala = {
+        command = 'kulala-fmt',
+        args = { 'format', '--stdin' },
       },
     },
   },

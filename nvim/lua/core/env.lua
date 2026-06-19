@@ -1,12 +1,18 @@
 -- To use env in Neovim, create a env variable in ~/.zshrc => source
 -- vim.env only works in neovim
 return {
-  NVIM_USE_TSSERVER = vim.env.NVIM_USE_TSSERVER and true or false,
   DOTFILES = vim.env.DOTFILES or '~/.dotfiles',
+  DOWNLOADS = vim.env.DOWNLOADS or '~/Downloads',
+  DESKTOP = vim.env.DESKTOP or '~/Desktop',
+  PICTURES = vim.env.PICTURES or '~/Pictures/',
+  SCREENSHOTS = vim.env.SCREENSHOTS or '~/Pictures/screenshots',
+  GITHUB_USERNAME = vim.env.GITHUB_USERNAME or 'phuongthuan',
   NVIM_CONFIG_DIR = vim.env.NVIM_CONFIG_DIR or '~/.config/nvim',
   EH_CONFIG_DIR = vim.env.EH_CONFIG_DIR or '~/.config/eh',
   REFERENCES_DIR = vim.env.REFERENCES_DIR or '~/p/references',
+  HTTP_DIR = vim.env.HTTP_DIR or '~/p/http',
   PERSONAL_NOTES = vim.env.PERSONAL_NOTES or '~/Documents/Notes',
+  AGENT_SKILLS = vim.env.AGENT_SKILLS or '~/p/claude/skills',
   SECRET_ENV_FILE = vim.env.SECRET_ENV_FILE or '~/.dotfiles/zsh/secret.zsh',
   ICLOUD_DRIVE_OBSIDIAN_DIR = vim.env.ICLOUD_DRIVE_OBSIDIAN_DIR
     or '~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes',

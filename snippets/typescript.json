@@ -1,0 +1,340 @@
+{
+  "import": {
+    "prefix": "imp",
+    "body": "import ${2:moduleName} from '${1:module}';$0",
+    "description": "Imports entire module statement in ES6 syntax"
+  },
+  "importDestructing": {
+    "prefix": "imd",
+    "body": "import { $2 } from '${1:module}';$0",
+    "description": "Imports only a portion of the module in ES6 syntax"
+  },
+  "importEverything": {
+    "prefix": "ime",
+    "body": "import * as ${2:alias} from '${1:module}';$0",
+    "description": "Imports everything as alias from the module in ES6 syntax"
+  },
+  "importAs": {
+    "prefix": "ima",
+    "body": "import { ${2:originalName} as ${3:alias} } from '${1:module}';$0",
+    "description": "Imports a specific portion of the module by assigning a local alias in ES6 syntax"
+  },
+  "importReact": {
+    "prefix": "imr",
+    "body": "import React from 'react';$0",
+    "description": "Import React"
+  },
+  "require": {
+    "prefix": "rqr",
+    "body": "require('${1:package}');",
+    "description": "Require a package"
+  },
+  "requireToConst": {
+    "prefix": "req",
+    "body": "const ${1:packageName} = require('${1:package}');$0",
+    "description": "Require a package to const"
+  },
+  "exportNamedVariable": {
+    "prefix": "env",
+    "body": "export const ${1:exportVariable} = ${2:localVariable};\n",
+    "description": "Export named variable in ES6 syntax"
+  },
+  "exportNamedFunction": {
+    "prefix": "enf",
+    "body": "export const ${1:functionName} = (${2:params}) => {\n\t$0\n};\n",
+    "description": "Export named function in ES6 syntax"
+  },
+  "exportDefaultFunction": {
+    "prefix": "edf",
+    "body": "export default function ${1:${TM_FILENAME_BASE}}(${2:params}) {\n\t$0\n};\n",
+    "description": "Export default function in ES6 syntax"
+  },
+  "method": {
+    "prefix": "met",
+    "body": "${1:methodName}(${2:params}) {\n\t${0}\n}",
+    "description": "Creates a method inside a class in ES6 syntax"
+  },
+  "forEach": {
+    "prefix": "fre",
+    "body": "${1:array}.forEach(${2:currentItem} => {\n\t${0}\n});",
+    "description": "Creates a forEach statement in ES6 syntax"
+  },
+  "forOf": {
+    "prefix": "fof",
+    "body": "for (const ${1:item} of ${2:object}) {\n\t${0}\n}",
+    "description": "Iterating over property names of iterable objects"
+  },
+  "forIn": {
+    "prefix": "fin",
+    "body": "for (const ${1:item} in ${2:object}) {\n\t${0}\n}",
+    "description": "Iterating over property values of iterable objects"
+  },
+  "anonymousFunction": {
+    "prefix": "anfn",
+    "body": "(${1:params}) => {\n\t${2}\n}",
+    "description": "Creates an anonymous function in ES6 syntax"
+  },
+  "namedFunction": {
+    "prefix": "nfn",
+    "body": "const ${1:name} = (${2:params}) => {\n\t${3}\n}",
+    "description": "Creates a named function in ES6 syntax"
+  },
+  "destructingObject": {
+    "prefix": "dob",
+    "body": "const {${2:propertyName}} = ${1:objectToDestruct};",
+    "description": "Creates and assigns a local variable using object destructing"
+  },
+  "destructingArray": {
+    "prefix": "dar",
+    "body": "const [${2:propertyName}] = ${1:arrayToDestruct};",
+    "description": "Creates and assigns a local variable using array destructing"
+  },
+  "setInterval": {
+    "prefix": "sti",
+    "body": "setInterval(() => {\n\t${2}\n}, ${0:intervalInms});",
+    "description": "Executes the given function at specified intervals in ES6 syntax"
+  },
+  "setTimeOut": {
+    "prefix": "sto",
+    "body": "setTimeout(() => {\n\t${2}\n}, ${1:delayInms});",
+    "description": "Executes the given function after the specified delay in ES6 syntax"
+  },
+  "promise": {
+    "prefix": "prom",
+    "body": "return new Promise((resolve, reject) => {\n\t${1}\n});",
+    "description": "Creates and returns a new Promise in the standard ES6 syntax"
+  },
+  "pre": {
+    "prefix": "pre",
+    "body": "<pre>{JSON.stringify(${1:object}, undefined, 2)}</pre>$0",
+    "description": "Prints a JavaScript representation of the specified object"
+  },
+  "consoleDir": {
+    "prefix": "cdi",
+    "body": "console.dir(${1:object});",
+    "description": "Prints a JavaScript representation of the specified object"
+  },
+  "consoleError": {
+    "prefix": "cer",
+    "body": "console.error(${1:object});",
+    "description": "Displays a message in the console and also includes a stack trace from where the method was called"
+  },
+  "consoleLog": {
+    "prefix": "clg",
+    "body": "console.log(${1});$0",
+    "description": "Displays a message in the console"
+  },
+  "consoleLogObject": {
+    "prefix": "clo",
+    "body": "console.log('${1} :>> ', ${2});$0",
+    "description": "Displays an object in the console with its name"
+  },
+  "consoleWarn": {
+    "prefix": "cwa",
+    "body": "console.warn(${1:object});",
+    "description": "Displays a message in the console but also displays a yellow warning icon along with the logged message"
+  },
+  "consoleInfo": {
+    "prefix": "cin",
+    "body": "console.info(${1:object});",
+    "description": "Displays a message in the console but also displays a blue information icon along with the logged message"
+  },
+  "useState": {
+    "prefix": "ush",
+    "body": ["const [${1}, set${1/(.*)/${1:/capitalize}/}] = useState($2);$0"],
+    "description": "React useState() hook"
+  },
+  "useEffect": {
+    "prefix": "ueh",
+    "body": [
+      "useEffect(() => {",
+      "\t$1",
+      "\n\treturn cleanUp = () => {",
+      "\t\t$2",
+      "\t}",
+      "}, [${3}]);$0"
+    ],
+    "description": "React useEffect() hook"
+  },
+  "useContext": {
+    "prefix": "uch",
+    "body": ["const $1 = useContext($2);$0"],
+    "description": "React useContext() hook"
+  },
+  "useFormContext": {
+    "prefix": "ufch",
+    "body": ["const { ${1:control} } = useFormContext($2);$0"],
+    "description": "React Hook Form useFormContext() hook"
+  },
+  "useForm": {
+    "prefix": "ufh",
+    "body": ["const { ${1:control}, handleSubmit } = useForm($2);$0"],
+    "description": "React Hook Form useForm() hook"
+  },
+  "useCallback": {
+    "prefix": "ucbh",
+    "body": [
+      "const ${1:memoizedCallback} = useCallback(",
+      "\t() => {",
+      "\t\t$2",
+      "\t},",
+      "\t[$3],",
+      ");$0"
+    ],
+    "description": "React useCallback() hook"
+  },
+  "useMemo": {
+    "prefix": "umh",
+    "body": ["const ${1:memoizedValue} = useMemo(() => {", "\t$2", "}, []);$0"],
+    "description": "React useMemo() hook"
+  },
+  "useRef": {
+    "prefix": "urh",
+    "body": ["const $1 = useRef($2);$0"],
+    "description": "React useRef() hook"
+  },
+  "useReducer": {
+    "prefix": "urdh",
+    "body": [
+      "const [${1:state},${2: dispatch}] = useReducer(${3:reducer}, ${4:initialArg}, ${5:init});"
+    ],
+    "description": "React useReducer() hook"
+  },
+  "useSelector": {
+    "prefix": "uss",
+    "body": ["const $1 = useSelector($2);$0"]
+  },
+  "useDispatch": {
+    "prefix": "udp",
+    "body": ["const dispatch = useDispatch();$0"]
+  },
+  "it test case": {
+    "prefix": "tit",
+    "body": ["it('${1:should renders correctly}', () => {", "\t$2", "});$0"],
+    "description": "single unit test syntax"
+  },
+  "it each test case": {
+    "prefix": "tite",
+    "body": [
+      "it.each`",
+      "\tinput                     | output ",
+      "\t${'input-value'}          | ${'output-value'}",
+      "`('should works correctly', ({ input, output }) => {",
+      "\texpect(${1:function}(input)).toEqual(output);",
+      "});$0"
+    ],
+    "description": "nultiple unit test syntax"
+  },
+  "expect getByText": {
+    "prefix": "tegbt",
+    "body": ["expect(screen.getByText(\"$1\")).toBeVisible();$0"]
+  },
+  "expect getByLabelText": {
+    "prefix": "tegbl",
+    "body": ["expect(screen.getByLabelText(\"$1\")).toBeVisible();$0"]
+  },
+  "expect await findByText": {
+    "prefix": "tefbt",
+    "body": ["expect(await screen.findByText(\"$1\")).toBeVisible();$0"]
+  },
+  "expect queryByText": {
+    "prefix": "teqbt",
+    "body": ["expect(screen.queryByText(\"$1\")).not.toBeVisible();$0"]
+  },
+  "expect queryByTestId": {
+    "prefix": "teqbi",
+    "body": ["expect(screen.queryByTestId(\"$1\")).not.toBeVisible();$0"]
+  },
+  "expect getByRole": {
+    "prefix": "tegbr",
+    "body": [
+      "expect(screen.getByRole('${1:img}')).toHaveAttribute('src', '${2:url_link}');$0"
+    ]
+  },
+  "fireEvent click": {
+    "prefix": "tfec",
+    "body": [
+      "fireEvent.click(screen.getByText('$1', { selector: 'button' }));$0"
+    ]
+  },
+  "Intl formatMessage": {
+    "prefix": "ehintlf",
+    "body": "Intl.formatMessage({ id: '$1' })$0",
+    "description": "redux-intl formatMessage method"
+  },
+  "Intl formatHTMLMessage": {
+    "prefix": "ehintlfhtml",
+    "body": "Intl.formatHTMLMessage({ id: '$1' })$0",
+    "description": "redux-intl formatHTMLMessage method"
+  },
+  "Typography.Body": {
+    "prefix": "typobo",
+    "body": "<Typography.Body>{Intl.formatMessage({ id: '$1' })}</Typography.Body>$0",
+    "description": ""
+  },
+  "Typography.Title": {
+    "prefix": "typoti",
+    "body": "<Typography.Title level='h1'>{Intl.formatMessage({ id: '$1' })}</Typography.Title>$0",
+    "description": ""
+  },
+  "createSelector": {
+    "prefix": "css",
+    "body": ["const $1 = createSelector($2);$0"]
+  },
+  "import Intl redux-intl": {
+    "prefix": "iri",
+    "body": ["import { Intl } from 'redux-intl';$0"]
+  },
+  "import useTheme from @ehrocks/hero-theme": {
+    "prefix": "ehht",
+    "body": ["import { useTheme } from '@ehrocks/hero-theme';$0"]
+  },
+  "useTheme": {
+    "prefix": "uth",
+    "body": ["const theme = useTheme();$0"]
+  },
+  "import styled from styled-component": {
+    "prefix": "ims",
+    "body": ["import styled from 'styled-components';$0"]
+  },
+  "import Component hero-design": {
+    "prefix": "ehhd",
+    "body": ["import { ${1:Box} } from '@hero-design/rn';$0"]
+  },
+  "import lodash fp method": {
+    "prefix": "ilo",
+    "body": ["import ${1:methodName} from 'lodash/fp/${1:methodName}';$0"]
+  },
+  "import react-redux hooks": {
+    "prefix": "irrh",
+    "body": ["import { useSelector, useDispatch } from 'react-redux';"]
+  },
+  "Typescript React Functional Component": {
+    "prefix": "tscomp",
+    "body": [
+      "import React from 'react';",
+      "import { Box } from '@hero-design/rn';",
+      "",
+      "type ${1}Props = {}",
+      "",
+      "const ${1} = ({}: ${1}Props) => {",
+      "\treturn <Box>${2:}</Box>;",
+      "};",
+      "",
+      "export default ${1};",
+      ""
+    ],
+    "description": "Create a Typescript React Function Component"
+  },
+  "Array.from mock data": {
+    "prefix": "arrmock",
+    "body": [
+      "const ${1:mockData} = Array.from({ length: ${2:10} }, (_, index) => ({",
+      "  id: `${3:item}-\\${index + 1}`,",
+      "  name: `${4:Item}-\\${index + 1}`,",
+      "  createdAt: new Date().toISOString(),",
+      "}));$0"
+    ],
+    "description": "Generate mock array data using Array.from with incrementing values"
+  }
+}

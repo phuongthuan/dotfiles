@@ -1,0 +1,25 @@
+--[[
+
+  ██╗███╗   ██╗██╗████████╗██╗     ██╗   ██╗ █████╗
+  ██║████╗  ██║██║╚══██╔══╝██║     ██║   ██║██╔══██╗
+  ██║██╔██╗ ██║██║   ██║   ██║     ██║   ██║███████║
+  ██║██║╚██╗██║██║   ██║   ██║     ██║   ██║██╔══██║
+  ██║██║ ╚████║██║   ██║██╗███████╗╚██████╔╝██║  ██║
+  ╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝
+                  Neovim configuration
+          Author: https://github.com/phuongthuan
+--]]
+
+-- Enable faster startup by caching compiled Lua modules
+vim.loader.enable()
+
+_G.t = {}
+t.home = os.getenv('HOME')
+
+require('config')
+require('packer')
+require('keymaps')
+require('autocmds')
+require('commands')
+require('functions')
+require('gh-cli').setup()

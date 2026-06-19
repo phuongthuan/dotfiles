@@ -1,5 +1,6 @@
 return {
   'numToStr/Comment.nvim',
+  enabled = false,
   dependencies = {
     -- better comment support for jsx/tsx
     {

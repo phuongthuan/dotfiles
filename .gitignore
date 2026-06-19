@@ -5,15 +5,15 @@
 zsh/eh.zsh
 zsh/secret.zsh
 
-plugin/
-
-.gp.md
-
 log/
 *.log
 
 coverage/
-karabiner/automatic_backups/
+karabiner/
 
-MY_PULL_REQUEST_TEMPLATE.md
-http-client.private.env.json
+# Claude Code
+.claude/settings.local.json
+**/.serena/
+**/.serena/cache/
+**/.serena/memories/
+**/.eh-claude-code/

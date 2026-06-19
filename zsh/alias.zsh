@@ -1,4 +1,5 @@
 alias vim='/usr/bin/vim'
+alias nn='NVIM_APPNAME="nvim-new" nvimv exec nightly'
 
 alias arm='arch -arm64'
 alias intel='arch -x86_64'
@@ -6,8 +7,6 @@ alias intel='arch -x86_64'
 alias rv='ruby -v'
 alias nv='node -v'
 alias lv='lua -v'
-
-alias db='defaultbrowser'
 
 # Open iCloud Drive
 alias ic='eval nvim $ICLOUD_DRIVE'
@@ -20,6 +19,8 @@ alias dot='cd ~/.dotfiles/ && nvim'
 
 alias c='clear'
 alias e='exit'
+alias op='open'
+alias db='defaultbrowser'
 
 # brew
 alias br='brew'
@@ -78,3 +79,9 @@ alias bws='bw sync'
 
 # crypto coin tracker
 alias btc='curl rate.sx'
+
+# Android emulator
+alias start_emulator='~/scripts/start-android-emulator.sh'
+
+# Kill port
+alias kill_port='~/scripts/kill-port.sh'

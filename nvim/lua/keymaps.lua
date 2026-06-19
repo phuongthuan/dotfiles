@@ -1,4 +1,5 @@
 local env = require('core.env')
+local functions = require('core.functions')
 local mapper = require('core.utils').mapper_factory
 
 local nmap = mapper('n')
@@ -33,13 +34,13 @@ nmap(';l', ':lua ', { silent = false })
 nmap('<leader>va', ':keepjumps normal! ggVG<cr>', { desc = 'Select All Content' })
 
 -- Save current buffer
-nmap('<leader>s', ':w<cr>:echo "Saved current file ✔"<cr>')
+nmap('<leader>s', ':w<cr>:echo "Saved current file 󰸞 "<cr>')
 
 -- Save all loaded buffers
-nmap('<leader>S', ':wa<cr>:echo "Saved all files ✔"<cr>')
+nmap('<leader>S', ':wa<cr>:echo "Saved all files 󰸞 "<cr>')
 
 -- :wq
-nmap('<leader>w', ':wq<cr>:echo "Git commit created ✔"<cr>')
+nmap('<leader>w', ':wq<cr>:echo "Git commit created 󰸞 "<cr>')
 
 -- Map Esc to jk
 imap('jk', '<Esc>', { noremap = true })
@@ -102,14 +103,21 @@ nmap('<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { sil
 
 -- Get current file path
 nmap(
-  '<leader>gyp',
+  '<C-p>',
   [[:let @+=substitute(expand("%:p"), getcwd() . '/', '', '')<cr>:echo " " . @+ . " copied to clipboard ✔"<cr>]],
   { desc = 'Copy Current Path', noremap = true }
 )
 
+-- Get current full file path
+nmap(
+  '<leader>cp',
+  [[:let @+=expand("%:p")<cr>:echo " " . @+ . " copied to clipboard ✔"<cr>]],
+  { desc = 'Copy Absolute Path', noremap = true }
+)
+
 -- Copy the content of current file to clipboard
 nmap(
-  '<leader>gyP',
+  '<C-y>',
   [[:%y+<cr>:echo "Content copied to clipboard ✔"<cr>]],
   { desc = 'Copy Current File Content', noremap = true }
 )
@@ -152,10 +160,33 @@ nmap('<leader>ut', function()
   -- local file = vim.api.nvim_buf_get_name(0) -- Absolute path
   -- Get relative path from current working directory
   local file = vim.fn.expand('%:.')
-  vim.notify('󰙨 Run test: ' .. file, vim.log.levels.INFO)
   vim.system({
     'zsh',
     '-ic',
     string.format("tmux new-window -n test 'source ~/.dotfiles/zsh/dev.zsh && ytc %s; exec zsh'", file),
   })
-end, { desc = 'Run Test' })
+end, { desc = 'Run Unit Tests' })
+
+-- Run Maestro E2E test
+nmap('<leader>mt', function()
+  -- local file = vim.api.nvim_buf_get_name(0) -- Absolute path
+  -- Get relative path from current working directory
+  local file = vim.fn.expand('%:.')
+  vim.system({
+    'zsh',
+    '-ic',
+    string.format("tmux new-window -n test 'source ~/.dotfiles/zsh/dev.zsh && mte %s; exec zsh'", file),
+  })
+end, { desc = 'Run Maestro E2E Tests' })
+
+nmap('<leader>op', function()
+  functions.open_github_pr()
+end, { desc = 'GitHub: Open PR' })
+
+nmap('<leader>ow', function()
+  functions.open_github_workflow()
+end, { desc = 'GitHub: Open Workflows' })
+
+nmap('<leader>i', function()
+  functions.toggle_react_test_file()
+end, { desc = 'Toggle React Test File' })
