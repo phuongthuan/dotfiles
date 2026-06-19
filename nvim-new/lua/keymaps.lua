@@ -146,6 +146,9 @@ nmap('<leader>z', ':bdelete<cr>')
 
 nmap('<leader>od', ':e ~/p/draft.md<cr>', { desc = 'Open Draft File' })
 
+-- Open lsp.log file
+nmap('<leader>ll', ':e /Users/thuan/.local/state/nvim-new/lsp.log<cr>', { desc = 'Open Lsp Log File' })
+
 nmap('<leader>ts', function()
   ---@diagnostic disable-next-line: undefined-field
   local new_state = not vim.opt_local.spell:get()
