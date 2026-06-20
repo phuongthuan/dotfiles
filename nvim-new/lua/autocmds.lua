@@ -72,7 +72,7 @@ autocmd('FileType', {
 
 autocmd('BufWinEnter', {
   group = close_with_q_group,
-  pattern = vim.lsp.get_log_path(),
+  pattern = vim.lsp.log.get_filename(),
   callback = map_q_to_close,
   desc = 'Maps q to exit on lsp.log',
 })
