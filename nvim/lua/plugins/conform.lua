@@ -2,7 +2,7 @@
 local slow_format_filetypes = {}
 local ignore_filetypes = { 'sql', 'java', 'yaml' }
 
-local prettierd = { 'prettierd', stop_after_first = true }
+local formatter = { 'biome', stop_after_first = true }
 
 return {
   'stevearc/conform.nvim',
@@ -128,17 +128,17 @@ return {
       ruby = { 'rubocop' },
       http = { 'kulala' },
       rest = { 'kulala' },
-      javascript = prettierd,
-      typescript = prettierd,
-      typescriptreact = prettierd,
-      javascriptreact = prettierd,
-      json = prettierd,
-      jsonc = prettierd,
-      markdown = prettierd,
-      css = prettierd,
-      scss = prettierd,
-      html = prettierd,
-      yaml = prettierd,
+      javascript = formatter,
+      typescript = formatter,
+      typescriptreact = formatter,
+      javascriptreact = formatter,
+      json = formatter,
+      jsonc = formatter,
+      markdown = formatter,
+      css = formatter,
+      scss = formatter,
+      html = formatter,
+      yaml = formatter,
     },
     formatters = {
       shfmt = {
