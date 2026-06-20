@@ -20,7 +20,7 @@ VictorMono Nerd Font | **Theme:** Gruvbox Dark (consistent across all tools)
 | Multiplexer     | Tmux + TPM plugins + tmuxinator sessions             |
 | Shell           | Zsh + oh-my-zsh + Starship prompt                    |
 | Window Manager  | AeroSpace (i3-like tiling for macOS)                 |
-| Version Manager | asdf — Node.js 22.20.0, Ruby 3.1.4, Lua 5.1          |
+| Version Manager | mise — Node.js 20.19.4, Ruby 3.1.4, Lua 5.1          |
 
 ## Commands
 
@@ -39,6 +39,12 @@ tmux source-file ~/.dotfiles/tmux/tmux.conf
 
 # Source zsh config
 source ~/.dotfiles/zsh/zshrc
+
+# List installed tool versions
+mise ls
+
+# Install tools from config
+mise install
 ```
 
 ## Neovim Architecture

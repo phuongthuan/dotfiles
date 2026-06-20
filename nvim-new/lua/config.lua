@@ -5,10 +5,10 @@ vim.g.maplocalleader = '\\'
 vim.g.have_nerd_font = true
 
 -- Node.js provider configs
-vim.g.node_host_prog = '/Users/thuan/.asdf/installs/nodejs/20.19.4/lib/node_modules/neovim/bin/cli.js'
+vim.g.node_host_prog = vim.fn.expand('$HOME') .. '/.local/share/mise/installs/node/20.19.4/lib/node_modules/neovim/bin/cli.js'
 
--- Add the custom yarn wrapper path at the front of PATH
-vim.env.PATH = os.getenv('HOME') .. '/.local/bin:' .. vim.env.PATH
+-- Add mise shims and custom yarn wrapper to PATH so mason subprocesses can find tools
+vim.env.PATH = os.getenv('HOME') .. '/.local/share/mise/shims:' .. os.getenv('HOME') .. '/.local/bin:' .. vim.env.PATH
 
 -- Skip providers
 vim.g.loaded_perl_provider = 0
