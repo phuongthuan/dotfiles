@@ -7,7 +7,7 @@ return {
       'folke/lazydev.nvim',
       'moyiz/blink-emoji.nvim',
       'MahanRahmati/blink-nerdfont.nvim',
-      'giuxtaposition/blink-cmp-copilot',
+      -- 'giuxtaposition/blink-cmp-copilot',
       'Kaiser-Yang/blink-cmp-dictionary',
     },
     ---@module 'blink.cmp'
@@ -53,7 +53,7 @@ return {
 
           -- extra sources
           'lazydev',
-          'copilot',
+          -- 'copilot',
 
           'emoji',
           'nerdfont',
@@ -66,12 +66,12 @@ return {
               search_paths = { '~/.dotfiles/snippets' },
             },
           },
-          copilot = {
-            name = 'copilot',
-            module = 'blink-cmp-copilot',
-            score_offset = 100,
-            async = true,
-          },
+          -- copilot = {
+          --   name = 'copilot',
+          --   module = 'blink-cmp-copilot',
+          --   score_offset = 100,
+          --   async = true,
+          -- },
           emoji = {
             module = 'blink-emoji',
             name = 'emoji',

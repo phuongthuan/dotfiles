@@ -19,7 +19,7 @@ require('render-markdown').setup({
 })
 
 require('copilot').setup({
-  copilot_node_command = vim.fn.expand('$HOME') .. '/.asdf/installs/nodejs/22.20.0/bin/node',
+  copilot_node_command = vim.fn.expand('$HOME') .. '/.local/share/mise/installs/node/20.19.4/bin/node',
   suggestion = { enabled = false, auto_trigger = true },
   panel = { enabled = false },
   filetypes = {

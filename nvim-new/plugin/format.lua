@@ -8,7 +8,7 @@ local nmap = require('utils').nmap
 local slow_format_filetypes = {}
 local ignore_filetypes = { 'sql', 'java' }
 
-local prettierd = { 'prettierd', stop_after_first = true }
+local formatter = { 'biome', 'prettierd', stop_after_first = true }
 
 -- Disable auto format by default
 -- vim.g.disable_autoformat = true
@@ -49,7 +49,6 @@ end, {
 })
 
 require('conform').setup({
-  log_level = vim.log.levels.DEBUG,
   -- notify_on_error = false,
   format_on_save = function(bufnr)
     -- Disable autoformat on certain filetypes
@@ -87,7 +86,7 @@ require('conform').setup({
     return {
       timeout_ms = 500,
       lsp_format = 'fallback',
-      on_format,
+      on_format = on_format,
     }
   end,
   format_after_save = function(bufnr)
@@ -102,17 +101,16 @@ require('conform').setup({
     zsh = { 'shfmt' },
     ruby = { 'rubocop' },
     http = { 'kulala' },
-    javascript = prettierd,
-    typescript = prettierd,
-    typescriptreact = prettierd,
-    javascriptreact = prettierd,
-    json = prettierd,
-    jsonc = prettierd,
-    markdown = prettierd,
-    css = prettierd,
-    scss = prettierd,
-    html = prettierd,
-    yaml = prettierd,
+    javascript = formatter,
+    typescript = formatter,
+    typescriptreact = formatter,
+    javascriptreact = formatter,
+    json = formatter,
+    jsonc = formatter,
+    markdown = formatter,
+    css = formatter,
+    scss = formatter,
+    html = formatter,
   },
   formatters = {
     shfmt = {
@@ -121,6 +119,11 @@ require('conform').setup({
     kulala = {
       command = 'kulala-fmt',
       args = { 'format', '--stdin' },
+    },
+    biome = {
+      condition = function(_, ctx)
+        return vim.fs.find({ 'biome.json', 'biome.jsonc' }, { path = ctx.filename, upward = true })[1] ~= nil
+      end,
     },
   },
 })
