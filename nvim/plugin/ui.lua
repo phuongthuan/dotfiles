@@ -5,6 +5,7 @@ vim.pack.add({
   'https://github.com/nvim-mini/mini.hipatterns',
   'https://github.com/MeanderingProgrammer/render-markdown.nvim',
   'https://github.com/folke/todo-comments.nvim',
+  'https://github.com/3rd/image.nvim',
 })
 
 local colors = require('utils').colors.gruvbox_dark
@@ -115,3 +116,12 @@ require('render-markdown').setup({
   -- },
 })
 nmap('<leader>tm', '<cmd>RenderMarkdown toggle<cr>', { desc = 'Toggle Render Markdown' })
+
+-- image
+require('image').setup({
+  integrations = {
+    neorg = { enabled = false },
+  },
+  window_overlap_clear_enabled = true,
+  tmux_show_only_in_active_window = true,
+})

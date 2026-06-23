@@ -56,7 +56,7 @@ local function winbar()
       self.icon, self.icon_color = GetFileIcons()
     end,
     provider = function(self)
-      return self.icon and (self.icon .. ' ')
+      return self.icon and (self.icon .. ' ') or ''
     end,
     hl = function(self)
       return { fg = self.icon_color }
@@ -292,7 +292,7 @@ local function statusline()
       })
     end,
     init = function(self)
-      self.status_dict = vim.b.gitsigns_status_dict
+      self.status_dict = vim.b.gitsigns_status_dict or {}
       self.added_count = self.status_dict.added or 0
       self.removed_count = self.status_dict.removed or 0
       self.changed_count = self.status_dict.changed or 0
@@ -301,7 +301,7 @@ local function statusline()
     GitIcon,
     {
       provider = function(self)
-        return self.status_dict.head
+        return self.status_dict.head or ''
       end,
       on_click = {
         callback = function(self)
@@ -328,21 +328,21 @@ local function statusline()
     {
       provider = function(self)
         local count = self.added_count
-        return count > 0 and ('+' .. count) or nil
+        return count > 0 and ('+' .. count) or ''
       end,
       hl = { fg = colors.green },
     },
     {
       provider = function(self)
         local count = self.removed_count
-        return count > 0 and ('-' .. count) or nil
+        return count > 0 and ('-' .. count) or ''
       end,
       hl = { fg = colors.red },
     },
     {
       provider = function(self)
         local count = self.changed_count
-        return count > 0 and ('~' .. count) or nil
+        return count > 0 and ('~' .. count) or ''
       end,
       hl = { fg = colors.yellow },
     },
@@ -469,7 +469,7 @@ local function statusline()
       self.icon, self.icon_color = require('nvim-web-devicons').get_icon_color(filename, extension, { default = true })
     end,
     provider = function(self)
-      return self.icon and (' ' .. self.icon)
+      return self.icon and (' ' .. self.icon) or ''
     end,
     hl = function(self)
       return { fg = self.icon_color }
@@ -486,7 +486,7 @@ local function statusline()
   local FileEncoding = {
     provider = function()
       local enc = (vim.bo.fenc ~= '' and vim.bo.fenc) or vim.o.enc
-      return enc ~= 'utf-8' and enc:upper() or nil
+      return enc ~= 'utf-8' and enc:upper() or ''
     end,
     hl = { fg = colors.gray },
   }
