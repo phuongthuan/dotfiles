@@ -2,6 +2,8 @@ vim.pack.add({
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main' },
 })
 
+vim.opt.rtp:prepend(vim.fn.stdpath('data') .. '/site')
+
 local parsers = {
   'c',
   'css',

@@ -6,19 +6,20 @@
   ██║██║╚██╗██║██║   ██║   ██║     ██║   ██║██╔══██║
   ██║██║ ╚████║██║   ██║██╗███████╗╚██████╔╝██║  ██║
   ╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝
-                  Neovim init file
-                Author: phuongthuan
-            https://github.com/phuongthuan
+                  Neovim configuration
+          Author: https://github.com/phuongthuan
 --]]
 
-_G.pt = {}
+-- Enable faster startup by caching compiled Lua modules
+vim.loader.enable()
 
---  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+_G.t = {}
+t.home = os.getenv('HOME')
 
-require('options')
+require('config')
+require('packer')
 require('keymaps')
-require('commands')
 require('autocmds')
-require('lazynvim')
+require('commands')
+require('functions')
+require('gh-cli').setup()

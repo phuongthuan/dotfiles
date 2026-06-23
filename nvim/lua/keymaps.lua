@@ -1,15 +1,15 @@
-local env = require('core.env')
-local functions = require('core.functions')
-local mapper = require('core.utils').mapper_factory
+local u = require('utils')
+local f = require('functions')
 
-local nmap = mapper('n')
-local vmap = mapper('v')
-local imap = mapper('i')
-local xmap = mapper('x')
-local omap = mapper('o')
+local env = u.env
+local nmap = u.nmap
+local vmap = u.vmap
+local imap = u.imap
+local xmap = u.xmap
+local omap = u.omap
 
 -- Open today note
-local new_note_file = env.PERSONAL_NOTES .. '/diary/' .. os.date('%Y-%m-%d') .. '.md'
+local new_note_file = env.NOTES_DIR .. '/diary/' .. os.date('%Y-%m-%d') .. '.md'
 nmap('<leader>nn', ':e ' .. new_note_file .. '<cr>', { noremap = false, desc = 'New Note' })
 
 -- Source Neovim configuration
@@ -20,7 +20,7 @@ nmap(
 )
 
 -- Open EH configuration
-nmap('<leader>eh', ':e ' .. env.EH_CONFIG_FILE .. '<cr>', { desc = 'EH ENV' })
+nmap('<leader>eh', ':e ' .. env.COMPANY_CONFIG_FILE .. '<cr>', { desc = 'Company ENV' })
 nmap('<leader>sc', ':e ' .. env.SECRET_ENV_FILE .. '<cr>', { desc = 'Secret ENV' })
 
 -- No need to keep holding shift
@@ -34,13 +34,13 @@ nmap(';l', ':lua ', { silent = false })
 nmap('<leader>va', ':keepjumps normal! ggVG<cr>', { desc = 'Select All Content' })
 
 -- Save current buffer
-nmap('<leader>s', ':w<cr>:echo "Saved current file 󰸞 "<cr>')
+nmap('<leader>s', ':w<cr>:echo "Saved current file ✔"<cr>')
 
 -- Save all loaded buffers
-nmap('<leader>S', ':wa<cr>:echo "Saved all files 󰸞 "<cr>')
+nmap('<leader>S', ':wa<cr>:echo "Saved all files ✔"<cr>')
 
 -- :wq
-nmap('<leader>w', ':wq<cr>:echo "Git commit created 󰸞 "<cr>')
+nmap('<leader>w', ':wq<cr>:echo "Git commit created ✔"<cr>')
 
 -- Map Esc to jk
 imap('jk', '<Esc>', { noremap = true })
@@ -95,7 +95,7 @@ nmap('k', "v:count == 0 ? 'gk' : 'k'", { expr = true })
 nmap('j', "v:count == 0 ? 'gj' : 'j'", { expr = true })
 
 -- Delete without changing the registers
-mapper({ 'n', 'x' })('x', '"_x')
+u.mapper({ 'n', 'x' })('x', '"_x')
 xmap('<leader>p', '"_dP')
 
 -- Replace text
@@ -141,6 +141,14 @@ nmap('<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 nmap('<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 nmap('<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+-- Delete current buffer
+nmap('<leader>z', ':bdelete<cr>')
+
+nmap('<leader>od', ':e ~/p/draft.md<cr>', { desc = 'Open Draft File' })
+
+-- Open lsp.log file
+nmap('<leader>ll', ':e ~/.local/state/nvim/lsp.log<cr>', { desc = 'Open Lsp Log File' })
+
 nmap('<leader>ts', function()
   ---@diagnostic disable-next-line: undefined-field
   local new_state = not vim.opt_local.spell:get()
@@ -156,37 +164,14 @@ nmap('<leader>tl', function()
   vim.notify(new_state and 'Line number enabled ✔' or 'Line number disabled ✔', vim.log.levels.INFO)
 end, { desc = 'Toggle Line Number' })
 
-nmap('<leader>ut', function()
-  -- local file = vim.api.nvim_buf_get_name(0) -- Absolute path
-  -- Get relative path from current working directory
-  local file = vim.fn.expand('%:.')
-  vim.system({
-    'zsh',
-    '-ic',
-    string.format("tmux new-window -n test 'source ~/.dotfiles/zsh/dev.zsh && ytc %s; exec zsh'", file),
-  })
-end, { desc = 'Run Unit Tests' })
-
--- Run Maestro E2E test
-nmap('<leader>mt', function()
-  -- local file = vim.api.nvim_buf_get_name(0) -- Absolute path
-  -- Get relative path from current working directory
-  local file = vim.fn.expand('%:.')
-  vim.system({
-    'zsh',
-    '-ic',
-    string.format("tmux new-window -n test 'source ~/.dotfiles/zsh/dev.zsh && mte %s; exec zsh'", file),
-  })
-end, { desc = 'Run Maestro E2E Tests' })
-
 nmap('<leader>op', function()
-  functions.open_github_pr()
+  f.open_github_pr()
 end, { desc = 'GitHub: Open PR' })
 
 nmap('<leader>ow', function()
-  functions.open_github_workflow()
+  f.open_github_workflow()
 end, { desc = 'GitHub: Open Workflows' })
 
 nmap('<leader>i', function()
-  functions.toggle_react_test_file()
+  f.toggle_react_test_file()
 end, { desc = 'Toggle React Test File' })

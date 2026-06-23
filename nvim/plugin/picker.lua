@@ -590,7 +590,7 @@ nmap('<leader>fp', function()
   })
 end, { desc = 'Pictures (fd)' })
 
-nmap('<leader>fo', function()
+nmap('<leader>fc', function()
   MiniPick.builtin.files({ tool = 'fd' }, {
     source = { name = 'Screenshots (fd)', cwd = env.SCREENSHOTS },
   })
