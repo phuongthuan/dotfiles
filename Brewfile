@@ -27,8 +27,6 @@ brew "libyaml"
 brew "mpc"
 # Music Player Daemon
 brew "mpd"
-# Ambitious Vim-fork focused on extensibility and agility
-brew "neovim"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Cross-shell prompt for astronauts
