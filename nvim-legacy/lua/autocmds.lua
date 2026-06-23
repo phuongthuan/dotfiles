@@ -1,8 +1,6 @@
-local autocmd = vim.api.nvim_create_autocmd --[[@type function]]
-local nmap = require('utils').nmap
+local autocmd = vim.api.nvim_create_autocmd
+local nmap = require('core.utils').mapper_factory('n')
 
----Helper to create augroups
----@param name string
 local function augroup(name)
   return vim.api.nvim_create_augroup('user' .. name, { clear = true })
 end
@@ -36,26 +34,15 @@ autocmd('TermOpen', {
   end,
 })
 
-local close_with_q_group = augroup('close_with_q')
-
-local function map_q_to_close(e)
-  vim.bo[e.buf].buflisted = false
-  nmap('q', function()
-    local ok = pcall(vim.cmd, 'close')
-    if not ok then
-      vim.cmd('bd')
-    end
-  end, { buffer = e.buf })
-end
-
 autocmd('FileType', {
-  group = close_with_q_group,
+  group = augroup('close_with_q'),
   pattern = {
     'vim',
     'man',
     'help',
     'checkhealth',
     'lspinfo',
+    'lsp.log',
     'qf',
     'oil',
     'gitsigns-blame',
@@ -66,23 +53,18 @@ autocmd('FileType', {
     'spectre_panel',
     'OverseerOutput',
   },
-  callback = map_q_to_close,
-  desc = 'Maps q to exit on non-filetypes',
-})
-
-autocmd('BufWinEnter', {
-  group = close_with_q_group,
-  pattern = vim.lsp.log.get_filename(),
-  callback = map_q_to_close,
-  desc = 'Maps q to exit on lsp.log',
-})
-
-autocmd('BufWritePre', {
-  group = augroup('remove_trailing_whitespace'),
-  pattern = '*',
-  callback = function()
-    vim.cmd([[%s/\s\+$//e]])
+  callback = function(e)
+    -- Map q to exit in non-filetype buffers
+    vim.bo[e.buf].buflisted = false
+    nmap('q', function()
+      -- Try to close window, fallback to buffer delete if it fails
+      local ok = pcall(vim.cmd, 'close')
+      if not ok then
+        vim.cmd('bd')
+      end
+    end, { buffer = e.buf })
   end,
+  desc = 'Maps q to exit on non-filetypes',
 })
 
 autocmd({ 'BufRead', 'BufNewFile' }, {

@@ -47,6 +47,37 @@ mise ls
 mise install
 ```
 
+## Neovim Version Management (nvimv)
+
+Neovim versions are managed via
+[nvimv](https://github.com/nicholasgasior/nvimv). Tags are stored in
+`~/.local/share/nvimv/tags/`. The `nn` alias runs the stable tag:
+`nvimv exec stable` (uses default `NVIM_APPNAME=nvim` → `~/.config/nvim`).
+
+```bash
+# List installed tags
+nvimv list
+
+# Install a tag (stable or nightly)
+nvimv install stable
+
+# Upgrade an existing tag to the latest release
+nvimv upgrade stable
+
+# Remove a tag
+nvimv remove stable
+
+# Execute nvim with a tag
+nvimv exec stable
+```
+
+**Upgrading Neovim:** run `nvimv upgrade stable`. If `vim.health` reports stale
+`$VIMRUNTIME` files, remove and reinstall the tag:
+
+```bash
+nvimv remove stable && nvimv install stable
+```
+
 ## Neovim Architecture
 
 Primary config: `nvim-new/` (uses `vim.pack`, Neovim's built-in plugin manager).

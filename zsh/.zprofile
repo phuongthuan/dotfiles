@@ -15,7 +15,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export SECRET_ENV_FILE="$HOME/.dotfiles/zsh/secret.zsh"
 
 # add Ruby Gem executables directory to PATH
-export PATH="$HOME/.asdf/installs/ruby/3.1.4/bin:$PATH"
+export PATH="$HOME/.local/share/mise/installs/ruby/3.1.4/bin:$PATH"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
@@ -44,23 +44,3 @@ export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/Users/thuan/.lmstudio/bin"
-
-# ===================================================
-# asdf shims must be last so they prepend to the front of PATH,
-# Explaination
-# When you install Node (or Ruby, Python, etc.) via Homebrew, brew shellenv (in your .zprofile) puts /opt/homebrew/bin on your PATH. If you also manage those same tools with asdf, Homebrew's version would win because it comes first.
-#
-# asdf works by placing "shim" executables in ~/.asdf/shims/. When you run node, the shim intercepts it and delegates to whichever version asdf has set for that directory (via .tool-versions). But this only works if the shim directory comes before Homebrew on your PATH.
-#
-# Your .zprofile load order:
-#
-# brew shellenv          → adds /opt/homebrew/bin to PATH  (line 21)
-# ...
-# postgresql@16 PATH     → /opt/homebrew/opt/postgresql@16/bin
-# asdf shims             → $HOME/.asdf/shims:$HOME/.asdf/bin  ← appended LAST = highest priority
-#
-# Because each export PATH="...:$PATH" prepends to the front, the last one wins. Putting asdf at the bottom of .zprofile ensures it sits at the front of $PATH, overriding Homebrew's node/ruby/python.
-#
-# Without it: node -v would give you Homebrew's global Node instead of the project-specific version asdf selected — breaking per-project version switching entirely.
-export PATH="$HOME/.asdf/shims:$HOME/.asdf/bin:$PATH"
-# ===================================================
