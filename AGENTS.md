@@ -1,265 +1,219 @@
-# Dotfiles Repository - Agent Guidelines
+# AGENTS.md
 
-## Project Overview
+This file provides guidance to AI coding agents (Claude Code, GitHub Copilot,
+etc.) when working with code in this repository. `CLAUDE.md` and
+`.github/copilot-instructions.md` are symlinks to this file — edit this file
+only; the others will always stay in sync.
 
-Personal dotfiles repository for macOS development environment. Contains
-configuration files for terminal tools, Neovim, window management, and
-productivity applications.
+## Overview
 
-**Author:** phuongthuan **Target OS:** macOS (Darwin) **Package Manager:**
-Homebrew (via Brewfile)
+Personal dotfiles for macOS development environment. No traditional build/test
+process — this repo is managed via symlinks to `~/.config/` directories.
 
-## Version Requirements
+**Target OS:** macOS (Darwin) | **Package Manager:** Homebrew | **Font:**
+VictorMono Nerd Font | **Theme:** Gruvbox Dark (consistent across all tools)
 
-- Node.js: 22.20.0
-- Lua: 5.1
-- Ruby: 3.1.4
-- Neovim: 0.11+
+## Tool Stack
 
-## Repository Structure
+| Category        | Tools                                                       |
+| --------------- | ----------------------------------------------------------- |
+| Editor          | Neovim (Lua, `vim.pack` — Neovim's built-in plugin manager) |
+| Terminal        | Ghostty (primary), Alacritty, Kitty, WezTerm                |
+| Multiplexer     | Tmux + TPM plugins + tmuxinator sessions                    |
+| Shell           | Zsh + oh-my-zsh + Starship prompt                           |
+| Window Manager  | AeroSpace (i3-like tiling for macOS)                        |
+| Version Manager | mise — Node.js 20.19.4, Ruby 3.1.4, Lua 5.1                 |
 
-```
-.
-├── nvim/                 # Neovim configuration (Lua)
-│   ├── lua/
-│   │   ├── options.lua   # Vim options
-│   │   ├── keymaps.lua   # Key mappings
-│   │   ├── commands.lua  # Custom commands
-│   │   ├── core/         # Utilities, helpers
-│   │   └── plugins/      # Plugin configurations
-│   │       ├── ai/       # AI plugins
-│   │       ├── lsp/      # LSP setup
-│   │       └── extras/   # Optional plugins
-│   └── .stylua.toml      # Lua formatter config
-├── tmux/                 # Tmux configuration
-├── ghostty/              # Ghostty terminal config
-├── zsh/                  # Zsh shell configuration
-├── aerospace/            # AeroSpace window manager
-├── karabiner/            # Keyboard customization
-├── tmuxinator/           # Tmux session templates
-├── Brewfile              # Homebrew dependencies
-└── .tool-versions        # asdf version pinning
-```
-
-## Build/Lint/Test Commands
-
-This is a dotfiles repository with no traditional build process. However, there
-are specific tools and commands:
-
-### Neovim Lua Formatting
+## Commands
 
 ```bash
-# Format Lua files with StyLua
+# Format Lua files
 stylua nvim/lua/**/*.lua
 
-# Check formatting
+# Check Lua formatting without writing
 stylua --check nvim/lua/**/*.lua
-```
 
-### Shell Testing
-
-```bash
-# Source zsh configuration
-source ~/.dotfiles/zsh/zshrc
-
-# Test tmux configuration
-tmux source-file ~/.dotfiles/tmux/tmux.conf
-```
-
-### Homebrew Package Management
-
-```bash
-# Install all packages from Brewfile
+# Install all Homebrew packages
 brew bundle
 
-# Update packages
-brew bundle --force cleanup
+# Reload tmux config
+tmux source-file ~/.dotfiles/tmux/tmux.conf
+
+# Source zsh config
+source ~/.dotfiles/zsh/zshrc
+
+# List installed tool versions
+mise ls
+
+# Install tools from config
+mise install
 ```
 
-### Running Tests (from Neovim keymaps)
+## Worktrees (treehouse)
+
+Repos may be checked out as `treehouse` worktrees, not just plain git worktrees.
+Treehouse worktree paths follow this convention:
+
+```
+~/.treehouse/<repo-name>-<hash>/<worktree-id>/<repo-name>
+```
+
+e.g. `~/.treehouse/eh-mobile-pro-3958c1/2/eh-mobile-pro`. The `<hash>` and
+`<worktree-id>` segments are opaque and vary per checkout, so repo-detection
+helpers must match on the pattern rather than an exact path — see
+`is_mobile_repo`/`is_frontend_core_repo` in `nvim/lua/functions.lua`.
+
+## Neovim Version Management (nvimv)
+
+Neovim versions are managed via
+[nvimv](https://github.com/nicholasgasior/nvimv). Tags are stored in
+`~/.local/share/nvimv/tags/`. The `nn` alias runs the stable tag:
+`nvimv exec stable` (uses default `NVIM_APPNAME=nvim` → `~/.config/nvim`).
 
 ```bash
-# Run unit tests (triggered from Neovim with <leader>ut)
-ytc <path/to/test.spec.js>
+# List installed tags
+nvimv list
 
-# Run Maestro E2E tests (triggered from Neovim with <leader>mt)
-mte <path/to/test.yaml>
+# Install a tag (stable or nightly)
+nvimv install stable
+
+# Upgrade an existing tag to the latest release
+nvimv upgrade stable
+
+# Remove a tag
+nvimv remove stable
+
+# Execute nvim with a tag
+nvimv exec stable
 ```
 
-## Code Style Guidelines
+**Upgrading Neovim:** run `nvimv upgrade stable`. If `vim.health` reports stale
+`$VIMRUNTIME` files, remove and reinstall the tag:
 
-### Neovim Lua Configuration
+```bash
+nvimv remove stable && nvimv install stable
+```
 
-#### Formatting (StyLua)
+## Neovim Architecture
 
-- 2 spaces indentation
-- 120 character line width
-- Unix line endings
-- Single quotes preferred (AutoPreferSingle)
-- Always use parentheses for function calls
-- No trailing whitespace
+Primary config: `nvim/` (uses `vim.pack`, Neovim's built-in plugin manager).
+`nvim-legacy/` is a backup — don't touch it unless explicitly asked.
 
-#### Import/Require Patterns
+**Load order:** `init.lua` → `config` → `packer` → `keymaps` → `autocmds` →
+`commands` → `functions` → `gh-cli`
+
+```
+nvim/
+├── init.lua                  # Entry point; sets mapleader = ' ', global table _G.t
+├── lua/
+│   ├── config.lua            # All vim options and globals
+│   ├── keymaps.lua           # Global keymaps
+│   ├── autocmds.lua          # Autocommands
+│   ├── commands.lua          # Custom Ex commands
+│   ├── functions.lua         # Shared Lua functions
+│   ├── gh-cli.lua            # GitHub CLI integration
+│   ├── packer.lua            # vim.pack setup + PackUpdate/PackStatus/PackDelete commands
+│   ├── utils.lua             # Shared module: mapper_factory, env vars, icons, colors
+│   └── overseer/template/    # Overseer task templates (yarn, mobile, maestro, etc.)
+├── plugin/                   # Plugin configs, each file is a domain
+│   ├── lsp.lua               # LSP + mason.nvim setup
+│   ├── completion.lua        # Completion engine (blink.cmp)
+│   ├── treesitter.lua        # Treesitter
+│   ├── picker.lua            # File/symbol picker (MiniPick)
+│   ├── git.lua               # Git integration
+│   ├── coding.lua            # Editing utilities (pairs, jump, ai, autotag)
+│   ├── format.lua            # Formatting
+│   ├── harpoon.lua           # Harpoon file marks
+│   ├── heirline.lua          # Status line
+│   ├── ui.lua                # UI plugins
+│   ├── colorscheme.lua       # Colorscheme
+│   └── folding.lua           # Folding
+├── lsp/                      # Per-language LSP configs (loaded by plugin/lsp.lua)
+│   └── *.lua                 # basedpyright, bashls, lua_ls, ruby_lsp, ts_ls, yamlls
+├── extras/                   # Optional plugins (e.g. ai.lua for copilot/codecompanion)
+└── .stylua.toml               # Formatter: 120 cols, 2-space indent, single quotes
+```
+
+### Keymap convention
+
+`utils.lua` exports pre-built mode mappers — use these instead of calling
+`vim.keymap.set` directly:
 
 ```lua
--- Local requires at top of file
-local mapper = require('core.utils').mapper_factory
-local env = require('core.env')
+local utils = require('utils')
+local nmap = utils.nmap
+local vmap = utils.vmap
+local imap = utils.imap
 
--- Group related requires together
-local nmap = mapper('n')
-local vmap = mapper('v')
-local imap = mapper('i')
+nmap('<leader>ff', '<cmd>lua MiniPick.builtin.files()<cr>', { desc = 'Find files' })
+
+-- Or use the factory for other modes:
+local xmap = utils.mapper('x')
 ```
 
-#### Naming Conventions
+### Plugin convention
 
-- Module tables: `M` (e.g., `local M = {}`)
-- Mode mappers: `nmap`, `vmap`, `imap`, `xmap`, `omap`
-- Constants: `UPPER_SNAKE_CASE` (e.g., `NVIM_CONFIG_DIR`)
-- Functions: `snake_case` (e.g., `mapper_factory`)
-- Private functions: prefix with underscore `_function_name`
-
-#### Plugin Structure
-
-- Core plugins: `nvim/lua/plugins/*.lua` (always loaded)
-- Optional plugins: `nvim/lua/plugins/extras/*.lua` (toggle with `enabled`)
-- Plugin spec format:
+Each `plugin/*.lua` file calls `vim.pack.add({...})` at the top, then configures
+the plugins inline. No return value needed.
 
 ```lua
-return {
-  'author/plugin-name',
-  dependencies = { 'dep1', 'dep2' }, -- optional
-  event = 'VeryLazy',                -- lazy load
-  enabled = true,                    -- for extras
-  opts = {},                         -- plugin options
-}
+vim.pack.add({
+  'https://github.com/author/plugin-name',
+})
+
+-- configure inline below
 ```
 
-#### Keymap Utilities
-
-Use `mapper_factory` from `core.utils`:
+Pin a version when needed:
 
 ```lua
-local mapper = require('core.utils').mapper_factory
-local nmap = mapper('n')
-
--- Basic mapping
-nmap('<leader>ff', '<cmd>Telescope find_files<cr>', { desc = 'Find files' })
-
--- Multi-mode mapping
-mapper({ 'n', 'x' })('x', '"_x')
+vim.pack.add({
+  { src = 'https://github.com/author/plugin-name', version = vim.version.range('^1') },
+})
 ```
 
-Alternative: `vim.keymap.set` is also acceptable.
+For optional plugins, add to `extras/` and `vim.pack.add` there.
 
-#### API Preferences
+### Neovim conventions
 
-- Use `vim.keymap.set` instead of `vim.api.nvim_set_keymap`
-- Use `vim.o` / `vim.opt` for options
-- Use `vim.api.nvim_create_autocmd` for autocommands
-- Use `require('core.utils')` for shared utilities
+- No line numbers (`vim.o.number = false`) — intentional
+- No Python/Perl providers — disabled intentionally
+- Use `vim.o`/`vim.opt` for options, `vim.api.nvim_create_autocmd` for autocmds
+- `require('utils')` is the single shared module (env, icons, colors, mappers)
+- Global table `_G.t = {}` available for shared state
+  (`t.home = os.getenv('HOME')`)
+- Autocmd groups go through the `augroup(name)` helper in `autocmds.lua`,
+  which prefixes every group with `user` (e.g. `userhighlight_yanked_text`)
+- Cursor stays centered after `n`/`N` search jumps (`nzzzv`/`Nzzzv`)
+- `.env` / `.env.*` files are auto-detected as filetype `sh`
 
-#### Error Handling
+## Code Style
 
-- Use `pcall` for operations that might fail
-- Provide descriptive error messages with context
-- Use `vim.notify` for user-facing messages
+- **Lua:** 2-space indent, 120-col width, single quotes, always use parentheses
+  — enforced by StyLua
+- **Shell/TOML/YAML:** 2-space indent; no tabs anywhere
+- **Paths:** always use `$HOME` or `~`, never hardcode absolute paths
+- **Naming:** module tables as `M`, mode mappers as `nmap`/`vmap`/`imap`,
+  constants as `UPPER_SNAKE_CASE`, private functions prefixed with `_`
 
-#### Comments and Documentation
+## Gruvbox Colors
 
-- Use LuaLS annotations for functions:
-
-```lua
----@param mode string|table
----@return fun(lhs: string, rhs: string|function, opts: table|nil)
-function M.mapper_factory(mode)
-  -- implementation
-end
-```
-
-### Shell/Zsh Configuration
-
-- Use consistent 2-space indentation
-- Comment complex logic
-- Keep functions focused and reusable
-- Use descriptive variable names in UPPER_CASE for exports
-
-### Configuration Files
-
-- TOML: Starship, Ghostty, AeroSpace, StyLua
-- YAML: tmuxinator sessions
-- Keep configs minimal and well-commented
-- Use Gruvbox color palette consistently
-
-## Color Palette (Gruvbox Dark)
-
-Use these colors across all configs:
+Use these across all configs (tmux, terminal, Starship, etc.):
 
 ```
-hard-black: #282828
-black:      #3c3836
-white:      #fbf1c7
-gray:       #a89984
-orange:     #fe8019
-purple:     #d3869b
-blue:       #458588
-light-blue: #83a598
-green:      #b8bb26
-aqua:       #8ec07c
-red:        #cc241d
-yellow:     #fabd2f
+hard-black: #282828   black:      #3c3836   white:   #fbf1c7
+gray:       #a89984   orange:     #fe8019   purple:  #d3869b
+blue:       #458588   light-blue: #83a598   green:   #b8bb26
+aqua:       #8ec07c   red:        #cc241d   yellow:  #fabd2f
 ```
 
-## Important Conventions
+In tmux configs, reference via variables: `#{@aqua}`, `#{@purple}`, etc.
+Tmux prefix key is `` ` `` (backtick); window/pane navigation is integrated
+with Neovim (C-h/j/k/l); `allow-rename` is off.
 
-### DO
+## Reference Files
 
-- Use spaces, never tabs (2-width)
-- Keep cursor centered when searching (mapped in keymaps.lua)
-- Use relative paths with `$HOME` or `~`
-- Maintain Gruvbox theme consistency
-- Use VictorMono Nerd Font glyphs where applicable
-- Symlink configs to `~/.config/` directories
-
-### DO NOT
-
-- Add line numbers in Neovim (disabled intentionally)
-- Use Python/Perl providers (disabled in options.lua)
-- Use tabs for indentation
-- Hardcode absolute paths
-- Rename tmux windows automatically (disabled)
-
-## Common Patterns
-
-### Tmux Configuration
-
-- Prefix key: `` ` `` (backtick)
-- Use Gruvbox color variables: `#{@aqua}`, `#{@purple}`
-- Window/pane navigation: integrated with Neovim (C-h/j/k/l)
-
-### Neovim Options
-
-- No line numbers by default (`vim.o.number = false`)
-- Cursor line highlighting enabled
-- Smart case-insensitive search
-- 2-space tabs, expand to spaces
-- Sign column always visible
-
-### Autocommands
-
-- Group all autocmds under 'UserConfig' group
-- Highlight on yank (40ms timeout)
-- Map 'q' to quit in help/man/lspinfo buffers
-- Auto-detect .env files as shell filetype
-
-## File References
-
-When working on specific components:
-
-- Neovim detailed guidelines: `.github/instructions/neovim.instructions.md`
-- Copilot instructions: `.github/copilot-instructions.md`
-- Lua formatter config: `nvim/.stylua.toml`
-- Core utilities: `nvim/lua/core/utils.lua`
-- Global keymaps: `nvim/lua/keymaps.lua`
-- Vim options: `nvim/lua/options.lua`
+- LSP configs: `nvim/lsp/*.lua` (basedpyright, bashls, lua_ls, ruby_lsp, ts_ls,
+  yamlls)
+- Snippets (VS Code format): `snippets/` — lua, typescript, shell, html, json,
+  markdown
