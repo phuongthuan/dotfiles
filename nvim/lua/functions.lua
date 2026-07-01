@@ -393,30 +393,44 @@ function M.checkout_from_branch(branch)
   end
 end
 
+-- Check if the current working directory is `repo_name`, one of its git
+-- worktrees (~/p/eh/worktree/<repo_name>/*), or one of its treehouse
+-- worktrees (~/.treehouse/<repo_name>-<hash>/<id>/<repo_name>)
+local function _is_repo(repo_name)
+  local current_dir = vim.fn.getcwd()
+  local repo_path = os.getenv('EH_REPOSITORY_DIR') .. '/' .. repo_name
+  local worktree_base = os.getenv('EH_REPOSITORY_DIR') .. '/worktree/' .. repo_name .. '/'
+  local treehouse_base = os.getenv('HOME') .. '/.treehouse/'
+
+  if current_dir == repo_path or current_dir:find(worktree_base, 1, true) == 1 then
+    return true
+  end
+
+  if current_dir:find(treehouse_base, 1, true) == 1 then
+    local relative = current_dir:sub(#treehouse_base + 1)
+    local repo_name_pattern = repo_name:gsub('%-', '%%-')
+    return relative:match('^' .. repo_name_pattern .. '%-[^/]+/[^/]+/' .. repo_name_pattern .. '$') ~= nil
+  end
+
+  return false
+end
+
 -- Check if current working directory is the eh-mobile-pro repository
 -- Returns true for:
 --   - Main repo: ~/p/eh/eh-mobile-pro
---   - Any worktree: ~/p/eh/worktree/eh-mobile-pro/*
+--   - Any git worktree: ~/p/eh/worktree/eh-mobile-pro/*
+--   - Any treehouse worktree: ~/.treehouse/eh-mobile-pro-<hash>/<id>/eh-mobile-pro
 function M.is_mobile_repo()
-  local current_dir = vim.fn.getcwd()
-  local eh_mobile_pro_path = os.getenv('EH_REPOSITORY_DIR') .. '/eh-mobile-pro'
-  local worktree_base = os.getenv('EH_REPOSITORY_DIR') .. '/worktree/eh-mobile-pro'
-
-  -- Check main repo or any path under worktree/eh-mobile-pro/
-  return current_dir == eh_mobile_pro_path or current_dir:find(worktree_base, 1, true) == 1
+  return _is_repo('eh-mobile-pro')
 end
 
 -- Check if current working directory is the frontend-core repository
 -- Returns true for:
 --   - Main repo: ~/p/eh/frontend-core
---   - Any worktree: ~/p/eh/worktree/frontend-core/*
+--   - Any git worktree: ~/p/eh/worktree/frontend-core/*
+--   - Any treehouse worktree: ~/.treehouse/frontend-core-<hash>/<id>/frontend-core
 function M.is_frontend_core_repo()
-  local current_dir = vim.fn.getcwd()
-  local frontend_core_path = os.getenv('EH_REPOSITORY_DIR') .. '/frontend-core'
-  local worktree_base = os.getenv('EH_REPOSITORY_DIR') .. '/worktree/frontend-core'
-
-  -- Check main repo or any path under worktree/frontend-core/
-  return current_dir == frontend_core_path or current_dir:find(worktree_base, 1, true) == 1
+  return _is_repo('frontend-core')
 end
 
 function M.ToggleLineNumbers()
