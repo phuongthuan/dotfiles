@@ -1,5 +1,5 @@
 alias vim='/usr/bin/vim'
-alias nl='NVIM_APPNAME="nvim-legacy" nvimv exec stable'
+alias lz='NVIM_APPNAME="nvim-legacy" nvimv exec stable'
 
 alias arm='arch -arm64'
 alias intel='arch -x86_64'
@@ -7,6 +7,15 @@ alias intel='arch -x86_64'
 alias rv='ruby -v'
 alias nv='node -v'
 alias lv='lua -v'
+
+# treehouse
+alias th='treehouse'
+alias ths='treehouse status'
+alias thd='treehouse destroy'
+alias thp='treehouse prune --yes'
+alias thr='treehouse return'
+alias thh='treehouse --help'
+alias thu='treehouse update'
 
 # Open iCloud Drive
 alias ic='eval nvim $ICLOUD_DRIVE'
@@ -36,6 +45,9 @@ alias t='tmux'
 alias ta='tmux attach -t'
 alias cc='clear && tmux clear-history'
 
+# tmuxinator
+alias tmx_prac='tmuxinator start prac'
+
 # ruby
 alias bi='bundle install'
 alias be='bundle exec'
@@ -55,6 +67,7 @@ alias rsp='bundle exec rspec'
 # npm
 alias ni='npm install'
 alias ns='npm start'
+alias nl='npm list -g --depth=0'
 
 # yarn
 alias yv='yarn --version'

@@ -7,6 +7,6 @@ return {
     }
   end,
   condition = {
-    dir = '~/p/',
+    dir = { '~/p/', '~/.treehouse/' },
   },
 }

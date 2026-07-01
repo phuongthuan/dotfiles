@@ -591,9 +591,10 @@ nmap('<leader>fp', function()
 end, { desc = 'Pictures (fd)' })
 
 nmap('<leader>fc', function()
-  MiniPick.builtin.files({ tool = 'fd' }, {
-    source = { name = 'Screenshots (fd)', cwd = env.SCREENSHOTS },
-  })
+  find_files(
+    { tool = 'fd', excludes = { '.DS_Store', '*.mov', '*.mp4' } },
+    { source = { name = 'Screenshots (fd)', cwd = env.SCREENSHOTS } }
+  )
 end, { desc = 'Screenshots (fd)' })
 
 nmap('<leader>gbr', function()

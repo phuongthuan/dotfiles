@@ -78,6 +78,13 @@ autocmd('BufWinEnter', {
   desc = 'Maps q to exit on lsp.log',
 })
 
+autocmd('BufWinEnter', {
+  group = close_with_q_group,
+  pattern = { '*.png', '*.jpg', '*.jpeg' },
+  callback = map_q_to_close,
+  desc = 'Maps q to close image buffers',
+})
+
 autocmd('BufWritePre', {
   group = augroup('remove_trailing_whitespace'),
   pattern = '*',

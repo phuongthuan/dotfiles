@@ -146,6 +146,8 @@ nmap('<leader>z', ':bdelete<cr>')
 
 nmap('<leader>od', ':e ~/p/draft.md<cr>', { desc = 'Open Draft File' })
 
+nmap('<leader>oc', ':e ~/AGENTS.md<cr>', { desc = 'Open AGENTS.md File' })
+
 -- Open lsp.log file
 nmap('<leader>ll', ':e ~/.local/state/nvim/lsp.log<cr>', { desc = 'Open Lsp Log File' })
 

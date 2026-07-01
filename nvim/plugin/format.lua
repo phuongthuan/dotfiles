@@ -8,7 +8,7 @@ local nmap = require('utils').nmap
 local slow_format_filetypes = {}
 local ignore_filetypes = { 'sql', 'java' }
 
-local formatter = { 'biome', 'prettierd', stop_after_first = true }
+local formatter = { 'prettierd', stop_after_first = true }
 
 -- Disable auto format by default
 -- vim.g.disable_autoformat = true
@@ -113,6 +113,9 @@ require('conform').setup({
     html = formatter,
   },
   formatters = {
+    prettierd = {
+      prepend_args = { '--prose-wrap=preserve' },
+    },
     shfmt = {
       prepend_args = { '-i', '2' },
     },
@@ -120,11 +123,11 @@ require('conform').setup({
       command = 'kulala-fmt',
       args = { 'format', '--stdin' },
     },
-    biome = {
-      condition = function(_, ctx)
-        return vim.fs.find({ 'biome.json', 'biome.jsonc' }, { path = ctx.filename, upward = true })[1] ~= nil
-      end,
-    },
+    -- biome = {
+    --   condition = function(_, ctx)
+    --     return vim.fs.find({ 'biome.json', 'biome.jsonc' }, { path = ctx.filename, upward = true })[1] ~= nil
+    --   end,
+    -- },
   },
 })
 
