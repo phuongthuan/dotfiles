@@ -10,6 +10,7 @@ log/
 
 coverage/
 karabiner/automatic_backups/
+tmux/.tmux/
 
 # Claude Code
 .claude/settings.local.json
