@@ -182,8 +182,8 @@ For optional plugins, add to `extras/` and `vim.pack.add` there.
 - `require('utils')` is the single shared module (env, icons, colors, mappers)
 - Global table `_G.t = {}` available for shared state
   (`t.home = os.getenv('HOME')`)
-- Autocmd groups go through the `augroup(name)` helper in `autocmds.lua`,
-  which prefixes every group with `user` (e.g. `userhighlight_yanked_text`)
+- Autocmd groups go through the `augroup(name)` helper in `autocmds.lua`, which
+  prefixes every group with `user` (e.g. `userhighlight_yanked_text`)
 - Cursor stays centered after `n`/`N` search jumps (`nzzzv`/`Nzzzv`)
 - `.env` / `.env.*` files are auto-detected as filetype `sh`
 
@@ -207,9 +207,9 @@ blue:       #458588   light-blue: #83a598   green:   #b8bb26
 aqua:       #8ec07c   red:        #cc241d   yellow:  #fabd2f
 ```
 
-In tmux configs, reference via variables: `#{@aqua}`, `#{@purple}`, etc.
-Tmux prefix key is `` ` `` (backtick); window/pane navigation is integrated
-with Neovim (C-h/j/k/l); `allow-rename` is off.
+In tmux configs, reference via variables: `#{@aqua}`, `#{@purple}`, etc. Tmux
+prefix key is `` ` `` (backtick); window/pane navigation is integrated with
+Neovim (C-h/j/k/l); `allow-rename` is off.
 
 ## Reference Files
 

@@ -323,8 +323,16 @@ nmap('<leader>om', function()
 end, { desc = 'Open MPC' })
 
 mapper({ 'n', 'v' })('<leader>pw', function()
-  -- current word under cursor in the current buffer
-  local word = vim.fn.expand('<cword>')
+  -- word under cursor in normal mode, or the visual selection in visual mode
+  local mode = vim.fn.mode()
+  local word
+
+  if mode == 'v' or mode == 'V' or mode == '\22' then
+    vim.cmd('normal! "vy')
+    word = vim.fn.getreg('v')
+  else
+    word = vim.fn.expand('<cword>')
+  end
 
   local globs = nil
 
