@@ -27,6 +27,10 @@ local _default_excludes = {
   '.git/',
   'node_modules/',
   '.next/',
+  '/tmux/.tmux/',
+  'karabiner/automatic_backups/',
+  '.serena/',
+  '.ruby-lsp/',
   '.yarn/cache',
   'coverage/',
 

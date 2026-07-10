@@ -633,7 +633,7 @@ local function statusline()
     end,
     {
       ViMode,
-      ScrollBar,
+      -- ScrollBar,
       Git,
       GitHubActionsIcon,
       FileName,

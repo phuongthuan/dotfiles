@@ -17,6 +17,8 @@ alias del='git branch -D'
 alias rsh='git reset --hard'
 alias rss='git reset --soft'
 alias grm='git checkout --'
+alias gmd='git merge origin/development'
+alias gmm='git merge origin/master'
 
 alias gp='git pull origin $(git rev-parse --abbrev-ref HEAD)'
 alias gpm='git pull origin master'
@@ -267,7 +269,7 @@ cgb() {
   branch_name="$1"
   git branch $branch_name
   echo "$branch_name" | pbcopy
-  echo -e "\033[32mCopied branch $branch_name to clipboard 📝 \033[0m"
+  echo -e "\033[32mCreated and copied $branch_name to clipboard 📝 \033[0m"
 }
 
 # Reset master branch

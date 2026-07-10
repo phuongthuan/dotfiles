@@ -79,7 +79,7 @@ return {
     redhat = { telemetry = { enabled = false } },
     -- formatting disabled by default in yaml-language-server; enable it
     yaml = {
-      format = { enable = true },
+      format = { enable = true, singleQuote = true },
       schemas = {
         -- kubernetes = 'k8s-*.yaml',
         ['https://json.schemastore.org/github-workflow.json'] = '/.github/workflows/*',
