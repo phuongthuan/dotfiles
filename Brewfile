@@ -32,7 +32,7 @@ brew "starship"
 # Simplified and community-driven man pages
 brew "tldr"
 # Terminal multiplexer
-brew "tmux"
+brew "herdr"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
 # Watch files and take action when they change

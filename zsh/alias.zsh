@@ -17,6 +17,10 @@ alias thr='treehouse return'
 alias thh='treehouse --help'
 alias thu='treehouse update'
 
+# herdr
+alias hd='herdr'
+alias hdr='herdr server reload-config'
+
 # Open iCloud Drive
 alias ic='eval nvim $ICLOUD_DRIVE'
 

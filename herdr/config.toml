@@ -1,0 +1,74 @@
+[theme]
+name = "gruvbox"
+
+[theme.custom]
+# # hard-black: #282828, black: #3c3836, white: #fbf1c7
+# # gray: #a89984, orange: #fe8019, purple: #d3869b
+# # blue: #458588, light-blue: #83a598, green: #b8bb26
+# # aqua: #8ec07c, red: #cc241d, yellow: #fabd2f
+accent = "#d3869b"
+
+[terminal]
+# Use login shell on macOS (like tmux does)
+shell_mode = "auto"
+
+new_cwd = "follow"
+
+[update]
+channel = "stable"
+
+
+[keys]
+prefix = "backtick" # (`)
+detach = "prefix+d"
+settings = "prefix+g"
+goto = "prefix+s"
+
+# agents
+# focus_agent = "prefix+alt+1..9"
+next_agent = "prefix+y"
+previous_agent = "prefix+t"
+
+# tabs
+rename_tab = "prefix+,"
+close_tab = "prefix+="
+
+# panes
+split_vertical = "prefix+|"
+
+# workspaces
+next_workspace = "prefix+n"
+previous_workspace = "prefix+p"
+# switch_workspace = "prefix+shift+1..9"
+
+# worktrees
+remove_worktree = "prefix+shift+w"
+new_worktree = "prefix+shift+t"
+
+# Custom command: clear terminal (matches tmux: bind C-l send-keys 'C-l')
+[[keys.command]]
+key = "ctrl+alt+l"
+type = "pane"
+command = "clear"
+
+[ui]
+
+sidebar_width = 36
+sidebar_max_width = 56
+
+# Ask for confirmation before closing workspaces
+confirm_close = true
+
+prompt_new_tab_name = false
+
+# Keep agent ordering by workspace
+agent_panel_sort = "priority"
+
+[experimental]
+# Keep pane history across server restarts
+# pane_history = true
+
+# CJK IME support for macOS (useful with Asian input methods)
+# switch_ascii_input_source_in_prefix = true
+# reveal_hidden_cursor_for_cjk_ime = true
+

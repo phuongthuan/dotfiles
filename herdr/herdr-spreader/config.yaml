@@ -1,0 +1,55 @@
+workspaces:
+  - name: mobile
+    root: ~/p/eh/eh-mobile-pro
+    env:
+      NODE_ENV: development
+    tabs:
+      - label: ide
+        panes:
+          - command: nvim
+      - label: agent
+        panes:
+          - command: claude --enable-auto-mode
+      - label: wt-dev
+        panes:
+          - command: cd ~/p/eh/worktree/eh-mobile-pro/dev
+      - label: wt-master
+        panes:
+          - command: cd ~/p/eh/worktree/eh-mobile-pro/master
+      - label: wt-test
+        panes:
+          - command: cd ~/p/eh/worktree/eh-mobile-pro/test
+  - name: web
+    root: ~/p/eh/frontend-core
+    env:
+      NODE_ENV: development
+    tabs:
+      - label: ide
+        panes:
+          - command: nvim
+      - label: agent
+        panes:
+          - command: claude --enable-auto-mode
+  - name: mainapp
+    root: ~/p/eh/employment-hero
+    focus: true
+    env:
+      NODE_ENV: development
+    tabs:
+      - label: ide
+        panes:
+          - command: gs
+      - label: agent
+        panes:
+          - command: claude --enable-auto-mode
+  - name: dotfiles
+    root: ~/p/dotfiles
+    env:
+      NODE_ENV: development
+    tabs:
+      - label: ide
+        panes:
+          - command: nvim
+      - label: agent
+        panes:
+          - command: claude --enable-auto-mode
