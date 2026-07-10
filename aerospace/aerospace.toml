@@ -60,6 +60,10 @@ if.app-name-regex-substring = 'IINA'
 run = 'layout floating'
 
 [[on-window-detected]]
+if.app-name-regex-substring = 'OpenSuperWhisper'
+run = 'layout floating'
+
+[[on-window-detected]]
 if.app-name-regex-substring = 'mpv'
 run = 'layout floating'
 
