@@ -174,6 +174,30 @@ vim.pack.add({
 
 For optional plugins, add to `extras/` and `vim.pack.add` there.
 
+### Plugin documentation
+
+Installed `vim.pack` plugins live at
+`~/.local/share/nvim/site/pack/core/opt/<plugin-name>/`. Read their docs
+before answering questions about a specific plugin's config or API instead of
+relying on training data, which may be stale. Run
+`ls <plugin-dir>` and `ls <plugin-dir>/doc` first — layout varies by plugin,
+falling into three patterns:
+
+- **Vim-help only** (most plugins: mini.\*, gitsigns.nvim, neogit,
+  nvim-treesitter, mason.nvim, ...): a single `doc/<name>.txt`. Read directly
+  as plain text, or use `:help <topic>` inside Neovim. If it reports "No help
+  for...", generate tags first:
+  `:helptags ~/.local/share/nvim/site/pack/core/opt/<plugin-name>/doc`
+- **Vim-help + supplementary Markdown** (oil.nvim, conform.nvim,
+  overseer.nvim, blink.cmp, codecompanion.nvim, kulala.nvim, render-markdown.nvim):
+  `doc/<name>.txt` is the entry point/reference; extra `doc/*.md` files
+  (`recipes.md`, `api.md`, `guides.md`, etc.) cover deep-dive topics — check
+  both.
+- **Markdown only, no `doc/` dir** (heirline.nvim, harpoon, image.nvim,
+  nvim-tmux-navigation, nvim-ts-autotag, xls-viewer.nvim): read `README.md`
+  at the plugin root, plus any other `.md` files present (e.g. heirline.nvim's
+  `cookbook.md`).
+
 ### Neovim conventions
 
 - No line numbers (`vim.o.number = false`) — intentional

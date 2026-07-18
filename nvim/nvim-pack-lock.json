@@ -75,6 +75,10 @@
       "rev": "4511b3481707c1d021485475d34f2ed2a50bf47b",
       "src": "https://github.com/nvim-mini/mini.ai"
     },
+    "mini.clue": {
+      "rev": "4d506660e7030a15748ab073bebfe3ed03884000",
+      "src": "https://github.com/nvim-mini/mini.clue"
+    },
     "mini.extra": {
       "rev": "8bb48fadc6e31d8b3550f587661ded15d4396451",
       "src": "https://github.com/nvim-mini/mini.extra"

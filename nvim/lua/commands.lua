@@ -35,3 +35,11 @@ end, { nargs = '*', desc = 'Open GitHub PR List (interactive or with args)' })
 
 command('GHOpenWorkflows', f.open_github_workflow, { desc = 'Open GitHub Workflows' })
 command('GHPRNumber', f.get_pr_number, { desc = 'Get GitHub PR Number' })
+
+command('ClaudeUsage', function()
+  vim.ui.open('https://claude.ai/settings/usage')
+end, { desc = 'Open Claude AI usage dashboard' })
+
+command('VPN', function()
+  vim.ui.open('https://vpn.staging.ehrocks.com')
+end, { desc = 'Open Staging VPN' })

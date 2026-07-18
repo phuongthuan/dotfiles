@@ -8,6 +8,8 @@ alias rv='ruby -v'
 alias nv='node -v'
 alias lv='lua -v'
 
+alias cc='clear'
+
 # treehouse
 alias th='treehouse'
 alias ths='treehouse status'
@@ -47,7 +49,6 @@ alias brd='brew doctor'
 # tmux
 alias t='tmux'
 alias ta='tmux attach -t'
-alias cc='clear && tmux clear-history'
 
 # tmuxinator
 alias tmx_prac='tmuxinator start prac'

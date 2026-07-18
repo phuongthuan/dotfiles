@@ -624,3 +624,13 @@ end, { desc = 'Spell Suggest Word' })
 nmap('<leader>ff', function()
   MiniExtra.pickers.visit_paths(nil, { source = { name = ' Frecently accessed files' } })
 end, { desc = 'Frecently Accessed' })
+
+nmap('<leader>fcl', function()
+  local excludes = {
+    'plugins/cache/',
+    'cache/',
+    '**/eh-claude-code/**',
+  }
+
+  find_files({ tool = 'fd', excludes = excludes }, { source = { name = ' Claude (fd)', cwd = '~/.claude/' } })
+end, { desc = '.claude (fd)' })

@@ -10,6 +10,17 @@ local env = require('utils').env
 local icons = require('utils').icons
 local colors = require('utils').colors.gruvbox_dark
 
+local function format_directory(path)
+  if not path or path == '' then
+    return ''
+  end
+  local home = os.getenv('HOME')
+  if path:sub(1, #home) == home then
+    return '~' .. path:sub(#home + 1)
+  end
+  return path
+end
+
 local function GetFileIcons()
   local filename = vim.api.nvim_buf_get_name(0)
   local extension = vim.fn.fnamemodify(filename, ':e')
@@ -95,6 +106,52 @@ local function winbar()
     },
   }
 
+  local Directory = {
+    {
+      provider = function()
+        local path
+        local bufname = vim.api.nvim_buf_get_name(0)
+
+        if package.loaded.oil then
+          path = require('oil').get_current_dir()
+        end
+
+        if not path or path == '' then
+          if bufname ~= '' then
+            path = vim.fn.fnamemodify(bufname, ':h')
+          else
+            return ''
+          end
+        end
+
+        if path == '' or path == '.' then
+          return ''
+        end
+
+        path = format_directory(path)
+
+        if #path > 0 and not conditions.width_percent_below(#path, 0.85) then
+          path = vim.fn.pathshorten(path)
+        end
+
+        return path
+      end,
+      hl = { fg = colors.gray },
+    },
+    {
+      condition = function()
+        local bufname = vim.api.nvim_buf_get_name(0)
+        if bufname == '' then
+          return false
+        end
+        local path = vim.fn.fnamemodify(bufname, ':h')
+        return path ~= '' and path ~= '.'
+      end,
+      provider = '/',
+      hl = { fg = colors.gray },
+    },
+  }
+
   local FileName = {
     provider = function()
       local filename
@@ -104,15 +161,11 @@ local function winbar()
       end
 
       if not filename then
-        filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':.')
+        filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':t')
       end
 
       if filename == '' then
         return '[No Name]'
-      end
-
-      if not conditions.width_percent_below(#filename, 0.90) then
-        filename = vim.fn.pathshorten(filename)
       end
 
       return filename
@@ -160,6 +213,7 @@ local function winbar()
 
   return {
     FileType,
+    Directory,
     FileName,
     FileSize,
     FileFlags,
